@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>变嫁后宫 - 状态栏</title>
+    <link
+      rel="stylesheet"
+      href="http://localhost:5500/作品/变嫁后宫/状态栏.css"
+    />
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="world-info">
+        <div class="world-info-box">
+          <div class="world-info-item-display">⏰日期：</div>
+          <div class="world-info-item-display" id="current-time">加载中...</div>
+        </div>
+        <div class="world-info-box">
+          <div class="world-info-item-display">📍地点：</div>
+          <div class="world-info-item-display" id="current-location">
+            加载中...
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-bar">
+        <div class="tab-button" data-page="1">行动选项</div>
+        <div class="tab-button" data-page="2">主角</div>
+        <div class="tab-button" data-page="3">后宫</div>
+        <div class="tab-button" data-page="4">最近事件</div>
+      </div>
+
+      <div class="page-container active" id="1-page">
+        <div class="action-options-container">
+          <div class="action-option-container" id="action-option-view"></div>
+          <div
+            class="action-option-container"
+            id="action-option-container-one"
+          ></div>
+
+          <div
+            class="action-option-container"
+            id="action-option-container-two"
+          ></div>
+
+          <div
+            class="action-option-container"
+            id="action-option-container-three"
+          ></div>
+
+          <div
+            class="action-option-container"
+            id="action-option-container-four"
+          ></div>
+        </div>
+      </div>
+
+      <div class="page-container" id="2-page">
+        <div class="character-detail-body">
+          <div class="character-info-section">
+            <div class="info-group">
+              <div class="info-item">
+                <div class="info-label">姓名</div>
+                <div class="info-value" id="char-name"></div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">年龄</div>
+                <div class="info-value" id="char-age"></div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">性别</div>
+                <div class="info-value" id="char-gender"></div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">身份</div>
+                <div class="info-value" id="char-identity"></div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">当前着装</div>
+                <div class="info-value" id="char-clothing"></div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">当前姿势</div>
+                <div class="info-value" id="char-pose"></div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">当前位置</div>
+                <div class="info-value" id="char-location"></div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">后宫状态</div>
+                <div class="info-value" id="char-harem-status"></div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">当前想法</div>
+                <div class="info-value" id="char-thoughts"></div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">性经验</div>
+                <div class="info-value" id="char-sex-exp"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-container" id="3-page">
+        <div class="harem-container">
+          <div class="harem-cards-grid" id="harem-cards-grid">
+            <!-- 角色卡片将动态生成 -->
+          </div>
+        </div>
+      </div>
+
+      <div class="page-container" id="4-page">
+        <div class="events-container" id="events-container">
+          <!-- 事件列表将动态填充 -->
+        </div>
+      </div>
+    </div>
+    <div class="character-detail-modal" id="character-detail-modal">
+      <div class="character-detail-content">
+        <div class="character-detail-header">
+          <div class="character-name" id="detail-char-name">角色名称</div>
+          <div class="character-detail-close" id="detail-close-btn">✕</div>
+        </div>
+        <div class="character-detail-body">
+          <div class="character-detail-info info-group">
+            <div class="info-item">
+              <div class="info-label">年龄</div>
+              <div class="info-value" id="detail-age"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">关系</div>
+              <div class="info-value" id="detail-relation"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">好感度</div>
+              <div class="info-value" id="detail-affection"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">处女</div>
+              <div class="info-value" id="detail-virgin"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">高潮次数</div>
+              <div class="info-value" id="detail-sex-count"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">被内射次数</div>
+              <div class="info-value" id="detail-creampie-count"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">当前着装</div>
+              <div class="info-value" id="detail-dress"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">当前姿势</div>
+              <div class="info-value" id="detail-pose"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">当前位置</div>
+              <div class="info-value" id="detail-location"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">当前想法</div>
+              <div class="info-value" id="detail-thought"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">月经状态</div>
+              <div class="info-value" id="detail-menstruation"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">怀孕状态</div>
+              <div class="info-value" id="detail-pregnancy"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">最近性行为</div>
+              <div class="info-value" id="detail-last-intimacy"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">身体状态</div>
+              <div class="info-value" id="detail-body-status"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">胸部状态</div>
+              <div class="info-value" id="detail-breasts"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">阴部状态</div>
+              <div class="info-value" id="detail-vagina"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const 发送文本到聊天框 = (text) => {
+        const trimmedText = String(text).trim();
+
+        if (!trimmedText || trimmedText === "…" || trimmedText === "...") {
+          return;
+        }
+
+        try {
+          const $textarea = $(parent.document).find("#send_textarea");
+
+          if ($textarea.length === 0) {
+            return;
+          }
+
+          const currentContent = $textarea.val() || "";
+
+          if (currentContent.includes(trimmedText)) {
+            return;
+          }
+
+          const separator = currentContent.trim() ? "\n" : "";
+          const newContent = currentContent + separator + trimmedText;
+
+          $textarea.val(newContent);
+          $textarea.trigger("input");
+        } catch (error) {
+          console.error("发送到聊天框时出错:", error);
+          triggerQuickReply(text);
+        }
+      };
+
+      function 生成行动选项(stat_data) {
+        try {
+          const 行动选项 = stat_data.行动选项;
+
+          if (!行动选项) {
+            console.error("无法加载行动选项");
+            return;
+          }
+
+          $("#action-option-view").text(行动选项.当前视角 || "");
+          $("#action-option-container-one").text(行动选项.选项一 || "");
+          $("#action-option-container-two").text(行动选项.选项二 || "");
+          $("#action-option-container-three").text(行动选项.选项三 || "");
+          $("#action-option-container-four").text(行动选项.选项四 || "");
+          // console.log("行动选项显示更新结束");
+        } catch (error) {
+          console.error("生成行动选项时出错:", error);
+        }
+      }
+
+      function 显示时间地点(stat_data) {
+        try {
+          const 世界 = stat_data.世界;
+
+          if (!世界) {
+            console.error("无法加载世界数据");
+            return;
+          }
+
+          $("#current-time").text(世界.时间 || "");
+          $("#current-location").text(世界.地点 || "");
+        } catch (error) {
+          console.error("显示时间地点时出错:", error);
+        }
+      }
+
+      function 主角填充(stat_data) {
+        try {
+          const 主角 = stat_data.主角;
+
+          if (!主角) {
+            console.error("无法加载主角数据");
+            return;
+          }
+
+          $("#char-name").text(主角.姓名 || "");
+          $("#char-age").text(主角.年龄 || "");
+          $("#char-gender").text(主角.性别 || "");
+          $("#char-identity").text(主角.身份 || "");
+          $("#char-clothing").text(主角.当前着装 || "");
+          $("#char-pose").text(主角.当前姿势 || "");
+          $("#char-location").text(主角.当前位置 || "");
+          $("#char-harem-status").text(主角.后宫状态 || "");
+          $("#char-thoughts").text(主角.当前想法 || "");
+          $("#char-sex-exp").text(主角.性经验 || "");
+        } catch (error) {
+          console.error("填充主角数据时出错:", error);
+        }
+      }
+
+      function 生成后宫卡片(stat_data) {
+        try {
+          const $cardsGrid = $("#harem-cards-grid");
+          $cardsGrid.empty();
+
+          const 角色们 = stat_data.后宫 || {};
+          const characterNames = Object.keys(角色们);
+
+          if (characterNames.length === 0) {
+            $cardsGrid.html(
+              '<div class="harem-character-card"><div class="harem-character-name">暂无角色</div></div>',
+            );
+            return;
+          }
+
+          $.each(characterNames, function (index, characterName) {
+            const 角色 = 角色们[characterName];
+            const 好感度 = 角色.好感度 || 0;
+            const 关系 = 角色.关系 || "";
+            const 处女 = 角色.处女 || "";
+
+            let affectionClass = "";
+            if (好感度 < 30) {
+              affectionClass = "low";
+            } else if (好感度 < 70) {
+              affectionClass = "medium";
+            }
+
+            const initial = characterName.charAt(0).toUpperCase();
+
+            const cardHtml = `
+              <div class="harem-character-card" data-character="${characterName}">
+                <div class="harem-character-avatar">${initial}</div>
+                <div class="harem-character-name">${characterName}</div>
+                <div class="harem-character-affection ${affectionClass}">好感度: ${好感度}</div>
+              </div>
+            `;
+
+            $cardsGrid.append(cardHtml);
+          });
+
+          $(".harem-character-card").on("click", function () {
+            const characterName = $(this).data("character");
+            显示角色详情(characterName, stat_data);
+          });
+        } catch (error) {
+          console.error("生成后宫卡片时出错:", error);
+        }
+      }
+
+      function 显示角色详情(characterName, stat_data) {
+        try {
+          const 角色 = stat_data.后宫[characterName];
+
+          if (!角色) {
+            console.error("无法找到角色数据:", characterName);
+            return;
+          }
+
+          $("#detail-char-name").text(characterName);
+          $("#detail-age").text(角色.年龄 || "");
+          $("#detail-relation").text(角色.关系 || "");
+          $("#detail-affection").text(角色.好感度 || 0);
+          if (角色.处女) {
+            $("#detail-virgin").text("是");
+          } else {
+            $("#detail-virgin").text("否");
+          }
+          $("#detail-sex-count").text(
+            角色.高潮次数 !== undefined ? 角色.高潮次数 : "",
+          );
+          $("#detail-creampie-count").text(
+            角色.被内射次数 !== undefined ? 角色.被内射次数 : "",
+          );
+          $("#detail-dress").text(角色.当前着装 || "");
+          $("#detail-pose").text(角色.当前姿势 || "");
+          $("#detail-location").text(角色.当前位置 || "");
+          $("#detail-thought").text(角色.当前想法 || "");
+          $("#detail-menstruation").text(角色.月经状态 || "");
+
+          const 怀孕信息 = 角色.怀孕 || {};
+          if (怀孕信息.是否怀孕) {
+            $("#detail-pregnancy").text(`已怀孕 ${怀孕信息.怀孕月数} 个月`);
+          } else {
+            $("#detail-pregnancy").text("未怀孕");
+          }
+
+          $("#detail-last-intimacy").text(角色.最近性行为 || "");
+          $("#detail-body-status").text(角色.身体状态 || "");
+          $("#detail-breasts").text(角色.胸部状态 || "");
+          $("#detail-vagina").text(角色.阴部状态 || "");
+
+          $("#character-detail-modal").addClass("active");
+        } catch (error) {
+          console.error("显示角色详情时出错:", error);
+        }
+      }
+
+      function 关闭详情模态框() {
+        $("#character-detail-modal").removeClass("active");
+      }
+
+      function 最近事件填充(stat_data) {
+        try {
+          const 最近事件 = stat_data.最近事件;
+
+          if (!最近事件 || !Array.isArray(最近事件) || 最近事件.length === 0) {
+            $("#events-container").html(`
+              <div class="no-events">
+                <span>暂无事件记录</span>
+              </div>
+            `);
+            return;
+          }
+
+          const container = $("#events-container");
+          container.empty();
+
+          if (Array.isArray(最近事件)) {
+            const eventEntries = [];
+            最近事件.forEach((event) => {
+              if (
+                event &&
+                typeof event === "object" &&
+                (event.时间 || event.地点 || event.内容)
+              ) {
+                const eventEntry = $(`
+                <div class="event-entry">
+                  <div class="event-time">${event.时间 || "无"}</div>
+                  <div class="event-location">${event.地点 || "无"}</div>
+                  <div class="event-content">${event.内容 || "无"}</div>
+                </div>
+              `);
+                eventEntries.push(eventEntry);
+              }
+            });
+            eventEntries.reverse();
+            container.append(eventEntries);
+          }
+
+          if (container.children().length === 0) {
+            container.html(`
+              <div class="no-events">
+                <span>暂无事件记录</span>
+              </div>
+            `);
+          }
+        } catch (error) {
+          console.error("填充最近事件数据时出错:", error);
+        }
+      }
+
+      function 拷贝事件(stat_data) {
+        const 最近事件 = stat_data.最近事件;
+        if (Array.isArray(最近事件)) {
+          insertVariables({ 最近事件: [...最近事件] }, { type: "chat" });
+        }
+      }
+
+      // 为行动选项添加点击事件
+      $("#action-option-container-one").on("click", function () {
+        const optionText = $(this).text().trim();
+        if (optionText) {
+          发送文本到聊天框(optionText);
+        }
+      });
+      $("#action-option-container-two").on("click", function () {
+        const optionText = $(this).text().trim();
+        if (optionText) {
+          发送文本到聊天框(optionText);
+        }
+      });
+      $("#action-option-container-three").on("click", function () {
+        const optionText = $(this).text().trim();
+        if (optionText) {
+          发送文本到聊天框(optionText);
+        }
+      });
+      $("#action-option-container-four").on("click", function () {
+        const optionText = $(this).text().trim();
+        if (optionText) {
+          发送文本到聊天框(optionText);
+        }
+      });
+
+      // 页面切换功能
+      $(".tab-button").on("click", function () {
+        const pageId = $(this).data("page");
+
+        // 移除所有按钮的active类
+        $(".tab-button").removeClass("active");
+
+        // 隐藏所有页面
+        $(".page-container").removeClass("active");
+
+        // 激活当前按钮
+        $(this).addClass("active");
+
+        // 显示当前页面
+        $(`#${pageId}-page`).addClass("active");
+      });
+
+      // 关闭详情模态框
+      $("#detail-close-btn").on("click", 关闭详情模态框);
+      $("#character-detail-modal").on("click", function (e) {
+        if ($(e.target).is("#character-detail-modal")) {
+          关闭详情模态框();
+        }
+      });
+
+      // 可选：添加一些jQuery UI特效
+      $(".tab-button").hover(
+        function () {
+          $(this)
+            .stop(true, true)
+            .animate({ paddingTop: "1rem", paddingBottom: "10px" }, 100);
+        },
+        function () {
+          $(this)
+            .stop(true, true)
+            .animate({ paddingTop: "12px", paddingBottom: "12px" }, 100);
+        },
+      );
+
+      (async function () {
+        // console.log("状态栏开始加载");
+        await waitGlobalInitialized("Mvu");
+        // console.log("状态栏: Mvu 已初始化");
+        const stat_data = getAllVariables().stat_data;
+
+        拷贝事件(stat_data);
+        显示时间地点(stat_data);
+        生成行动选项(stat_data);
+        主角填充(stat_data);
+        生成后宫卡片(stat_data);
+        最近事件填充(stat_data);
+      })();
+    </script>
+  </body>
+</html>

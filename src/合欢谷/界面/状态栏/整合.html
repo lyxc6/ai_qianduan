@@ -1,0 +1,1349 @@
+```
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>合欢谷 - 状态栏</title>
+  <style>
+    :root {
+      --font-serif: "Noto Serif SC", serif;
+      --font-title: "ZCOOL XiaoWei", serif;
+      --bg-main: #1a1208;
+      --bg-panel: rgba(43, 29, 14, 0.75);
+      --border-color: rgba(165, 113, 58, 0.5);
+      --user-color-primary: #d4b16a;
+      --user-color-secondary: #e0c88f;
+      --text-primary: #f0e6d3;
+      --text-secondary: #b8a98f;
+      --text-title: #d4b16a;
+      --accent-color: #ff6b9d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: transparent;
+      font-family: var(--font-serif);
+      font-size: 0.75rem;
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    .main {
+      background-color: var(--bg-main);
+      background-size: cover;
+      background-position: center;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      animation: fadeIn 1s ease-out;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .world-info {
+      background: linear-gradient(135deg,
+          rgba(43, 29, 14, 0.85) 0%,
+          rgba(62, 42, 20, 0.75) 100%);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-left: 3px solid var(--user-color-primary);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(212, 177, 106, 0.1);
+    }
+
+    .world-info-box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .world-info-box:last-child {
+      margin-bottom: 0;
+    }
+
+    .world-info-item-display {
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      letter-spacing: 1px;
+    }
+
+    .world-info-item-display:first-child {
+      color: var(--user-color-primary);
+      min-width: 4.5rem;
+    }
+
+    .world-info-item-display:last-child {
+      color: var(--text-primary);
+      font-family: var(--font-serif);
+      font-weight: 500;
+      flex: 1;
+      text-align: right;
+      padding-left: 0.5rem;
+    }
+
+    .tab-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.4rem;
+      background: linear-gradient(135deg,
+          rgba(43, 29, 14, 0.6) 0%,
+          rgba(62, 42, 20, 0.4) 100%);
+      border-radius: 0.5rem 0.5rem 0 0;
+      padding: 0.25rem 0.25rem 0 0.25rem;
+    }
+
+    .tab-button {
+      flex: 1;
+      font-family: var(--font-title);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      padding: 0.6rem 0.4rem;
+      cursor: pointer;
+      background-color: transparent;
+      border: 1px solid transparent;
+      border-radius: 0.4rem 0.4rem 0 0;
+      transition: all 0.3s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tab-button:hover {
+      color: var(--text-primary);
+      background-color: rgba(212, 177, 106, 0.05);
+      border-color: var(--border-color);
+    }
+
+    .tab-button.active {
+      color: var(--text-title);
+      background-color: var(--bg-panel);
+      border-bottom: 1px solid var(--bg-panel);
+      transform: translateY(-1px);
+    }
+
+    .tab-button.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 0.1875rem;
+      background: linear-gradient(90deg,
+          var(--user-color-primary),
+          var(--user-color-secondary));
+      border-radius: 0.25rem 0.25rem 0 0;
+    }
+
+    .page-container {
+      display: none;
+      background-color: var(--bg-panel);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 0.5rem 0.5rem;
+      padding: 0.5rem;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 0.5s ease-out;
+      max-height: 20rem;
+      height: 20rem;
+      overflow-y: auto;
+    }
+
+    .page-container.active {
+      display: block;
+    }
+
+    .action-options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 100%;
+      padding: 0.25rem;
+    }
+
+    .action-option-container {
+      background: linear-gradient(135deg,
+          rgba(62, 42, 20, 0.8) 0%,
+          rgba(43, 29, 14, 0.9) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(212, 177, 106, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 2.8rem;
+      height: auto;
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-option-container::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg,
+          var(--user-color-primary),
+          var(--user-color-secondary));
+      opacity: 0.8;
+    }
+
+    .action-option-container:hover {
+      background: linear-gradient(135deg,
+          rgba(82, 56, 27, 0.9) 0%,
+          rgba(57, 38, 19, 0.95) 100%);
+      border-color: var(--user-color-primary);
+      transform: translateX(2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(212, 177, 106, 0.2);
+    }
+
+    .action-option-container:active {
+      transform: translateX(1px);
+    }
+
+    .character-detail-body {
+      padding: 0.5rem;
+    }
+
+    .character-info-section {
+      background: linear-gradient(135deg,
+          rgba(43, 29, 14, 0.6) 0%,
+          rgba(62, 42, 20, 0.4) 100%);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-left: 3px solid var(--accent-color);
+    }
+
+    .info-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      min-width: 30%;
+      flex: 1;
+    }
+
+    .info-label {
+      font-family: var(--font-title);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+      letter-spacing: 1px;
+    }
+
+    .info-value {
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .status-section {
+      background: linear-gradient(135deg,
+          rgba(43, 29, 14, 0.6) 0%,
+          rgba(62, 42, 20, 0.4) 100%);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+    }
+
+    .section-header {
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      color: var(--text-title);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      letter-spacing: 2px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+    }
+
+    .status-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .status-label {
+      font-family: var(--font-title);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.2rem;
+      letter-spacing: 1px;
+    }
+
+    .status-value {
+      font-family: var(--font-serif);
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      line-height: 1.4;
+    }
+
+    .harem-container {
+      height: 100%;
+      padding: 0.25rem;
+    }
+
+    .harem-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+      gap: 0.5rem;
+      padding: 0.25rem;
+    }
+
+    .harem-character-card {
+      background: linear-gradient(135deg,
+          rgba(62, 42, 20, 0.8) 0%,
+          rgba(43, 29, 14, 0.9) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(212, 177, 106, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .harem-character-card:hover {
+      background: linear-gradient(135deg,
+          rgba(82, 56, 27, 0.9) 0%,
+          rgba(57, 38, 19, 0.95) 100%);
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(212, 177, 106, 0.2);
+    }
+
+    .harem-character-avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg,
+          var(--user-color-primary),
+          var(--user-color-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      color: var(--bg-main);
+      margin-bottom: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .harem-character-name {
+      font-family: var(--font-title);
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      letter-spacing: 1px;
+    }
+
+    .harem-character-affection {
+      font-family: var(--font-serif);
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.25rem;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .harem-character-affection.low {
+      color: #ff6b6b;
+    }
+
+    .harem-character-affection.medium {
+      color: #ffd93d;
+    }
+
+
+
+    .character-detail-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .character-detail-modal.active {
+      display: flex;
+    }
+
+    .character-detail-content {
+      background: linear-gradient(135deg,
+          rgba(43, 29, 14, 0.98) 0%,
+          rgba(62, 42, 20, 0.95) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(212, 177, 106, 0.1);
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .character-detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      background: linear-gradient(90deg,
+          rgba(212, 177, 106, 0.1) 0%,
+          transparent 100%);
+    }
+
+    .character-name {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      color: var(--text-title);
+      letter-spacing: 2px;
+    }
+
+    .character-detail-close {
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      border-radius: 0.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .character-detail-close:hover {
+      background-color: rgba(255, 107, 107, 0.2);
+      color: #ff6b6b;
+    }
+
+    .character-detail-body {
+      padding: 1rem;
+    }
+
+    .character-detail-info {
+      margin-bottom: 1rem;
+    }
+
+    .events-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.25rem;
+    }
+
+    .event-entry {
+      background: linear-gradient(135deg,
+          rgba(62, 42, 20, 0.6) 0%,
+          rgba(43, 29, 14, 0.8) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.875rem;
+      animation: slideIn 0.3s ease-out;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(212, 177, 106, 0.05);
+    }
+
+    .event-entry:hover {
+      border-color: var(--user-color-primary);
+      background: linear-gradient(135deg,
+          rgba(72, 49, 23, 0.7) 0%,
+          rgba(50, 34, 16, 0.85) 100%);
+    }
+
+    .event-time {
+      font-family: var(--font-title);
+      font-size: 0.75rem;
+      color: var(--user-color-primary);
+      margin-bottom: 0.2rem;
+      letter-spacing: 1px;
+    }
+
+    .event-location {
+      font-family: var(--font-serif);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.35rem;
+      font-style: italic;
+    }
+
+    .event-content {
+      font-family: var(--font-serif);
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .no-events {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--text-secondary);
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      font-style: italic;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .character-inventory-section {
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      color: var(--text-title);
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid rgba(212, 177, 106, 0.2);
+      letter-spacing: 1px;
+    }
+
+    .martial-arts-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .martial-art-item {
+      background: linear-gradient(135deg,
+          rgba(62, 42, 20, 0.6) 0%,
+          rgba(43, 29, 14, 0.8) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .martial-art-item:hover {
+      background: linear-gradient(135deg,
+          rgba(72, 49, 23, 0.7) 0%,
+          rgba(50, 34, 16, 0.85) 100%);
+      border-color: var(--user-color-primary);
+      transform: translateX(2px);
+    }
+
+    .martial-art-name {
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      line-height: 1.4;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .no-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      color: var(--text-secondary);
+      font-family: var(--font-serif);
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+
+    ::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 0.25rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 0.25rem;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--user-color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .info-group {
+        gap: 0.5rem;
+      }
+
+      .info-item {
+        min-width: 100%;
+        flex: 1;
+      }
+
+      .info-label {
+        font-size: 0.7rem;
+        margin-bottom: 0.15rem;
+      }
+
+      .info-value {
+        font-size: 0.8rem;
+        line-height: 1.3;
+      }
+
+      .character-detail-info {
+        padding: 0.5rem;
+      }
+
+      .martial-arts-container {
+        gap: 0.35rem;
+      }
+
+      .martial-art-item {
+        padding: 0.4rem 0.6rem;
+      }
+
+      .martial-art-name {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="world-info">
+      <div class="world-info-box">
+        <div class="world-info-item-display">⏰日期：</div>
+        <div class="world-info-item-display" id="current-time">加载中...</div>
+      </div>
+      <div class="world-info-box">
+        <div class="world-info-item-display">📍地点：</div>
+        <div class="world-info-item-display" id="current-location">
+          加载中...
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-bar">
+      <div class="tab-button" data-page="1">行动选项</div>
+      <div class="tab-button" data-page="2">主角</div>
+      <div class="tab-button" data-page="3">后宫</div>
+      <div class="tab-button" data-page="4">最近事件</div>
+    </div>
+
+    <div class="page-container active" id="1-page">
+      <div class="action-options-container">
+        <div class="action-option-container" id="action-option-view"></div>
+        <div class="action-option-container" id="action-option-container-one"></div>
+
+        <div class="action-option-container" id="action-option-container-two"></div>
+
+        <div class="action-option-container" id="action-option-container-three"></div>
+
+        <div class="action-option-container" id="action-option-container-four"></div>
+      </div>
+    </div>
+
+    <div class="page-container" id="2-page">
+      <div class="character-detail-body">
+        <div class="character-info-section">
+          <div class="section-title">主角信息</div>
+          <div class="info-group">
+            <div class="info-item">
+              <div class="info-label">姓名</div>
+              <div class="info-value" id="char-name"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">年龄</div>
+              <div class="info-value" id="char-age"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">身份</div>
+              <div class="info-value" id="char-identity"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">境界</div>
+              <div class="info-value" id="char-realm"></div>
+            </div>
+          </div>
+          <div class="character-inventory-section">
+            <h3 class="section-title">秘密知晓</h3>
+            <div class="martial-arts-container" id="char-secrets-container"></div>
+          </div>
+          <div class="character-inventory-section">
+            <h3 class="section-title">功法与技能</h3>
+            <div class="martial-arts-container" id="char-skills-container"></div>
+          </div>
+        </div>
+        <div class="character-info-section">
+          <div class="section-title">合欢谷信息</div>
+          <div class="info-group">
+            <div class="info-item">
+              <div class="info-label">谷内人数</div>
+              <div class="info-value" id="valley-population"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">弟子数量</div>
+              <div class="info-value" id="valley-disciples"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">后宫规模</div>
+              <div class="info-value" id="valley-harem"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">谷内状态</div>
+              <div class="info-value" id="valley-status"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">外界认知</div>
+              <div class="info-value" id="valley-reputation"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">阵法状态</div>
+              <div class="info-value" id="valley-formation"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">资源状况</div>
+              <div class="info-value" id="valley-resources"></div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">当前任务</div>
+              <div class="info-value" id="valley-task"></div>
+            </div>
+          </div>
+          <div class="character-inventory-section">
+            <h3 class="section-title">待办事项</h3>
+            <div class="martial-arts-container" id="valley-todos-container"></div>
+          </div>
+          <div class="character-inventory-section">
+            <h3 class="section-title">统治范围</h3>
+            <div class="martial-arts-container" id="valley-territory-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-container" id="3-page">
+      <div class="harem-container">
+        <div class="harem-cards-grid" id="harem-cards-grid">
+          <!-- 角色卡片将动态生成 -->
+        </div>
+      </div>
+    </div>
+
+    <div class="page-container" id="4-page">
+      <div class="events-container" id="events-container">
+        <!-- 事件列表将动态填充 -->
+      </div>
+    </div>
+  </div>
+  <div class="character-detail-modal" id="character-detail-modal">
+    <div class="character-detail-content">
+      <div class="character-detail-header">
+        <div class="character-name" id="detail-char-name">角色名称</div>
+        <div class="character-detail-close" id="detail-close-btn">✕</div>
+      </div>
+      <div class="character-detail-body">
+        <div class="character-detail-info info-group">
+          <div class="info-item">
+            <div class="info-label">性别</div>
+            <div class="info-value" id="detail-gender"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">年龄</div>
+            <div class="info-value" id="detail-age"></div>
+          </div>
+          <div class="info-item female-only">
+            <div class="info-label">后宫地位</div>
+            <div class="info-value" id="detail-harem-rank"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">身份</div>
+            <div class="info-value" id="detail-identity"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">好感度</div>
+            <div class="info-value" id="detail-affection"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">功力境界</div>
+            <div class="info-value" id="detail-realm"></div>
+          </div>
+          <div class="info-item female-only">
+            <div class="info-label">处女</div>
+            <div class="info-value" id="detail-virgin"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">高潮次数</div>
+            <div class="info-value" id="detail-sex-count"></div>
+          </div>
+          <div class="info-item female-only">
+            <div class="info-label">被内射次数</div>
+            <div class="info-value" id="detail-creampie-count"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">当前着装</div>
+            <div class="info-value" id="detail-dress"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">当前姿势</div>
+            <div class="info-value" id="detail-pose"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">当前位置</div>
+            <div class="info-value" id="detail-location"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">当前想法</div>
+            <div class="info-value" id="detail-thought"></div>
+          </div>
+          <div class="info-item female-only">
+            <div class="info-label">月经状态</div>
+            <div class="info-value" id="detail-menstruation"></div>
+          </div>
+          <div class="info-item female-only">
+            <div class="info-label">怀孕状态</div>
+            <div class="info-value" id="detail-pregnancy"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">最近性行为</div>
+            <div class="info-value" id="detail-last-intimacy"></div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">身体状态</div>
+            <div class="info-value" id="detail-body-status"></div>
+          </div>
+          <div class="female-only">
+            <div class="info-label">胸部状态</div>
+            <div class="info-value" id="detail-breasts"></div>
+          </div>
+          <div class="info-item female-only">
+            <div class="info-label">阴部状态</div>
+            <div class="info-value" id="detail-vagina"></div>
+          </div>
+        </div>
+        <div class="character-inventory-section">
+          <h3 class="section-title">功法与技能</h3>
+          <div class="martial-arts-container" id="detail-skills-container"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+  <script>
+    const 发送文本到聊天框 = (text) => {
+      const trimmedText = String(text).trim();
+
+      if (!trimmedText || trimmedText === "…" || trimmedText === "...") {
+        return;
+      }
+
+      try {
+        const $textarea = $(parent.document).find("#send_textarea");
+
+        if ($textarea.length === 0) {
+          return;
+        }
+
+        const currentContent = $textarea.val() || "";
+
+        if (currentContent.includes(trimmedText)) {
+          return;
+        }
+
+        const separator = currentContent.trim() ? "\n" : "";
+        const newContent = currentContent + separator + trimmedText;
+
+        $textarea.val(newContent);
+        $textarea.trigger("input");
+      } catch (error) {
+        console.error("发送到聊天框时出错:", error);
+        triggerQuickReply(text);
+      }
+    };
+
+    function 生成行动选项(stat_data) {
+      try {
+        const 行动选项 = stat_data.行动选项;
+
+        if (!行动选项) {
+          console.error("无法加载行动选项");
+          return;
+        }
+
+        $("#action-option-view").text(行动选项.当前视角 || "");
+        $("#action-option-container-one").text(行动选项.一 || "");
+        $("#action-option-container-two").text(行动选项.二 || "");
+        $("#action-option-container-three").text(行动选项.三 || "");
+        $("#action-option-container-four").text(行动选项.四 || "");
+        // console.log("行动选项显示更新结束");
+      } catch (error) {
+        console.error("生成行动选项时出错:", error);
+      }
+    }
+
+    function 显示时间地点(stat_data) {
+      try {
+        const 时间 = stat_data.当前时间 || "";
+        const 地点 = stat_data.当前地点 || "";
+
+        if (!时间 && !地点) {
+          console.error("无法加载世界数据");
+          return;
+        }
+
+        $("#current-time").text(时间 || "");
+        $("#current-location").text(地点 || "");
+      } catch (error) {
+        console.error("显示时间地点时出错:", error);
+      }
+    }
+
+    function 主角填充(stat_data) {
+      try {
+        const 主角 = stat_data.主角;
+
+        if (!主角) {
+          console.error("无法加载主角数据");
+          return;
+        }
+
+        $("#char-name").text(主角.姓名 || "");
+        $("#char-age").text(主角.年龄 || "");
+        $("#char-identity").text(主角.身份 || "");
+        $("#char-realm").text(主角.境界 || "");
+
+        const 秘密知晓 = 主角.秘密知晓 || [];
+        const 秘密容器 = $("#char-secrets-container");
+        秘密容器.empty();
+        if (Array.isArray(秘密知晓) && 秘密知晓.length > 0) {
+          秘密知晓.forEach((秘密) => {
+            秘密容器.append(
+              $(`
+                <div class="martial-art-item">
+                  <div class="martial-art-name">${秘密 || ""}</div>
+                </div>
+              `),
+            );
+          });
+        } else {
+          秘密容器.html('<div class="no-items">暂无秘密</div>');
+        }
+
+        const 功法与技能 = 主角.功法与技能 || [];
+        const 功法与技能容器 = $("#char-skills-container");
+        功法与技能容器.empty();
+        if (Array.isArray(功法与技能) && 功法与技能.length > 0) {
+          功法与技能.forEach((功法) => {
+            const 功法项 = $(`
+                <div class="martial-art-item">
+                  <div class="martial-art-name">${功法 || ""}</div>
+                </div>
+              `);
+            功法与技能容器.append(功法项);
+          });
+        } else {
+          功法与技能容器.html('<div class="no-items">暂无功法与技能</div>');
+        }
+      } catch (error) {
+        console.error("填充主角数据时出错:", error);
+      }
+    }
+
+    function 合欢谷填充(stat_data) {
+      try {
+        const 合欢谷 = stat_data.合欢谷;
+
+        if (!合欢谷) {
+          console.error("无法加载合欢谷数据");
+          return;
+        }
+
+        $("#valley-population").text(合欢谷.谷内人数 || "");
+        $("#valley-disciples").text(合欢谷.弟子数量 || "");
+        $("#valley-harem").text(合欢谷.后宫规模 || "");
+        $("#valley-status").text(合欢谷.谷内状态 || "");
+        $("#valley-reputation").text(合欢谷.外界认知 || "");
+        $("#valley-formation").text(合欢谷.阵法状态 || "");
+        $("#valley-resources").text(合欢谷.资源状况 || "");
+        $("#valley-task").text(合欢谷.当前任务 || "");
+
+        const 待办事项 = 合欢谷.待办事项 || [];
+        const 待办事项容器 = $("#valley-todos-container");
+        待办事项容器.empty();
+        if (Array.isArray(待办事项) && 待办事项.length > 0) {
+          待办事项.forEach((事项) => {
+            const 事项项 = $(`
+                <div class="martial-art-item">
+                  <div class="martial-art-name">${事项 || ""}</div>
+                </div>
+              `);
+            待办事项容器.append(事项项);
+          });
+        } else {
+          待办事项容器.html('<div class="no-items">暂无待办事项</div>');
+        }
+
+        const 统治范围 = 合欢谷.统治范围 || [];
+        const 统治范围容器 = $("#valley-territory-container");
+        统治范围容器.empty();
+        if (Array.isArray(统治范围) && 统治范围.length > 0) {
+          统治范围.forEach((区域) => {
+            const 区域项 = $(`
+                <div class="martial-art-item">
+                  <div class="martial-art-name">${区域 || ""}</div>
+                </div>
+              `);
+            统治范围容器.append(区域项);
+          });
+        } else {
+          统治范围容器.html('<div class="no-items">暂无统治范围</div>');
+        }
+      } catch (error) {
+        console.error("填充合欢谷数据时出错:", error);
+      }
+    }
+
+    function 生成后宫卡片(stat_data) {
+      try {
+        const $cardsGrid = $("#harem-cards-grid");
+        $cardsGrid.empty();
+
+        const 角色们 = stat_data.后宫 || {};
+        const characterNames = Object.keys(角色们);
+
+        if (characterNames.length === 0) {
+          $cardsGrid.html(
+            '<div class="harem-character-card"><div class="harem-character-name">暂无角色</div></div>',
+          );
+          return;
+        }
+
+        $.each(characterNames, function (index, characterName) {
+          const 角色 = 角色们[characterName];
+          const 好感度 = 角色.好感度 || 0;
+          const 关系 = 角色.关系 || "";
+          const 处女 = 角色.处女 || "";
+
+          let affectionClass = "";
+          if (好感度 < 30) {
+            affectionClass = "low";
+          } else if (好感度 < 70) {
+            affectionClass = "medium";
+          }
+
+          const initial = characterName.charAt(0).toUpperCase();
+
+          const cardHtml = `
+              <div class="harem-character-card" data-character="${characterName}">
+                <div class="harem-character-avatar">${initial}</div>
+                <div class="harem-character-name">${characterName}</div>
+                <div class="harem-character-affection ${affectionClass}">好感度: ${好感度}</div>
+              </div>
+            `;
+
+          $cardsGrid.append(cardHtml);
+        });
+
+        $(".harem-character-card").on("click", function () {
+          const characterName = $(this).data("character");
+          显示角色详情(characterName, stat_data);
+        });
+      } catch (error) {
+        console.error("生成后宫卡片时出错:", error);
+      }
+    }
+
+    function 显示角色详情(characterName, stat_data) {
+      try {
+        const 角色 = stat_data.后宫[characterName];
+
+        if (!角色) {
+          console.error("无法找到角色数据:", characterName);
+          return;
+        }
+
+        const 性别 = 角色.性别 || "女";
+        const 是女性 = 性别 === "女" || 性别 === "由男变女";
+
+        $("#detail-char-name").text(characterName);
+        $("#detail-gender").text(性别);
+        $("#detail-age").text(角色.年龄 || "");
+        $("#detail-harem-rank").text(角色.后宫地位 || "");
+        $("#detail-identity").text(角色.身份 || "");
+        $("#detail-affection").text(角色.好感度 || 0);
+        $("#detail-realm").text(角色.功力境界 || "");
+
+        $("#detail-dress").text(角色.当前着装 || "");
+        $("#detail-pose").text(角色.当前姿势 || "");
+        $("#detail-location").text(角色.当前位置 || "");
+        $("#detail-thought").text(角色.当前想法 || "");
+        $("#detail-sex-count").text(
+          角色.高潮次数 !== undefined ? 角色.高潮次数 : "",
+        );
+        $("#detail-last-intimacy").text(角色.最近性行为 || "");
+        $("#detail-body-status").text(角色.身体状况 || "");
+
+        if (是女性) {
+          $("#detail-virgin").text(角色.处女 ? "是" : "否");
+          $("#detail-creampie-count").text(
+            角色.被内射次数 !== undefined ? 角色.被内射次数 : "",
+          );
+          $("#detail-menstruation").text(角色.月经状态 || "");
+          $("#detail-pregnancy").text(角色.怀孕状态 || "");
+          $("#detail-breasts").text(角色.胸部状态 || "");
+          $("#detail-vagina").text(角色.阴部状态 || "");
+          $(".female-only").show();
+        } else {
+          $(
+            "#detail-virgin, #detail-creampie-count, #detail-menstruation, #detail-pregnancy, #detail-breasts, #detail-vagina, #detail-harem-rank",
+          ).text("-");
+          $(".female-only").hide();
+        }
+
+        const 功法与技能 = 角色.功法与技能 || [];
+        const 技能容器 = $("#detail-skills-container");
+        技能容器.empty();
+
+        if (Array.isArray(功法与技能) && 功法与技能.length > 0) {
+          功法与技能.forEach((功法) => {
+            技能容器.append(
+              $(`
+                <div class="martial-art-item">
+                  <div class="martial-art-name">${功法 || ""}</div>
+                </div>
+              `),
+            );
+          });
+        } else {
+          技能容器.html('<div class="no-items">暂无功法与技能</div>');
+        }
+
+        $("#character-detail-modal").addClass("active");
+      } catch (error) {
+        console.error("显示角色详情时出错:", error);
+      }
+    }
+
+    function 关闭详情模态框() {
+      $("#character-detail-modal").removeClass("active");
+    }
+
+    function 最近事件填充(stat_data) {
+      try {
+        const 重要事件 = stat_data.重要事件;
+
+        if (!重要事件 || !Array.isArray(重要事件) || 重要事件.length === 0) {
+          $("#events-container").html(`
+              <div class="no-events">
+                <span>暂无事件记录</span>
+              </div>
+            `);
+          return;
+        }
+
+        const container = $("#events-container");
+        container.empty();
+
+        if (Array.isArray(重要事件)) {
+          const eventEntries = [];
+          重要事件.forEach((event) => {
+            if (
+              event &&
+              typeof event === "object" &&
+              (event.时间 || event.地点 || event.内容)
+            ) {
+              const eventEntry = $(`
+                <div class="event-entry">
+                  <div class="event-time">${event.时间 || "无"}</div>
+                  <div class="event-location">${event.地点 || "无"}</div>
+                  <div class="event-content">${event.内容 || "无"}</div>
+                </div>
+              `);
+              eventEntries.push(eventEntry);
+            }
+          });
+          eventEntries.reverse();
+          container.append(eventEntries);
+        }
+
+        if (container.children().length === 0) {
+          container.html(`
+              <div class="no-events">
+                <span>暂无事件记录</span>
+              </div>
+            `);
+        }
+      } catch (error) {
+        console.error("填充最近事件数据时出错:", error);
+      }
+    }
+
+    function 拷贝事件(stat_data) {
+      const 重要事件 = stat_data.重要事件;
+      if (Array.isArray(重要事件)) {
+        insertVariables({ 重要事件: [...重要事件] }, { type: "chat" });
+      }
+    }
+
+    // 为行动选项添加点击事件
+    $("#action-option-container-one").on("click", function () {
+      const optionText = $(this).text().trim();
+      if (optionText) {
+        发送文本到聊天框(optionText);
+      }
+    });
+    $("#action-option-container-two").on("click", function () {
+      const optionText = $(this).text().trim();
+      if (optionText) {
+        发送文本到聊天框(optionText);
+      }
+    });
+    $("#action-option-container-three").on("click", function () {
+      const optionText = $(this).text().trim();
+      if (optionText) {
+        发送文本到聊天框(optionText);
+      }
+    });
+    $("#action-option-container-four").on("click", function () {
+      const optionText = $(this).text().trim();
+      if (optionText) {
+        发送文本到聊天框(optionText);
+      }
+    });
+
+    // 页面切换功能
+    $(".tab-button").on("click", function () {
+      const pageId = $(this).data("page");
+
+      // 移除所有按钮的active类
+      $(".tab-button").removeClass("active");
+
+      // 隐藏所有页面
+      $(".page-container").removeClass("active");
+
+      // 激活当前按钮
+      $(this).addClass("active");
+
+      // 显示当前页面
+      $(`#${pageId}-page`).addClass("active");
+    });
+
+    // 关闭详情模态框
+    $("#detail-close-btn").on("click", 关闭详情模态框);
+    $("#character-detail-modal").on("click", function (e) {
+      if ($(e.target).is("#character-detail-modal")) {
+        关闭详情模态框();
+      }
+    });
+
+    // 可选：添加一些jQuery UI特效
+    $(".tab-button").hover(
+      function () {
+        $(this)
+          .stop(true, true)
+          .animate({ paddingTop: "1rem", paddingBottom: "10px" }, 100);
+      },
+      function () {
+        $(this)
+          .stop(true, true)
+          .animate({ paddingTop: "12px", paddingBottom: "12px" }, 100);
+      },
+    );
+
+    (async function () {
+      // console.log("状态栏开始加载");
+      await waitGlobalInitialized("Mvu");
+      // console.log("状态栏: Mvu 已初始化");
+      const stat_data = getAllVariables().stat_data;
+
+      拷贝事件(stat_data);
+      显示时间地点(stat_data);
+      生成行动选项(stat_data);
+      主角填充(stat_data);
+      合欢谷填充(stat_data);
+      生成后宫卡片(stat_data);
+      最近事件填充(stat_data);
+    })();
+  </script>
+</body>
+
+</html>
+```

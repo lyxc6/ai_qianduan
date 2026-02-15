@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>领主战术卷轴</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <link
+            href="https://fonts.googleapis.com/css2family=IM+Fell+English+SC&family=Noto+Serif+SC:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --scroll-bg: #f4ecd8;
+                --scroll-border: #dbbba0;
+                --ink-primary: #4a3b2a;
+                --ink-secondary: #6e5a44;
+                --ink-accent: #8b2e2e;
+                --gold: #cfb53b;
+                --silver: #a8a9ad;
+                --copper: #b87333;
+                --hover-highlight: rgba(139, 46, 46, 0.08);
+                --font-en: 'IM Fell English SC', serif;
+                --font-cn: 'Noto Serif SC', serif;
+            }
+
+            body {
+                background: transparent;
+                margin: 0;
+                padding: 5px;
+                /* 移动端减少外边距 */
+                font-family: var(--font-cn);
+                color: var(--ink-primary);
+                box-sizing: border-box;
+            }
+
+            /* 卷轴主体 - 移除两侧棒子，优化为羊皮纸风格 */
+            .lord-scroll {
+                background: var(--scroll-bg);
+                background-image: linear-gradient(
+                        to right,
+                        rgba(0, 0, 0, 0.05) 0%,
+                        transparent 10%,
+                        transparent 90%,
+                        rgba(0, 0, 0, 0.05) 100%
+                    ),
+                    url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity=' 0.08'/%3E%3C/svg%3E");
+                border: 1px solid var(--scroll-border);
+                border-radius: 4px;
+                /* 减小圆角，更像纸张 */
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1), /* 基础阴影 */ 0 10px 20px rgba(0, 0, 0, 0.15),
+                    /* 悬浮感 */ inset 0 0 60px rgba(160, 120, 80, 0.15);
+                /* 内部陈旧感 */
+                position: relative;
+                max-width: 750px;
+                margin: 0 auto;
+                padding: 30px 40px;
+                /* 调整内边距 */
+                overflow: hidden;
+                transition: transform 0.3s ease;
+            }
+
+            /* 顶部信息栏 */
+            .header-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                /* 底部对齐 */
+                border-bottom: 2px solid var(--ink-primary);
+                padding-bottom: 15px;
+                margin-bottom: 25px;
+                position: relative;
+            }
+
+            .header-title {
+                font-family: var(--font-en);
+                font-size: 2.2em;
+                font-weight: bold;
+                line-height: 1;
+                letter-spacing: 1px;
+                text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+            }
+
+            .world-status {
+                text-align: right;
+                font-size: 0.9em;
+                color: var(--ink-secondary);
+            }
+
+            .world-status div {
+                margin-bottom: 4px;
+            }
+
+            .world-status i {
+                color: var(--ink-accent);
+                margin-right: 5px;
+                width: 16px;
+                text-align: center;
+            }
+
+            /* 网格布局 */
+            .grid-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            /* 通用板块样式 */
+            .section-box {
+                position: relative;
+                padding: 15px;
+                border: 1px dashed rgba(110, 90, 68, 0.3);
+                border-radius: 6px;
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.15);
+                /* 轻微提亮背景 */
+            }
+
+            .section-box:hover {
+                background-color: var(--hover-highlight);
+                border-color: var(--ink-accent);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+
+            .section-title {
+                font-family: var(--font-en);
+                font-size: 1.2em;
+                color: var(--ink-accent);
+                margin-top: 0;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid rgba(139, 46, 46, 0.2);
+                padding-bottom: 5px;
+            }
+
+            .section-title i {
+                margin-right: 8px;
+                font-size: 0.9em;
+            }
+
+            /* 核心关系 */
+            .relation-item {
+                margin-bottom: 12px;
+                padding: 8px 10px;
+                border-radius: 4px;
+                transition: background 0.3s;
+                border: 1px solid transparent;
+            }
+
+            .relation-item:hover {
+                background: rgba(255, 255, 255, 0.5);
+                border-color: rgba(139, 46, 46, 0.1);
+            }
+
+            .char-header {
+                display: flex;
+                justify-content: space-between;
+                font-weight: bold;
+                margin-bottom: 5px;
+                font-size: 1.05em;
+            }
+
+            .char-status {
+                font-size: 0.85em;
+                color: var(--ink-secondary);
+                font-style: italic;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .progress-track {
+                height: 6px;
+                background: rgba(74, 59, 42, 0.1);
+                border-radius: 3px;
+                margin-top: 8px;
+                overflow: hidden;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: var(--ink-accent);
+                width: 0%;
+                transition: width 1s ease-out;
+                border-radius: 3px;
+            }
+
+            /* 经济系统 */
+            .currency-row {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                /* 允许移动端换行 */
+                gap: 15px;
+                margin: 15px 0;
+                background: rgba(74, 59, 42, 0.05);
+                padding: 12px;
+                border-radius: 8px;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+            }
+
+            .coin-group {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-family: var(--font-en);
+                font-weight: bold;
+                font-size: 1.1em;
+                cursor: help;
+                transition: transform 0.2s;
+            }
+
+            .coin-group:hover {
+                transform: scale(1.05);
+            }
+
+            .coin-icon {
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                display: inline-block;
+                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+                position: relative;
+            }
+
+            .coin-icon::after {
+                content: ' ';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, transparent 60%);
+                border-radius: 50%;
+            }
+
+            .gold .coin-icon {
+                background: var(--gold);
+                border: 1px solid #b8860b;
+            }
+
+            .silver .coin-icon {
+                background: var(--silver);
+                border: 1px solid #7d7d7d;
+            }
+
+            .copper .coin-icon {
+                background: var(--copper);
+                border: 1px solid #8b4513;
+            }
+
+            .stat-row {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.95em;
+                padding: 6px 0;
+                border-bottom: 1px dotted rgba(74, 59, 42, 0.15);
+            }
+
+            .stat-row:last-child {
+                border-bottom: none;
+            }
+
+            .trend-up {
+                color: #2e8b57;
+                font-weight: bold;
+            }
+
+            .trend-down {
+                color: #8b2e2e;
+                font-weight: bold;
+            }
+
+            /* 列表通用样式 */
+            .scroll-list {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .list-card {
+                background: rgba(255, 255, 255, 0.6);
+                padding: 10px 12px;
+                border-radius: 4px;
+                border-left: 3px solid var(--ink-secondary);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            }
+
+            .list-card:hover {
+                background: #fff;
+                padding-left: 18px;
+                border-left-color: var(--ink-accent);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+                transform: translateX(2px);
+            }
+
+            .card-main {
+                font-weight: bold;
+                color: var(--ink-primary);
+                display: flex;
+                align-items: center;
+            }
+
+            .card-sub {
+                font-family: var(--font-en);
+                font-weight: bold;
+                color: var(--ink-secondary);
+                font-size: 0.9em;
+            }
+
+            /* 外交关系网格类 - 用于JS动态控制 */
+            .diplomacy-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 10px;
+            }
+
+            /* Tooltip 移动端优化：隐藏或改为下方显示，这里保留悬浮逻辑但在移动端防止溢出 */
+            [data-tooltip] {
+                position: relative;
+            }
+
+            [data-tooltip]:hover::after {
+                content: attr(data-tooltip);
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--ink-primary);
+                color: #f4ecd8;
+                padding: 8px 12px;
+                border-radius: 4px;
+                font-size: 0.85em;
+                font-weight: normal;
+                width: max-content;
+                max-width: 200px;
+                text-align: center;
+                z-index: 100;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                pointer-events: none;
+                opacity: 0;
+                animation: fadeIn 0.3s forwards;
+                margin-bottom: 8px;
+                white-space: normal;
+                line-height: 1.4;
+            }
+
+            [data-tooltip]:hover::before {
+                content: ' ';
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border: 6px solid transparent;
+                border-top-color: var(--ink-primary);
+                margin-bottom: -4px;
+                opacity: 0;
+                animation: fadeIn 0.3s forwards;
+            }
+
+            @keyframes fadeIn {
+                to {
+                    opacity: 1;
+                }
+            }
+
+            .full-width {
+                grid-column: 1 / -1;
+            }
+
+            .relation-badge {
+                font-size: 0.8em;
+                padding: 2px 6px;
+                border-radius: 3px;
+                border: 1px solid currentColor;
+                display: inline-block;
+            }
+
+            .rel-peace {
+                color: #2e8b57;
+                background: rgba(46, 139, 87, 0.08);
+            }
+
+            .rel-hostile {
+                color: #8b2e2e;
+                background: rgba(139, 46, 46, 0.08);
+            }
+
+            .rel-neutral {
+                color: #6e5a44;
+                background: rgba(110, 90, 68, 0.08);
+            }
+
+            /* --- 移动端适配 (Max Width 600px) --- */
+            @media (max-width: 600px) {
+                body {
+                    padding: 0;
+                }
+
+                /* 移动端贴边 */
+                .lord-scroll {
+                    padding: 20px 15px;
+                    /* 减小内边距 */
+                    border-radius: 0;
+                    /* 移动端全屏时取消圆角 */
+                    border-left: none;
+                    border-right: none;
+                    box-shadow: none;
+                    /* 移动端扁平化处理 */
+                }
+
+                .header-info {
+                    flex-direction: column;
+                    align-items: center;
+                    /* 居中对齐 */
+                    text-align: center;
+                    gap: 10px;
+                    margin-bottom: 20px;
+                }
+
+                .header-title {
+                    font-size: 1.8em;
+                }
+
+                .world-status {
+                    text-align: center;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 10px;
+                    font-size: 0.85em;
+                }
+
+                .world-status div {
+                    margin-bottom: 0;
+                }
+
+                .grid-container {
+                    grid-template-columns: 1fr;
+                    /* 强制单列 */
+                    gap: 15px;
+                }
+
+                .currency-row {
+                    gap: 10px;
+                    padding: 10px 5px;
+                }
+
+                .diplomacy-grid {
+                    grid-template-columns: 1fr;
+                    /* 外交列表在手机上也单列显示 */
+                }
+
+                [data-tooltip]:hover::after {
+                    /* 移动端 Tooltip 防溢出粗暴处理：定宽 */
+                    width: 200px;
+                    left: 0;
+                    transform: translateX(-10%);
+                }
+
+                [data-tooltip]:hover::before {
+                    left: 20%;
+                }
+
+                .list-card:hover {
+                    transform: none;
+                    /* 移动端移除位移效果，防止误触 */
+                    padding-left: 12px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="lord-scroll">
+            <!-- 头部 -->
+            <div class="header-info">
+                <div class="header-title">The Lord's Ledger</div>
+                <div class="world-status">
+                    <div><i class="fas fa-calendar-alt"></i> <span id="world-date">--</span></div>
+                    <div><i class="fas fa-map-marker-alt"></i> <span id="world-location">--</span></div>
+                </div>
+            </div>
+            <div class="grid-container">
+                <!-- 核心关系 -->
+                <div class="section-box">
+                    <h3 class="section-title"><i class="fas fa-heart"></i> 核心关系</h3>
+                    <div id="relations-container"></div>
+                </div>
+                <!-- 财政 -->
+                <div class="section-box">
+                    <h3 class="section-title"><i class="fas fa-coins"></i> 领地财政</h3>
+                    <div class="currency-row" data-tooltip="1金=20银=300铜">
+                        <div class="coin-group gold">
+                            <div class="coin-icon"></div>
+                            <span id="eco-gold">0</span>
+                        </div>
+                        <div class="coin-group silver">
+                            <div class="coin-icon"></div>
+                            <span id="eco-silver">0</span>
+                        </div>
+                        <div class="coin-group copper">
+                            <div class="coin-icon"></div>
+                            <span id="eco-copper">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <span>预计年净收入</span> <span id="eco-income" class="card-sub">--</span>
+                    </div>
+                    <div
+                        class="stat-row"
+                        style="margin-top: 8px; font-style: italic; font-size: 0.8em; color: var(--ink-secondary)"
+                    >
+                        *每年1月1日结算税收
+                    </div>
+                </div>
+                <!-- 领地 -->
+                <div class="section-box">
+                    <h3 class="section-title"><i class="fas fa-chess-rook"></i> 领地概览</h3>
+                    <div class="scroll-list" id="territory-list"></div>
+                </div>
+                <!-- 军队 -->
+                <div class="section-box">
+                    <h3 class="section-title"><i class="fas fa-chess-knight"></i> 军队编制</h3>
+                    <div class="scroll-list" id="army-list"></div>
+                </div>
+                <!-- 外交 (全宽) -->
+                <div class="section-box full-width">
+                    <h3 class="section-title"><i class="fas fa-handshake"></i> 外交态势</h3>
+                    <!-- 使用 CSS class 控制网格 -->
+                    <div id="diplomacy-list" class="diplomacy-grid"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            (function () {
+                // 初始硬编码数据
+                const hardcodedInitialData = {
+                    世界: {
+                        当前日期: ['帝国历476年5月1日'],
+                        所在地点: ['{{user}}的男爵领 - 领主大厅'],
+                    },
+                    领主: {
+                        核心关系: {
+                            克劳迪娅: {
+                                好感度: [30],
+                                状态: ['沉睡中的无意识'],
+                            },
+                            莉娜: {
+                                好感度: [55],
+                                状态: ['顺从{{user}}的命令'],
+                            },
+                        },
+                        经济: {
+                            当前库存: [5000],
+                            预计年净收入: [3000],
+                        },
+                        领地: [
+                            {
+                                名称: '{{user}}的男爵领',
+                                描述: '主角的初始封地。',
+                                年净收入: 200,
+                            },
+                            '$__META_EXTENSIBLE__$',
+                        ],
+                        军队: [
+                            {
+                                名称: '家族骑士',
+                                描述: '装备精良的重装骑兵，家族的精英力量。',
+                                数量: 3,
+                            },
+                            {
+                                名称: '征召长矛民兵',
+                                描述: '从领地农民中征召的步兵，只接受过基础训练，装备皮甲和长矛。',
+                                数量: 20,
+                            },
+                            '$__META_EXTENSIBLE__$',
+                        ],
+                        外交关系: [
+                            {
+                                名称: '克劳狄乌斯伯爵领',
+                                描述: '边境领地, 战略要地, (鹰堡, 艾德勒镇, 银溪村), 森林密布, 矿产贫乏, 领主为克劳狄乌斯家族。',
+                                关系: '平和',
+                            },
+                            '$__META_EXTENSIBLE__$',
+                        ],
+                    },
+                };
+
+                function _get(obj, path, defaultValue = undefined) {
+                    const keys = Array.isArray(path) ? path : path.split('.');
+                    let result = obj;
+                    for (const key of keys) {
+                        if (result === null || result === undefined) return defaultValue;
+                        result = result[key];
+                    }
+                    return result === undefined ? defaultValue : result;
+                }
+
+                function extractVal(val) {
+                    return Array.isArray(val) ? val[0] : val;
+                }
+
+                function updateEconomy(copperTotal, incomeCopper) {
+                    const total = parseInt(copperTotal, 10) || 0;
+                    const income = parseInt(incomeCopper, 10) || 0;
+                    const gold = Math.floor(total / 300);
+                    const remainder1 = total % 300;
+                    const silver = Math.floor(remainder1 / 15);
+                    const copper = remainder1 % 15;
+                    updateField('eco-gold', gold);
+                    updateField('eco-silver', silver);
+                    updateField('eco-copper', copper);
+                    const incomeClass = income >= 0 ? 'trend-up' : 'trend-down';
+                    const incomeSign = income >= 0 ? '+' : '';
+                    document.getElementById(
+                        'eco-income'
+                    ).innerHTML = `<span class="${incomeClass}">${incomeSign}${income} 铜币/年</span>`;
+                }
+
+                function renderList(containerId, listData, type) {
+                    const container = document.getElementById(containerId);
+                    container.innerHTML = '';
+                    if (!Array.isArray(listData)) return;
+                    listData.forEach((item) => {
+                        if (typeof item === 'string') return;
+                        let mainText = item.名称;
+                        let subText = '';
+                        let tooltip = item.描述 || '暂无描述';
+                        let icon = '';
+                        let badge = '';
+                        if (type === 'territory') {
+                            subText = `<i class="fas fa-arrow-up"></i> ${item.年净收入}`;
+                            icon = '<i class="fas fa-map-marked-alt" style="margin-right:8px; opacity: 0.6; "></i>';
+                        } else if (type === 'army') {
+                            subText = `${item.数量} 人`;
+                            icon = '<i class="fas fa-shield-alt" style="margin-right:8px; opacity: 0.6; "></i>';
+                        } else if (type === 'diplomacy') {
+                            const relClass =
+                                item.关系 === '敌对'
+                                    ? 'rel-hostile'
+                                    : item.关系 === '平和' || item.关系 === '盟友'
+                                    ? 'rel-peace'
+                                    : 'rel-neutral';
+                            badge = `<span class="relation-badge ${relClass}">${item.关系}</span>`;
+                            icon = '<i class="fas fa-flag" style="margin-right:8px; opacity: 0.6; "></i>';
+                        }
+                        container.innerHTML += `
+                        <div class="list-card" data-tooltip="${tooltip}">
+                            <span class="card-main">${icon}${mainText}</span>
+                            <span class="card-sub">${badge || subText}</span>
+                        </div>`;
+                    });
+                }
+
+                function populate(data) {
+                    updateField('world-date', extractVal(_get(data, '世界.当前日期')));
+                    updateField('world-location', extractVal(_get(data, '世界.所在地点')));
+                    renderRelations(_get(data, '领主.核心关系'));
+                    updateEconomy(
+                        extractVal(_get(data, '领主.经济.当前库存')),
+                        extractVal(_get(data, '领主.经济.预计年净收入'))
+                    );
+                    renderList('territory-list', _get(data, '领主.领地'), 'territory');
+                    renderList('army-list', _get(data, '领主.军队'), 'army');
+                    renderList('diplomacy-list', _get(data, '领主.外交关系'), 'diplomacy');
+                }
+
+                function updateField(id, val) {
+                    const el = document.getElementById(id);
+                    if (el) el.innerText = val;
+                }
+
+                function renderRelations(relationsObj) {
+                    const container = document.getElementById('relations-container');
+                    container.innerHTML = '';
+                    if (!relationsObj) return;
+                    for (const [name, data] of Object.entries(relationsObj)) {
+                        const favor = parseInt(extractVal(data.好感度), 10);
+                        const status = extractVal(data.状态);
+                        container.innerHTML += `                <div class="relation-item">                    <div class="char-header">                        <span>${name}</span>                        <span style="color: var(--ink-accent);">${favor}</span>                    </div>                    <div class="char-status">${status}</div>                    <div class="progress-track">                        <div class="progress-fill" style="width: ${Math.max(
+                            0,
+                            Math.min(100, favor)
+                        )}%;"></div>                    </div>                </div>            `;
+                    }
+                }
+
+                async function fetchData(msgId, maxRetries = 5) {
+                    for (let i = 0; i < maxRetries; i++) {
+                        try {
+                            if (typeof getChatMessages !== 'function') {
+                                populate(hardcodedInitialData);
+                                return;
+                            }
+                            const messages = await getChatMessages(msgId);
+                            const statData = _get(messages, '0.data.stat_data');
+                            if (statData && statData.领主) {
+                                populate(statData);
+                                return;
+                            }
+                        } catch (err) {}
+                        await new Promise((r) => setTimeout(r, 300));
+                    }
+                    populate(hardcodedInitialData);
+                }
+
+                let initialMsgId = '0';
+
+                try {
+                    if (typeof getCurrentMessageId === 'function') initialMsgId = getCurrentMessageId();
+                } catch (e) {}
+
+                fetchData(initialMsgId);
+            })();
+        </script>
+    </body>
+</html>

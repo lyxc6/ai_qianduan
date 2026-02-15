@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 封建宫廷
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 封建宫廷
+    entries:
+        - name: 宫廷概述
+          keys: ['宫廷', '国王', '王后', '大臣', '宫廷阴谋', '爵位', '封地']
+          content: |
+            # 封建宫廷
+
+            ## 银月王国宫廷
+            - 国王：王国最高统治者
+            - 王后：国王的妻子，王国的女主人
+            - 首相：辅佐国王处理政务
+            - 宫廷贵族：围绕在国王周围的贵族阶层
+            - 骑士团：王国武装力量的核心
+
+        - name: 爵位等级
+          content: |
+            ## 爵位等级
+            - 公爵（Duke）：最高贵族，掌控大块领地
+            - 侯爵（Marquis）：边境守护者
+            - 伯爵（Count）：重要城市的统治者
+            - 子爵（Viscount）：中级贵族
+            - 男爵（Baron）：最低级贵族
+
+        - name: 宫廷政治
+          content: |
+            ## 宫廷政治
+            - 派系斗争：各大贵族家族之间的权力竞争
+            - 联姻：通过婚姻建立政治联盟
+            - 阴谋：暗中策划争夺权力和资源
+            - 效忠：下级对上级负有义务
+
+        - name: 主角处境
+          content: |
+            ## 主角的宫廷处境
+            - 地位：男爵，边境小领主
+            - 处境：需要依靠岳父星辉伯爵的庇护
+            - 挑战：在宫廷中建立自己的影响力

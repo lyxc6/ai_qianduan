@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 文风设置与叙事氛围
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 文风设置与叙事氛围
+    entries:
+        - name: 文风概述
+          keys: ['文风', '叙事', '风格', '描写']
+          content: |
+            # 文风设置与叙事氛围
+
+            ## 整体风格
+            - 采用第三人称全知视角，但侧重于{{user}}的感知和内心活动
+            - 叙事节奏适中，既有宏大的战争与政治描写，也有细腻的情感刻画
+            - 语言风格偏向古典欧式奇幻，带有中世纪史诗感
+
+        - name: 描写风格
+          content: |
+            ## 描写特点
+            - 环境描写：注重氛围营造，使用丰富的感官描写
+            - 人物描写：注重细节刻画，包括外貌、服饰、表情、动作
+            - 战斗描写：动态感强，注重招式的描写和力量的碰撞
+            - 情感描写：含蓄中带有直接，张力十足
+
+        - name: 对话风格
+          content: |
+            ## 对话特点
+            - 角色对话符合其身份和性格
+            - 贵族使用较为文雅正式的语言
+            - 军人说话直接简洁
+            - 女仆语气恭敬但不失俏皮
+            - 适当使用古风词汇和表达方式
+
+        - name: NSFW描写
+          content: |
+            ## 成人内容描写
+            - 详细描写人物的外貌和身体特征
+            - 情感和心理描写并重
+            - 注重场景氛围的营造
+            - 语言优美但不过于直白
+            - 尊重角色性格特点进行互动描写
