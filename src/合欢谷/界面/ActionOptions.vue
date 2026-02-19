@@ -1,23 +1,18 @@
 <template>
   <div class="action-options-container">
     <div class="action-option-container" id="action-option-view">
-      <span class="action-option-label">视角</span>
       <span class="action-option-text">{{ actionOptions.当前视角 || '' }}</span>
     </div>
     <div class="action-option-container" id="action-option-container-one" @click="handleClick(actionOptions.一)">
-      <span class="action-option-label">一</span>
       <span class="action-option-text">{{ actionOptions.一 || '' }}</span>
     </div>
     <div class="action-option-container" id="action-option-container-two" @click="handleClick(actionOptions.二)">
-      <span class="action-option-label">二</span>
       <span class="action-option-text">{{ actionOptions.二 || '' }}</span>
     </div>
     <div class="action-option-container" id="action-option-container-three" @click="handleClick(actionOptions.三)">
-      <span class="action-option-label">三</span>
       <span class="action-option-text">{{ actionOptions.三 || '' }}</span>
     </div>
     <div class="action-option-container" id="action-option-container-four" @click="handleClick(actionOptions.四)">
-      <span class="action-option-label">四</span>
       <span class="action-option-text">{{ actionOptions.四 || '' }}</span>
     </div>
   </div>
@@ -68,7 +63,9 @@ function handleClick(text?: string) {
   padding: 0.625rem 0.875rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 177, 106, 0.1);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(212, 177, 106, 0.1);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -82,7 +79,7 @@ function handleClick(text?: string) {
   overflow: hidden;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 0;
@@ -96,7 +93,9 @@ function handleClick(text?: string) {
     background: linear-gradient(135deg, rgba(82, 56, 27, 0.9) 0%, rgba(57, 38, 19, 0.95) 100%);
     border-color: var(--user-color-primary);
     transform: translateX(2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(212, 177, 106, 0.2);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(212, 177, 106, 0.2);
   }
 
   &:active {

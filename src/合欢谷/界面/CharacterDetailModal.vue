@@ -14,11 +14,11 @@
             </div>
             <div class="info-item">
               <div class="info-label">年龄</div>
-              <div class="info-value">{{ character.年龄 || '' }}</div>
+              <div class="info-value">{{ character.年龄 !== undefined ? character.年龄 : '' }}</div>
             </div>
             <div class="info-item female-only" :class="{ hidden: !isFemale }">
-              <div class="info-label">后宫地位</div>
-              <div class="info-value">{{ character.后宫地位 || '' }}</div>
+              <div class="info-label">谷内地位</div>
+              <div class="info-value">{{ character.谷内地位 || '' }}</div>
             </div>
             <div class="info-item">
               <div class="info-label">身份</div>
@@ -59,10 +59,6 @@
             <div class="info-item">
               <div class="info-label">当前想法</div>
               <div class="info-value">{{ character.当前想法 || '' }}</div>
-            </div>
-            <div class="info-item female-only" :class="{ hidden: !isFemale }">
-              <div class="info-label">月经状态</div>
-              <div class="info-value">{{ character.月经状态 || '' }}</div>
             </div>
             <div class="info-item female-only" :class="{ hidden: !isFemale }">
               <div class="info-label">怀孕状态</div>
@@ -126,7 +122,7 @@ const isFemale = computed(() => {
   return gender === '女' || gender === '由男变女';
 });
 
-const skills = computed(() => character.value.功法与技能 || []);
+const skills = computed(() => character.value.功法 || []);
 
 function handleBackdropClick() {
   emit('close');

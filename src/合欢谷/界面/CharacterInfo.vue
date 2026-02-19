@@ -9,7 +9,7 @@
         </div>
         <div class="info-item">
           <div class="info-label">年龄</div>
-          <div class="info-value">{{ character.年龄 || '' }}</div>
+          <div class="info-value">{{ character.年龄 !== undefined ? character.年龄 : '' }}</div>
         </div>
         <div class="info-item">
           <div class="info-label">身份</div>
@@ -44,15 +44,15 @@
       <div class="info-group">
         <div class="info-item">
           <div class="info-label">谷内人数</div>
-          <div class="info-value">{{ valley.谷内人数 || '' }}</div>
+          <div class="info-value">{{ valley.谷内人数 !== undefined ? valley.谷内人数 : '' }}</div>
         </div>
         <div class="info-item">
           <div class="info-label">弟子数量</div>
-          <div class="info-value">{{ valley.弟子数量 || '' }}</div>
+          <div class="info-value">{{ valley.弟子数量 !== undefined ? valley.弟子数量 : '' }}</div>
         </div>
         <div class="info-item">
           <div class="info-label">后宫规模</div>
-          <div class="info-value">{{ valley.后宫规模 || '' }}</div>
+          <div class="info-value">{{ valley.后宫规模 !== undefined ? valley.后宫规模 : '' }}</div>
         </div>
         <div class="info-item">
           <div class="info-label">谷内状态</div>
@@ -104,16 +104,16 @@ interface Props {
   statData: {
     主角?: {
       姓名?: string;
-      年龄?: string;
+      年龄?: number;
       身份?: string;
       境界?: string;
       秘密知晓?: string[];
       功法与技能?: string[];
     };
     合欢谷?: {
-      谷内人数?: string;
-      弟子数量?: string;
-      后宫规模?: string;
+      谷内人数?: number;
+      弟子数量?: number;
+      后宫规模?: number;
       谷内状态?: string;
       外界认知?: string;
       阵法状态?: string;

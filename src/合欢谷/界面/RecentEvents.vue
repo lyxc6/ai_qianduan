@@ -4,14 +4,10 @@
       <span>暂无事件记录</span>
     </div>
     <div v-else class="events-list">
-      <div
-        v-for="(event, index) in reversedEvents"
-        :key="index"
-        class="event-entry"
-      >
-        <div class="event-time">{{ event.时间 || '无' }}</div>
-        <div class="event-location">{{ event.地点 || '无' }}</div>
-        <div class="event-content">{{ event.内容 || '无' }}</div>
+      <div v-for="(eventStr, index) in reversedEvents" :key="index" class="event-entry">
+        <div class="event-time">{{ parseEvent(eventStr).时间 || '无' }}</div>
+        <div class="event-location">{{ parseEvent(eventStr).地点 || '无' }}</div>
+        <div class="event-content">{{ parseEvent(eventStr).内容 || '无' }}</div>
       </div>
     </div>
   </div>
@@ -22,11 +18,7 @@ import { computed } from 'vue';
 
 interface Props {
   statData: {
-    重要事件?: Array<{
-      时间?: string;
-      地点?: string;
-      内容?: string;
-    }>;
+    重要事件?: string[];
   };
 }
 
@@ -34,6 +26,15 @@ const props = defineProps<Props>();
 
 const events = computed(() => props.statData?.重要事件 || []);
 const reversedEvents = computed(() => [...events.value].reverse());
+
+function parseEvent(eventStr: string): { 时间: string; 地点: string; 内容: string } {
+  const parts = eventStr.split('|');
+  return {
+    时间: parts[0] || '',
+    地点: parts[1] || '',
+    内容: parts.slice(2).join('|') || '',
+  };
+}
 </script>
 
 <style lang="scss">
@@ -50,7 +51,9 @@ const reversedEvents = computed(() => [...events.value].reverse());
   border-radius: 0.5rem;
   padding: 0.625rem 0.875rem;
   animation: slideIn 0.3s ease-out;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(212, 177, 106, 0.05);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(212, 177, 106, 0.05);
 
   &:hover {
     border-color: var(--user-color-primary);
