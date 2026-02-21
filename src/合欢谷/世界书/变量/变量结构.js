@@ -23,7 +23,7 @@ export const Schema = z.object({
       年龄: z.union([z.string(), z.number()]),
       好感度: z.number().int().min(-100).max(100),
       身份: z.string(),
-      谷内地位: z.string(),
+      谷内地位: z.string().optional(),
       当前想法: z.string(),
       当前着装: z.string(),
       当前姿势: z.string(),

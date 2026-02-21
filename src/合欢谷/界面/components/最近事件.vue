@@ -4,7 +4,7 @@
       <span>暂无事件记录</span>
     </div>
     <div v-else class="events-list">
-      <div v-for="(eventStr, index) in reversedEvents" :key="index" class="event-entry">
+      <div v-for="(eventStr, index) in reversedEvents" :key="eventStr" class="event-entry">
         <div class="event-time">{{ parseEvent(eventStr).时间 || '无' }}</div>
         <div class="event-location">{{ parseEvent(eventStr).地点 || '无' }}</div>
         <div class="event-content">{{ parseEvent(eventStr).内容 || '无' }}</div>
@@ -43,6 +43,13 @@ function parseEvent(eventStr: string): { 时间: string; 地点: string; 内容:
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.25rem;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .event-entry {

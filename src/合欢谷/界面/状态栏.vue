@@ -16,23 +16,22 @@
       <div class="tab-button" :class="{ active: currentPage === '2' }" @click="currentPage = '2'">主角</div>
       <div class="tab-button" :class="{ active: currentPage === '3' }" @click="currentPage = '3'">后宫</div>
       <div class="tab-button" :class="{ active: currentPage === '4' }" @click="currentPage = '4'">最近事件</div>
+      <div class="tab-button" :class="{ active: currentPage === '5' }" @click="currentPage = '5'">设置</div>
     </div>
 
     <div class="page-container" :class="{ active: currentPage === '1' }">
-      <ActionOptions :statData="statData" @send="handleSend" />
+      <ActionOptions :statData="statData" @send="处理发送" />
     </div>
 
-    <div class="page-container" :class="{ active: currentPage === '2' }">
-      <CharacterInfo :statData="statData" />
-    </div>
+    <div class="page-container" :class="{ active: currentPage === '2' }"><CharacterInfo :statData="statData" /></div>
 
     <div class="page-container" :class="{ active: currentPage === '3' }">
-      <HaremPage :statData="statData" @showDetail="showCharacterDetail" />
+      <Harem :statData="statData" @showDetail="显示角色详情" />
     </div>
 
-    <div class="page-container" :class="{ active: currentPage === '4' }">
-      <RecentEvents :statData="statData" />
-    </div>
+    <div class="page-container" :class="{ active: currentPage === '4' }"><RecentEvents :statData="statData" /></div>
+
+    <div class="page-container" :class="{ active: currentPage === '5' }"><Settings /></div>
 
     <CharacterDetailModal
       :characterName="selectedCharacter"
@@ -45,11 +44,16 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import ActionOptions from './ActionOptions.vue';
-import CharacterDetailModal from './CharacterDetailModal.vue';
-import CharacterInfo from './CharacterInfo.vue';
-import HaremPage from './HaremPage.vue';
-import RecentEvents from './RecentEvents.vue';
+import Harem from './components/后宫.vue';
+import RecentEvents from './components/最近事件.vue';
+import ActionOptions from './components/行动选项.vue';
+import CharacterInfo from './components/角色信息.vue';
+import CharacterDetailModal from './components/角色详情弹窗.vue';
+import Settings from './components/设置.vue';
+
+defineOptions({
+  unusedWarnings: false,
+});
 
 interface StatData {
   当前时间?: string;
@@ -92,7 +96,7 @@ const statData = ref<StatData>({});
 const selectedCharacter = ref('');
 const detailVisible = ref(false);
 
-async function loadData() {
+async function 加载数据() {
   await waitGlobalInitialized('Mvu');
   const data = getAllVariables().stat_data;
   statData.value = data || {};
@@ -105,7 +109,7 @@ async function loadData() {
   }
 }
 
-function handleSend(text: string) {
+function 处理发送(text: string) {
   const trimmedText = String(text).trim();
   if (!trimmedText || trimmedText === '…' || trimmedText === '...') {
     return;
@@ -129,17 +133,17 @@ function handleSend(text: string) {
     $textarea.trigger('input');
   } catch (error) {
     console.error('发送到聊天框时出错:', error);
-    triggerQuickReply(text);
+    // triggerQuickReply(text);
   }
 }
 
-function showCharacterDetail(characterName: string) {
+function 显示角色详情(characterName: string) {
   selectedCharacter.value = characterName;
   detailVisible.value = true;
 }
 
 onMounted(() => {
-  loadData();
+  加载数据();
 });
 </script>
 
