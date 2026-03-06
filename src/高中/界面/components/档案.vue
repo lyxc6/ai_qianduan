@@ -7,6 +7,9 @@
       <div class="profile-tab" :class="{ active: profileTab === 'classmates' }" @click="profileTab = 'classmates'">
         同学
       </div>
+      <div class="profile-tab" :class="{ active: profileTab === 'addCharacter' }" @click="profileTab = 'addCharacter'">
+        添加角色
+      </div>
     </div>
 
     <div class="profile-content" :class="{ active: profileTab === 'events' }">
@@ -36,11 +39,38 @@
         </div>
       </div>
     </div>
+
+    <div class="profile-content" :class="{ active: profileTab === 'addCharacter' }">
+      <div class="add-character-form">
+        <div class="form-group">
+          <label>角色名称</label>
+          <input type="text" v-model="newCharacter.name" placeholder="请输入角色名称" />
+        </div>
+        <div class="form-group">
+          <label>性别</label>
+          <select v-model="newCharacter.性别">
+            <option value="">请选择</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>关系</label>
+          <input type="text" v-model="newCharacter.关系" placeholder="如：同学、朋友、暗恋对象" />
+        </div>
+        <div class="form-group">
+          <label>好感度</label>
+          <input type="number" v-model.number="newCharacter.好感度" placeholder="0-100" min="0" max="100" />
+        </div>
+        <button class="add-btn" @click="handleAddCharacter">添加角色</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 
 interface Props {
   statData: {
@@ -60,9 +90,17 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits<{
   showDetail: [characterName: string];
+  addCharacter: [character: { name: string; 性别: string; 关系: string; 好感度: number }];
 }>();
 
 const profileTab = ref('events');
+
+const newCharacter = reactive({
+  name: '',
+  性别: '',
+  关系: '',
+  好感度: 50,
+});
 
 const events = computed(() => props.statData?.最近事件 || []);
 const reversedEvents = computed(() => [...events.value].reverse());
@@ -81,6 +119,22 @@ function getRelationClass(relation?: string): string {
 
 function handleCardClick(name: string) {
   emit('showDetail', name);
+}
+
+function handleAddCharacter() {
+  if (!newCharacter.name.trim()) {
+    return;
+  }
+  emit('addCharacter', {
+    name: newCharacter.name.trim(),
+    性别: newCharacter.性别,
+    关系: newCharacter.关系 || '同学',
+    好感度: newCharacter.好感度 || 0,
+  });
+  newCharacter.name = '';
+  newCharacter.性别 = '';
+  newCharacter.关系 = '';
+  newCharacter.好感度 = 50;
 }
 </script>
 
@@ -259,6 +313,73 @@ function handleCardClick(name: string) {
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.add-character-form {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  label {
+    font-family: var(--font-title);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  input,
+  select {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 0.35rem;
+    padding: 0.5rem;
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: var(--user-color-primary);
+    }
+
+    &::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.6;
+    }
+  }
+
+  select {
+    cursor: pointer;
+  }
+}
+
+.add-btn {
+  margin-top: 0.5rem;
+  background: linear-gradient(135deg, var(--user-color-primary), var(--user-color-secondary));
+  border: none;
+  border-radius: 0.35rem;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-title);
+  font-size: 0.8rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 138, 128, 0.3);
+  }
+
+  &:active {
     transform: translateY(0);
   }
 }
