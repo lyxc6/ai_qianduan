@@ -1,19 +1,23 @@
 <template>
   <div class="action-options-container">
-    <div class="action-option-container" id="action-option-view">
-      <span class="action-option-text">{{ actionOptions.当前视角 || '' }}</span>
+    <div class="current-view-row">
+      <span class="view-label">视角</span>
+      <span class="view-separator">:</span>
+      <span class="view-value">{{ actionOptions.当前视角 || '未设置' }}</span>
     </div>
-    <div class="action-option-container" id="action-option-container-one" @click="handleClick(actionOptions.选项一)">
-      <span class="action-option-text">{{ actionOptions.选项一 || '' }}</span>
-    </div>
-    <div class="action-option-container" id="action-option-container-two" @click="handleClick(actionOptions.选项二)">
-      <span class="action-option-text">{{ actionOptions.选项二 || '' }}</span>
-    </div>
-    <div class="action-option-container" id="action-option-container-three" @click="handleClick(actionOptions.选项三)">
-      <span class="action-option-text">{{ actionOptions.选项三 || '' }}</span>
-    </div>
-    <div class="action-option-container" id="action-option-container-four" @click="handleClick(actionOptions.选项四)">
-      <span class="action-option-text">{{ actionOptions.选项四 || '' }}</span>
+    <div class="options-grid">
+      <div class="action-option-btn" @click="handleClick(actionOptions.选项一)">
+        <span class="option-text">{{ actionOptions.选项一 || '' }}</span>
+      </div>
+      <div class="action-option-btn" @click="handleClick(actionOptions.选项二)">
+        <span class="option-text">{{ actionOptions.选项二 || '' }}</span>
+      </div>
+      <div class="action-option-btn" @click="handleClick(actionOptions.选项三)">
+        <span class="option-text">{{ actionOptions.选项三 || '' }}</span>
+      </div>
+      <div class="action-option-btn" @click="handleClick(actionOptions.选项四)">
+        <span class="option-text">{{ actionOptions.选项四 || '' }}</span>
+      </div>
     </div>
   </div>
 </template>
