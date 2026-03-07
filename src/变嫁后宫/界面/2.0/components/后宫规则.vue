@@ -1,27 +1,24 @@
 <template>
   <div class="rules-container">
-    <div class="rules-section">
-      <div class="rules-title">后宫守则</div>
-      <div class="rules-list">
-        <div v-for="(rule, index) in rules" :key="index" class="rule-item">
-          <textarea v-model="rules[index]" class="rule-input" placeholder="请输入守则"></textarea>
-          <i class="fas fa-times delete-icon" @click="删除规则(index)" title="删除"></i>
-        </div>
-        <div class="add-rule-btn" @click="添加规则">
-          <i class="fas fa-plus add-icon"></i>
-          <span>添加守则</span>
-        </div>
+    <div class="rules-list">
+      <div v-for="(rule, index) in rules" :key="index" class="rule-item">
+        <textarea v-model="rules[index]" class="rule-input" placeholder="请输入守则"></textarea>
+        <i class="fas fa-times delete-icon" @click="删除规则(index)" title="删除"></i>
       </div>
-      <div class="rules-actions">
-        <button class="action-btn save-btn" @click="保存守则" :disabled="保存中">
-          <i class="fas fa-save"></i>
-          <span>{{ 保存中 ? '保存中...' : '保存' }}</span>
-        </button>
-        <button class="action-btn reset-btn" @click="重置守则" :disabled="重置中">
-          <i class="fas fa-undo"></i>
-          <span>{{ 重置中 ? '重置中...' : '重置' }}</span>
-        </button>
+      <div class="add-rule-btn" @click="添加规则">
+        <i class="fas fa-plus add-icon"></i>
+        <span>添加守则</span>
       </div>
+    </div>
+    <div class="rules-actions">
+      <button class="action-btn save-btn" @click="保存守则" :disabled="保存中">
+        <i class="fas fa-save"></i>
+        <span>{{ 保存中 ? '保存中...' : '保存' }}</span>
+      </button>
+      <button class="action-btn reset-btn" @click="重置守则" :disabled="重置中">
+        <i class="fas fa-undo"></i>
+        <span>{{ 重置中 ? '重置中...' : '重置' }}</span>
+      </button>
     </div>
   </div>
 </template>
@@ -180,154 +177,3 @@ onMounted(() => {
   初始化守则();
 });
 </script>
-
-<style lang="scss">
-.rules-container {
-  padding: 0.25rem;
-  height: 100%;
-  overflow-y: auto;
-}
-
-.rules-section {
-  background: linear-gradient(135deg, var(--warm-gradient-start) 0%, var(--warm-gradient-end) 100%);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  box-shadow:
-    0 2px 8px var(--warm-shadow),
-    inset 0 1px 0 var(--warm-inner-light);
-}
-
-.rules-title {
-  font-family: var(--font-title);
-  font-size: 1.1rem;
-  color: var(--text-title);
-  text-align: center;
-  margin-bottom: 1rem;
-  letter-spacing: 3px;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--warm-border-light);
-}
-
-.rules-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.rule-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--warm-border-light);
-  border-radius: 0.4rem;
-  padding: 0.5rem;
-}
-
-.rule-input {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--warm-border-light);
-  border-radius: 0.25rem;
-  padding: 0.4rem;
-  font-size: 0.8rem;
-  color: var(--text-primary);
-  font-family: inherit;
-  resize: vertical;
-  min-height: 2.5rem;
-
-  &:focus {
-    outline: none;
-    border-color: var(--user-color-primary);
-  }
-
-  &::placeholder {
-    color: var(--text-secondary);
-  }
-}
-
-.delete-icon {
-  color: rgba(255, 100, 100, 0.7);
-  cursor: pointer;
-  margin-top: 0.3rem;
-  font-size: 0.8rem;
-  transition: color 0.2s;
-
-  &:hover {
-    color: rgba(255, 80, 80, 1);
-  }
-}
-
-.add-rule-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border: 1px dashed var(--border-color);
-  border-radius: 0.4rem;
-  background: var(--warm-bg-light);
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s;
-
-  &:hover {
-    background: var(--warm-bg-dark);
-    border-color: var(--warm-border-hover);
-    color: var(--text-primary);
-  }
-}
-
-.add-icon {
-  color: rgba(100, 200, 100, 0.7);
-  font-size: 0.8rem;
-}
-
-.rules-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--warm-border-light);
-}
-
-.action-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.4rem 0.8rem;
-  border: 1px solid var(--warm-border-light);
-  border-radius: 0.25rem;
-  background: var(--warm-bg-light);
-  color: var(--text-primary);
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s;
-
-  &:hover:not(:disabled) {
-    background: var(--warm-bg-dark);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-}
-
-.save-btn {
-  &:hover:not(:disabled) {
-    background: rgba(100, 150, 255, 0.2);
-    border-color: rgba(100, 150, 255, 0.5);
-  }
-}
-
-.reset-btn {
-  &:hover:not(:disabled) {
-    background: rgba(255, 150, 100, 0.2);
-    border-color: rgba(255, 150, 100, 0.5);
-  }
-}
-</style>
