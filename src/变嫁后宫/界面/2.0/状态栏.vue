@@ -1,5 +1,7 @@
-<template>
+﻿<template>
   <div class="main">
+    <VariableDisplay :currentMessage="currentMessage" />
+
     <div class="world-info">
       <div class="world-info-box">
         <div class="world-info-item-display">⏰日期：</div>
@@ -20,28 +22,29 @@
     </div>
 
     <div class="page-container" :class="{ active: currentPage === '1' }">
-      <ActionOptions :statData="statData" @send="处理发送" />
+      <ActionOptions :statData="statData" :currentMessage="currentMessage" @send="处理发送" />
     </div>
 
     <div class="page-container" :class="{ active: currentPage === '2' }">
-      <CharacterInfo :statData="statData" />
+      <CharacterInfo :statData="statData" :currentMessage="currentMessage" />
     </div>
 
     <div class="page-container" :class="{ active: currentPage === '3' }">
-      <HaremRules :statData="statData" />
+      <HaremRules :statData="statData" :currentMessage="currentMessage" />
     </div>
 
     <div class="page-container" :class="{ active: currentPage === '4' }">
-      <Harem :statData="statData" @showDetail="显示角色详情" />
+      <Harem :statData="statData" :currentMessage="currentMessage" @showDetail="显示角色详情" />
     </div>
 
     <div class="page-container" :class="{ active: currentPage === '5' }">
-      <RecentEvents :statData="statData" />
+      <RecentEvents :statData="statData" :currentMessage="currentMessage" />
     </div>
 
     <CharacterDetailModal
       :characterName="selectedCharacter"
       :statData="statData"
+      :currentMessage="currentMessage"
       :visible="detailVisible"
       @close="detailVisible = false"
     />
@@ -50,6 +53,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import VariableDisplay from './components/变量显示.vue';
 import Harem from './components/后宫.vue';
 import HaremRules from './components/后宫规则.vue';
 import RecentEvents from './components/最近事件.vue';
@@ -93,6 +97,7 @@ const currentLocation = ref('加载中...');
 const statData = ref<StatData>({});
 const selectedCharacter = ref('');
 const detailVisible = ref(false);
+const currentMessage = ref<any>(null);
 
 async function 加载数据() {
   await waitGlobalInitialized('Mvu');
@@ -106,6 +111,11 @@ async function 加载数据() {
 
   if (data.事件 && Array.isArray(data.事件)) {
     insertVariables({ 最近事件: [...data.事件] }, { type: 'chat' });
+  }
+
+  const messages = getChatMessages(-1);
+  if (messages && messages.length > 0) {
+    currentMessage.value = messages[0];
   }
 }
 

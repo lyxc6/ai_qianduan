@@ -1,0 +1,99 @@
+[1mdiff --git "a/src/\345\217\230\345\253\201\345\220\216\345\256\253/\347\225\214\351\235\242/2.0/\347\212\266\346\200\201\346\240\217.vue" "b/src/\345\217\230\345\253\201\345\220\216\345\256\253/\347\225\214\351\235\242/2.0/\347\212\266\346\200\201\346\240\217.vue"[m
+[1mindex ca3df68..26b8d81 100644[m
+[1m--- "a/src/\345\217\230\345\253\201\345\220\216\345\256\253/\347\225\214\351\235\242/2.0/\347\212\266\346\200\201\346\240\217.vue"[m
+[1m+++ "b/src/\345\217\230\345\253\201\345\220\216\345\256\253/\347\225\214\351\235\242/2.0/\347\212\266\346\200\201\346\240\217.vue"[m
+[36m@@ -6,7 +6,7 @@[m
+         <div class="world-info-item-display" id="current-time">{{ currentTime }}</div>[m
+       </div>[m
+       <div class="world-info-box">[m
+[31m-        <div class="world-info-item-display">📍地点：</div>[m
+[32m+[m[32m        <div class="world-info-item-display">📍地点�?/div>[m
+         <div class="world-info-item-display" id="current-location">{{ currentLocation }}</div>[m
+       </div>[m
+     </div>[m
+[36m@@ -16,11 +16,11 @@[m
+       <div class="tab-button" :class="{ active: currentPage === '2' }" @click="currentPage = '2'">主角</div>[m
+       <div class="tab-button" :class="{ active: currentPage === '3' }" @click="currentPage = '3'">后宫守则</div>[m
+       <div class="tab-button" :class="{ active: currentPage === '4' }" @click="currentPage = '4'">后宫</div>[m
+[31m-      <div class="tab-button" :class="{ active: currentPage === '5' }" @click="currentPage = '5'">最近事件</div>[m
+[32m+[m[32m      <div class="tab-button" :class="{ active: currentPage === '5' }" @click="currentPage = '5'">最近事�?/div>[m
+     </div>[m
+ [m
+     <div class="page-container" :class="{ active: currentPage === '1' }">[m
+[31m-      <ActionOptions :statData="statData" @send="处理发送" />[m
+[32m+[m[32m      <ActionOptions :statData="statData" @send="处理发�? />[m
+     </div>[m
+ [m
+     <div class="page-container" :class="{ active: currentPage === '2' }">[m
+[36m@@ -45,6 +45,9 @@[m
+       :visible="detailVisible"[m
+       @close="detailVisible = false"[m
+     />[m
+[32m+[m
+[32m+[m[32m    <!-- 这里添加一个div，用于显示变量更新内�?-->[m
+[32m+[m[32m    <show />[m
+   </div>[m
+ </template>[m
+ [m
+[36m@@ -52,10 +55,11 @@[m
+ import { onMounted, ref } from 'vue';[m
+ import Harem from './components/后宫.vue';[m
+ import HaremRules from './components/后宫规则.vue';[m
+[31m-import RecentEvents from './components/最近事件.vue';[m
+[32m+[m[32mimport RecentEvents from './components/最近事�?vue';[m
+ import ActionOptions from './components/行动选项.vue';[m
+ import CharacterInfo from './components/角色信息.vue';[m
+ import CharacterDetailModal from './components/角色详情弹窗.vue';[m
+[32m+[m[32mimport show from './components/变量显示.vue'[m
+ [m
+ defineOptions({[m
+   unusedWarnings: false,[m
+[36m@@ -69,16 +73,16 @@[m [minterface StatData {[m
+   行动选项?: {[m
+     当前视角?: string;[m
+     选项一?: string;[m
+[31m-    选项二?: string;[m
+[31m-    选项三?: string;[m
+[31m-    选项四?: string;[m
+[32m+[m[32m    选项�?: string;[m
+[32m+[m[32m    选项�?: string;[m
+[32m+[m[32m    选项�?: string;[m
+   };[m
+   主角?: {[m
+     姓名?: string;[m
+     年龄?: number;[m
+     性别?: string;[m
+     身份?: string;[m
+[31m-    当前着装?: string;[m
+[32m+[m[32m    当前着�?: string;[m
+     当前姿势?: string;[m
+     当前想法?: string;[m
+     射精进度?: number;[m
+[36m@@ -88,8 +92,8 @@[m [minterface StatData {[m
+ }[m
+ [m
+ const currentPage = ref('1');[m
+[31m-const currentTime = ref('加载中...');[m
+[31m-const currentLocation = ref('加载中...');[m
+[32m+[m[32mconst currentTime = ref('加载�?..');[m
+[32m+[m[32mconst currentLocation = ref('加载�?..');[m
+ const statData = ref<StatData>({});[m
+ const selectedCharacter = ref('');[m
+ const detailVisible = ref(false);[m
+[36m@@ -105,13 +109,13 @@[m [masync function 加载数据() {[m
+   }[m
+ [m
+   if (data.事件 && Array.isArray(data.事件)) {[m
+[31m-    insertVariables({ 最近事件: [...data.事件] }, { type: 'chat' });[m
+[32m+[m[32m    insertVariables({ 最近事�? [...data.事件] }, { type: 'chat' });[m
+   }[m
+ }[m
+ [m
+[31m-function 处理发送(text: string) {[m
+[32m+[m[32mfunction 处理发�?text: string) {[m
+   const trimmedText = String(text).trim();[m
+[31m-  if (!trimmedText || trimmedText === '…' || trimmedText === '...') {[m
+[32m+[m[32m  if (!trimmedText || trimmedText === '�? || trimmedText === '...') {[m
+     return;[m
+   }[m
+ [m
