@@ -17,7 +17,7 @@ export const Schema = z.object({
     姓名: z.string(),
     原名: z.string(),
     性别: z.string(),
-    年龄: z.number(),
+    年龄: z.string(),
     武功境界: z.number(),
     对男主好感度: z.number().min(0).max(100),
     当前发育状态: z.number().min(0).max(100),
@@ -50,7 +50,7 @@ export const Schema = z.object({
   男主: z.object({
     姓名: z.string(),
     性别: z.string(),
-    年龄: z.number(),
+    年龄: z.string(),
     武功境界: z.number(),
     对女主好感度: z.number().int().min(0).max(100),
     射精进度: z.number().min(0).max(100),
@@ -72,7 +72,7 @@ export const Schema = z.object({
     z.object({
       姓名: z.string(),
       性别: z.string(),
-      年龄: z.number(),
+      年龄: z.string(),
       身份: z.string(),
       关系: z.string(),
       对女主看法: z.string(),
