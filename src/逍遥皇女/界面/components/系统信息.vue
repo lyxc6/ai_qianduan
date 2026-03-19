@@ -25,6 +25,10 @@
           <div class="info-label">任务内容</div>
           <div class="info-value">{{ system.当前任务.内容 || '' }}</div>
         </div>
+        <div class="info-item" v-if="system.当前任务.进度 !== undefined">
+          <div class="info-label">任务进度</div>
+          <div class="info-value">{{ system.当前任务.进度 }}%</div>
+        </div>
         <div class="info-item" v-if="system.当前任务.要求">
           <div class="info-label">任务要求</div>
           <div class="info-value requirement">{{ system.当前任务.要求 }}</div>
@@ -56,6 +60,7 @@ interface Props {
         要求?: string;
         奖励?: string;
         惩罚?: string;
+        进度?: number;
       };
       最近性行为?: string;
     };

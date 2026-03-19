@@ -1,50 +1,54 @@
 <template>
   <div class="npc-info-container">
-    <div v-if="npcList.length === 0" class="no-npc">
-      暂无路人信息
-    </div>
-    <div v-else v-for="(npc, index) in npcList" :key="index" class="npc-section">
-      <div class="npc-header">
-        <span class="npc-name">{{ npc.姓名 || '未命名' }}</span>
-        <span class="npc-relation">{{ npc.关系 || '' }}</span>
-      </div>
+    <div v-if="npcList.length === 0" class="no-npc">暂无路人信息</div>
+    <template v-else v-for="(npc, index) in npcList" :key="index">
+      <div class="npc-section">
+        <div class="npc-header">
+          <span class="npc-name">{{ npc.姓名 || '未命名' }}</span>
+          <span class="npc-relation">{{ npc.关系 || '' }}</span>
+        </div>
 
-      <div class="info-section">
-        <div class="section-title">基本信息</div>
-        <div class="info-group">
-          <div class="info-item" v-if="npc.性别">
-            <div class="info-label">性别</div>
-            <div class="info-value">{{ npc.性别 }}</div>
+        <div class="info-section">
+          <div class="section-title">基本信息</div>
+          <div class="info-group">
+            <div class="info-item" v-if="npc.性别">
+              <div class="info-label">性别</div>
+              <div class="info-value">{{ npc.性别 }}</div>
+            </div>
+            <div class="info-item" v-if="npc.年龄">
+              <div class="info-label">年龄</div>
+              <div class="info-value">{{ npc.年龄 }}岁</div>
+            </div>
+            <div class="info-item" v-if="npc.武功境界 !== undefined">
+              <div class="info-label">武功境界</div>
+              <div class="info-value">{{ npc.武功境界 }}</div>
+            </div>
+            <div class="info-item" v-if="npc.身份">
+              <div class="info-label">身份</div>
+              <div class="info-value">{{ npc.身份 }}</div>
+            </div>
+            <div class="info-item" v-if="npc.对女主看法">
+              <div class="info-label">对女主看法</div>
+              <div class="info-value">{{ npc.对女主看法 }}</div>
+            </div>
           </div>
-          <div class="info-item" v-if="npc.年龄">
-            <div class="info-label">年龄</div>
-            <div class="info-value">{{ npc.年龄 }}岁</div>
-          </div>
-          <div class="info-item" v-if="npc.身份">
-            <div class="info-label">身份</div>
-            <div class="info-value">{{ npc.身份 }}</div>
-          </div>
-          <div class="info-item" v-if="npc.对女主看法">
-            <div class="info-label">对女主看法</div>
-            <div class="info-value">{{ npc.对女主看法 }}</div>
+        </div>
+
+        <div class="info-section">
+          <div class="section-title">当前状态</div>
+          <div class="info-group">
+            <div class="info-item" v-if="npc.当前姿势">
+              <div class="info-label">当前姿势</div>
+              <div class="info-value">{{ npc.当前姿势 }}</div>
+            </div>
+            <div class="info-item" v-if="npc.当前想法">
+              <div class="info-label">当前想法</div>
+              <div class="info-value">{{ npc.当前想法 }}</div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="info-section">
-        <div class="section-title">当前状态</div>
-        <div class="info-group">
-          <div class="info-item" v-if="npc.当前姿势">
-            <div class="info-label">当前姿势</div>
-            <div class="info-value">{{ npc.当前姿势 }}</div>
-          </div>
-          <div class="info-item" v-if="npc.当前想法">
-            <div class="info-label">当前想法</div>
-            <div class="info-value">{{ npc.当前想法 }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -55,6 +59,7 @@ interface NPC {
   姓名?: string;
   性别?: string;
   年龄?: number;
+  武功境界?: number;
   身份?: string;
   关系?: string;
   对女主看法?: string;
@@ -63,15 +68,15 @@ interface NPC {
 }
 
 interface Props {
-  statData: {
+  statData?: {
     路人?: NPC[];
   };
 }
 
 const props = defineProps<Props>();
 
-const npcList = computed(() => {
-  return props.statData?.路人 || [];
+const npcList = computed<NPC[]>(() => {
+  return props.statData?.路人 ?? [];
 });
 </script>
 
@@ -145,21 +150,19 @@ const npcList = computed(() => {
 .info-item {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 0.2rem 0;
+  align-items: center;
+  padding: 0.15rem 0;
+  font-size: 0.65rem;
 }
 
 .info-label {
   color: var(--text-secondary);
-  font-size: 0.65rem;
-  min-width: 60px;
+  flex-shrink: 0;
 }
 
 .info-value {
   color: var(--text-primary);
-  font-size: 0.65rem;
   text-align: right;
-  flex: 1;
-  word-break: break-all;
+  margin-left: 0.5rem;
 }
 </style>

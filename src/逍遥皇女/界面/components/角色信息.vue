@@ -2,7 +2,7 @@
   <div class="character-detail-body">
     <div v-if="characterType === '女主'" class="character-info-section">
       <div class="character-header">
-        <span class="character-header-name">{{ character.姓名 || '加载中...' }}</span>
+        <span class="character-header-name">{{ 女主角.姓名 || '加载中...' }}</span>
         <span class="character-header-tag">女主</span>
       </div>
 
@@ -11,27 +11,41 @@
         <div class="info-group">
           <div class="info-item">
             <div class="info-label">姓名</div>
-            <div class="info-value">{{ character.姓名 || '' }}</div>
+            <div class="info-value">{{ 女主角.姓名 || '' }}</div>
+          </div>
+          <div class="info-item" v-if="女主角.原名">
+            <div class="info-label">原名</div>
+            <div class="info-value">{{ 女主角.原名 }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">年龄</div>
-            <div class="info-value">{{ character.年龄 !== undefined ? character.年龄 + '岁' : '' }}</div>
+            <div class="info-value">{{ 女主角.年龄 !== undefined ? 女主角.年龄 + '岁' : '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">性别</div>
-            <div class="info-value">{{ character.性别 || '' }}</div>
+            <div class="info-value">{{ 女主角.性别 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">武功境界</div>
-            <div class="info-value">{{ character.武功境界 || '0' }}</div>
+            <div class="info-value">{{ 女主角.武功境界 || '0' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">身份</div>
-            <div class="info-value">{{ character.身份 || '' }}</div>
+            <div class="info-value">{{ 女主角.身份 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">目标</div>
-            <div class="info-value">{{ character.目标 || '' }}</div>
+            <div class="info-value">{{ 女主角.目标 || '' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <div class="section-title">人际关系</div>
+        <div class="info-group">
+          <div class="info-item" v-if="女主角.对男主好感度 !== undefined">
+            <div class="info-label">对男主好感度</div>
+            <div class="info-value">{{ 女主角.对男主好感度 }}</div>
           </div>
         </div>
       </div>
@@ -41,27 +55,27 @@
         <div class="info-group">
           <div class="info-item">
             <div class="info-label">当前姿势</div>
-            <div class="info-value">{{ character.当前姿势 || '' }}</div>
+            <div class="info-value">{{ 女主角.当前姿势 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">身体状态</div>
-            <div class="info-value">{{ character.身体状态 || '' }}</div>
+            <div class="info-value">{{ 女主角.身体状态 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">小嘴状态</div>
-            <div class="info-value">{{ character.小嘴状态 || '' }}</div>
+            <div class="info-value">{{ 女主角.小嘴状态 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">胸部状态</div>
-            <div class="info-value">{{ character.胸部状态 || '' }}</div>
+            <div class="info-value">{{ 女主角.胸部状态 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">小屄状态</div>
-            <div class="info-value">{{ character.小屄状态 || '' }}</div>
+            <div class="info-value">{{ 女主角.小屄状态 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">屁穴状态</div>
-            <div class="info-value">{{ character.屁穴状态 || '' }}</div>
+            <div class="info-value">{{ 女主角.屁穴状态 || '' }}</div>
           </div>
         </div>
       </div>
@@ -71,27 +85,27 @@
         <div class="info-group">
           <div class="info-item">
             <div class="info-label">发育状态</div>
-            <div class="info-value">{{ character.当前发育状态 || '0' }}%</div>
+            <div class="info-value">{{ 女主角.当前发育状态 || '0' }}%</div>
           </div>
           <div class="info-item">
             <div class="info-label">高潮进程</div>
-            <div class="info-value">{{ character.高潮进程 || '0' }}%</div>
+            <div class="info-value">{{ 女主角.高潮进程 || '0' }}%</div>
           </div>
           <div class="info-item">
             <div class="info-label">高潮次数</div>
-            <div class="info-value">{{ character.高潮次数 || '0' }}次</div>
+            <div class="info-value">{{ 女主角.高潮次数 || '0' }}次</div>
           </div>
           <div class="info-item">
             <div class="info-label">被内射次数</div>
-            <div class="info-value">{{ character.被内射次数 || '0' }}次</div>
+            <div class="info-value">{{ 女主角.被内射次数 || '0' }}次</div>
           </div>
           <div class="info-item">
             <div class="info-label">处女</div>
-            <div class="info-value">{{ character.处女 === true ? '是' : '否' }}</div>
+            <div class="info-value">{{ 女主角.处女 === true ? '是' : '否' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">破处记录</div>
-            <div class="info-value">{{ character.破处记录 || '无' }}</div>
+            <div class="info-value">{{ 女主角.破处记录 || '无' }}</div>
           </div>
         </div>
       </div>
@@ -101,36 +115,36 @@
         <div class="info-group">
           <div class="info-item">
             <div class="info-label">当前想法</div>
-            <div class="info-value">{{ character.当前想法 || '' }}</div>
+            <div class="info-value">{{ 女主角.当前想法 || '' }}</div>
           </div>
-          <div v-if="着装信息.整体" class="info-item">
+          <div v-if="女着装.整体" class="info-item">
             <div class="info-label">整体着装</div>
-            <div class="info-value">{{ 着装信息.整体 }}</div>
+            <div class="info-value">{{ 女着装.整体 }}</div>
           </div>
-          <div v-if="着装信息.内衣" class="info-item">
+          <div v-if="女着装.内衣" class="info-item">
             <div class="info-label">内衣</div>
-            <div class="info-value">{{ 着装信息.内衣 }}</div>
+            <div class="info-value">{{ 女着装.内衣 }}</div>
           </div>
-          <div v-if="着装信息.内裤" class="info-item">
+          <div v-if="女着装.内裤" class="info-item">
             <div class="info-label">内裤</div>
-            <div class="info-value">{{ 着装信息.内裤 }}</div>
+            <div class="info-value">{{ 女着装.内裤 }}</div>
           </div>
-          <div v-if="着装信息.特殊配饰" class="info-item">
+          <div v-if="女着装.特殊配饰" class="info-item">
             <div class="info-label">特殊配饰</div>
-            <div class="info-value">{{ 着装信息.特殊配饰 }}</div>
+            <div class="info-value">{{ 女着装.特殊配饰 }}</div>
           </div>
-          <div v-if="着装信息.暴露程度" class="info-item">
+          <div v-if="女着装.暴露程度" class="info-item">
             <div class="info-label">暴露程度</div>
-            <div class="info-value">{{ 着装信息.暴露程度 }}</div>
+            <div class="info-value">{{ 女着装.暴露程度 }}</div>
           </div>
         </div>
       </div>
 
-      <div class="info-section" v-if="character.秘密">
+      <div class="info-section" v-if="女主角.秘密">
         <div class="section-title">🔒 秘密</div>
         <div class="info-group">
-          <div class="info-item" style="flex-direction: column; align-items: flex-start;">
-            <div class="info-value" style="color: #c62828; font-size: 0.65rem;">{{ character.秘密 }}</div>
+          <div class="info-item" style="flex-direction: column; align-items: flex-start">
+            <div class="info-value" style="color: #c62828; font-size: 0.65rem">{{ 女主角.秘密 }}</div>
           </div>
         </div>
       </div>
@@ -138,7 +152,7 @@
 
     <div v-else-if="characterType === '男主'" class="character-info-section">
       <div class="character-header">
-        <span class="character-header-name">{{ character.姓名 || '加载中...' }}</span>
+        <span class="character-header-name">{{ 男主角.姓名 || '加载中...' }}</span>
         <span class="character-header-tag">男主</span>
       </div>
 
@@ -147,23 +161,23 @@
         <div class="info-group">
           <div class="info-item">
             <div class="info-label">姓名</div>
-            <div class="info-value">{{ character.姓名 || '' }}</div>
+            <div class="info-value">{{ 男主角.姓名 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">年龄</div>
-            <div class="info-value">{{ character.年龄 !== undefined ? character.年龄 + '岁' : '' }}</div>
+            <div class="info-value">{{ 男主角.年龄 !== undefined ? 男主角.年龄 + '岁' : '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">性别</div>
-            <div class="info-value">{{ character.性别 || '' }}</div>
+            <div class="info-value">{{ 男主角.性别 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">武功境界</div>
-            <div class="info-value">{{ character.武功境界 || '0' }}</div>
+            <div class="info-value">{{ 男主角.武功境界 || '0' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">身份</div>
-            <div class="info-value">{{ character.身份 || '' }}</div>
+            <div class="info-value">{{ 男主角.身份 || '' }}</div>
           </div>
         </div>
       </div>
@@ -173,15 +187,19 @@
         <div class="relationship-section">
           <div class="relationship-item">
             <span class="relation-label">关系</span>
-            <span class="relation-value">{{ character.关系 || '' }}</span>
+            <span class="relation-value">{{ 男主角.关系 || '' }}</span>
           </div>
           <div class="relationship-item">
             <span class="relation-label">好感度</span>
-            <span class="relation-value">{{ character.对女主好感度 || '0' }}</span>
+            <span class="relation-value">{{ 男主角.对女主好感度 || '0' }}</span>
           </div>
           <div class="relationship-item">
             <span class="relation-label">射精进度</span>
-            <span class="relation-value">{{ character.射精进度 || '0' }}%</span>
+            <span class="relation-value">{{ 男主角.射精进度 || '0' }}%</span>
+          </div>
+          <div class="relationship-item" v-if="男主角.识破身份进度 !== undefined">
+            <span class="relation-label">识破身份进度</span>
+            <span class="relation-value">{{ 男主角.识破身份进度 }}%</span>
           </div>
         </div>
       </div>
@@ -191,23 +209,23 @@
         <div class="info-group">
           <div class="info-item">
             <div class="info-label">当前姿势</div>
-            <div class="info-value">{{ character.当前姿势 || '' }}</div>
+            <div class="info-value">{{ 男主角.当前姿势 || '' }}</div>
           </div>
           <div class="info-item">
             <div class="info-label">当前想法</div>
-            <div class="info-value">{{ character.当前想法 || '' }}</div>
+            <div class="info-value">{{ 男主角.当前想法 || '' }}</div>
           </div>
-          <div v-if="着装信息.整体" class="info-item">
+          <div v-if="男着装.整体" class="info-item">
             <div class="info-label">整体着装</div>
-            <div class="info-value">{{ 着装信息.整体 }}</div>
+            <div class="info-value">{{ 男着装.整体 }}</div>
           </div>
-          <div v-if="着装信息.配饰" class="info-item">
+          <div v-if="男着装.配饰" class="info-item">
             <div class="info-label">配饰</div>
-            <div class="info-value">{{ 着装信息.配饰 }}</div>
+            <div class="info-value">{{ 男着装.配饰 }}</div>
           </div>
-          <div v-if="着装信息.暴露程度" class="info-item">
+          <div v-if="男着装.暴露程度" class="info-item">
             <div class="info-label">暴露程度</div>
-            <div class="info-value">{{ 着装信息.暴露程度 }}</div>
+            <div class="info-value">{{ 男着装.暴露程度 }}</div>
           </div>
         </div>
       </div>
@@ -219,12 +237,14 @@
 import { computed } from 'vue';
 
 interface Props {
-  statData: {
+  statData?: {
     女主?: {
       姓名?: string;
+      原名?: string;
       性别?: string;
       年龄?: number;
       武功境界?: number;
+      对男主好感度?: number;
       当前发育状态?: number;
       高潮进程?: number;
       高潮次数?: number;
@@ -260,6 +280,7 @@ interface Props {
       射精进度?: number;
       身份?: string;
       关系?: string;
+      识破身份进度?: number;
       当前姿势?: string;
       当前想法?: string;
       当前着装?: {
@@ -276,16 +297,26 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const character = computed(() => {
-  if (props.characterType === '女主') {
-    return props.statData?.女主 || {};
-  } else if (props.characterType === '男主') {
-    return props.statData?.男主 || {};
-  }
-  return {};
+type FemaleChar = NonNullable<Props['statData']>['女主'];
+type MaleChar = NonNullable<Props['statData']>['男主'];
+
+const 女主角 = computed<FemaleChar>(() => {
+  if (!props.statData) return {} as FemaleChar;
+  return props.statData.女主 || ({} as FemaleChar);
+});
+const 男主角 = computed<MaleChar>(() => {
+  if (!props.statData) return {} as MaleChar;
+  return props.statData.男主 || ({} as MaleChar);
 });
 
-const 着装信息 = computed(() => {
-  return character.value.当前着装 || {};
+const 女着装 = computed(() => {
+  const char = 女主角.value;
+  if (!char) return {};
+  return char.当前着装 || {};
+});
+const 男着装 = computed(() => {
+  const char = 男主角.value;
+  if (!char) return {};
+  return char.当前着装 || {};
 });
 </script>

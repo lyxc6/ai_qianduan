@@ -10,6 +10,7 @@ export const Schema = z.object({
       内容: z.string(),
       奖励: z.string(),
       惩罚: z.string(),
+      进度: z.number().min(0).max(100),
     }),
   }),
 
@@ -18,7 +19,7 @@ export const Schema = z.object({
     原名: z.string(),
     性别: z.string(),
     年龄: z.string(),
-    武功境界: z.number(),
+    武功境界: z.number().min(0).max(100),
     对男主好感度: z.number().min(0).max(100),
     当前发育状态: z.number().min(0).max(100),
     高潮进程: z.number().min(0).max(100),
@@ -51,7 +52,7 @@ export const Schema = z.object({
     姓名: z.string(),
     性别: z.string(),
     年龄: z.string(),
-    武功境界: z.number(),
+    武功境界: z.number().min(0).max(100),
     对女主好感度: z.number().int().min(0).max(100),
     射精进度: z.number().min(0).max(100),
     身份: z.string(),
@@ -78,6 +79,7 @@ export const Schema = z.object({
       对女主看法: z.string(),
       当前姿势: z.string(),
       当前想法: z.string(),
+      武功境界: z.number().min(0).max(100),
     }),
   ),
 });
