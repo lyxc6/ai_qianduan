@@ -5,11 +5,11 @@
       <div class="info-group">
         <div class="info-item">
           <div class="info-label">当前时间</div>
-          <div class="info-value">{{ system.当前时间 || '未设置' }}</div>
+          <div class="info-value">{{ system.当前时间 || '不存在' }}</div>
         </div>
         <div class="info-item">
           <div class="info-label">当前地点</div>
-          <div class="info-value">{{ system.当前地点 || '未设置' }}</div>
+          <div class="info-value">{{ system.当前地点 || '不存在' }}</div>
         </div>
       </div>
     </div>
@@ -19,27 +19,23 @@
       <div class="info-group">
         <div class="info-item">
           <div class="info-label">任务名称</div>
-          <div class="info-value">{{ system.当前任务.名称 || '' }}</div>
+          <div class="info-value">{{ system.当前任务.名称 || '不存在' }}</div>
         </div>
         <div class="info-item">
           <div class="info-label">任务内容</div>
-          <div class="info-value">{{ system.当前任务.内容 || '' }}</div>
+          <div class="info-value">{{ system.当前任务.内容 || '不存在' }}</div>
         </div>
-        <div class="info-item" v-if="system.当前任务.进度 !== undefined">
+        <div class="info-item">
           <div class="info-label">任务进度</div>
-          <div class="info-value">{{ system.当前任务.进度 }}%</div>
+          <div class="info-value">{{ system.当前任务.进度 !== undefined ? system.当前任务.进度 + '%' : '不存在' }}</div>
         </div>
-        <div class="info-item" v-if="system.当前任务.要求">
-          <div class="info-label">任务要求</div>
-          <div class="info-value requirement">{{ system.当前任务.要求 }}</div>
-        </div>
-        <div class="info-item" v-if="system.当前任务.奖励">
+        <div class="info-item">
           <div class="info-label">奖励</div>
-          <div class="info-value reward">{{ system.当前任务.奖励 }}</div>
+          <div class="info-value reward">{{ system.当前任务.奖励 || '不存在' }}</div>
         </div>
-        <div class="info-item" v-if="system.当前任务.惩罚">
+        <div class="info-item">
           <div class="info-label">惩罚</div>
-          <div class="info-value penalty">{{ system.当前任务.惩罚 }}</div>
+          <div class="info-value penalty">{{ system.当前任务.惩罚 || '不存在' }}</div>
         </div>
       </div>
     </div>

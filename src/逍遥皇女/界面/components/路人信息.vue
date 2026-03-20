@@ -5,31 +5,31 @@
       <div class="npc-section">
         <div class="npc-header">
           <span class="npc-name">{{ npc.姓名 || '未命名' }}</span>
-          <span class="npc-relation">{{ npc.关系 || '' }}</span>
+          <span class="npc-relation">{{ npc.关系 || '不存在' }}</span>
         </div>
 
         <div class="info-section">
           <div class="section-title">基本信息</div>
           <div class="info-group">
-            <div class="info-item" v-if="npc.性别">
+            <div class="info-item">
               <div class="info-label">性别</div>
-              <div class="info-value">{{ npc.性别 }}</div>
+              <div class="info-value">{{ npc.性别 || '不存在' }}</div>
             </div>
-            <div class="info-item" v-if="npc.年龄">
+            <div class="info-item">
               <div class="info-label">年龄</div>
-              <div class="info-value">{{ npc.年龄 }}岁</div>
+              <div class="info-value">{{ npc.年龄 !== undefined ? npc.年龄 + '岁' : '不存在' }}</div>
             </div>
-            <div class="info-item" v-if="npc.武功境界 !== undefined">
+            <div class="info-item">
               <div class="info-label">武功境界</div>
-              <div class="info-value">{{ npc.武功境界 }}</div>
+              <div class="info-value">{{ npc.武功境界 !== undefined ? npc.武功境界 : '不存在' }}</div>
             </div>
-            <div class="info-item" v-if="npc.身份">
+            <div class="info-item">
               <div class="info-label">身份</div>
-              <div class="info-value">{{ npc.身份 }}</div>
+              <div class="info-value">{{ npc.身份 || '不存在' }}</div>
             </div>
-            <div class="info-item" v-if="npc.对女主看法">
+            <div class="info-item">
               <div class="info-label">对女主看法</div>
-              <div class="info-value">{{ npc.对女主看法 }}</div>
+              <div class="info-value">{{ npc.对女主看法 || '不存在' }}</div>
             </div>
           </div>
         </div>
@@ -37,13 +37,13 @@
         <div class="info-section">
           <div class="section-title">当前状态</div>
           <div class="info-group">
-            <div class="info-item" v-if="npc.当前姿势">
+            <div class="info-item">
               <div class="info-label">当前姿势</div>
-              <div class="info-value">{{ npc.当前姿势 }}</div>
+              <div class="info-value">{{ npc.当前姿势 || '不存在' }}</div>
             </div>
-            <div class="info-item" v-if="npc.当前想法">
+            <div class="info-item">
               <div class="info-label">当前想法</div>
-              <div class="info-value">{{ npc.当前想法 }}</div>
+              <div class="info-value">{{ npc.当前想法 || '不存在' }}</div>
             </div>
           </div>
         </div>

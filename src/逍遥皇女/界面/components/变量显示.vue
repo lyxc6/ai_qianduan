@@ -93,19 +93,55 @@ watch(
 );
 
 function 校验JSON() {
-  if (!editableContent.value) {
-    return;
-  }
   try {
-    JSON.parse(editableContent.value);
-    alert('JSON格式有效！');
+    const parsed = JSON.parse(editableContent.value);
+    toastr.success(`校验通过 - ${parsed.length}个操作`);
   } catch (e) {
-    alert(`JSON格式无效: ${(e as Error).message}`);
+    toastr.error('校验失败', (e as Error).message);
   }
 }
 
-function 保存修改() {
-  console.log('保存修改:', editableContent.value);
+async function 保存修改() {
+  try {
+    JSON.parse(editableContent.value);
+
+    if (!props.currentMessage) {
+      toastr.error('无法获取当前消息');
+      return;
+    }
+
+    const originalMessage = props.currentMessage.message || '';
+    const outerRegex = /<(update(?:variable)?)>\s*((?:(?!<\1>).)*)\s*<\/\1>/gis;
+
+    let newMessage = originalMessage;
+    let match;
+    while ((match = outerRegex.exec(originalMessage)) !== null) {
+      const updatedContent = match[0].replace(
+        /<JSONPatch>[\s\S]*?<\/JSONPatch>/gis,
+        `<JSONPatch>\n${editableContent.value}\n</JSONPatch>`,
+      );
+      newMessage = newMessage.replace(match[0], updatedContent);
+    }
+
+    if (newMessage === originalMessage) {
+      toastr.error('未找到UpdateVariable标签');
+      return;
+    }
+
+    await setChatMessages(
+      [
+        {
+          message_id: props.currentMessage.message_id,
+          message: newMessage,
+        },
+      ],
+      { refresh: 'affected' },
+    );
+
+    toastr.success('保存成功');
+  } catch (e) {
+    toastr.error('JSON格式错误', (e as Error).message);
+  }
 }
 
 function 重置内容() {
