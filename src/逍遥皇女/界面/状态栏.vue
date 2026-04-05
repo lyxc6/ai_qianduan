@@ -127,7 +127,7 @@ interface StatData {
 const currentPage = ref('1');
 const currentTime = ref('加载中...');
 const currentLocation = ref('加载中...');
-const statData = ref<StatData>({});
+const statData = ref<StatData>({} as StatData);
 const currentMessage = ref<any>(null);
 
 async function 加载数据() {
