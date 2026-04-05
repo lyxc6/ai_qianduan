@@ -2,24 +2,15 @@
 import { registerMvuSchema } from 'https://testingcf.jsdelivr.net/gh/StageDog/tavern_resource/dist/util/mvu_zod.js';
 
 export const Schema = z.object({
-  系统: z.object({
-    当前时间: z.string(),
-    当前地点: z.string(),
-    当前任务: z.object({
-      名称: z.string(),
-      内容: z.string(),
-      奖励: z.string(),
-      惩罚: z.string(),
-      进度: z.number().min(0).max(100),
-    }),
-  }),
+  当前时间: z.string(),
+  当前地点: z.string(),
 
   女主: z.object({
     姓名: z.string(),
     原名: z.string(),
     性别: z.string(),
-    年龄: z.string(),
-    武功境界: z.number().min(0).max(100),
+    年龄: z.number(),
+    武功境界: z.string(),
     对男主好感度: z.number().min(0).max(100),
     当前发育状态: z.number().min(0).max(100),
     高潮进程: z.number().min(0).max(100),
@@ -51,8 +42,8 @@ export const Schema = z.object({
   男主: z.object({
     姓名: z.string(),
     性别: z.string(),
-    年龄: z.string(),
-    武功境界: z.number().min(0).max(100),
+    年龄: z.number(),
+    武功境界: z.string(),
     对女主好感度: z.number().int().min(0).max(100),
     射精进度: z.number().min(0).max(100),
     身份: z.string(),
@@ -69,17 +60,25 @@ export const Schema = z.object({
     }),
   }),
 
-  路人: z.array(
+  其他角色: z.array(
     z.object({
       姓名: z.string(),
       性别: z.string(),
-      年龄: z.string(),
+      年龄: z.number(),
+      武功境界: z.string(),
       身份: z.string(),
-      关系: z.string(),
-      对女主看法: z.string(),
-      当前姿势: z.string(),
+      与女主关系: z.string(),
+      对女主态度: z.string(),
       当前想法: z.string(),
-      武功境界: z.number().min(0).max(100),
+      当前姿势: z.string(),
+      背景: z.string(),
+      性格: z.object({
+        核心: z.string(),
+        优点: z.string(),
+        缺点: z.string(),
+        习惯: z.string(),
+        说话: z.string(),
+      }),
     }),
   ),
 });

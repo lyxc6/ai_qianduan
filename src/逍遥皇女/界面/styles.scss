@@ -81,6 +81,39 @@ body {
   max-height: 400px;
 }
 
+.world-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: linear-gradient(135deg, var(--warm-bg-medium) 0%, var(--warm-bg-dark) 100%);
+  border-radius: 0.3rem;
+  margin-bottom: 0.5rem;
+  border-left: 3px solid var(--accent-color);
+
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .status-icon {
+    font-size: 0.7rem;
+  }
+
+  .status-text {
+    font-size: 0.65rem;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .status-divider {
+    width: 1px;
+    height: 12px;
+    background: var(--border-color);
+  }
+}
+
 .world {
   &-info {
     background: linear-gradient(135deg, var(--warm-bg-light) 0%, var(--warm-bg-medium) 100%);
@@ -531,18 +564,18 @@ body {
 
 ::-webkit-scrollbar {
   width: 4px;
-}
 
-::-webkit-scrollbar-track {
-  background: var(--warm-bg-light);
-  border-radius: 2px;
-}
+  &-track {
+    background: var(--warm-bg-light);
+    border-radius: 2px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--user-color-secondary);
-  border-radius: 2px;
+  &-thumb {
+    background: var(--user-color-secondary);
+    border-radius: 2px;
 
-  &:hover {
-    background: var(--user-color-primary);
+    &:hover {
+      background: var(--user-color-primary);
+    }
   }
 }

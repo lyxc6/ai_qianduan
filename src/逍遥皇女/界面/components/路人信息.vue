@@ -8,45 +8,31 @@
           <span class="npc-relation">{{ npc.关系 || '不存在' }}</span>
         </div>
 
-        <div class="info-section">
-          <div class="section-title">基本信息</div>
-          <div class="info-group">
-            <div class="info-item">
-              <div class="info-label">性别</div>
-              <div class="info-value">{{ npc.性别 || '不存在' }}</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">年龄</div>
-              <div class="info-value">{{ npc.年龄 !== undefined ? npc.年龄 + '岁' : '不存在' }}</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">武功境界</div>
-              <div class="info-value">{{ npc.武功境界 !== undefined ? npc.武功境界 : '不存在' }}</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">身份</div>
-              <div class="info-value">{{ npc.身份 || '不存在' }}</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">对女主看法</div>
-              <div class="info-value">{{ npc.对女主看法 || '不存在' }}</div>
-            </div>
-          </div>
-        </div>
+        <CollapsibleSection title="基本信息">
+          <InfoItem label="性别" :value="npc.性别" />
+          <InfoItem label="年龄" :value="npc.年龄 !== undefined ? npc.年龄 + '岁' : undefined" />
+          <InfoItem label="武功境界" :value="npc.武功境界" />
+          <InfoItem label="身份" :value="npc.身份" />
+          <InfoItem label="与女主关系" :value="npc.与女主关系" />
+          <InfoItem label="对女主态度" :value="npc.对女主态度" />
+        </CollapsibleSection>
 
-        <div class="info-section">
-          <div class="section-title">当前状态</div>
-          <div class="info-group">
-            <div class="info-item">
-              <div class="info-label">当前姿势</div>
-              <div class="info-value">{{ npc.当前姿势 || '不存在' }}</div>
-            </div>
-            <div class="info-item">
-              <div class="info-label">当前想法</div>
-              <div class="info-value">{{ npc.当前想法 || '不存在' }}</div>
-            </div>
-          </div>
-        </div>
+        <CollapsibleSection title="当前状态" :defaultOpen="false">
+          <InfoItem label="当前姿势" :value="npc.当前姿势" />
+          <InfoItem label="当前想法" :value="npc.当前想法" />
+        </CollapsibleSection>
+
+        <CollapsibleSection title="背景" :defaultOpen="false">
+          <InfoItem label="" :value="npc.背景" />
+        </CollapsibleSection>
+
+        <CollapsibleSection title="性格" :defaultOpen="false" v-if="npc.性格">
+          <InfoItem label="核心" :value="npc.性格.核心" />
+          <InfoItem label="优点" :value="npc.性格.优点" />
+          <InfoItem label="缺点" :value="npc.性格.缺点" />
+          <InfoItem label="习惯" :value="npc.性格.习惯" />
+          <InfoItem label="说话方式" :value="npc.性格.说话" />
+        </CollapsibleSection>
       </div>
     </template>
   </div>
@@ -54,29 +40,43 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import InfoItem from './信息项.vue';
+import CollapsibleSection from './折叠区块.vue';
+
+interface NPC性格 {
+  核心?: string;
+  优点?: string;
+  缺点?: string;
+  习惯?: string;
+  说话?: string;
+}
 
 interface NPC {
   姓名?: string;
   性别?: string;
   年龄?: number;
-  武功境界?: number;
+  武功境界?: string;
   身份?: string;
   关系?: string;
+  与女主关系?: string;
   对女主看法?: string;
+  对女主态度?: string;
   当前姿势?: string;
   当前想法?: string;
+  背景?: string;
+  性格?: NPC性格;
 }
 
 interface Props {
   statData?: {
-    路人?: NPC[];
+    其他角色?: NPC[];
   };
 }
 
 const props = defineProps<Props>();
 
 const npcList = computed<NPC[]>(() => {
-  return props.statData?.路人 ?? [];
+  return props.statData?.其他角色 ?? [];
 });
 </script>
 
@@ -122,47 +122,5 @@ const npcList = computed<NPC[]>(() => {
   background: var(--warm-bg-dark);
   padding: 0.15rem 0.35rem;
   border-radius: 0.25rem;
-}
-
-.info-section {
-  margin-bottom: 0.5rem;
-}
-
-.info-section:last-child {
-  margin-bottom: 0;
-}
-
-.section-title {
-  font-weight: bold;
-  color: var(--text-title);
-  font-size: 0.7rem;
-  margin-bottom: 0.35rem;
-  padding-bottom: 0.2rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.info-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.info-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.15rem 0;
-  font-size: 0.65rem;
-}
-
-.info-label {
-  color: var(--text-secondary);
-  flex-shrink: 0;
-}
-
-.info-value {
-  color: var(--text-primary);
-  text-align: right;
-  margin-left: 0.5rem;
 }
 </style>
