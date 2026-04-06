@@ -1,122 +1,150 @@
 <template>
   <div class="main">
+    <VariableDisplay :currentMessage="currentMessage" />
+
     <div class="world-info">
       <div class="world-info-box">
-        <div>
-          <div class="world-info-label">当前时间</div>
-          <div class="world-info-content">{{ time }}</div>
-        </div>
-        <div>
-          <div class="world-info-label">当前地点</div>
-          <div class="world-info-content">{{ location }}</div>
-        </div>
+        <div class="world-info-item-display">⏰日期：</div>
+        <div class="world-info-item-display" id="current-time">{{ currentTime }}</div>
+      </div>
+      <div class="world-info-box">
+        <div class="world-info-item-display">📍地点：</div>
+        <div class="world-info-item-display" id="current-location">{{ currentLocation }}</div>
       </div>
     </div>
 
-    <div class="time-location">
-      <div class="time-location-time">📅 {{ time }}</div>
-      <div class="time-location-location">📍 {{ location }}</div>
+    <div class="tab-bar">
+      <div class="tab-button" :class="{ active: currentPage === '1' }" @click="currentPage = '1'">行动</div>
+      <div class="tab-button" :class="{ active: currentPage === '2' }" @click="currentPage = '2'">女主</div>
+      <div class="tab-button" :class="{ active: currentPage === '3' }" @click="currentPage = '3'">世界</div>
+      <div class="tab-button" :class="{ active: currentPage === '4' }" @click="currentPage = '4'">男主</div>
+      <div class="tab-button" :class="{ active: currentPage === '5' }" @click="currentPage = '5'">事件</div>
     </div>
 
-    <div class="status-container">
-      <div class="status-title">角色状态</div>
-      <div class="status-content">
-        <div v-for="char in characters" :key="char.id" class="status-item">
-          <div class="status-item-avatar">{{ char.avatar }}</div>
-          <div class="status-item-info">
-            <div class="status-item-name">{{ char.name }}</div>
-            <div class="status-item-detail">{{ char.status }}</div>
-          </div>
-        </div>
-      </div>
+    <div class="page-container" :class="{ active: currentPage === '1' }">
+      <ActionOptions :statData="statData" :currentMessage="currentMessage" @send="处理发送" />
     </div>
 
-    <div v-if="actions.length > 0" class="action-container">
-      <div class="action-title">行动选项</div>
-      <div class="action-options">
-        <div v-for="(action, index) in actions" :key="index" class="action-option">
-          {{ index + 1 }}. {{ action }}
-        </div>
-      </div>
+    <div class="page-container" :class="{ active: currentPage === '2' }">
+      <Female :statData="statData" :currentMessage="currentMessage" />
     </div>
 
-    <div v-if="events.length > 0" class="event-container">
-      <div class="event-title">最近事件</div>
-      <div class="event-list">
-        <div v-for="(event, index) in events" :key="index" class="event-item">
-          {{ event }}
-        </div>
-      </div>
+    <div class="page-container" :class="{ active: currentPage === '3' }">
+      <World :statData="statData" :currentMessage="currentMessage" />
+    </div>
+
+    <div class="page-container" :class="{ active: currentPage === '4' }">
+      <Male :statData="statData" :currentMessage="currentMessage" />
+    </div>
+
+    <div class="page-container" :class="{ active: currentPage === '5' }">
+      <RecentEvents :statData="statData" :currentMessage="currentMessage" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { getVars, subscribeUpdate } from '@if/exported.mvu';
+import { onMounted, ref } from 'vue';
+import World from './components/世界.vue';
+import VariableDisplay from './components/变量显示.vue';
+import Female from './components/女主.vue';
+import RecentEvents from './components/最近事件.vue';
+import Male from './components/男主.vue';
+import ActionOptions from './components/行动选项.vue';
 
-const time = ref('');
-const location = ref('');
-const characters = ref<Array<{
-  id: string;
-  avatar: string;
-  name: string;
-  status: string;
-}>>([]);
-const actions = ref<string[]>([]);
-const events = ref<string[]>([]);
+defineOptions({
+  unusedWarnings: false,
+});
 
-async function loadData() {
-  try {
-    const vars = await getVars();
+interface StatData {
+  世界?: {
+    当前时间?: string;
+    当前地点?: string;
+  };
+  行动选项?: {
+    当前视角?: string;
+    选项一?: string;
+    选项二?: string;
+    选项三?: string;
+    选项四?: string;
+  };
+  主角?: {
+    姓名?: string;
+    年龄?: number;
+    性别?: string;
+    身份?: string;
+    当前着装?: string;
+    当前姿势?: string;
+    当前想法?: string;
+    射精进度?: number;
+  };
+  顾言?: {
+    年龄?: number;
+    关系?: string;
+    当前着装?: string;
+    当前姿势?: string;
+    当前想法?: string;
+    身体感受?: string;
+    隐藏身份?: string;
+    射精进度?: number;
+  };
+  事件?: string[];
+}
 
-    if (vars.世界) {
-      time.value = vars.世界.当前时间 || '';
-      location.value = vars.世界.当前地点 || '';
-    }
+const currentPage = ref('1');
+const currentTime = ref('加载中...');
+const currentLocation = ref('加载中...');
+const statData = ref<StatData>({});
+const currentMessage = ref<any>(null);
 
-    characters.value = [];
+async function 加载数据() {
+  await waitGlobalInitialized('Mvu');
+  const data = getAllVariables().stat_data;
+  statData.value = data || {};
 
-    if (vars.主角) {
-      const mainChar = vars.主角;
-      let gdcInfo = '';
-      if (mainChar.GDC状态 && mainChar.GDC状态 !== '无') {
-        gdcInfo = ` [${mainChar.GDC状态}]`;
-      }
-      characters.value.push({
-        id: '主角',
-        avatar: '👤',
-        name: mainChar.姓名 + gdcInfo,
-        status: `${mainChar.当前姿势} | ${mainChar.当前着装}`,
-      });
-    }
+  if (data.世界) {
+    if (data.世界.当前时间) currentTime.value = data.世界.当前时间;
+    if (data.世界.当前地点) currentLocation.value = data.世界.当前地点;
+  }
 
-    if (vars.顾言) {
-      const guy = vars.顾言;
-      characters.value.push({
-        id: '顾言',
-        avatar: '💕',
-        name: guy.姓名 + ' [好感度:' + guy.好感度 + ']',
-        status: `${guy.当前姿势} | ${guy.当前着装}`,
-      });
-    }
+  if (data.事件 && Array.isArray(data.事件)) {
+    insertVariables({ 最近事件: [...data.事件] }, { type: 'chat' });
+  }
 
-    if (vars.行动选项 && vars.行动选项.选项) {
-      actions.value = vars.行动选项.选项;
-    }
-
-    if (vars.事件 && Array.isArray(vars.事件)) {
-      events.value = vars.事件.slice(-3);
-    }
-  } catch (error) {
-    console.error('加载变量失败:', error);
+  const messages = getChatMessages(-1);
+  if (messages && messages.length > 0) {
+    currentMessage.value = messages[0];
   }
 }
 
-onMounted(async () => {
-  await loadData();
-  subscribeUpdate(() => {
-    loadData();
-  });
+function 处理发送(text: string) {
+  const trimmedText = String(text).trim();
+  if (!trimmedText || trimmedText === '…' || trimmedText === '...') {
+    return;
+  }
+
+  try {
+    const $textarea = $(parent.document).find('#send_textarea');
+    if ($textarea.length === 0) {
+      return;
+    }
+
+    const currentContent = String($textarea.val() || '');
+    if (currentContent.includes(trimmedText)) {
+      return;
+    }
+
+    const separator = currentContent.trim() ? '\n' : '';
+    const newContent = currentContent + separator + trimmedText;
+
+    $textarea.val(newContent);
+    $textarea.trigger('input');
+  } catch (error) {
+    console.error('发送到聊天框时出错:', error);
+  }
+}
+
+onMounted(() => {
+  加载数据();
 });
 </script>
