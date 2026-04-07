@@ -20,6 +20,20 @@
       </div>
 
       <div class="info-section">
+        <div class="section-title">好感度</div>
+        <div class="info-group">
+          <div class="info-item">
+            <div class="info-label">男主对女主好感度</div>
+            <div class="info-value">{{ world.男主对女主的好感度 !== undefined ? world.男主对女主的好感度 : '' }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">女主对男主好感度</div>
+            <div class="info-value">{{ world.女主对男主的好感度 !== undefined ? world.女主对男主的好感度 : '' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
         <div class="section-title">NSFW状态</div>
         <div class="info-group">
           <div class="info-item">
@@ -88,6 +102,8 @@ interface Props {
       解锁插入式性行为?: boolean;
       当前NSFW进度?: string;
       亲密度等级?: string;
+      男主对女主的好感度?: number;
+      女主对男主的好感度?: number;
     };
   };
 }

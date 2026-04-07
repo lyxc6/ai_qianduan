@@ -20,10 +20,6 @@
             <div class="info-label">身份</div>
             <div class="info-value">{{ character.身份 || '' }}</div>
           </div>
-          <div class="info-item">
-            <div class="info-label">对男主好感度</div>
-            <div class="info-value">{{ character.对男主的好感度 !== undefined ? character.对男主的好感度 : '' }}</div>
-          </div>
         </div>
       </div>
 
@@ -102,7 +98,7 @@
           </div>
           <div class="info-item">
             <div class="info-label">处女</div>
-            <div class="info-value">{{ character.处女 ? '是' : '否' }}</div>
+            <div class="info-value">{{ character.处女 === true ? '是' : character.处女 === false ? '否' : '' }}</div>
           </div>
         </div>
       </div>

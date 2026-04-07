@@ -15,6 +15,8 @@ export const Schema = z.object({
     解锁插入式性行为: z.boolean(),
     当前NSFW进度: z.string(),
     亲密度等级: z.string(),
+    男主对女主的好感度: z.number().int().min(0),
+    女主对男主的好感度: z.number().int().min(0),
   }),
 
   主角: z.object({
@@ -30,7 +32,6 @@ export const Schema = z.object({
     小穴感受: z.string(),
     菊穴感受: z.string(),
     处女: z.boolean(),
-    对男主的好感度: z.number().int().min(0).max(100),
     高潮次数: z.number(),
     内射次数: z.number(),
     GDC状态: z.string(),
