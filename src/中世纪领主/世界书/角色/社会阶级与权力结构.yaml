@@ -1,0 +1,77 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 社会阶级与权力结构
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 社会阶级与权力结构
+    entries:
+        - name: 社会结构概述
+          keys:
+            [
+              '封建制度',
+              '贵族',
+              '魔法贵族',
+              '种族结构',
+              '力量阶层',
+              '权力链',
+              '效忠体系',
+              '社会等级',
+              '阶级',
+              '地位',
+              '身份',
+            ]
+          content: |
+            # 社会阶级与权力结构
+
+            ## 封建制度
+            - 国王：最高统治者
+            - 公爵：最大贵族，掌控大块领地
+            - 侯爵：边境守护者
+            -伯爵：重要城市的统治者
+            - 男爵：最低级贵族，通常是小领主
+            - 骑士：贵族的附庸，武士阶层
+            - 平民：农民、手工业者、商人
+
+        - name: 魔法贵族
+          content: |
+            ## 魔法贵族
+            - 简介：拥有魔法血脉的贵族家族
+            - 特点：魔法能力与贵族身份挂钩
+            - 星辉家族：占星术和预言魔法闻名
+            - 银翼家族：龙血血脉，以剑术闻名
+
+        - name: 种族结构
+          content: |
+            ## 种族结构
+            - 人类：主导种族，占据大部分领土
+            - 精灵：隐居在翡翠森林，擅长自然魔法
+            - 矮人：擅长锻造，居住在地底或山区
+            - 半精灵：人类与精灵的后代，数量稀少
+            - 兽人：战力强大，分布在边境地区
+
+        - name: 权力链条
+          content: |
+            ## 权力链条
+            - 效忠体系：从下到上依次效忠
+            - 土地分封：领主将土地分封给下级
+            - 军事义务：下级对上级负有军事义务
+            - 税收义务：平民向领主纳税
+
+        - name: 力量阶层
+          content: |
+            ## 力量阶层
+            - 魔法师：受人尊敬的特殊阶层
+            - 骑士团：王国武装力量的核心
+            - 奥术学院：魔法研究和教育机构
+            - 教会：精神权威，的影响力渗透各阶层

@@ -1,0 +1,256 @@
+# 魔法领主角色卡配置文件
+# 基础信息
+name: 魔法领主
+creator: ""
+character_version: ""
+
+# 主要字段映射
+# 对话补充等额外设定应该放入 character_book，而不是使用 mes_example
+fields:
+    description: 作品/魔法领主/角色设定_{{user}}.xyaml
+    personality: ""
+    scenario: ""
+    first_mes: 作品/魔法领主/开场白.md
+    mes_example: ""
+    creator_notes: ""
+    system_prompt: ""
+    post_history_instructions: ""
+
+# 扩展字段
+extensions:
+    talkativeness: "0.5"
+    fav: false
+    world: 魔法领主
+    status_bar: 作品/魔法领主/状态栏.html # 可选
+
+# 脚本配置
+scripts:
+    # 变量结构设计脚本（Zod Schema）
+    - name: "变量结构设计"
+      content: 作品/魔法领主/变量结构.js
+      enabled: true
+
+# 角色书配置
+character_book:
+    name: 魔法领主
+    entries:
+        # [InitVar]初始化条目
+        - comment: "[initvar]变量初始化"
+          content: 作品/魔法领主/[initvar]变量初始化.xyaml
+          enabled: false
+          position: before_char
+          insertion_order: 1
+          depth: 4
+          role: 0
+
+        # 变量更新规则
+        - comment: "[mvu_update]变量更新规则"
+          content: 作品/魔法领主/[mvu_update]变量更新规则.xyaml
+          enabled: true
+          position: at_depth
+          insertion_order: 1
+          depth: 1
+          role: 0
+
+        # 变量输出格式
+        - comment: "[mvu_update]变量输出格式"
+          content: 作品/魔法领主/[mvu_update]变量输出格式.xyaml
+          enabled: true
+          position: at_depth
+          insertion_order: 1
+          depth: 1
+          role: 0
+
+        # 背景设定
+        - comment: "背景设定"
+          content: 作品/魔法领主/背景设定.xyaml
+          enabled: true
+          position: before_char
+          insertion_order: 50
+          depth: 4
+          role: 0
+
+        # NSFW描述规则
+        - comment: "NSFW描述规则"
+          keys:
+              [
+                  "NSFW",
+                  "成人内容",
+                  "色情描写",
+                  "性描写",
+                  "性器官",
+                  "性爱场景",
+                  "淫秽",
+                  "下流",
+                  "直白",
+                  "露骨",
+              ]
+          content: 作品/魔法领主/NSFW描述规则.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 50
+          depth: 4
+          role: 0
+
+        # 艾莉丝角色设定
+        - comment: "[艾莉丝]角色设定"
+          keys:
+              [
+                  "艾莉丝",
+                  "Alice",
+                  "女骑士",
+                  "骑士",
+                  "银剑骑士",
+                  "剑士",
+                  "战士",
+                  "龙血候选者",
+                  "候选者",
+              ]
+          content: 作品/魔法领主/角色设定_艾莉丝.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0
+
+        # 克劳迪娅角色设定
+        - comment: "[克劳迪娅]角色设定"
+          keys:
+              [
+                  "克劳迪娅",
+                  "Claudia",
+                  "夫人",
+                  "妻子",
+                  "女主人",
+                  "公爵小姐",
+                  "贵族夫人",
+                  "领主夫人",
+              ]
+          content: 作品/魔法领主/角色设定_克劳迪娅.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0
+
+        # 莉娜角色设定
+        - comment: "[莉娜]角色设定"
+          keys:
+              [
+                  "莉娜",
+                  "Lina",
+                  "女仆",
+                  "贴身女仆",
+                  "半精灵",
+                  "精灵",
+                  "性伴侣",
+                  "侍寝",
+                  "侍从",
+              ]
+          content: 作品/魔法领主/角色设定_莉娜.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0
+
+        # 塞蕾丝蒂亚角色设定
+        - comment: "[塞蕾丝蒂亚]角色设定"
+          keys:
+              [
+                  "塞蕾丝蒂亚",
+                  "Celestia",
+                  "女法师",
+                  "魔法师",
+                  "学者",
+                  "教授",
+                  "贵族法师",
+                  "魔法学者",
+                  "阿斯特拉",
+              ]
+          content: 作品/魔法领主/角色设定_塞蕾丝蒂亚.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0
+
+        # 莉莉安角色设定
+        - comment: "[莉莉安]角色设定"
+          keys:
+              [
+                  "莉莉安",
+                  "Lilian",
+                  "农家女",
+                  "村姑",
+                  "少女",
+                  "魔法学徒",
+                  "学徒",
+                  "农家少女",
+                  "纯真少女",
+              ]
+          content: 作品/魔法领主/角色设定_莉莉安.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0
+
+        # 克劳迪娅分阶段设定
+        - comment: "[克劳迪娅]分阶段设定"
+          keys:
+              ["克劳迪娅", "Claudia", "阶段", "好感度", "关系阶段", "情感阶段"]
+          content: 作品/魔法领主/[克劳迪娅]分阶段设定.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0
+
+        # 莉娜分阶段设定
+        - comment: "[莉娜]分阶段设定"
+          keys: ["莉娜", "Lina", "阶段", "好感度", "关系阶段", "情感阶段"]
+          content: 作品/魔法领主/[莉娜]分阶段设定.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0
+
+        # 塞蕾丝蒂亚分阶段设定
+        - comment: "[塞蕾丝蒂亚]分阶段设定"
+          keys:
+              [
+                  "塞蕾丝蒂亚",
+                  "Celestia",
+                  "阶段",
+                  "好感度",
+                  "关系阶段",
+                  "情感阶段",
+              ]
+          content: 作品/魔法领主/[塞蕾丝蒂亚]分阶段设定.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0
+
+        # 艾莉丝分阶段设定
+        - comment: "[艾莉丝]分阶段设定"
+          keys: ["艾莉丝", "Alice", "阶段", "好感度", "关系阶段", "情感阶段"]
+          content: 作品/魔法领主/[艾莉丝]分阶段设定.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0
+
+        # 莉莉安分阶段设定
+        - comment: "[莉莉安]分阶段设定"
+          keys: ["莉莉安", "Lilian", "阶段", "好感度", "关系阶段", "情感阶段"]
+          content: 作品/魔法领主/[莉莉安]分阶段设定.xyaml
+          enabled: true
+          position: after_char
+          insertion_order: 100
+          depth: 4
+          role: 0

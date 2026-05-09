@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 军事骑士精神
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 军事骑士精神
+    entries:
+        - name: 骑士精神概述
+          keys: ['骑士精神', '骑士道', '荣誉', '忠诚', '保护弱者', '比武', '骑士誓言']
+          content: |
+            # 军事：骑士精神
+
+            ## 骑士精神核心
+            - 荣誉：骑士最看重的品质
+            - 忠诚：对领主和信仰的忠诚
+            - 勇气：面对危险不退缩
+            - 公正：行事正直公平
+            - 保护弱者：骑士的职责
+
+        - name: 骑士誓言
+          content: |
+            ## 骑士誓言
+            - 保护教会：为教会而战
+            - 捍卫信仰：传播和捍卫信仰
+            - 保护弱者：帮助需要帮助的人
+            - 勇敢战斗：永不退缩
+            - 言行一致：言出必行
+
+        - name: 骑士等级
+          content: |
+            ## 骑士等级
+            - 侍从：骑士的学徒
+            - 正规骑士：通过授仪式的骑士
+            - 骑士团长：骑士团的首领
+            - 大团长：最高级别的骑士
+
+        - name: 骑士团
+          content: |
+            ## 著名骑士团
+            - 圣殿骑士团：教会的武装力量
+            - 医院骑士团：医疗和战斗并重
+            - 条顿骑士团：日耳曼骑士团
+            - 白鹰骑士团：已覆灭的南方骑士团
+
+        - name: 比武大会
+          content: |
+            ## 比武大会
+            - 个人比武：骑士之间的单打独斗
+            - 团队比武：骑士团队的对抗
+            - 马上比武：骑马进行的战斗
+            - 奖品：胜利者的荣誉和奖励

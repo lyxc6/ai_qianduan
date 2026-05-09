@@ -1,0 +1,349 @@
+name: 青梅竹马想要收集天书
+creator: ''
+character_version: ''
+fields:
+  description: ''
+  personality: ''
+  scenario: ''
+  first_mes: 作品/青梅竹马想要收集天书/开场白.md
+  mes_example: ''
+  creator_notes: ''
+  system_prompt: ''
+  post_history_instructions: ''
+extensions:
+  talkativeness: '0.5'
+  fav: false
+  world: 青梅竹马想要收集天书
+  status_bar: 作品/青梅竹马想要收集天书/状态栏.html
+character_book:
+  name: 青梅竹马想要收集天书
+  entries:
+    - comment: '[initvar]变量初始化'
+      content: 作品/青梅竹马想要收集天书/[initvar]变量初始化.yaml
+      enabled: false
+      position: after_char
+      insertion_order: 100
+      depth: 4
+      role: 0
+    - comment: '[mvu_update]变量输出格式'
+      content: 作品/青梅竹马想要收集天书/[mvu_update]变量输出格式.xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 100
+      depth: 1
+      role: 0
+    - comment: '[mvu_update]记录角色生成'
+      content: 作品/青梅竹马想要收集天书/[mvu_update]记录角色生成.xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 100
+      depth: 1
+      role: 0
+    - comment: '[mvu_update]子女角色生成'
+      content: 作品/青梅竹马想要收集天书/[mvu_update]子女角色生成.xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 100
+      depth: 1
+    - comment: '[mvu_update]行动选项'
+      content: 作品/青梅竹马想要收集天书/[mvu_update]行动选项.xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 100
+      depth: 1
+      role: 0
+    - comment: '[mvu_update]给ai的变量'
+      content: 作品/青梅竹马想要收集天书/[mvu_update]给ai的变量.xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 100
+      depth: 1
+      role: 0
+    - comment: 苏灵儿 (穿越者)
+      keys:
+        - 苏灵儿
+        - 灵儿
+        - 穿越者
+        - 青梅竹马
+        - 女主角
+        - 女主
+        - 主角
+        - 天书收集者
+      content: 作品/青梅竹马想要收集天书/苏灵儿 (穿越者).xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 100
+      depth: 4
+    - comment: 天书：《百毒真经》
+      keys:
+        - 百毒真经
+        - 毒经
+        - 万毒经
+      content: 作品/青梅竹马想要收集天书/天书：《百毒真经》.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 天书：《天道经》
+      keys:
+        - 天道经
+        - 道德经
+        - 逆道经
+      content: 作品/青梅竹马想要收集天书/天书：《天道经》.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 天书：《金刚护体经》
+      keys:
+        - 金刚经
+        - 金刚怒
+        - 金刚护体经
+      content: 作品/青梅竹马想要收集天书/天书：《金刚护体经》.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 天书：《阴阳和合经》
+      keys:
+        - 素女经
+        - 合欢经
+        - 阴阳和合经
+      content: 作品/青梅竹马想要收集天书/天书：《阴阳和合经》.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 天书：《奇诡真经》
+      keys:
+        - 奇诡真经
+        - 天魔策
+        - 血魔策
+      content: 作品/青梅竹马想要收集天书/天书：《奇诡真经》.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 天书：《西域真经》
+      keys:
+        - 西域真经
+        - 昆仑经
+        - 沙魔经
+      content: 作品/青梅竹马想要收集天书/天书：《西域真经》.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 天书：《龙力真经》
+      keys:
+        - 龙力真经
+        - 降龙经
+        - 噬龙经
+      content: 作品/青梅竹马想要收集天书/天书：《龙力真经》.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 天书：《九剑真经》
+      keys:
+        - 九剑真经
+        - 剑经
+        - 魔剑经
+      content: 作品/青梅竹马想要收集天书/天书：《九剑真经》.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 天书：《南疆剑经》
+      keys:
+        - 点苍经
+        - 蛊剑经
+        - 南疆剑经
+      content: 作品/青梅竹马想要收集天书/天书：《南疆剑经》.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 宗门：点苍派
+      keys:
+        - 点苍派
+      content: 作品/青梅竹马想要收集天书/宗门：点苍派.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+
+    - comment: '{{user}}'
+      content: 作品/青梅竹马想要收集天书/{{user}}.xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 100
+      depth: 4
+      role: 0
+    - comment: 武学体系与战斗规则
+      content: 作品/青梅竹马想要收集天书/武学体系与战斗规则.xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 100
+      depth: 1
+      role: 0
+    - comment: 世界背景
+      content: 作品/青梅竹马想要收集天书/世界背景.xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 100
+      depth: 1
+      role: 0
+    - comment: 宗门：峨眉派
+      keys:
+        - 峨眉派
+      content: 作品/青梅竹马想要收集天书/宗门：峨眉派.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: '[mvu_plot]故事规则'
+      content: 作品/青梅竹马想要收集天书/[mvu_plot]故事规则.xyaml
+      enabled: true
+      position: after_char
+      insertion_order: 999
+      depth: 1
+      role: 0
+    - comment: 宗门：丐帮
+      keys:
+        - 丐帮
+      content: 作品/青梅竹马想要收集天书/宗门：丐帮.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+
+    - comment: 宗门：华山派
+      keys:
+        - 华山派
+      content: 作品/青梅竹马想要收集天书/宗门：华山派.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 宗门：昆仑派
+      keys:
+        - 昆仑派
+      content: 作品/青梅竹马想要收集天书/宗门：昆仑派.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 宗门：日月神教
+      keys:
+        - 日月神教
+      content: 作品/青梅竹马想要收集天书/宗门：日月神教.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 宗门：少林寺
+      keys:
+        - 少林寺
+      content: 作品/青梅竹马想要收集天书/宗门：少林寺.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 宗门：五毒教
+      keys:
+        - 五毒教
+      content: 作品/青梅竹马想要收集天书/宗门：五毒教.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 宗门：武当派
+      keys:
+        - 武当派
+      content: 作品/青梅竹马想要收集天书/宗门：武当派.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 九州：北疆
+      keys:
+        - 北疆州
+        - 北疆
+      content: 作品/青梅竹马想要收集天书/九州：北疆.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 九州：南蛮
+      keys:
+        - 南蛮州
+        - 南蛮
+      content: 作品/青梅竹马想要收集天书/九州：南蛮.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 九州：西域
+      keys:
+        - 西域州
+        - 西域
+      content: 作品/青梅竹马想要收集天书/九州：西域.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 九州：东海
+      keys:
+        - 东海州
+        - 东海
+      content: 作品/青梅竹马想要收集天书/九州：东海.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 九州：岭南
+      keys:
+        - 岭南州
+        - 岭南
+      content: 作品/青梅竹马想要收集天书/九州：岭南.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 九州：江南
+      keys:
+        - 江南州
+        - 江南
+      content: 作品/青梅竹马想要收集天书/九州：江南.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 九州：漠北
+      keys:
+        - 漠北州
+        - 漠北
+      content: 作品/青梅竹马想要收集天书/九州：漠北.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 九州：西川
+      keys:
+        - 西川州
+        - 西川
+      content: 作品/青梅竹马想要收集天书/九州：西川.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4
+    - comment: 九州：中原
+      keys:
+        - 中原州
+        - 中原
+      content: 作品/青梅竹马想要收集天书/九州：中原.xyaml
+      enabled: true
+      position: before_char
+      insertion_order: 100
+      depth: 4

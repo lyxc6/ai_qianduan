@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>主题切换组件演示</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --font-serif: "Noto Serif SC", serif;
+        --font-title: "ZCOOL XiaoWei", serif;
+        --bg-main: #0d1117;
+        --bg-panel: rgba(25, 19, 12, 0.75);
+        --border-color: rgba(165, 113, 58, 0.5);
+        --color-gold: #d4b16a;
+        --color-starlight: #d4b16a;
+        --text-primary: #f0e6d3;
+        --text-secondary: #b8a98f;
+        --text-title: #d4b16a;
+        --text-danger: #d44f49;
+        --rarity-t4: #a5d6a7;
+        --rarity-t3: #8cb4ff;
+        --rarity-t2: #c9a46a;
+        --rarity-t1: #ffc83d;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: transparent;
+        font-family: var(--font-serif);
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        color: var(--text-primary);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .interactive-narrative-container {
+        font-family: var(--font-serif);
+        background-color: var(--bg-panel);
+        backdrop-filter: blur(10px);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 40px 24px 24px 24px;
+        margin-bottom: 16px;
+        box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+        line-height: 1.8;
+        position: relative;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        animation: fadeIn 1s ease-out;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .content {
+        text-indent: 2em;
+        margin: 0;
+        transition: color 0.3s;
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex: 1;
+        white-space: pre-wrap; /* 保留空白符和换行符 */
+        word-wrap: break-word; /* 允许长单词换行 */
+      }
+
+      .theme-switcher {
+        position: absolute;
+        top: 12px;
+        left: 18px;
+        display: flex;
+        gap: 8px;
+        z-index: 3;
+      }
+
+      .theme-button {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .theme-button:hover {
+        transform: scale(1.2);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-original {
+        background-color: var(--color-gold);
+      }
+
+      .btn-day {
+        background-color: #ffffff;
+      }
+
+      .btn-night {
+        background-color: #000000;
+      }
+
+      .theme-original {
+        background-color: var(--bg-panel);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+      }
+
+      .theme-original p {
+        color: var(--text-primary);
+      }
+
+      .theme-day {
+        background-color: #ffffff;
+        color: #000000;
+        border: 1px solid #cccccc;
+      }
+
+      .theme-day p {
+        color: #000000;
+      }
+
+      .theme-night {
+        background-color: #000000;
+        color: #ffffff;
+        border: 1px solid #333333;
+      }
+
+      .theme-night p {
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+使用方法：
+1. 为每个正文容器设置一个唯一的ID，例如 "narrative-block-UniqueId"。
+2. 在onclick事件中，将这个唯一ID作为第一个参数传入switchTheme函数。
+3. 默认主题通过在class中预设，例如 class="interactive-narrative-container theme-original"。
+-->
+    <div
+      id="narrative-block-UniqueId"
+      class="interactive-narrative-container theme-original"
+    >
+      <div class="theme-switcher">
+        <span
+          class="theme-button btn-original"
+          onclick="switchTheme('narrative-block-UniqueId', 'theme-original')"
+        ></span>
+        <span
+          class="theme-button btn-day"
+          onclick="switchTheme('narrative-block-UniqueId', 'theme-day')"
+        ></span>
+        <span
+          class="theme-button btn-night"
+          onclick="switchTheme('narrative-block-UniqueId', 'theme-night')"
+        ></span>
+      </div>
+      <p class="content">$1</p>
+    </div>
+
+    <script>
+      function switchTheme(containerId, themeClass) {
+        const container = document.getElementById(containerId);
+        container.classList.remove(
+          "theme-original",
+          "theme-day",
+          "theme-night"
+        );
+        container.classList.add(themeClass);
+      }
+    </script>
+  </body>
+</html>

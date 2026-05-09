@@ -1,0 +1,271 @@
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  --bg-gradient-start: #fff1f7;
+  --bg-gradient-mid: #ffd6e9;
+  --bg-gradient-end: #ffc4df;
+  --text-primary: #65143f;
+  --text-secondary: #9d174d;
+  --accent-primary: #ff4fa3;
+  --accent-secondary: #be185d;
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(236, 72, 153, 0.24);
+  --tag-bg: rgba(244, 114, 182, 0.18);
+  --tag-border: rgba(244, 114, 182, 0.35);
+  --shadow-color: rgba(190, 24, 93, 0.2);
+  --glow-color: rgba(255, 77, 166, 0.42);
+}
+
+.hh-phone {
+  width: 100%;
+  max-width: 430px;
+  margin: 10px auto;
+  border-radius: 30px;
+  background: linear-gradient(160deg, var(--bg-gradient-start), var(--bg-gradient-mid) 48%, var(--bg-gradient-end));
+  padding: 12px;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  box-shadow:
+    0 0 18px rgba(255, 120, 188, 0.3),
+    0 18px 48px rgba(170, 55, 110, 0.15);
+  overflow: hidden;
+}
+
+.hh-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 10px 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 800;
+}
+
+.hh-screen {
+  position: relative;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.9), transparent 28%),
+    radial-gradient(circle at 82% 8%, rgba(255, 151, 205, 0.55), transparent 32%),
+    linear-gradient(160deg, #fff7fb, #ffd3e7 55%, #ffc1dc);
+  min-height: 520px;
+  height: 520px;
+  padding: 12px;
+  box-shadow: inset 0 0 32px rgba(255, 83, 169, 0.18);
+  overflow: hidden;
+}
+
+.hh-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 10px;
+  margin-bottom: 9px;
+  box-shadow: 0 8px 18px var(--shadow-color);
+}
+
+.hh-card-title {
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+}
+
+.hh-row {
+  display: flex;
+  gap: 8px;
+  line-height: 1.55;
+  font-size: 12px;
+  margin: 3px 0;
+}
+
+.hh-label {
+  min-width: 72px;
+  color: var(--accent-secondary);
+  font-weight: 900;
+}
+
+.hh-value {
+  flex: 1;
+  color: #5b173c;
+  word-break: break-word;
+}
+
+.hh-bar {
+  height: 7px;
+  background: rgba(236, 72, 153, 0.15);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.hh-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #f472b6, #fb7185);
+}
+
+.hh-empty {
+  font-size: 12px;
+  color: #9f647f;
+  text-align: center;
+  padding: 16px 0;
+}
+
+.hh-tag {
+  display: inline-block;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.35), rgba(236, 72, 153, 0.25));
+  border: 1px solid rgba(236, 72, 153, 0.4);
+  padding: 4px 10px;
+  font-size: 11px;
+  margin: 3px;
+  color: #831843;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(190, 24, 93, 0.15);
+}
+
+.hh-tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px 0;
+}
+
+.hh-small {
+  font-size: 11px;
+  color: #8b4566;
+  line-height: 1.5;
+}
+
+.hh-buy {
+  display: grid;
+  grid-template-columns: 1fr 78px;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.hh-qty {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(236, 72, 153, 0.35);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 11px;
+  padding: 8px;
+  color: #831843;
+  font-weight: 800;
+}
+
+.hh-buybtn {
+  border: 0;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #ff5fae, #db2777);
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.hh-buybtn:active {
+  transform: scale(0.98);
+}
+
+.hh-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.3), rgba(236, 72, 153, 0.2));
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.hh-back:hover {
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.5), rgba(236, 72, 153, 0.4));
+}
+
+.hh-page-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text-secondary);
+  text-align: center;
+  flex: 1;
+}
+
+.hh-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  position: relative;
+  min-height: 36px;
+}
+
+.hh-content {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+  padding-bottom: 10px;
+}
+
+.hh-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.hh-content::-webkit-scrollbar-track {
+  background: rgba(236, 72, 153, 0.1);
+  border-radius: 3px;
+}
+
+.hh-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f472b6, #ec4899);
+  border-radius: 3px;
+}
+
+.hh-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ec4899, #db2777);
+}
+
+.hh-tips {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 230, 245, 0.5));
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.hh-tips-title {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--accent-secondary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hh-tips-title::before {
+  content: '💡';
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .hh-phone {
+    margin: 6px 0;
+    border-radius: 24px;
+    padding: 8px;
+  }
+  .hh-screen {
+    padding: 10px;
+  }
+  .hh-row {
+    font-size: 11px;
+  }
+  .hh-label {
+    min-width: 66px;
+  }
+}

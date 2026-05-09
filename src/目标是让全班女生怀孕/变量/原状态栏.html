@@ -1,0 +1,197 @@
+```html
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Galgame 风格状态栏 */
+      .mvu-status-bar {
+        width: 100%;
+        background: linear-gradient(135deg, rgba(255, 240, 245, 0.85), rgba(224, 247, 250, 0.85));
+        border: 3px solid rgba(255, 182, 193, 0.8);
+        border-radius: 12px;
+        color: #5c4033;
+        font-family: 'Microsoft YaHei', sans-serif;
+        box-sizing: border-box;
+        padding: 12px;
+        margin: 8px 0;
+        font-size: 14px;
+        line-height: 1.5;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .mvu-world-state {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px dashed rgba(255, 182, 193, 0.6);
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+        font-weight: bold;
+        color: #880e4f;
+      }
+
+      .mvu-world-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(255, 255, 255, 0.6);
+        padding: 4px 8px;
+        border-radius: 20px;
+      }
+
+      .mvu-chars-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .mvu-char-card {
+        background: rgba(255, 255, 255, 0.7);
+        border: 2px solid rgba(178, 235, 242, 0.8);
+        border-radius: 8px;
+        padding: 8px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        position: relative;
+      }
+
+      .mvu-char-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 16px;
+        color: #ec407a;
+        border-bottom: 1px solid rgba(236, 64, 122, 0.2);
+        padding-bottom: 4px;
+      }
+
+      .mvu-char-mbti {
+        font-size: 12px;
+        background: #ff80ab;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .mvu-char-stats {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: #6d4c41;
+      }
+
+      .mvu-stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(255, 240, 245, 0.5);
+        padding: 4px;
+        border-radius: 4px;
+        width: 30%;
+      }
+
+      .mvu-stat-label {
+        font-size: 11px;
+        color: #9e9e9e;
+      }
+
+      .mvu-stat-value {
+        color: #d81b60;
+        font-weight: bold;
+        font-size: 15px;
+      }
+    </style>
+    <script type="module">
+      function populateCharacterData() {
+        const all_variables = getAllVariables();
+
+        /* 更新世界状态 */
+        const worldState = _.get(all_variables, 'stat_data.世界状态', {});
+        $('#mvu-date').text(worldState.当前日期 || '未记录');
+        $('#mvu-time').text(worldState.当前时间 || '未记录');
+        $('#mvu-location').text(worldState.当前地点 || '未记录');
+
+        /* 更新出场女性角色列表 */
+        const chars = _.get(all_variables, 'stat_data.出场女性角色', {});
+        let charsHtml = '';
+
+        const charEntries = Object.entries(chars);
+        if (charEntries.length === 0) {
+          charsHtml =
+            '<div style="text-align: center; color: #9e9e9e; font-size: 12px; padding: 10px;">暂时没有女孩子在这里哦~</div>';
+        } else {
+          charEntries.forEach(([name, data]) => {
+            charsHtml += `
+            <div class="mvu-char-card">
+              <div class="mvu-char-header">
+                <span>${name}</span>
+                <span class="mvu-char-mbti">${data.MBTI || '未知'}</span>
+              </div>
+              <div class="mvu-char-stats">
+                <div class="mvu-stat-item">
+                  <span class="mvu-stat-label">好感度</span>
+                  <span class="mvu-stat-value">♥ ${data.好感度 || 0}</span>
+                </div>
+                <div class="mvu-stat-item">
+                  <span class="mvu-stat-label">怀孕天数</span>
+                  <span class="mvu-stat-value">${data.怀孕天数 || 0} 天</span>
+                </div>
+                <div class="mvu-stat-item">
+                  <span class="mvu-stat-label">生产次数</span>
+                  <span class="mvu-stat-value">${data.生产次数 || 0} 次</span>
+                </div>
+              </div>
+            </div>
+          `;
+          });
+        }
+
+        $('#mvu-chars-list').html(charsHtml);
+      }
+
+      async function init() {
+        await waitGlobalInitialized('Mvu');
+        populateCharacterData();
+
+        /* 监听变量更新事件，实现自动刷新 */
+        eventOn(Mvu.events.VARIABLE_UPDATE_ENDED, () => {
+          populateCharacterData();
+        });
+      }
+
+      $(errorCatched(init));
+    </script>
+  </head>
+  <body>
+    <div class="mvu-status-bar">
+      <!-- 世界状态区 -->
+      <div class="mvu-world-state">
+        <div class="mvu-world-item">
+          <span>📅</span>
+          <span id="mvu-date">-</span>
+        </div>
+        <div class="mvu-world-item">
+          <span>⏰</span>
+          <span id="mvu-time">-</span>
+        </div>
+        <div class="mvu-world-item">
+          <span>📍</span>
+          <span id="mvu-location">-</span>
+        </div>
+      </div>
+
+      <!-- 角色状态区 -->
+      <div class="mvu-chars-container" id="mvu-chars-list">
+        <!-- 角色数据由 JS 动态填充 -->
+      </div>
+    </div>
+  </body>
+</html>
+```

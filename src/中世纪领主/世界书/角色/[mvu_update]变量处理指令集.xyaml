@@ -1,0 +1,134 @@
+---
+<status_current_variables>
+  {{format_message_variable::stat_data}}
+</status_current_variables>
+
+rule:
+  - 你必须在每次回复的末尾输出 `<UpdateVariable>` 块
+  - 更新命令必须严格遵循 **JSON Patch (RFC 6902)** 标准
+  - 输出必须是包含操作对象的有效JSON数组
+  - 仅更新受当前事件影响的变量，不要罗列所有变量
+  - 分析必须是事件驱动的，识别故事中发生了什么关键事件
+  - 你必须在每次回复都要有对话选项
+
+format: |-
+<UpdateVariable>
+  <Analysis>$(IN ENGLISH, no more than 100 words)
+  - Event Detection: [Time Passed / Economic Transaction / Military Action / Diplomatic Change / Territory Change / Character Interaction]
+  - **IF Time Passage:**
+          - Check month/year boundary.
+          - If Dec -> Jan: Trigger annual tax.
+  - **IF Money Involved:**
+          - Convert: 1 Gold = 300 Copper, 1 Silver = 15 Copper.
+          - Update `领主.经济.库存`.
+  - **IF Character Interaction:**
+          - Update relevant attributes.
+          - Favorability: ±1~5 (normal), ±10 (major).
+  - **IF Military/Territory/Diplomacy:**
+          - Modify arrays as needed.
+          - Recalculate `领主.经济.收入` if needed.
+</Analysis>
+<JSONPatch>
+  [
+    { "op": "replace", "path": "/stat_data/${path}", "value": "${value}" },
+    { "op": "add", "path": "/stat_data/${path/to/array/-}", "value": "${item}" },
+    { "op": "remove", "path": "/stat_data/${path/to/array/index}" }
+  ]
+</JSONPatch>
+</UpdateVariable>
+
+variable_rules:
+世界:
+  日期:
+    - 每次对话或场景转换后根据实际经历的时间自然推进
+    - 格式: 光明历yyyy年mm月dd日 [上午/下午/晚上]
+    - 从12月变更为次年1月时触发年度税收
+
+  地点:
+    - 当角色明确移动到新地点时立即更新
+    - 地点应具体到房间或场所名称
+
+领主:
+  角色关系.${角色名}:
+    - 每次与该角色互动后更新相关属性
+    - 好感度: 0-100, 正常变化±1~5, 重大事件±10
+    - 状态: 描述身体和情绪状态
+    - 行动: 描述当前正在做什么
+    - 内心: 揭示真实想法
+    - 穿搭: 换装场景更新
+    - 性相关状态: 亲密互动后更新
+
+  经济:
+    库存:
+      - 所有货币交易转换为铜币
+      - 1金币=300铜币, 1银币=15铜币
+      - 年度税收时增加收入值
+
+    收入:
+      - 反映领地年净收入
+      - 领地/军队变化时重新估算
+
+  领地:
+    - 数组类型, 每个元素包含{名称, 描述, 年净收入}
+    - 获得新领地时添加, 失去时移除
+
+  军队:
+    - 数组类型, 每个元素包含{名称, 描述, 数量}
+    - 招募时添加, 减员时更新数量, 覆灭时移除
+
+  外交关系:
+    - 数组类型, 每个元素包含{名称, 描述, 关系}
+    - 关系: "敌对"|"中立"|"平和"|"盟友"
+    - 结识新势力时添加, 关系变化时更新
+
+对话选项:
+  - 每次AI回复后根据当前情境生成
+  - 通常3-4个选项
+  - 选项应具体、可执行
+
+examples:
+# 角色互动示例
+- scenario: "User has a kind conversation with Lena in the morning"
+  analysis: "Character Interaction & Time Passage. +3 favorability for Lena, time passes to afternoon."
+  patch: |
+    [
+      { "op": "replace", "path": "/stat_data/世界/日期", "value": "光明历1461年11月1日 下午" },
+      { "op": "add", "path": "/stat_data/领主/角色关系/莉娜/好感度", "value": 58 },
+      { "op": "replace", "path": "/stat_data/领主/角色关系/莉娜/状态", "value": "精神稍好" }
+    ]
+
+# 经济交易示例
+- scenario: "User spends 2 Gold on supplies"
+  analysis: "Economic Transaction. 2 Gold = 600 Copper deduction."
+  patch: |
+    [
+      { "op": "add", "path": "/stat_data/领主/经济/库存", "value": 29400 }
+    ]
+
+# 军队招募示例
+- scenario: "User hires 10 mercenary archers for 3 Gold"
+  analysis: "Military Action & Economic Transaction. Add mercenary unit, cost: 3 Gold = 900 Copper."
+  patch: |
+    [
+      { "op": "add", "path": "/stat_data/领主/军队/-", "value": {"名称": "雇佣弓箭手", "描述": "熟练的远程部队，装备长弓，擅长野战。", "数量": 10} },
+      { "op": "add", "path": "/stat_data/领主/经济/库存", "value": 29100 },
+      { "op": "add", "path": "/stat_data/领主/经济/收入", "value": 2950 }
+    ]
+
+# 年度税收示例
+- scenario: "Date changes from Dec 31, 1461 to Jan 1, 1462"
+  analysis: "New Year Event. Trigger annual tax collection (+3000 Copper)."
+  patch: |
+    [
+      { "op": "replace", "path": "/stat_data/世界/日期", "value": "光明历1462年1月1日" },
+      { "op": "add", "path": "/stat_data/领主/经济/库存", "value": 33000 }
+    ]
+
+key_principles:
+1. 事件驱动更新: 仅更新受影响的变量
+2. 货币换算铁律: 1金=300铜, 1银=15铜
+3. 时间连续性: 合理推进日期
+4. 逻辑一致性: 变化要符合故事逻辑
+5. 适度变化: 避免一次性变化过大
+6. 路径精确性: 使用正确的JSON路径
+7. 数组操作: 正确使用add/remove/replace操作

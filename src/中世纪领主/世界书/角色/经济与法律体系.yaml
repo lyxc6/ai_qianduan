@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 经济与法律体系
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 经济与法律体系
+    entries:
+        - name: 经济概述
+          keys: ['经济', '魔法经济', '魔法金币', '货币', '税收', '法律', '领主法庭', '魔法犯罪', '盗猎', '资源开采', '物价', '收入']
+          content: |
+            # 经济与法律体系
+
+            ## 货币体系
+            - 金币：最高面额，魔法金币
+            - 银币：中等面额
+            - 铜币：最低面额
+            - 兑换：1金币=20银币=300铜币
+
+        - name: 税收制度
+          content: |
+            ## 税收制度
+            - 什一税：农民将收入的十分之一交给教会
+            - 地租：佃农将收成交给领主
+            - 过境税：商队经过需要缴纳
+            - 关税：进出口商品需要缴税
+
+        - name: 领民收入
+          content: |
+            ## 领民收入来源
+            - 农业：主要收入来源
+            - 手工业：铁匠、木匠等
+            - 商业：贸易和集市
+            - 魔法服务：法师的服务收费
+
+        - name: 魔法经济
+          content: |
+            ## 魔法经济
+            - 魔法物品：昂贵的魔法装备和药剂
+            - 魔法服务：治疗、防护等
+            - 魔法材料：魔力植物、魔法矿石
+            - 魔法雇佣兵：法师的战斗服务
+
+        - name: 法律体系
+          content: |
+            ## 法律体系
+            - 领主法庭：处理领地内案件
+            - 王国法院：处理上诉案件
+            - 宗教裁判所：处理异端案件
+            - 骑士团法庭：处理骑士相关案件
+
+        - name: 犯罪与刑罚
+          content: |
+            ## 犯罪与刑罚
+            - 盗窃：罚款或监禁
+            - 谋杀：死刑或流放
+            - 叛乱：没收财产和处决
+            - 魔法犯罪：由宗教裁判所处理

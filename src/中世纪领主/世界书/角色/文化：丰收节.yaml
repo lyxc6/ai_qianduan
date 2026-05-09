@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 文化丰收节
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 文化丰收节
+    entries:
+        - name: 丰收节概述
+          keys: ['丰收节', '节日', '庆典', '祭祀', '丰收祭祀', '农神节']
+          content: |
+            # 文化：丰收节
+
+            ## 节日概述
+            - 时间：每年秋季收获之后
+            - 性质：最重要的农业节日
+            - 意义：感谢神灵保佑丰收
+
+        - name: 庆祝活动
+          content: |
+            ## 庆祝活动
+            - 游行：盛大的游行队伍
+            - 祭祀：在教堂举行丰收祭祀
+            - 宴席：领主设宴款待领民
+            - 比赛：各种民间比赛和游戏
+            - 舞蹈：传统的丰收舞蹈
+
+        - name: 传统食物
+          content: |
+            ## 传统食物
+            - 面包：丰收的象征
+            - 葡萄酒：新酿的美酒
+            - 烤肉：各种肉类烧烤
+            - 水果：秋季收获的果实
+
+        - name: 节日意义
+          content: |
+            ## 节日意义
+            - 感谢神灵：表达对丰收的感激
+            - 团结领民：增进领主与领民的关系
+            - 展示繁荣：展示领地的富饶
+            - 祈福来年：祈求来年继续丰收
