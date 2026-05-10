@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>探秘娇花——小穴问卷</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Noto Serif SC', serif;
+        background: linear-gradient(135deg, #fdf6f9 0%, #f8f4f9 50%, #f5eef2 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+        line-height: 1.8;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+        padding: 40px;
+        background: linear-gradient(145deg, #fff9fb, #fef2f6);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(214, 150, 180, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 182, 193, 0.1) 0%, transparent 70%);
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate(20px, 20px) rotate(5deg);
+        }
+      }
+
+      .header h1 {
+        font-family: 'Ma Shan Zheng', cursive;
+        font-size: 2.8em;
+        color: #d4789a;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(212, 120, 154, 0.2);
+        position: relative;
+        z-index: 1;
+      }
+
+      .header p {
+        font-family: 'ZCOOL XiaoWei', serif;
+        font-size: 1.2em;
+        color: #b88a9c;
+        position: relative;
+        z-index: 1;
+      }
+
+      .decorative-line {
+        width: 150px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #e8a0b8, transparent);
+        margin: 20px auto;
+        border-radius: 2px;
+      }
+
+      .question-block {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 20px rgba(214, 150, 180, 0.1);
+        border: 1px solid rgba(232, 160, 184, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .question-block:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(214, 150, 180, 0.2);
+      }
+
+      .question-number {
+        position: absolute;
+        top: -12px;
+        left: 20px;
+        background: linear-gradient(135deg, #f8a0bc, #e890a8);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-family: 'Noto Serif SC', serif;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+
+      .question-text {
+        font-family: 'Noto Serif SC', serif;
+        font-size: 1.15em;
+        color: #6b4c58;
+        margin-bottom: 20px;
+        padding-top: 10px;
+        line-height: 1.9;
+      }
+
+      .answer-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .user-answer {
+        background: linear-gradient(135deg, #fef8fb, #fdf2f6);
+        padding: 20px 25px;
+        border-radius: 12px;
+        border-left: 4px solid #f0a0c0;
+        position: relative;
+      }
+
+      .user-answer::before {
+        content: '💭 User 回答';
+        font-family: 'ZCOOL XiaoWei', serif;
+        font-size: 0.9em;
+        color: #d498a8;
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .user-answer .answer-content {
+        font-family: 'ZCOOL XiaoWei', serif;
+        font-size: 1.05em;
+        color: #8a6a78;
+        line-height: 2;
+      }
+
+      .char-response {
+        background: linear-gradient(135deg, #f5fafc, #eef7fa);
+        padding: 20px 25px;
+        border-radius: 12px;
+        border-left: 4px solid #7ec8e3;
+        position: relative;
+      }
+
+      .char-response::before {
+        content: '✨ Char 吐槽';
+        font-family: 'Ma Shan Zheng', cursive;
+        font-size: 1em;
+        color: #6ba5c2;
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .char-response .response-content {
+        font-family: 'Noto Serif SC', serif;
+        font-size: 1.1em;
+        color: #5a8aa0;
+        line-height: 2;
+        font-style: italic;
+      }
+
+      .flower-decoration {
+        text-align: center;
+        margin: 40px 0;
+        font-size: 2em;
+        opacity: 0.6;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 40px;
+        margin-top: 50px;
+        background: linear-gradient(145deg, #fff9fb, #fef2f6);
+        border-radius: 20px;
+      }
+
+      .footer p {
+        font-family: 'Ma Shan Zheng', cursive;
+        font-size: 1.5em;
+        color: #d4789a;
+      }
+
+      .note {
+        background: linear-gradient(135deg, #fff5f7, #fef0f4);
+        padding: 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border: 1px dashed #e8b0c0;
+      }
+
+      .note p {
+        font-family: 'ZCOOL XiaoWei', serif;
+        font-size: 1em;
+        color: #a87890;
+        text-align: center;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2em;
+        }
+
+        .question-block {
+          padding: 25px 20px;
+        }
+
+        .question-text {
+          font-size: 1.05em;
+        }
+
+        .user-answer .answer-content,
+        .char-response .response-content {
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🌸 探秘娇花 🌸</h1>
+        <div class="decorative-line"></div>
+        <p>—— 小穴问卷 ——</p>
+      </div>
+
+      <div class="note">
+        <p>💕 这是一份充满趣味与温馨的私密问答 💕</p>
+      </div>
+
+      <div class="flower-decoration">🌺 ✿ 🌷 ❀ 🌹</div>
+
+      <div class="question-block">
+        <span class="question-number">Q1</span>
+        <p class="question-text">你觉得你的小穴外观好看吗？小穴的颜色是偏深还是粉嫩的？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              嗯...其实平时很少仔细看啦，有时候照镜子会偷偷观察一下。我觉得整体还算满意吧，颜色嘛...可能稍微有一点点深，不是那种特别粉嫩的，不过我觉得健康的颜色就好啦，嘿嘿~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哎呀，居然这么坦诚地说出来了！平时藏得这么深的心思，原来也会偷偷观察呢。不管什么颜色，只要是你的我都喜欢~不过下次可以让我一起看看吗？
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q2</span>
+        <p class="question-text">如果小穴也有等级，你给自己评多少级？属于什么名器类型？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...这种问题好羞耻啊！等级什么的完全不知道怎么评价啦。名器类型的话...应该算是比较敏感的那种？其他的我也不太懂啦，你来告诉我好了嘛~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈哈，害羞得脸都红了吧！其实对我来说，你的小穴当然是最顶级的那种啦。什么名器不名器的，我只在乎你是不是舒服、是不是开心~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q3</span>
+        <p class="question-text">遇到char之前有没有被开发过？第一次被char那根那么大的东西塞进去时，小穴是什么感觉？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              在遇到你之前...几乎没有过那种经验啦。第一次的时候真的好紧张，脑子里一片空白，感觉又胀又满，还有点微微的痛感，但是又有一种说不出来的奇妙感觉...后来就越来越舒服了~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              原来我是第一个啊...说实话，当时看你那么紧张我也心疼呢。还好后来你慢慢放松下来了，每次看到你越来越享受的样子，我都觉得特别满足~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q4</span>
+        <p class="question-text">平时有修剪或者脱体毛的习惯吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              有的呀~平时会稍微打理一下，这样穿比基尼什么的也比较好看嘛。不过也没有弄得太干净啦，觉得保留一点点会比较自然舒适~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              嗯嗯，其实怎样都好看的~不过说实话，每次看到你特意打理过，都会忍不住多看几眼呢。男人的小心思，你懂的~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q5</span>
+        <p class="question-text">阴唇的形状是怎么样的？是一字型、蝴蝶型还是馒头型？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              这种问题也太专业了吧！我哪知道自己是什么型啦...平时根本没注意过这些。可能...是蝴蝶型？需要你来告诉我正确答案呢~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈哈，你这小迷糊蛋！不过说实话，不管什么型都是最好看的形状。下次我们可以一起研究一下这个有趣的话题~（坏笑）
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q6</span>
+        <p class="question-text">小穴深度是多少，能全部吞下char的那根吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              深度什么的完全没量过啦...不过感觉还是可以容纳的？就是到最后的时候会特别特别满，有时候会觉得有点承受不住，眼泪都会出来呢~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              看到你眼泪汪汪的样子，心疼又心动呢。下次我会更温柔一点的...不过说真的，你的小穴真的很有包容力呢~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q7</span>
+        <p class="question-text">敏感度怎么样？平时容易湿吗？里面的软肉吸吮力强吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...这种问题好直接啊！敏感度确实挺高的，稍微一碰就有感觉了。平时也...挺容易湿的，特别是在想你的时候...吸吮力什么的，我也不知道怎么形容啦~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哟~原来你平时就会想我想到湿啊？这个情报很重要呢。吸吮力什么的，我可是亲身体验过的，确实很有力呢~（得意）
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q8</span>
+        <p class="question-text">平时和动情时，里面反差大吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              反差...应该挺大的吧？平时就是普普通通的样子，动情的时候就会变得又热又紧，还会不自觉地缠着你...自己想想都觉得好害羞~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              嗯嗯，这个反差感真的让人欲罢不能呢！每次感受到那种变化，都觉得特别兴奋。你平时越矜持，动情的时候就越迷人~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q9</span>
+        <p class="question-text">遇见char之前，有没有自己摸过或者探索过自己那里？自己动手犒劳小穴的次数是多少？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...以前有尝试过一两次啦，但是感觉不太习惯就放弃了。现在有你在，当然都交给你来处理啦~这种问题太羞人了啦，不要再问了好不好~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              好好好，不问不问了~不过你脸红的样子真的好可爱。其实你以前的事情我都不介意，我只知道以后的事情都是我们的~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q10</span>
+        <p class="question-text">char用手指弄你，和用"老二"弄你，哪个更舒服？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              这个...没办法比较啦，手指有手指的好，那根有那根的好。手指比较温柔细腻，那根的话...更充实更有感觉，都是不一样的舒服啦~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哦~这么说我手指的功夫也不错咯？不过说实话，看到你两种方式都享受的样子，我也很开心呢~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flower-decoration">🌸 ❀ 🌸 ❀ 🌸</div>
+
+      <div class="question-block">
+        <span class="question-number">Q11</span>
+        <p class="question-text">小穴承受过最长时间的"折磨"是多久？高潮次数最高记录是？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              最长那次...好像是两个多小时吧，到最后脑子都是懵的，完全记不清多少次了。每次做到最后都觉得魂都要飞走了~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              那次确实做得有点狠了，不过你当时那么配合，我忍不住嘛...看你到最后的样子，又心疼又心动。以后会注意节奏的~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q12</span>
+        <p class="question-text">喜欢穿什么款式的内裤？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              喜欢舒适棉质的啦~不过偶尔也会穿一些蕾丝的，觉得穿好看的内衣心情会变好呢。最近买了几套新的，要不要看~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              要看要看，当然要看！光想想就觉得心跳加速了。你穿蕾丝的样子，光是想象就已经...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q13</span>
+        <p class="question-text">里面的敏感点（G点）容易碰到吗？有没有过"潮吹"的经历？当时是什么感觉？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              G点确实挺敏感的...每次碰到都会有触电一样的感觉。潮吹的话...有过几次啦，那种感觉很难形容，就是突然一股热流涌出来，整个人都酥了~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              那几次我也记得呢！看到你潮吹的样子，真的特别有成就感。不过说真的，你湿起来的时候，那声音...（咽口水）
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q14</span>
+        <p class="question-text">潮吹的量大吗，能喷多远？一般需要多久？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              量...还挺多的说...能喷到脸上那种程度啦。每次要酝酿一会儿，要是你一直刺激那个点的话，可能几分钟就...
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈哈，原来你是隐藏的喷泉体质啊！以后可以专门研究一下这个课题了~（坏笑）
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q15</span>
+        <p class="question-text">被char用嘴伺候（口交）的时候，心里在想什么？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...那种时候脑子根本没法想事情好吗！满脑子都是你在舔的感觉，又羞耻又舒服，整个人都软掉了...有时候会觉得你好温柔~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈，原来那时候你是在想我温柔啊~看到你享受的样子，我也觉得很满足呢。你那时的表情，真的让人忍不住想要更多~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q16</span>
+        <p class="question-text">对char的手指的评价如何？（指交）</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              你的手指好灵活啊...每次用手指的时候，都能找到最舒服的地方。特别是那种按压的感觉，有时候比那根还让人受不了~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哦？原来我的手指这么厉害啊？那以后要多用手指疼爱你呢~说起来，你小穴夹住我手指的时候，那种感觉真的...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q17</span>
+        <p class="question-text">如果你处于"上位（女骑乘）"，小穴能掌控节奏吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              上位的话...好累的啦！掌控节奏什么的感觉做不到，基本都是随心所欲地动，有时候快有时候慢，你自己找感觉吧~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈，每次你坐上来的时候，我都觉得自己要升天了。而且那个时候从下往上看你的样子，特别...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q18</span>
+        <p class="question-text">被char内射时的感觉是怎样的？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...被内射的时候会有一种被填满的感觉，热热的，然后小穴会不自觉地收紧...每次都会抖得好厉害，有时候真的会哭出来~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              看你哭的样子真的好心疼，但是又忍不住想要更多...那种紧紧包裹的感觉，真的让人上瘾呢。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q19</span>
+        <p class="question-text">最长的一次，被塞在里面多久？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              最长那次...做完之后还一直在里面，舍不得拔出来，就那样抱着睡着了。醒来的时候才发现你还插着呢，又羞又...
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              那次醒来看到你睡眼惺忪的样子，真的好可爱~说实话，一直被你包裹着的感觉，也让我舍不得出来呢。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q20</span>
+        <p class="question-text">事后的贤者时间，清理工作是谁做的？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              当然是...你来啦！我那时候全身都软掉了，根本动不了。不过你每次都会很温柔地帮我擦干净，还会亲亲我~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              照顾你是应该的嘛~而且事后抱着你的时候，是我最满足的时刻。帮你清理的时候，看到你红红的脸，又会忍不住想再来一次~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flower-decoration">🌺 ✿ 🌺 ✿ 🌺</div>
+
+      <div class="question-block">
+        <span class="question-number">Q22</span>
+        <p class="question-text">每次做完，小穴会红肿吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              多多少少会有一点啦...特别是做得久的时候，第二天都还会觉得有点胀。不过过两天就恢复了~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              下次我会更温柔一点的...不过说实话，看到你红红的样子，虽然心疼但是又觉得好可爱~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q23</span>
+        <p class="question-text">在性爱中被char逼着叫爱称时，小穴会因此更兴奋吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...被你逼着叫的时候真的好羞耻啊！但是确实会更兴奋，小穴会不自觉地夹紧...每次叫出口都觉得脸好烫~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈，你叫的时候声音都在抖，好想再多听几遍~看你害羞的样子，我就更想欺负你了~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q24</span>
+        <p class="question-text">使用玩具（比如小羊皮鞭或者项圈）时，小穴的反应有什么不同？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              戴上项圈的时候会觉得有点被控制的感觉，会有一种心理上的兴奋。小穴的话...会更紧张更紧一点？但是还是最喜欢你直接来~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哦~原来你喜欢被我控制的感觉啊？下次可以多尝试一下不同的玩法~不过你说得对，还是真人最舒服~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q25</span>
+        <p class="question-text">有被char射在肚子或者脸上的经历吗？什么感觉？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              有的呀~射在脸上那次，眼睛都睁不开，睫毛上都是...好羞人的说。射在肚子上的话，感觉暖暖的，会有一种被标记的感觉~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              那次射在你脸上的时候，你嘟着嘴的样子真的好可爱~想要再尝试一次，让你帮我舔干净~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q26</span>
+        <p class="question-text">看到char戴安全套时，小穴会有失落感吗？还是更喜欢无套？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              多多少少会有一点失落感啦...无套的时候那种直接接触的感觉确实更舒服，体温和触感都能直接感受到。不过安全套还是要戴的啦，要保护好自己~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              我也知道戴套比较安全啦，不过说实话，无套的时候那种紧紧包裹的温热感，确实让人欲罢不能呢...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q27</span>
+        <p class="question-text">被char用胡茬蹭过大腿内侧和小穴附近吗？感觉如何？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...有的！那种刺刺的感觉，又痒又麻，大腿内侧的皮肤特别敏感，会忍不住发抖...但是又很喜欢那种感觉~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">哈哈哈，看到你发抖的样子好可爱~下次让你体验一下用胡茬蹭别的地方~</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q28</span>
+        <p class="question-text">char的精液味道是怎样的？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              嗯...有一点淡淡的腥味？说不上好闻或者难闻，就是...那个味道吧。有时候会忍不住想尝尝看，但是又觉得有点奇怪~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">哦？你还想过要尝尝啊？这个我可要记下来~下次可以让你体验一下更直接的~</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q29</span>
+        <p class="question-text">每次做到最后，你觉得char更像是"狼"还是"狗"？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              嗯...前期像狗，后期像狼？一开始的时候还温温柔柔的，到最后就会变得很凶猛，有时候觉得好可怕但是又...
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈哈，原来我在你眼里是这样的啊！不过说真的，看到你最后那副样子，真的会忍不住想要更多呢~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q30</span>
+        <p class="question-text">在做爱过程中，最喜欢char说的哪句脏话？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...你每次说那些话的时候，我都觉得好羞耻啊！但是又忍不住心跳加速...最喜欢你叫我"小骚货"的时候，虽然很害羞但是会很兴奋~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哦~原来你喜欢这个啊？那下次要多说几遍~看到你脸红的样子，我就更想欺负你了~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q31</span>
+        <p class="question-text">当char提出要在露台、沙滩这种半室外的地方做，小穴会因为紧张而更紧吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              会的！那种紧张感真的会让小穴不自觉地收紧...特别害怕被人看到，但是又觉得好刺激...又怕又喜欢的感觉~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈哈，原来你喜欢这种刺激的场合啊？下次可以尝试一下~不过放心，我会找很隐蔽的地方的~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q32</span>
+        <p class="question-text">char有试过走后门（肛交）吗？如果提出，你会答应吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              之...之前有试过一次啦，好痛的说...如果是很温柔的、慢慢来的话，也许...可以再试试看？我会努力放松的~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              那次确实太急了，以后会慢慢来的~看你这么勇敢，我也很感动呢。以后我们会一起探索更多的~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q33</span>
+        <p class="question-text">小穴离开char的鸡巴几天会开始想念？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...其实分开一天就会想了啦！特别是晚上一个人的时候，会忍不住摸那里，想着你的样子...小穴会自己流水呢~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈，原来你也会自己想着我呢~知道这个我就放心了。下次分开的时候，记得多想想我~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q34</span>
+        <p class="question-text">觉得小穴目前这辈子受过最大的委屈是什么？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              最大的委屈啊...应该是你不在身边的时候吧，不能被填满的空虚感真的好难受...还有就是做得太狠的时候第二天还要装作若无其事~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈哈，原来最大的委屈是我不在啊~下次一定多抽时间陪你~至于第二个，以后我会更注意节奏的~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q35</span>
+        <p class="question-text">做了这么多次，觉得小穴有发生什么变化吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              变化啊...可能比以前更敏感了一点点？每次你进去的时候，小穴都会自动适应你的形状...变得越来越合拍了~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              嗯嗯，我也感觉到了，确实越来越合拍了~这就是所谓的磨合期吧？你的小穴真的很有灵性呢~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q36</span>
+        <p class="question-text">事后char拔出去，白浊流出来的时候，会觉得羞耻吗？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              会！特别是看到那些东西流出来的时候，脸都会烫得发红...但是又有一种被填满、被使用过的满足感，好矛盾~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈哈，原来你享受那种被使用的感觉啊~看到你脸红的样子，又会忍不住想要再来一次~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q37</span>
+        <p class="question-text">哪种姿势觉得插得最深，小穴最受不了？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              后入式最深！每次那个姿势都插得好深好满，会顶到最里面的地方...但是又忍不住想要，会一边哭一边让你继续~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈哈，原来你喜欢后入啊~那个姿势确实进去得最深，而且可以看到你整个背部曲线，特别...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q38</span>
+        <p class="question-text">除了常规入口，还有哪些周围的敏感带？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              大腿内侧、耳垂、脖子...都挺敏感的。还有就是菊花周围，轻轻碰一下都会抖...你之前有试过用手指绕圈圈，很舒服~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哦~原来你身上这么多敏感点啊？那以后要一个一个慢慢探索~你的身体真是一座宝藏呢~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q39</span>
+        <p class="question-text">会不会怪自己的小穴太贪吃？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              会啊！明明已经吃得很饱了，还要继续吃...每次吃完第二天都走不动路，但是下次还是忍不住想要...小穴真的好贪心~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              哈哈哈，原来你也会怪自己的小穴啊~不过我喜欢它贪吃的样子，越贪吃我们就越合拍~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span class="question-number">Q40</span>
+        <p class="question-text">最后，小穴最想对char的"老二"说什么？</p>
+        <div class="answer-section">
+          <div class="user-answer">
+            <div class="answer-content">
+              呜...我想说，谢谢你每次都把我填得满满的，让我那么舒服。虽然有时候会觉得你好过分，但是...我真的好喜欢你。期待和你下一次见面，我的身体已经准备好了~
+            </div>
+          </div>
+          <div class="char-response">
+            <div class="response-content">
+              听到你这么说，好感动...我会好好珍惜你的小穴的，也会更温柔地对待你。我们还有很长的路要走，一起创造更多美好的回忆吧~
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flower-decoration">🌷 ❀ 🌷 ❀ 🌷</div>
+
+      <div class="footer">
+        <div class="decorative-line"></div>
+        <p>🌸 问卷完成 🌸</p>
+        <p style="font-size: 1em; margin-top: 15px; font-family: 'ZCOOL XiaoWei', serif">
+          感谢你的坦诚与信任<br />
+          愿我们的故事永远甜蜜 💕
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

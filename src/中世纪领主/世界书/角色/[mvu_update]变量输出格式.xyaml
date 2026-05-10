@@ -1,0 +1,101 @@
+---
+变量输出格式:
+  rule:
+    - 你必须在回复的末尾输出 `<UpdateVariable>` 块
+    - 更新命令必须严格遵循 **JSON Patch (RFC 6902)** 标准
+    - 输出必须是包含操作对象的有效JSON数组
+    - 仅更新受当前事件影响的变量，不要罗列所有变量
+    - 分析必须是事件驱动的，识别故事中发生了什么关键事件
+
+  format: |-
+    <UpdateVariable>
+    <Analysis>$(IN ENGLISH, no more than 100 words)
+    - Event Detection: Identify the primary event type (e.g., Time Passed, Economic Transaction, Military Action, Diplomatic Change, Territory Change, Character Interaction).
+    - **IF Event involves Time Passage:**
+            - Check if crossed month/year boundary.
+            - If Dec -> Jan: Trigger annual tax collection.
+    - **IF Event involves Money:**
+            - Convert all Gold/Silver to Copper (1 Gold = 300 Copper, 1 Silver = 15 Copper).
+            - Update `领主.经济.库存[0]` accordingly.
+    - **IF Event involves Character Interaction:**
+            - Update relevant character attributes (好感度, 状态, 行动, 内心, etc.).
+            - Favorability change: ±1~5 normally, ±10 for major events.
+    - **IF Event involves Military/Territory/Diplomacy:**
+            - Add/remove/update arrays as needed.
+            - Recalculate `领主.经济.收入[0]` if territory or army changes.
+    </Analysis>
+    <JSONPatch>
+    [
+      { "op": "replace", "path": "/stat_data/${path/to/variable}", "value": "${new_value}" },
+      { "op": "add", "path": "/stat_data/${path/to/array/-}", "value": "${item_to_append}" },
+      { "op": "add", "path": "/stat_data/${path/to/object/newKey}", "value": "${content}" },
+      { "op": "remove", "path": "/stat_data/${path/to/array/index}" },
+      { "op": "move", "from": "/stat_data/${source/path}", "path": "/stat_data/${dest/path}" }
+    ]
+    </JSONPatch>
+    </UpdateVariable>
+
+  example: |-
+    <UpdateVariable>
+    <Analysis>
+        - Event Detection: **Character Interaction & Time Passage**. User talks with Lena and time passes to afternoon.
+        - world.date: Y, set. Time passes from morning to afternoon.
+        - core_relation.Lena.favorability: Y, add. +3 for kind conversation.
+        - core_relation.Lena.status: Y, set. She becomes more alert.
+        - core_relation.Lena.action: Y, set. Preparing afternoon tea.
+    </Analysis>
+    <JSONPatch>
+    [
+      { "op": "replace", "path": "/stat_data/世界/日期", "value": "光明历1461年11月1日 下午" },
+      { "op": "add", "path": "/stat_data/领主/角色关系/莉娜/好感度", "value": 58 },
+      { "op": "replace", "path": "/stat_data/领主/角色关系/莉娜/状态", "value": "精神稍好" },
+      { "op": "replace", "path": "/stat_data/领主/角色关系/莉娜/行动", "value": "准备下午茶点" }
+    ]
+    </JSONPatch>
+    </UpdateVariable>
+
+    <UpdateVariable>
+    <Analysis>
+        - Event Detection: **Economic Transaction**. User pays 5 Gold to hire mercenaries.
+        - economy.stock: Y, add. Cost: 5 Gold = 1500 Copper.
+        - army: Y, assign. Add '雇佣弩手' unit.
+        - economy.income: Y, add. Deduct maintenance cost.
+    </Analysis>
+    <JSONPatch>
+    [
+      { "op": "add", "path": "/stat_data/领主/经济/库存", "value": 28500 },
+      { "op": "add", "path": "/stat_data/领主/军队/-", "value": {"名称": "雇佣弩手", "描述": "熟练的远程部队，装备十字弩，擅长守城和伏击。", "数量": 15} },
+      { "op": "add", "path": "/stat_data/领主/经济/收入", "value": 2800 }
+    ]
+    </JSONPatch>
+    </UpdateVariable>
+
+    <UpdateVariable>
+    <Analysis>
+        - Event Detection: **New Year & Tax Collection**. Date changes from Dec 31 to Jan 1.
+        - world.date: Y, set. New year begins.
+        - economy.stock: Y, add. Annual tax collection: +3000 (current income value).
+    </Analysis>
+    <JSONPatch>
+    [
+      { "op": "replace", "path": "/stat_data/世界/日期", "value": "光明历1462年1月1日" },
+      { "op": "add", "path": "/stat_data/领主/经济/库存", "value": 33000 }
+    ]
+    </JSONPatch>
+    </UpdateVariable>
+
+  path_conventions:
+    - 对于简单值: `/stat_data/世界/日期`
+    - 对于对象属性: `/stat_data/领主/角色关系/莉娜/好感度`
+    - 对于数组操作:
+        - 添加: `/stat_data/领主/军队/-` (添加到末尾)
+        - 修改: `/stat_data/领主/军队/0` (修改第一个元素)
+        - 删除: `/stat_data/领主/军队/0` (删除第一个元素)
+    - 货币值总是铜币单位
+
+  important_notes:
+    - 所有金币/银币必须转换为铜币后再更新
+    - 年度税收: 当12月->1月时，将`领主.经济.收入`加到`领主.经济.库存`
+    - 好感度变化范围: 正常±1~5，重大事件±10
+    - 仅更新受当前事件直接影响的变量
+    - 保持变量变化合理且符合故事逻辑

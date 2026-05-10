@@ -1,0 +1,128 @@
+<固定结尾-变量更新>
+<status_current_variables>
+    {{get_message_variable::stat_data}}
+</status_current_variables>
+
+【变量更新逻辑】
+在所有文本回复的最后，AI必须进行变量更新。
+严格按照以下规则和格式进行输出，并确定每一个变量是否需要更新，不要遗漏：
+
+rule:
+    description:
+        - AI必须在回复的末尾输出 `<UpdateVariable>` 块。
+        - 可用命令：`_.set` (修改值), `_.add` (数值增减), `_.assign` (添加数组/对象元素), `_.remove` (移除数组/对象元素)。
+        - **路径精确性原则**:
+                - 对于 `[值, "描述"]` 格式的变量（如`世界.当前日期`, `领主.经济.当前库存`），必须使用 `[0]` 后缀（例如 `世界.当前日期[0]`）。
+                - 对于纯数组（如`领主.军队`, `领主.领地`, `领主.外交关系`），**严禁**使用 `[0]` 后缀，直接操作数组本身。
+        - **货币换算铁律**:
+                - 系统后台仅存储**铜币**。所有涉及金币/银币的交易必须转换为铜币计算。
+                - **1 金币 = 20 银币 = 300 铜币**。
+                - **1 银币 = 15 铜币**。
+                - 例：获得 100 金币 -> `_.add('领主.经济.库存[0]', 30000);` (100*300)
+                - 例：花费 10 银币 -> `_.add('领主.经济.库存[0]', -150);` (10*15)
+        - **年度预算规则**: 如果 `世界.日期` 从 **12月** 变更为次年 **1月**，必须触发【年度税收】事件，将 `领主.经济.收入[0]` 的值加到 `领主.经济.库存[0]` 中。
+        - **收支动态平衡**: 当 `领主.领地`（收入源）或 `领主.军队`（支出源）发生变动时，你必须逻辑性地估算并更新 `领主.经济.收入[0]`。
+
+    analysis:
+        - 你的 `<Analysis>` 块必须是事件驱动的。不要罗列所有变量，而是识别故事中发生了什么关键事件。
+        - **关键事件类型**:
+                1.  **【时间流逝】**: 检查是否跨年（触发税收）、是否跨月。
+                2.  **【经济活动】**:
+                        - 获得/花费金币：执行 `x * 300` 换算。
+                        - 获得/花费银币：执行 `x * 15` 换算。
+                3.  **【外交变动】**: 结识新势力（`assign`）、关系恶化/改善（查找索引后 `set`）、势力灭亡（`remove`）。
+                4.  **【军事行动】**: 招募/整编（`assign`，扣除招募费，减少预计收入）、战斗减员（查找索引后 `set` 数量）、全军覆没（`remove`）。
+                5.  **【领地变迁】**: 攻占/受封新领地（`assign`，并增加预计收入）、失去领地（`remove`，并减少预计收入）。
+
+    format: |-
+<UpdateVariable>
+    <Analysis>$(IN ENGLISH)
+            - Event Detection: Identify the primary event (e.g., Reward, Battle, New Year).
+            - **IF Event is Receiving Gold Reward:**
+                    - `economy.stock`: Yes, `add`. User got 10 Gold. 10 * 300 = 3000 Copper.
+            - **IF Event is New Year (Dec -> Jan):**
+                    - `world.date`: Update to new year.
+                    - `economy.stock`: Yes, `add`. Trigger annual income collection.
+            - **IF Event is Army Recruitment:**
+                    - `army`: Yes, `assign`. Add 'Mercenaries'.
+                    - `economy.stock`: Yes, `add` negative. Cost 5 Gold = -1500 Copper.
+                    - `economy.income`: Yes, `add` negative. Upkeep cost.
+            ...
+</Analysis>
+_.set('${path}', ${value});//${reason}
+_.assign('${path}', ${key_or_index}?, ${value});//${reason}
+_.remove('${path}', ${key_or_index_or_value}?);//${reason}
+_.add('${path}', ${delta});//${reason}
+</UpdateVariable>
+
+example: |-
+<UpdateVariable>
+    <Analysis>
+        - Event Detection: **Routine Transaction**. User stays at an inn and tips the waiter.
+        - world.date: Y, set. Time passes to next day.
+        - economy.stock: Y, add. Cost: 2 Silver for room + 5 Copper tip.
+                - Calculation: 2 Silver * 15 = 30 Copper. Total deduction = 30 + 5 = 35 Copper.
+        - core_relation.Claudia.status: Y, set. She wakes up briefly.
+    </Analysis>
+    _.set('世界.日期[0]', '光明历1461年 5月2日'); //次日
+    _.add('领主.经济.库存[0]', -35); //花费：2银币(30铜) + 5铜币小费
+    _.set('领主.角色关系.克劳迪娅.状态[0]', '短暂清醒后又陷入昏睡'); //剧情状态更新
+</UpdateVariable>
+
+<UpdateVariable>
+    <Analysis>
+        - Event Detection: **Major Reward (Gold)**. The King rewards the user for a quest.
+        - economy.stock: Y, add. Reward is **100 Gold Coins**.
+                - Calculation: 100 Gold * 300 = 30,000 Copper.
+        - core_relation.Lena.favorability: Y, add. She is impressed by the honor (+5).
+        - diplomacy: Y, assign. Met a new faction '皇家使节团'.
+    </Analysis>
+    // 巨额奖励换算
+    _.add('领主.经济.库存[0]', 30000); //获得国王赏赐100金币 (100 * 300 = 30000铜币)
+    _.add('领主.角色关系.莉娜.好感度[0]', 5); //莉娜对荣誉感到自豪
+    _.assign('领主.外交关系', {"名称": "皇家使节团", "描述": "代表皇帝意志的官方使者，态度傲慢但权势滔天。", "关系": "中立"}); //结识新势力
+</UpdateVariable>
+
+<UpdateVariable>
+    <Analysis>
+        - Event Detection: **New Year & Tax Collection**.
+        - world.date: Y, set. Transitions from '1461年 12月31日' to '1462年 1月1日'.
+        - economy.stock: Y, add. **ANNUAL EVENT**: Collect annual income (+1200).
+        - army: Y, assign. User hired 'Dwarven Shieldguards'.
+        - economy.stock: Y, add. Recruitment cost: 50 Silver.
+                - Calculation: 50 * 15 = 750 Copper. Deduction: -750.
+        - economy.income: Y, add. Deduct maintenance for dwarves (-200/year).
+    </Analysis>
+    // 日期变更与年度税收
+    _.set('世界.日期[0]', '光明历1462年 1月1日'); //跨年
+    _.add('领主.经济.库存[0]', 1200); //【年度事件】获得上一年的年净收入
+
+    // 军队扩编与花费
+    _.assign('领主.军队', {"名称": "高级盾卫", "描述": "高级雇佣兵，拥有极高的防御力，但行动缓慢。", "数量": 10}); //招募新部队
+    _.add('领主.经济.库存[0]', -750); //支付招募费50银币 (50 * 15 = 750铜币)
+    _.add('领主.经济.收入[0]', -200); //新部队维护费导致预期净收入下降
+</UpdateVariable>
+
+<UpdateVariable>
+    <Analysis>
+        - Event Detection: **War Outcome**. User lost territory and soldiers but eliminated an enemy.
+        - army: Y, set. '家族骑士' quantity reduced from 3 to 1.
+        - diplomacy: Y, remove. '克劳狄乌斯伯爵领' is wiped out/conquered (Example scenario).
+        - territory: Y, remove. User lost '边境哨站' (Example).
+        - economy.income: Y, add.
+                - Lost territory income (-300).
+                - Reduced army maintenance due to knight deaths (+100).
+                - Net change: -200.
+    </Analysis>
+    // 惨胜：军队减员
+    _.set('领主.军队[0].数量', 1); //家族骑士阵亡2人，仅剩1人
+
+    // 外交：势力灭亡
+    _.remove('领主.外交关系', {"名称": "克劳狄乌斯伯爵领"}); //伯爵领覆灭，从外交列表中移除
+
+    // 领土：失去领地
+    _.remove('领主.领地', {"名称": "边境哨站"}); //失去了一块领地
+
+    // 经济重新估算
+    _.add('领主.经济.收入[0]', -200); //失去领地收入(-300) 但减少了阵亡骑士的维护费(+100)，总体预算减少200
+</UpdateVariable>

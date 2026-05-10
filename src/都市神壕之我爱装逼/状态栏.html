@@ -1,0 +1,604 @@
+```html
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* 极简未来主义：深空灰与流光金 */
+      :root {
+        --bg-deep: #050608;
+        --bg-panel: rgba(15, 18, 25, 0.92);
+        --gold-primary: #ffcc66;
+        --gold-dim: rgba(255, 204, 102, 0.4);
+        --text-main: #e2e8f0;
+        --text-muted: #94a3b8;
+        --lust-color: #ff4d94;
+        --lust-bg: rgba(255, 77, 148, 0.15);
+        --neon-glow: 0 0 1.25rem rgba(255, 204, 102, 0.25);
+        --lust-glow: 0 0 0.9375rem rgba(255, 77, 148, 0.3);
+        --base-size: 14px;
+      }
+
+      html {
+        font-size: var(--base-size);
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'PingFang SC', 'Helvetica Neue', sans-serif;
+        color: var(--text-main);
+        font-size: 1rem;
+      }
+
+      .system-hud {
+        margin: 0.625rem;
+        border: 0.0625rem solid var(--gold-dim);
+        border-radius: 0.625rem;
+        background: var(--bg-panel);
+        box-shadow: var(--neon-glow);
+        overflow: hidden;
+        backdrop-filter: blur(0.9375rem);
+      }
+
+      .section-header {
+        background: linear-gradient(90deg, rgba(255, 204, 102, 0.2) 0%, transparent 100%);
+        color: var(--gold-primary);
+        padding: 0.875rem 1.125rem;
+        font-weight: bold;
+        font-size: 0.9375rem;
+        border-left: 0.25rem solid var(--gold-primary);
+        border-bottom: 0.0625rem solid var(--gold-dim);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        letter-spacing: 0.125rem;
+        text-shadow: 0 0 0.625rem rgba(255, 204, 102, 0.5);
+      }
+
+      .section-header::after {
+        content: '▼';
+        font-size: 0.75rem;
+        transition: transform 0.4s;
+      }
+
+      .section-header.active::after {
+        transform: rotate(180deg);
+      }
+
+      .section-content {
+        display: none;
+        max-height: 43.75rem;
+        overflow-y: auto;
+      }
+
+      .section-content.active {
+        display: block;
+      }
+
+      .core-data {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.0625rem;
+        background: var(--gold-dim);
+      }
+
+      .core-item {
+        background: var(--bg-panel);
+        padding: 0.875rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .core-label {
+        font-size: 0.6875rem;
+        color: var(--text-muted);
+        margin-bottom: 0.25rem;
+        text-transform: uppercase;
+      }
+      .core-val {
+        font-size: 1rem;
+        color: var(--gold-primary);
+        font-weight: bold;
+      }
+
+      .info-bar {
+        background: linear-gradient(90deg, rgba(255, 204, 102, 0.08) 0%, rgba(255, 204, 102, 0.03) 100%);
+        border-bottom: 0.0625rem solid var(--gold-dim);
+        padding: 0.625rem 1.125rem;
+        display: flex;
+        gap: 1.25rem;
+        font-size: 0.8125rem;
+        flex-wrap: wrap;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+
+      .info-label {
+        color: var(--text-muted);
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+      }
+
+      .info-value {
+        color: var(--gold-primary);
+        font-weight: bold;
+      }
+
+      .assets-section {
+        padding: 0.75rem 1.125rem;
+        border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.05);
+      }
+
+      .assets-title {
+        font-size: 0.6875rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.0625rem;
+      }
+
+      .assets-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .asset-item {
+        background: rgba(255, 204, 102, 0.08);
+        border: 0.0625rem solid rgba(255, 204, 102, 0.2);
+        padding: 0.25rem 0.625rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        color: var(--gold-primary);
+      }
+
+      .asset-item:empty::before {
+        content: '暂无资产';
+        color: var(--text-muted);
+        font-style: italic;
+      }
+
+      .skills-section {
+        padding: 0.75rem 1.125rem;
+        border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.05);
+      }
+
+      .skills-title {
+        font-size: 0.6875rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.0625rem;
+      }
+
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .skill-item {
+        background: rgba(100, 200, 255, 0.08);
+        border: 0.0625rem solid rgba(100, 200, 255, 0.2);
+        padding: 0.25rem 0.625rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        color: #64c8ff;
+      }
+
+      .skill-item:empty::before {
+        content: '暂无技能';
+        color: var(--text-muted);
+        font-style: italic;
+      }
+
+      /* 在场女性卡片 */
+      .girl-card {
+        margin: 0.75rem;
+        border: 0.0625rem solid rgba(255, 77, 148, 0.4);
+        border-radius: 0.5rem;
+        background: linear-gradient(180deg, rgba(30, 30, 40, 0.6) 0%, var(--lust-bg) 100%);
+        box-shadow: var(--lust-glow);
+      }
+
+      .girl-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.625rem 0.9375rem;
+        background: rgba(255, 77, 148, 0.1);
+        border-bottom: 0.0625rem solid rgba(255, 77, 148, 0.2);
+      }
+
+      .girl-name {
+        color: #fff;
+        font-weight: bold;
+        font-size: 1rem;
+        text-shadow: 0 0 0.625rem var(--lust-color);
+      }
+      .girl-score {
+        font-size: 0.75rem;
+        color: var(--gold-primary);
+        font-weight: bold;
+      }
+
+      .girl-body {
+        padding: 0.75rem;
+        font-size: 0.8125rem;
+      }
+
+      .stat-row {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 0.625rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.1);
+      }
+      .stat-box {
+        flex: 1;
+        text-align: center;
+      }
+      .stat-label {
+        font-size: 0.625rem;
+        color: var(--text-muted);
+        display: block;
+        margin-bottom: 0.125rem;
+      }
+      .stat-val {
+        color: #fff;
+        font-size: 0.875rem;
+        font-weight: bold;
+      }
+
+      .body-detail {
+        color: #cbd5e1;
+        line-height: 1.7;
+        margin-bottom: 0.5rem;
+      }
+      .body-detail b {
+        color: var(--gold-primary);
+        font-weight: normal;
+        margin-right: 0.375rem;
+      }
+
+      .intimate-panel {
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 0.375rem;
+        border: 0.0625rem solid var(--lust-color);
+        position: relative;
+      }
+
+      .intimate-panel::before {
+        content: 'BIOLOGICAL_SCAN';
+        position: absolute;
+        top: -0.5rem;
+        right: 0.625rem;
+        font-size: 0.5625rem;
+        background: var(--lust-color);
+        color: #000;
+        padding: 0 0.25rem;
+        border-radius: 0.125rem;
+        font-weight: bold;
+      }
+
+      .intimate-label {
+        color: var(--lust-color);
+        font-size: 0.75rem;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.5rem;
+        border-bottom: 0.0625rem solid var(--lust-bg);
+        text-align: center;
+        letter-spacing: 0.125rem;
+      }
+
+      .secret-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        margin-bottom: 0.625rem;
+      }
+
+      .secret-item {
+        background: rgba(255, 77, 148, 0.05);
+        padding: 0.3125rem 0.5rem;
+        border-radius: 0.25rem;
+        border: 0.0625rem solid rgba(255, 77, 148, 0.1);
+      }
+
+      .secret-item b {
+        color: var(--lust-color);
+        font-size: 0.6875rem;
+        margin-right: 0.25rem;
+      }
+      .secret-item span {
+        color: #fff;
+        font-size: 0.75rem;
+      }
+
+      .body-part-list {
+        font-size: 0.6875rem;
+        border-top: 0.0625rem dashed rgba(255, 77, 148, 0.3);
+        padding-top: 0.625rem;
+        color: #94a3b8;
+      }
+      .body-part-list b {
+        color: #ff80b3;
+      }
+
+      /* 后宫列表 */
+      .harem-item {
+        padding: 0.75rem 1.125rem;
+        border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .harem-name-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+      }
+
+      .harem-name {
+        color: var(--lust-color);
+        font-weight: bold;
+        font-size: 0.9375rem;
+      }
+      .harem-age {
+        color: var(--text-muted);
+        font-size: 0.6875rem;
+        opacity: 0.8;
+      }
+      .harem-info {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        text-align: right;
+      }
+
+      ::-webkit-scrollbar {
+        width: 0.25rem;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--gold-primary);
+        border-radius: 0.125rem;
+      }
+    </style>
+    <script type="module">
+      function renderShenHaoData(data) {
+        if (!data) return;
+
+        $('#val-date').text(data['日期'] || '未知日期');
+        $('#val-time').text(data['时间'] || '未知时间');
+        $('#val-location').text(data['位置'] || '未知位置');
+
+        $('#val-cash').text('￥' + (data['现金余额'] || 0).toLocaleString());
+        $('#val-level').text(data['神豪等级'] || '萌新神豪');
+        $('#val-points').text(data['系统积分'] || 0);
+        $('#val-mult').text((data['返现倍数'] || 0) + 'x');
+
+        const assets = data['名下资产'] || {};
+        const assetsContainer = $('#assets-content');
+        assetsContainer.empty();
+        if (Object.keys(assets).length === 0) {
+          assetsContainer.html('<span class="asset-item"></span>');
+        } else {
+          Object.entries(assets).forEach(([name, info]) => {
+            const display = typeof info === 'string' ? info : `${info['名称'] || name} x${info['数量'] || 1}`;
+            assetsContainer.append(`<span class="asset-item">${display}</span>`);
+          });
+        }
+
+        const skills = data['技能'] || {};
+        const skillsContainer = $('#skills-content');
+        skillsContainer.empty();
+        if (Object.keys(skills).length === 0) {
+          skillsContainer.html('<span class="skill-item"></span>');
+        } else {
+          Object.entries(skills).forEach(([name, info]) => {
+            const display = typeof info === 'string' ? info : `${info['名称'] || name}`;
+            skillsContainer.append(`<span class="skill-item">${display}</span>`);
+          });
+        }
+      }
+
+      function renderActiveGirls(girls) {
+        const container = $('#girls-content');
+        container.empty();
+
+        if (!girls || Object.keys(girls).length === 0) {
+          container.html(
+            '<div style="padding:1.875rem;color:var(--text-muted);text-align:center;font-style:italic;letter-spacing:0.0625rem;">[ SENSOR_OFFLINE: 范围内未发现目标女性 ]</div>',
+          );
+          return;
+        }
+
+        Object.entries(girls).forEach(([name, d]) => {
+          const clothes = d['衣着'] || {};
+          const body = d['身体状态'] || {};
+          const secret = d['私密档案'] || {};
+
+          const clothesHtml = [
+            `<b>[上装]</b> ${clothes['上装'] || '未探测'}`,
+            `<b>[下装]</b> ${clothes['下装'] || '未探测'}`,
+            `<b>[内衣]</b> ${clothes['内衣'] || '未探测'}`,
+            `<b>[袜子]</b> ${clothes['袜子'] || '未探测'}`,
+            `<b>[鞋子]</b> ${clothes['鞋子'] || '未探测'}`,
+          ].join('<br>');
+
+          const card = `
+          <div class="girl-card">
+            <div class="girl-header">
+              <span class="girl-name">❖ ${name}</span>
+              <span class="girl-score">AGE: ${d['年龄']} | SCORE: ${d['颜值评分']}</span>
+            </div>
+            <div class="girl-body">
+              <div class="stat-row">
+                <div class="stat-box"><span class="stat-label">RELATION</span><span class="stat-val">${d['与user的关系']}</span></div>
+                <div class="stat-box"><span class="stat-label">FAVOR</span><span class="stat-val">${d['好感度']}</span></div>
+                <div class="stat-box"><span class="stat-label">DEGEN</span><span class="stat-val" style="color:var(--lust-color)">${d['堕落值']}</span></div>
+              </div>
+
+              <div class="body-detail"><b>[认知]</b> ${d['自我认知']}</div>
+              <div class="body-detail"><b>[心声]</b> <i style="color:#ff80b3">"${d['心声']}"</i></div>
+
+              <div class="body-detail" style="background:rgba(255,204,102,0.05); padding:0.625rem; border-radius:0.25rem; border-left: 0.125rem solid var(--gold-primary); margin: 0.625rem 0;">
+                ${clothesHtml}
+              </div>
+
+              <div class="intimate-panel">
+                <span class="intimate-label">DEPTH_SCAN // 深度探测</span>
+                <div class="secret-grid">
+                  <div class="secret-item"><b>处女:</b><span>${secret['是否为处女'] || '未知'}</span></div>
+                  <div class="secret-item"><b>受孕:</b><span>${secret['是否怀孕'] || '未知'} (${secret['怀孕几率'] || '0%'})</span></div>
+                  <div class="secret-item" style="grid-column: span 2;"><b>初夜归属:</b><span>${secret['初夜对象'] || '尚未被夺走'}</span></div>
+                  <div class="secret-item"><b>内射次数:</b><span>${secret['内射次数'] || 0}</span></div>
+                  <div class="secret-item"><b>子嗣归属:</b><span>${secret['子嗣所属'] || '无'}</span></div>
+                </div>
+                <div class="body-detail"><b>名器记录:</b> <span style="color:var(--gold-primary); font-weight:bold;">${secret['名器'] || '尚未解析'}</span></div>
+                <div class="body-part-list">
+                  <b>[朱唇]</b> ${body['朱唇']}<br>
+                  <b>[乳房]</b> ${body['乳房']}<br>
+                  <b>[美臀]</b> ${body['美臀']}<br>
+                  <b>[小穴]</b> ${body['小穴']}<br>
+                  <b>[菊穴]</b> ${body['菊穴']}<br>
+                  <b>[玉足]</b> ${body['玉足']}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+          container.append(card);
+        });
+      }
+
+      /* 核心逻辑：后宫名单数据对齐 */
+      function renderHarem(harem, activeGirls) {
+        const container = $('#harem-content');
+        container.empty();
+        if (!harem || Object.keys(harem).length === 0) {
+          container.html(
+            '<div style="padding:1.25rem;color:var(--text-muted);text-align:center;">[ 暂无图鉴数据 ]</div>',
+          );
+          return;
+        }
+
+        Object.entries(harem).forEach(([name, d]) => {
+          /* 数据对齐逻辑：如果在场，优先使用在场数据覆盖显示 */
+          const activeData = _.get(activeGirls, name);
+          const displayData = activeData
+            ? {
+                ...d,
+                堕落值: activeData['堕落值'],
+                与user的关系: activeData['与user的关系'],
+                名器种类: _.get(activeData, '私密档案.名器', d['名器种类']),
+              }
+            : d;
+
+          container.append(`
+          <div class="harem-item">
+            <div class="harem-name-group">
+              <span class="harem-name">${name}</span>
+              <span class="harem-age">${displayData['年龄']}</span>
+            </div>
+            <div class="harem-info">
+              <div style="color:var(--lust-color)">堕落: ${displayData['堕落值']}</div>
+              <div style="font-size:0.625rem;">${displayData['与user的关系']} | ${displayData['名器种类']}</div>
+            </div>
+          </div>
+        `);
+        });
+      }
+
+      function populateCharacterData() {
+        const all = getAllVariables().stat_data;
+        console.log(all);
+        const activeGirls = all['当前在场互动女性'] || {};
+        const harem = all['后宫状态'] || {};
+
+        renderShenHaoData(all);
+        renderActiveGirls(activeGirls);
+        /* 将在场数据传入后宫渲染函数进行对齐 */
+        renderHarem(harem, activeGirls);
+      }
+
+      async function init() {
+        await waitGlobalInitialized('Mvu');
+        populateCharacterData();
+
+        eventOn(Mvu.events.VARIABLE_UPDATE_ENDED, () => {
+          populateCharacterData();
+        });
+
+        $('.section-header').on('click', function () {
+          $(this).toggleClass('active');
+          $(this).next('.section-content').slideToggle(300);
+        });
+      }
+
+      $(errorCatched(init));
+    </script>
+  </head>
+  <body>
+    <div class="system-hud">
+      <div class="info-bar">
+        <div class="info-item">
+          <span class="info-label">Date:</span>
+          <span class="info-value" id="val-date">未知日期</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Time:</span>
+          <span class="info-value" id="val-time">未知时间</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Location:</span>
+          <span class="info-value" id="val-location">未知位置</span>
+        </div>
+      </div>
+
+      <div class="assets-section">
+        <div class="assets-title">Assets // 名下资产</div>
+        <div class="assets-grid" id="assets-content">
+          <span class="asset-item"></span>
+        </div>
+      </div>
+
+      <div class="skills-section">
+        <div class="skills-title">Skills // 技能列表</div>
+        <div class="skills-grid" id="skills-content">
+          <span class="skill-item"></span>
+        </div>
+      </div>
+
+      <div class="core-data">
+        <div class="core-item">
+          <span class="core-label">Balance</span><span class="core-val" id="val-cash">￥0</span>
+        </div>
+        <div class="core-item">
+          <span class="core-label">Rank</span><span class="core-val" id="val-level">萌新神豪</span>
+        </div>
+        <div class="core-item">
+          <span class="core-label">Points</span><span class="core-val" id="val-points">0</span>
+        </div>
+        <div class="core-item"><span class="core-label">Mult</span><span class="core-val" id="val-mult">0x</span></div>
+      </div>
+
+      <div class="section-header active">TARGETS // 实时侦测中</div>
+      <div class="section-content active" id="girls-content"></div>
+
+      <div class="section-header">ARCHIVE // 禁脔图鉴</div>
+      <div class="section-content" id="harem-content"></div>
+    </div>
+  </body>
+</html>
+```

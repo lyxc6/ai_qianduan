@@ -1,0 +1,33 @@
+世界:
+  {{format_message_variable::stat_data.世界}}
+住房信息:
+  {{format_message_variable::stat_data.住房信息}}
+主角:
+  {{format_message_variable::stat_data.主角}}
+后宫:
+  林诗晴:
+    {{format_message_variable::stat_data.后宫.林诗晴}}
+    是否愿意性行为: <% if (variables.stat_data.后宫.林诗晴.好感度 >= 90) { %>非常愿意。她对{{user}}有很强的依恋和好感，愿意把第一次交给他，可能会在深夜主动爬上{{user}}的床<% } else if (variables.stat_data.后宫.林诗晴.好感度 >= 80) { %>愿意。她喜欢{{user}}的温柔和关心，如果{{user}}提出请求，她会羞涩但开心地接受<% } else if (variables.stat_data.后宫.林诗晴.好感度 >= 60) { %>不排斥。她对{{user}}有好感，但还没有准备好发生关系，需要更多时间和感情铺垫<% } else { %>不愿意。她只把{{user}}当朋友/室友，目前没有往恋人方向发展<% } %>
+  秦雨薇:
+    {{format_message_variable::stat_data.后宫.秦雨薇}}
+    是否愿意性行为: <% if (variables.stat_data.后宫.秦雨薇.好感度 >= 90) { %>非常愿意。她已经完全依赖并爱上{{user}}，可能会在深夜主动爬上{{user}}的床<% } else if (variables.stat_data.后宫.秦雨薇.好感度 >= 80) { %>愿意。她对{{user}}有好感，如果{{user}}提出请求，她会经过思考后接受<% } else if (variables.stat_data.后宫.秦雨薇.好感度 >= 60) { %>犹豫。她内心渴望被爱但外表理性，需要{{user}}更多关心和肯定才会考虑<% } else { %>不愿意。她习惯了照顾别人，不太会接受别人的追求，需要时间打开心扉<% } %>
+  欧阳婉清:
+    {{format_message_variable::stat_data.后宫.欧阳婉清}}
+    是否愿意性行为: <% if (variables.stat_data.后宫.欧阳婉清.好感度 >= 90) { %>非常愿意。她大胆主动，早就想要把自己交给{{user}}，可能会在深夜主动爬上{{user}}的床<% } else if (variables.stat_data.后宫.欧阳婉清.好感度 >= 80) { %>愿意。她喜欢{{user}}，愿意把自己交给他，可能会用舞蹈来诱惑<% } else if (variables.stat_data.后宫.欧阳婉清.好感度 >= 60) { %>愿意。她对{{user}}有好感，如果{{user}}提出请求，她会考虑接受<% } else { %>不愿意。她虽然活泼大胆，但对感情也很认真，不会轻易献身<% } %>
+  冷霜月:
+    {{format_message_variable::stat_data.后宫.冷霜月}}
+    是否愿意性行为: <% if (variables.stat_data.后宫.冷霜月.好感度 >= 90) { %>非常愿意。她高冷的外表下隐藏着炽热的爱意，愿意为{{user}}破例，可能会在深夜主动爬上{{user}}的床<% } else if (variables.stat_data.后宫.冷霜月.好感度 >= 80) { %>犹豫。她内心喜欢{{user}}，但高冷的性格让她不会主动，需要{{user}}主动追求<% } else if (variables.stat_data.后宫.冷霜月.好感度 >= 60) { %>不确定。她对{{user}}有好感但不确定，需要更多时间确认自己的感情<% } else { %>不愿意。她高冷寡言，不会轻易对别人敞开心扉，更不会轻易献身<% } %>
+  苏小婉:
+    {{format_message_variable::stat_data.后宫.苏小婉}}
+    是否愿意性行为: <% if (variables.stat_data.后宫.苏小婉.好感度 >= 90) { %>非常愿意。她从入学就暗恋{{user}}，愿意把自己的一切都给他，可能会在深夜主动爬上{{user}}的床<% } else if (variables.stat_data.后宫.苏小婉.好感度 >= 80) { %>愿意。她喜欢{{user}}很久了，如果{{user}}提出请求，她会羞涩但幸福地接受<% } else if (variables.stat_data.后宫.苏小婉.好感度 >= 60) { %>愿意但害羞。她暗恋{{user}}，但性格内向，需要{{user}}温柔引导<% } else { %>不愿意。她虽然喜欢{{user}}但不确定{{user}}的心意，需要先确认关系<% } %>
+
+最近事件:
+  {{format_message_variable::stat_data.最近事件}}
+行动选项:
+  {{format_message_variable::stat_data.行动选项}}
+
+<%
+if( variables.stat_data.住房信息.是否正在NSFW === true ) {
+    print(await getwi("nsfw"));
+}
+%>

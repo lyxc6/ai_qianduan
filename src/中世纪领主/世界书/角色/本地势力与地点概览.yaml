@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 本地势力与地点概览
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 本地势力与地点概览
+    entries:
+        - name: 地点概述
+          keys: ['地点', '势力', '城镇', '村庄', '要塞', '城堡', '领地', '幽影森林', '矮人城堡']
+          content: |
+            # 本地势力与地点概览
+
+            ## 主角领地
+            - 银翼城堡：主角的居所，矮人建造的古老城堡
+            - 幽影森林：领地附近的危险森林
+            - 艾德勒镇：领地内的主要城镇
+
+        - name: 重要地点
+          content: |
+            ## 重要地点
+            - 主厅：城堡的议事和接待大厅
+            - 占星塔：克劳迪娅的专属空间
+            - 教堂：领地内的宗教中心
+            - 市场：领地的商业中心
+            - 兵营：军队驻扎的地方
+
+        - name: 周边势力
+          content: |
+            ## 周边势力
+            - 克劳狄乌斯伯爵领：邻近领主，存在灌溉权纠纷
+            - 矮人矿山：提供武器和装备
+            - 精灵领地：神秘的翡翠森林边界
+            - 兽人部落：边境的威胁
+
+        - name: 资源分布
+          content: |
+            ## 资源分布
+            - 森林资源：木材、猎物、草药
+            - 矿产资源：铁矿、铜矿
+            - 农业：小麦、大麦、葡萄
+            - 魔法资源：魔力植物、魔法矿石

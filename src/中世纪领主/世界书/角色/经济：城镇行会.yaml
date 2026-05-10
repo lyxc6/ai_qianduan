@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 经济城镇行会
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 经济城镇行会
+    entries:
+        - name: 行会概述
+          keys: ['行会', '手工业', '商业', '工匠', '商人行会', 'guild']
+          content: |
+            # 经济：城镇行会
+
+            ## 行会系统
+            - 定义：同一行业从业者的自治组织
+            - 职能：管理行业、维护利益、培训学徒
+            - 地位：城镇经济的重要支柱
+
+        - name: 主要行会
+          content: |
+            ## 主要行会
+            - 铁匠行会：制造武器和工具
+            - 裁缝行会：制作衣物
+            - 面包师行会：制作面包
+            - 酿酒师行会：酿造酒类
+            - 商人行会：管理贸易
+            - 药剂师行会：制作药水
+
+        - name: 行会等级
+          content: |
+            ## 行会内部等级
+            - 学徒：正在学习技艺
+            - 熟练工：已掌握基本技艺
+            - 师傅：技艺精湛，可收徒
+            - 行会长老：行会管理者
+
+        - name: 行会作用
+          content: |
+            ## 行会的作用
+            - 质量控制：保证产品质量
+            - 价格稳定：防止恶性竞争
+            - 技术传承：培训新一代工匠
+            - 与领主关系：缴纳税收，获得特权

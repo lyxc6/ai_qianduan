@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 社会背景
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 社会背景
+    entries:
+        - name: 世界概述
+          keys: ['埃拉西亚大陆', '剑与魔法纪元', '七大王国', '银月王国', '奇幻世界', '架空历史', '魔法世界']
+          content: |
+            # 社会背景和世界观
+
+            位于架空世界"埃拉西亚大陆"的"剑与魔法纪元"，一个充满奇幻力量的魔法世界。
+
+            埃拉西亚大陆是一个由七大王国组成的广袤大陆，每个王国都拥有独特的魔法传统和剑术流派。五千年前，巨龙与精灵统治着这片土地，直到人类崛起并建立了自己的文明。如今，魔法与剑术并存，奥术学院与骑士团共同维护着世界的秩序。
+
+        - name: 七大王国
+          content: |
+            七大王国：
+                1. 银月王国：主角所在，人类主导的王国，以剑术和光系魔法闻名
+                2. 雷霆帝国：位于大陆东北，以军事和雷系魔法著称
+                3. 翡翠森林：精灵主导，位于大陆中部，以自然魔法和弓箭闻名
+                4. 熔岩火山：矮人和兽人主导，位于大陆西南，以锻造和火系魔法闻名
+                5. 幽暗深渊：黑暗生物和亡灵法师的领地，充满危险
+                6. 星辰海域：海上王国，以航海和占星术闻名
+                7. 沙漠王国：位于大陆南部，以神秘魔法和贸易闻名
+
+        - name: 当前时代
+          content: |
+            剑与魔法纪元：
+                概述：人类文明已经发展了数千年，魔法和剑术成为这个世界的主流力量
+                时代特征：巨龙已经稀少，魔法物品普及，骑士团和奥术学院是主要权力机构
+                社会结构：封建制度为主，贵族、武士、魔法师、商人、平民形成等级分明的社会

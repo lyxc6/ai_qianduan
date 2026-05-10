@@ -1,0 +1,10 @@
+<status_current_variables>
+世界:
+  {{format_chat_variable::世界}}
+主角:
+  {{format_chat_variable::主角}}
+角色:
+  {{format_chat_variable::角色}}
+最近事件:
+  {{format_chat_variable::最近事件}}
+</status_current_variables>

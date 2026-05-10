@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
+name: 文化民间迷信
+creator: ''
+character_version: ''
+fields:
+    description: ''
+    personality: ''
+    scenario: ''
+    first_mes: ''
+    mes_example: ''
+    creator_notes: ''
+    system_prompt: ''
+    post_history_instructions: ''
+extensions: {}
+
+character_book:
+    name: 文化民间迷信
+    entries:
+        - name: 民间迷信概述
+          keys: ['迷信', '传说', '预言', '占卜', '巫术', '辟邪', '诅咒']
+          content: |
+            # 文化：民间迷信
+
+            ## 常见迷信
+            - 幸运数字：特定数字被认为带来好运或厄运
+            - 幸运符号：护身符和辟邪物
+            - 禁忌：某些行为被认为会带来不幸
+            - 兆头：某些自然现象被认为是神的指示
+
+        - name: 神秘传说
+          content: |
+            ## 神秘传说
+            - 幽灵传说：关于鬼魂和亡灵的民间故事
+            - 怪物传说：关于森林和山区中的怪物
+            - 宝藏传说：关于失落宝藏的故事
+            - 预言传说：关于未来会发生的事情的预言
+
+        - name: 占卜预言
+          content: |
+            ## 占卜预言
+            - 占星术：通过星象预测未来
+            - 水晶球：用水晶球进行占卜
+            - 塔罗牌：使用塔罗牌进行占卜
+            - 梦境预言：通过梦境预测未来
+
+        - name: 辟邪方法
+          content: |
+            ## 辟邪方法
+            - 护身符：随身携带的辟邪物品
+            - 符咒：写在纸上的辟邪文字
+            - 仪式：特定的辟邪仪式
+            - 植物：被认为有辟邪作用的植物
+
+        - name: 对生活影响
+          content: |
+            ## 对生活的影响
+            - 建筑：建筑中的辟邪设计
+            - 服饰：服饰中的辟邪元素
+            - 行为：日常生活中的禁忌和行为
+            - 医疗：草药和巫医的治疗
