@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "liveServer.settings.proxy": {
     "enable": true,
     "baseUri": "/api",
@@ -9,6 +10,8 @@
     "Access-Control-Allow-Headers": "*",
     "Access-Control-Allow-Methods": "*"
   },
+=======
+>>>>>>> 6dc4e35995d4d180a1cd4ff223ac9d21f083e2f5
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.addMissingImports.ts": "explicit",
