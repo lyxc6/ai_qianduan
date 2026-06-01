@@ -1,0 +1,5 @@
+﻿﻿name: 玄霄宗
+version: 1.0.0
+description: 玄霄宗变量管理系统
+interface: ./index.html
+entry: ./index.ts
