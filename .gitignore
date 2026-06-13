@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dependencies
 node_modules
 .pnpm-store
@@ -7,12 +8,20 @@ node_modules
 Thumbs.db
 
 # Logs
+=======
+node_modules
+
+.DS_Store
+Thumbs.db
+
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+<<<<<<< HEAD
 # Auto-generated files
 auto-imports.d.ts
 auto-imports.zod.d.ts
@@ -35,3 +44,7 @@ components.d.ts
 *.swp
 *.swo
 *~
+=======
+auto-imports.d.ts
+components.d.ts
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
