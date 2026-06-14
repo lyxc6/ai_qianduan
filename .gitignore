@@ -12,9 +12,6 @@ pnpm-debug.log*
 auto-imports.d.ts
 components.d.ts
 
-# 构建输出
-dist/
-
 # IDE/工具配置目录
 .augment/
 .claude/
