@@ -132,18 +132,6 @@ export const Schema = z.object({
       }),
     )
     .describe('重要攻略目标记录'),
-  背包: z
-    .record(
-      z.string(),
-      z.object({
-        数量: nonNegative('数量'),
-        类型: z.string(),
-        效果: z.string(),
-        持续时间: z.string(),
-        使用限制: z.string(),
-      }),
-    )
-    .describe('合欢商店购买或剧情获得的道具'),
   后代: z
     .record(
       z.string(),

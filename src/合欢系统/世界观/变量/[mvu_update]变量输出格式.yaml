@@ -1,0 +1,55 @@
+﻿---
+变量输出格式:
+  rule:
+    - you must output both analysis and patch in one response
+    - output only contain exactly one <UpdateVariable> block, with exactly one <Analysis> and one <JSONPatch>
+    - the patch must be a valid JSON array of operation objects only, no comments, no trailing commas, no extra text inside <JSONPatch>
+    - allowed operations are only: replace, delta, insert, remove, move
+    - do not update any field whose final key starts with `_`
+    - do not invent new paths: every path must be grounded in existing schema fields or existing runtime keys
+    - JSON Pointer must follow RFC 6901 escaping: `~` -> `~0`, `/` -> `~1`
+    - for number change on existing number field, prefer delta; use replace only when setting absolute value is necessary
+    - replace and delta require target path already exists
+    - insert for object: path must be `/.../newKey` and parent object must exist
+    - insert for array append: path must be `/.../arrayField/-`
+    - if no valid update is needed, output empty array `[]` and explain why in analysis
+
+  format: |-
+    <UpdateVariable>
+    <Analysis>
+    [Scene Anchor]
+    - IN ENGLISH
+    - Current time/location: {{read from world state}}
+    - Player state: {{brief current action / condition}}
+    - Present characters: {{list characters currently in scene}}
+
+    [Hehuan System Checklist]
+    - Check whether any effective dual-cultivation event happened according to 002_奖励判定.
+    - If effective: update 用户.合欢值, 用户.累计获得合欢值, 用户.有效双修总次数, target 有效双修次数, target 是否首次性行为者, and 用户.已有效双修不同目标数 when applicable.
+    - Check whether a 5-target cash milestone is newly reached; if yes, update 用户.现金, 用户.已领取现金里程碑, and 系统.已解锁里程碑.
+    - Check whether any shop purchase, item use, score change, system-space event, task update, milestone, fame change, relationship-stage change, target creation, or shop unlock happened.
+    - If a task status becomes 已完成, its progress must also become a completed value such as 1/1, 3/3, or 完成; never leave completed tasks at 0/1.
+    - If a shop purchase happened, update 用户.合欢值, 用户.累计消费合欢值, and related score/status fields.
+    - If a new important target appears, insert a complete 目标 object with all required fields, including 性取向、喜好类型、亲密边界、主要顾虑、当前关系限制、社交圈连接、全身衣着信息、全身肉体信息、心里话、是否被攻略、怀孕状态、是否在场.
+    - 首次创建目标时，好感度默认设为20-30点天然基础好感！
+    - Always maintain current-scene target data for the gender-adaptive 在场目标APP: 男性{{user}} shows current-scene female targets, 女性{{user}} shows current-scene male targets, 未设定 shows all current-scene targets.
+    - Always maintain relationship-network data for the 关系网APP.
+    - When replying, update 系统.行动建议 with exactly 5 varied action suggestions for the 行动建议APP.
+    - The 系统商城APP must not be static: every reply should update 商城.本轮推荐商品 based on stage, scene, tasks, and unlocked goods.
+    - If the reply involves sect construction, also update 宗门 related fields: funds, members, positions, bases, industries, governance, and assets records.
+    - If a target joins the sect, decide the appropriate layer and role instead of treating every captured target as simple harem data.
+    - If a target becomes a sect member for the first time, first use insert to create a complete object at /宗门/成员/目标名 before any replace or delta on subfields.
+    - Never use replace or delta on /宗门/成员/目标名/子字段 when /宗门/成员/目标名 does not already exist.
+    - 系统提示必须包含对{{user}}的鼓励！
+
+    [Skip Declaration]
+    - list variables not updated this turn and why
+
+    [Legality Check]
+    - check path legality and operation legality before finalizing
+    - if no valid update is needed, explain why and output [] in <JSONPatch>
+    </Analysis>
+    <JSONPatch>
+    []
+    </JSONPatch>
+    </UpdateVariable>
