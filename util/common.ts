@@ -94,27 +94,6 @@ export function literalYamlify(value: any) {
 }
 
 export function parseString(content: string): any {
-<<<<<<< HEAD
-  let parsed: unknown;
-  try {
-    parsed = YAML.parseDocument(content, { merge: true }).toJS();
-  } catch (yaml_error) {
-    try {
-      // eslint-disable-next-line import-x/no-named-as-default-member
-      parsed = JSON5.parse(content);
-    } catch (json5_error) {
-      try {
-        parsed = JSON.parse(jsonrepair(content));
-      } catch (json_error) {
-        const toError = (error: unknown) => (error instanceof Error ? error.message : String(error));
-        throw new Error(
-          literalYamlify({
-            ['要解析的字符串不是有效的 YAML/JSON 格式']: {
-              字符串内容: content,
-              YAML错误信息: toError(yaml_error),
-              JSON5错误信息: toError(json5_error),
-              尝试修复JSON时的错误信息: toError(json_error),
-=======
   const json_first = /^[[{]/s.test(content.trimStart());
   try {
     if (json_first) {
@@ -145,16 +124,11 @@ export function parseString(content: string): any {
                 YAML错误信息: toError(json_first ? yaml_error2 : yaml_error1),
                 JSON5错误信息: toError(json5_error),
                 JSON错误信息: toError(json_error),
->>>>>>> 97a7b3d33c9c4352561a5d0902fe896ec003d90a
-            },
-          }),
-        );
+              },
+            }),
+          );
+        }
       }
     }
   }
-<<<<<<< HEAD
-  return parsed;
-=======
-  }
->>>>>>> 97a7b3d33c9c4352561a5d0902fe896ec003d90a
 }
