@@ -11,3 +11,28 @@ pnpm-debug.log*
 
 auto-imports.d.ts
 components.d.ts
+
+# 构建输出
+dist/
+
+# IDE/工具配置目录
+.augment/
+.claude/
+.cursor/
+.kilocode/
+.roo/
+.trae/
+.vscode/
+
+# 自动生成的类型文件
+auto-imports.zod.d.ts
+global.d.ts
+
+# 包管理器本地存储
+.pnpm-store/
+
+# AI Agent 工具目录
+.mimocode/
+
+# 误创建的文件
+tore*
