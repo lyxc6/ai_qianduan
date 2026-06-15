@@ -19,7 +19,11 @@ importers:
         version: 13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807))
       '@vueuse/integrations':
         specifier: ^13.9.0
+<<<<<<< HEAD
         version: 13.9.0(axios@1.14.0)(focus-trap@7.8.0)(vue@3.5.38(typescript@6.0.0-dev.20250807))
+=======
+        version: 13.9.0(axios@1.14.0)(focus-trap@7.6.5)(vue@3.5.38(typescript@6.0.0-dev.20250807))
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
       '@vueuse/shared':
         specifier: ^13.9.0
         version: 13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807))
@@ -60,6 +64,7 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4(typescript@6.0.0-dev.20250807)(vue@3.5.38(typescript@6.0.0-dev.20250807))
       pixi.js:
+<<<<<<< HEAD
         specifier: ^8.18.1
         version: 8.19.0
       react:
@@ -67,16 +72,33 @@ importers:
         version: 19.2.7
       react-dom:
         specifier: ^19.2.6
+=======
+        specifier: ^8.19.0
+        version: 8.19.0
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.2.7
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 19.2.7(react@19.2.7)
       toastr:
         specifier: ^2.1.4
         version: 2.1.4
       vue:
+<<<<<<< HEAD
         specifier: ^3.5.34
         version: 3.5.38(typescript@6.0.0-dev.20250807)
       vue-final-modal:
         specifier: ^4.5.5
         version: 4.5.5(@vueuse/core@13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807)))(@vueuse/integrations@13.9.0(axios@1.14.0)(focus-trap@7.8.0)(vue@3.5.38(typescript@6.0.0-dev.20250807)))(focus-trap@7.8.0)(vue@3.5.38(typescript@6.0.0-dev.20250807))
+=======
+        specifier: ^3.5.38
+        version: 3.5.38(typescript@6.0.0-dev.20250807)
+      vue-final-modal:
+        specifier: ^4.5.5
+        version: 4.5.5(@vueuse/core@13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807)))(@vueuse/integrations@13.9.0(axios@1.14.0)(focus-trap@7.6.5)(vue@3.5.38(typescript@6.0.0-dev.20250807)))(focus-trap@7.6.5)(vue@3.5.38(typescript@6.0.0-dev.20250807))
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
       vue-router:
         specifier: ^4.6.4
         version: 4.6.4(vue@3.5.38(typescript@6.0.0-dev.20250807))
@@ -87,7 +109,11 @@ importers:
         specifier: 1.0.0-beta.3
         version: 1.0.0-beta.3(vue@3.5.38(typescript@6.0.0-dev.20250807))
       yaml:
+<<<<<<< HEAD
         specifier: ^2.8.4
+=======
+        specifier: ^2.9.0
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 2.9.0
       zod:
         specifier: ^4.4.3
@@ -97,7 +123,11 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4
       '@tailwindcss/postcss':
+<<<<<<< HEAD
         specifier: ^4.3.0
+=======
+        specifier: ^4.3.1
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 4.3.1
       '@types/jquery':
         specifier: ^3.5.34
@@ -109,7 +139,11 @@ importers:
         specifier: ^4.17.24
         version: 4.17.24
       '@types/react':
+<<<<<<< HEAD
         specifier: ^19.2.14
+=======
+        specifier: ^19.2.17
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 19.2.17
       '@types/react-dom':
         specifier: ^19.2.3
@@ -124,7 +158,11 @@ importers:
         specifier: ^5.28.5
         version: 5.28.5(postcss@8.5.15)(webpack-cli@6.0.1)
       '@typescript-eslint/parser':
+<<<<<<< HEAD
         specifier: ^8.59.2
+=======
+        specifier: ^8.61.0
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 8.61.0(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.0-dev.20250807)
       autoprefixer:
         specifier: ^10.5.0
@@ -142,7 +180,11 @@ importers:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.39.4(jiti@2.7.0))
       eslint-import-resolver-typescript:
+<<<<<<< HEAD
         specifier: ^4.4.4
+=======
+        specifier: ^4.4.5
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 4.4.5(eslint-plugin-import-x@4.16.2(@typescript-eslint/utils@8.61.0(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.0-dev.20250807))(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-better-tailwindcss:
         specifier: ^3.8.0
@@ -154,7 +196,11 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(@typescript-eslint/utils@8.61.0(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.0-dev.20250807))(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-vue:
+<<<<<<< HEAD
         specifier: ^10.9.1
+=======
+        specifier: ^10.9.2
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 10.9.2(@typescript-eslint/parser@8.61.0(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.0-dev.20250807))(eslint@9.39.4(jiti@2.7.0))(vue-eslint-parser@10.4.1(eslint@9.39.4(jiti@2.7.0)))
       eslint-webpack-plugin:
         specifier: ^5.0.3
@@ -187,7 +233,11 @@ importers:
         specifier: ^2.10.2
         version: 2.10.2(webpack@5.107.2)
       postcss:
+<<<<<<< HEAD
         specifier: ^8.5.14
+=======
+        specifier: ^8.5.15
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 8.5.15
       postcss-cli:
         specifier: ^11.0.1
@@ -202,7 +252,11 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0(postcss@8.5.15)
       prettier:
+<<<<<<< HEAD
         specifier: ^3.8.3
+=======
+        specifier: ^3.8.4
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 3.8.4
       remark:
         specifier: ^15.0.1
@@ -214,7 +268,11 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(remark@15.0.1)(webpack@5.107.2)
       sass:
+<<<<<<< HEAD
         specifier: ^1.99.0
+=======
+        specifier: ^1.101.0
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 1.101.0
       sass-loader:
         specifier: ^16.0.8
@@ -226,6 +284,7 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(webpack@5.107.2)
       tailwindcss:
+<<<<<<< HEAD
         specifier: ^4.3.0
         version: 4.3.1
       terser-webpack-plugin:
@@ -233,6 +292,15 @@ importers:
         version: 5.6.1(postcss@8.5.15)(webpack@5.107.2)
       ts-loader:
         specifier: ^9.5.7
+=======
+        specifier: ^4.3.1
+        version: 4.3.1
+      terser-webpack-plugin:
+        specifier: ^5.6.1
+        version: 5.6.1(postcss@8.5.15)(webpack@5.107.2)
+      ts-loader:
+        specifier: ^9.6.0
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 9.6.0(loader-utils@1.4.2)(typescript@6.0.0-dev.20250807)(webpack@5.107.2)
       ts-node:
         specifier: ^10.9.2
@@ -250,7 +318,11 @@ importers:
         specifier: 6.0.0-dev.20250807
         version: 6.0.0-dev.20250807
       typescript-eslint:
+<<<<<<< HEAD
         specifier: ^8.59.2
+=======
+        specifier: ^8.61.0
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 8.61.0(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.0-dev.20250807)
       unplugin-auto-import:
         specifier: ^20.3.0
@@ -259,7 +331,11 @@ importers:
         specifier: ^29.2.0
         version: 29.2.0(@babel/parser@7.29.7)(vue@3.5.38(typescript@6.0.0-dev.20250807))
       vue-eslint-parser:
+<<<<<<< HEAD
         specifier: ^10.4.0
+=======
+        specifier: ^10.4.1
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 10.4.1(eslint@9.39.4(jiti@2.7.0))
       vue-loader:
         specifier: ^17.4.2
@@ -268,7 +344,11 @@ importers:
         specifier: ^4.1.3
         version: 4.1.3
       webpack:
+<<<<<<< HEAD
         specifier: ^5.106.2
+=======
+        specifier: ^5.107.2
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
         version: 5.107.2(postcss@8.5.15)(webpack-cli@6.0.1)
       webpack-cli:
         specifier: ^6.0.1
@@ -4919,7 +4999,11 @@ snapshots:
       '@vueuse/shared': 14.3.0(vue@3.5.38(typescript@6.0.0-dev.20250807))
       vue: 3.5.38(typescript@6.0.0-dev.20250807)
 
+<<<<<<< HEAD
   '@vueuse/integrations@13.9.0(axios@1.14.0)(focus-trap@7.8.0)(vue@3.5.38(typescript@6.0.0-dev.20250807))':
+=======
+  '@vueuse/integrations@13.9.0(axios@1.14.0)(focus-trap@7.6.5)(vue@3.5.38(typescript@6.0.0-dev.20250807))':
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
     dependencies:
       '@vueuse/core': 13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807))
       '@vueuse/shared': 13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807))
@@ -8199,11 +8283,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+<<<<<<< HEAD
   vue-final-modal@4.5.5(@vueuse/core@13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807)))(@vueuse/integrations@13.9.0(axios@1.14.0)(focus-trap@7.8.0)(vue@3.5.38(typescript@6.0.0-dev.20250807)))(focus-trap@7.8.0)(vue@3.5.38(typescript@6.0.0-dev.20250807)):
     dependencies:
       '@vueuse/core': 13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807))
       '@vueuse/integrations': 13.9.0(axios@1.14.0)(focus-trap@7.8.0)(vue@3.5.38(typescript@6.0.0-dev.20250807))
       focus-trap: 7.8.0
+=======
+  vue-final-modal@4.5.5(@vueuse/core@13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807)))(@vueuse/integrations@13.9.0(axios@1.14.0)(focus-trap@7.6.5)(vue@3.5.38(typescript@6.0.0-dev.20250807)))(focus-trap@7.6.5)(vue@3.5.38(typescript@6.0.0-dev.20250807)):
+    dependencies:
+      '@vueuse/core': 13.9.0(vue@3.5.38(typescript@6.0.0-dev.20250807))
+      '@vueuse/integrations': 13.9.0(axios@1.14.0)(focus-trap@7.6.5)(vue@3.5.38(typescript@6.0.0-dev.20250807))
+      focus-trap: 7.6.5
+>>>>>>> 953e75dbee8f57836eb5651fcf1275f064938d35
       vue: 3.5.38(typescript@6.0.0-dev.20250807)
 
   vue-loader@17.4.2(vue@3.5.38(typescript@6.0.0-dev.20250807))(webpack@5.107.2):
