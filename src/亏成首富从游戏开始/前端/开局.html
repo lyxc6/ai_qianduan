@@ -1,0 +1,260 @@
+```html
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Microsoft YaHei', sans-serif;
+        background: transparent;
+        padding: 12px;
+        color: #e0e0e0;
+      }
+
+      .setup-container {
+        max-width: 480px;
+        margin: 0 auto;
+        background: #1a1a2e;
+        border-radius: 12px;
+        padding: 24px;
+        border: 1px solid #333;
+      }
+
+      .setup-title {
+        font-size: 18px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #fff;
+        letter-spacing: 2px;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 13px;
+        color: #aaa;
+        margin-bottom: 6px;
+        font-weight: 500;
+      }
+
+      .form-label .required {
+        color: #f87171;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #444;
+        border-radius: 8px;
+        background: #16213e;
+        color: #e0e0e0;
+        font-size: 14px;
+        font-family: inherit;
+        transition: border-color 0.2s;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #5b9aff;
+      }
+
+      .form-input::placeholder {
+        color: #666;
+      }
+
+      textarea.form-input {
+        resize: vertical;
+        min-height: 80px;
+        line-height: 1.5;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 12px;
+      }
+
+      .form-row .form-group {
+        flex: 1;
+      }
+
+      .date-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .date-row .form-input {
+        flex: 1;
+        text-align: center;
+      }
+
+      .date-row .date-sep {
+        display: flex;
+        align-items: center;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .start-btn {
+        width: 100%;
+        padding: 14px;
+        margin-top: 8px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        letter-spacing: 2px;
+        transition: all 0.2s;
+      }
+
+      .start-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+      }
+
+      .start-btn:active {
+        transform: translateY(0);
+      }
+
+      .start-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .hint {
+        font-size: 11px;
+        color: #666;
+        margin-top: 12px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="setup-container">
+      <div class="setup-title">📋 产业开局设定</div>
+
+      <div class="form-group">
+        <label class="form-label">角色介绍 <span class="required">*</span></label>
+        <textarea
+          class="form-input"
+          id="inp-bio"
+          placeholder="描述你扮演的角色，如：姓名、年龄、背景、性格、特长等"
+        >裴谦，18岁，汉东大学大一学生。原本是2019年的普通青年，意外穿越回2009年，获得了一套财富转换系统。性格低调谦虚，目标是亏光系统资金转化为个人财产，但总是在不经意间做出成功决策。</textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">开局日期 <span class="required">*</span></label>
+        <div class="date-row">
+          <input type="number" class="form-input" id="inp-year" placeholder="年" min="1900" max="2100" value="2009" />
+          <span class="date-sep">年</span>
+          <input type="number" class="form-input" id="inp-month" placeholder="月" min="1" max="12" value="9" />
+          <span class="date-sep">月</span>
+          <input type="number" class="form-input" id="inp-day" placeholder="日" min="1" max="31" value="1" />
+          <span class="date-sep">日</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">所在城市 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="inp-city" placeholder="如：长沙市、深圳市、上海市" value="京州市" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">产业名称 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="inp-biz-name" placeholder="如：鑫达电子加工厂、顺心小吃店" value="腾达网络技术有限公司" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">主营内容 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="inp-biz-type" placeholder="如：餐饮、零售、制造、服务" value="游戏开发" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">产业资金 <span class="required">*</span></label>
+          <input type="number" class="form-input" id="inp-biz-fund" placeholder="只能用于产业" min="0" value="50000" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">自由资金</label>
+          <input type="number" class="form-input" id="inp-free-fund" placeholder="自由支配" min="0" value="443" />
+        </div>
+      </div>
+
+      <button class="start-btn" id="btn-start" onclick="startGame()">开 始 游 戏</button>
+
+      <div class="hint">填写完成后点击开始，AI将生成开局剧情</div>
+    </div>
+
+    <script>
+      function startGame() {
+        var bio = $('#inp-bio').val().trim();
+        var year = $('#inp-year').val().trim();
+        var month = $('#inp-month').val().trim();
+        var day = $('#inp-day').val().trim();
+        var city = $('#inp-city').val().trim();
+        var bizName = $('#inp-biz-name').val().trim();
+        var bizType = $('#inp-biz-type').val().trim();
+        var bizFund = $('#inp-biz-fund').val().trim();
+        var freeFund = $('#inp-free-fund').val().trim() || '0';
+
+        if (!bio || !year || !month || !day || !city || !bizName || !bizType || !bizFund) {
+          toastr.warning('请填写所有带 * 的必填项');
+          return;
+        }
+
+        var dateStr = year + '年' + month + '月' + day + '日';
+
+        var msg =
+          '【开局设定】\n' +
+          '角色介绍：' +
+          bio +
+          '\n' +
+          '日期：' +
+          dateStr +
+          '\n' +
+          '城市：' +
+          city +
+          '\n' +
+          '产业名称：' +
+          bizName +
+          '\n' +
+          '主营内容：' +
+          bizType +
+          '\n' +
+          '产业资金：' +
+          bizFund +
+          '\n' +
+          '自由资金：' +
+          freeFund +
+          '\n' +
+          '玩家刚刚在' +
+          city +
+          '工商管理局完成了"' +
+          bizName +
+          '"的登记注册。';
+
+        $('#btn-start').prop('disabled', true).text('正在生成...');
+
+        if (typeof triggerSlash === 'function') {
+          triggerSlash('/send ' + msg + '\n/trigger');
+        }
+      }
+    </script>
+  </body>
+</html>
+```
