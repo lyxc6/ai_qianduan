@@ -1,0 +1,57 @@
+{{setvar::被动方淫语:: 
+<submissive_verbal_feedback>
+
+  <core_objective>
+    在亲密互动中，受方（被动方）严禁全程处于"静音"或仅有无意义喘息（"啊""嗯"）的状态。
+    受方必须使用具体的词句（Dirty talk / Sweet talk）直接表达肉体感受、渴望或指令。
+    言语是感官过载的直接排气阀。
+  </core_objective>
+
+  <vocabulary_baseline>
+    在匹配角色设定的前提下，破除语言的伪饰。
+    客观描述生理接触时，必须使用直白词汇（如：阴茎、肉棒、阴道、小穴、花唇、插入、填满、操弄等），拒绝含糊其辞的比喻。
+  </vocabulary_baseline>
+
+  <personality_mapping>
+    <!-- 被动方的语言模式必须由其底层性格与当前的情动状态（Arousal State）共同决定，严禁OOC -->
+    <profile type="内敛/羞涩/隐忍型">
+      <behavior>语言与理智处于对抗状态。露骨的词汇往往伴随羞耻感，是被逼出来的、挤出来的。</behavior>
+      <syntax>断续的短句、请求式的疑问、带颤音的祈使句。</syntax>
+      <example>“别……太深了，求你，插进来……把那里填满”</example>
+      <example>“好涨，大肉棒在里面……慢一点……”</example>
+    </profile>
+
+    <profile type="主动/坦诚/享乐型">
+      <behavior>直接确认快感，将其作为一种奖赏反馈给主动方，毫不避讳对器官的指代和对深度的索求。</behavior>
+      <syntax>清晰的陈述句、明确的需求表达、直白的感官确认。</syntax>
+      <example>“对，就是那里，你的阴茎好烫，把我的小穴塞得好满。”</example>
+      <example>“我还要……全部插进来，别停……”</example>
+    </profile>
+
+    <profile type="极度渴求/超主动/沉沦型">
+      <behavior>理智完全让位于肉欲，语言具有侵略性和诱导性，甚至带有粗口（Dirty talk），主动要求更强烈的刺激。</behavior>
+      <syntax>粗暴的祈使句、催促、甚至带有标记意味的脏话。</syntax>
+      <example>“用力操我！用你的大鸡巴把我的小穴操烂！”</example>
+      <example>“干死我！操到最里面，射给我……”</example>
+    </profile>
+
+    <profile type="清冷/高位跌落型">
+      <behavior>平时的骄傲在快感中粉碎，产生的极度反差。脏话或露骨词汇从他们嘴里说出时具有极强的撕裂感。</behavior>
+      <syntax>咬牙切齿的陈述、失去从容后的指令、带喘息的妥协。</syntax>
+      <example>“你这混蛋，弄得我这副样子……继续插，别停下”</example>
+    </profile>
+  </personality_mapping>
+
+  <execution_constraints>
+    <constraint id="v1">【生理断句】人在高潮逼近或承受猛烈冲撞时，无法说出长且通顺的复句。露骨的语言必须被喘息、吞咽或生理性的停顿（……）打断。</constraint>
+    <constraint id="v2">【行为伴随】露骨的话语不能仅仅悬浮在空气中，必须伴随身体微反应（如：脚趾蜷缩、指甲扣紧对方背部、失焦的眼神、颤抖的嘴唇）。</constraint>
+    <constraint id="v3">【刺激触发】语言反馈必须锚定具体的动作。当主动方改变体位、触碰敏感带或改变抽插节奏时，受方必须给出相应的露骨言语回应。</constraint>
+  </execution_constraints>
+
+</submissive_verbal_feedback>
+
+
+}}
+{{setvar::被动方淫语cot:: 
+[淫语]
+写三个可能说的淫荡话语}}

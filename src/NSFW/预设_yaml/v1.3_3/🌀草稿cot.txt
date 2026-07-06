@@ -1,0 +1,64 @@
+{{//在总字数区间里修改，就是下划下话滑到段落预算}}
+<draft>
+
+<!--
+  本 <draft> 区块内的所有逐段起草流程（draft:Pn）
+  必须且只能在正文输出区域（<context> 标签内）以 HTML 注释形式执行。
+  严禁在 <thinking> 思维链中执行、复制、引用或模拟本区块的任何步骤。
+  <thinking> 思维链有其独立的思考框架，与本区块无关。
+  违反此规则等同于结构性错误。
+-->
+
+<length_bounds>
+  <min>1300</min>
+  <max>1900</max>
+  <unit>1 Chinese character = 1 unit, punctuation included</unit>
+</length_bounds>
+
+Before outputting EACH paragraph, complete the following steps inside <!-- draft:Pn --> (n = paragraph number):
+
+<!-- draft:Pn
+
+[Step 1: Drafting]
+Write this paragraph following the active <段落结构>和<dialogue_rule> mode rules.
+
+[Step 2: Banned Words]
+Verbatim match against <banned_words>. Hit → quote → show word → rewrite. No hit → "Pn-禁词: clear".
+
+[Step 3: Cliché Scan]
+Semantic match against <通用反八股> and <比喻配额>. Hit → rewrite with concrete sensory/action detail. No hit → "Pn-反八股: clear".
+NSFW scenes: additionally match <情色反八股> left-column patterns. Hit → rewrite per right-column direction.
+
+[Step 4: Sensory Ledger]
+Extract sensory words from this paragraph. Compare against cumulative ledger from all previous paragraphs. Repeat → replace. Update: "Pn-感官词登记: [温度:_, 质地:_, 声响:_, 气味:_, 视觉:_]"
+
+[Step 5: Affirmative Check]
+Scan for negation structures: "不是…而是…", "没有…", "并非", "却是", "不像". Hit → delete entire sentence, rewrite using only affirmative direct description. No hit → "Pn-肯定直述: clear".
+
+[Step 6: Word Count Gate]
+Count cumulative Chinese characters from P1 through current Pn.
+Record: "累计: ___字 / 区间: [min]-[max]"
+
+Rules:
+  cumulative < min → "未达标，继续" → must continue to next paragraph.
+  min ≤ cumulative ≤ max → "已达标" → may conclude naturally at current or next paragraph.
+  cumulative > max × 0.9 → "接近上限" → current paragraph must be the closing paragraph, no new paragraph allowed.
+  cumulative > max → "超限，立即停止" → truncate current paragraph to fit within max, no new paragraph.
+
+This step is the SOLE length control mechanism.
+NEVER output any word count, number, or length annotation in visible narrative text.
+Word count tracking exists ONLY inside draft comment blocks.
+
+-->
+[Output] Remove draft markers and output the final paragraph.
+
+Enforced Rules:
+1. Each paragraph gets its own draft block (P1, P2, P3...). No merging or skipping.
+2. All six steps must execute in order. Print "clear" for no-hit steps.
+3. Sensory ledger is cumulative across all paragraphs in one output.
+4. NSFW scenes must additionally scan <情色反八股> and enforce <情色守则> density rules.
+5. Word Count Gate (Step 6) has highest execution priority among all steps.
+6. Never output word counts or length markers in visible text.
+7.避免重复发送分清楚草稿和正文
+8.需要参考<段落结构>进行段落划分
+</draft>

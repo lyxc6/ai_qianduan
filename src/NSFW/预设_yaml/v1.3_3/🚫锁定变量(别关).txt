@@ -1,0 +1,52 @@
+{{//这里看见的一些没有的cot名字其实只是我之前有后面删了可能之后会补回去就懒得删了不影响的}}
+{{trim}}
+{{setvar::亲密特化:: }}
+{{setvar::bb好cot:: }}
+{{setvar::jj好cot:: }}
+{{setvar::jj好:: }}
+{{setvar::细致描写:: }}
+{{setvar::字数:: }}
+{{setvar::语言丰富:: }}
+{{setvar::nsfw基调cot:: }}
+{{setvar::双语对话cot:: }}
+{{setvar::nsfw文风cot:: }}
+{{setvar::复述cot:: }}
+{{setvar::bb好:: }}
+{{setvar::nsfw节奏:: }}
+{{setvar::nsfw基础:: }}
+{{setvar::前戏和温存::}}
+{{setvar::play多样:: }}
+{{setvar::体位正常:: }}
+{{setvar::nsfw抗八股:: }}
+{{setvar::色情服装::}}
+{{setvar::日常cot:: }}
+{{setvar::小cot:: }}
+{{setvar::多人卡cot:: }}
+{{setvar::bdsm:: }}
+{{setvar::dom1:: }}
+{{setvar::sub1:: }}
+{{setvar::nsfw基调:: }}
+{{setvar::公开调教:: }}
+{{setvar::胸部特化:: }}
+{{setvar::色情1:: }}
+{{setvar::色情2:: }}
+{{setvar::被动方淫语:: }}
+{{setvar::主动方羞耻:: }}
+{{setvar::手部特化cot:: }}
+{{setvar::声音特化cot:: }}
+{{setvar::nsfw基础cot:: }}
+{{setvar::体位正常cot:: }}
+{{setvar::色情服装cot:: }}
+{{setvar::前戏和温存cot:: }}
+{{setvar::play多样cot:: }}
+{{setvar::语言丰富cot:: }}
+{{setvar::被动方淫语cot:: }}
+{{setvar::公开调教cot:: }}
+{{setvar::bdsmcot:: }}
+{{setvar::胸部特化cot:: }}
+{{setvar::细致描写cot:: }}
+{{setvar::nsfw节奏cot:: }}
+{{setvar::xp深化:: }}
+{{setvar::xp深化cot:: }}
+{{setvar::nsfw文风:: }}
+{{setvar::亲密特化cot:: }}

@@ -1,0 +1,21 @@
+
+<bilingual_dialogue>
+  <language_rule>
+    所有角色对话必须遵循以下格式：
+    先用英语或日语写出原文（按照char国籍）默认英语，紧跟括号内的中文翻译。括号括号里面
+
+    格式示例：
+    "I missed you so much."（我好想你。）
+    「ねえ、こっちを見て。」（呐，看着我这边。）
+  </language_rule>
+
+  <scope>
+    此规则仅适用于角色的直接对话。
+    旁白、心理描写、环境描写等叙事部分使用纯中文。
+  </scope>
+</bilingual_dialogue>
+
+
+{{setvar::双语对话cot:: 
+[双语对话]
+参考</bilingual_dialogue>确定char语言}}

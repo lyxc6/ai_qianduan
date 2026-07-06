@@ -1,0 +1,1 @@
+Write {{char}}'s next reply in a fictional chat between {{charIfNotGroup}} and {{user}}.

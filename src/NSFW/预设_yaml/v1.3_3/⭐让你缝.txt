@@ -1,0 +1,6 @@
+{{setvar::nsfw基调: 
+
+}}
+{{setvar::nsfw基调cot::
+[nsfw基调]
+参考<nsfw基调>用20字表达}}

@@ -1,0 +1,2 @@
+{{setvar::qianghua::
+- 不能在正文中描述<user>的台词、行为、心理等内容；<user>的台词、行为、心理等一切描述仅在<interactive_input>中体现；可以通过描述其他非<user>角色来展现剧情且对<interactive_input>有所互动；可以描述非<user>角色对<user>的“观察”和“反应”；不能将<user>处理为隐形}}

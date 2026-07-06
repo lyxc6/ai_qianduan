@@ -1,0 +1,53 @@
+
+
+<writing_style author="Oscar Wilde">
+
+  <narrative_system>
+    <perspective>
+      Third-person limited, primarily internalized through protagonist; occasional parallax via secondary characters (Lord Henry as philosophical ventriloquist). Dual affective distance: intimate immersion in beauty's apprehension, clinical detachment in moral dissolution.
+      markers: felt/seemed/appeared/wondered/knew
+    </perspective>
+    <temporality>Chronological macro-structure with radical temporal compression (years collapsed into summary); key scenes dilated through psychological and descriptive density; repetitive thematic recurrence (youth's transience, sin's inscription)</temporality>
+    <rhythm pattern="long-short oscillation: ornamental periods vs. aphoristic stabs" pacing="static scenes (slow, descriptive saturation) punctuated by dramatic acceleration">
+      <example>"The studio was filled with the rich odour of roses, and when the light summer wind stirred amidst the trees of the garden, there came through the open door the heavy scent of the lilac, or the more delicate perfume of the pink-flowering thorn."</example>
+    </rhythm>
+  </narrative_system>
+
+  <expression_system>
+    <description style="ornamental, lapidary" principle="environment as psychic correlative; sensory saturation as aesthetic argument">
+      <example>"From the corner of the divan of Persian saddle-bags on which he was lying, smoking, as was his custom, innumerable cigarettes, Lord Henry Wotton could just catch the gleam of the honey-sweet and honey-coloured blossoms of a laburnum, whose tremulous branches seemed hardly able to bear the burden of a beauty so flamelike as theirs."</example>
+    </description>
+    <dialogue mode="wit as weapon; conversational philosophy; paradox as provocation">
+      <example>"The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful."</example>
+    </dialogue>
+    <characterization method="dialogue-dominant; psychological analysis via narrator; action subordinate to speech" psychology="internal schism (ideal self vs. corrupted self); external influence as personality formation (language as contagion)">
+      <example>"He grew more and more enamoured of his own beauty, more and more interested in the corruption of his own soul. He would examine with minute care, and sometimes with a monstrous and terrible delight, the hideous lines that seared the wrinkling forehead or crawled around the heavy sensual mouth."</example>
+    </characterization>
+    <sensory hierarchy="olfactory-visual dominance (perfume, color, physiognomy); synesthetic fusion">
+      <example>"The dim roar of London was like the bourdon note of a distant organ."</example>
+    </sensory>
+  </expression_system>
+
+  <aesthetics_system>
+    <core>
+      Aestheticism = art and beauty as autonomous values, independent of moral function (Pater's doctrine transposed into epigrammatic form)
+      Derivatives: New Hedonism (sensory cultivation as spiritual discipline) / Cult of Youth (beauty as supreme yet transient capital) / Decorative Ethics (surface as substance)
+    </core>
+    <categories types="symbolic objects, floral motifs, material luxuries">
+      Portrait: soul externalized, sin's ledger / Mirror: self-recognition, Narcissus echo / Flowers: rose (passion, ephemerality), lilac (innocence), thorn (latent danger) / Jewels-textiles: decadence materialized, collecting as self-constitution
+    </categories>
+    <palette>
+      chromatic: gold (youth, ideal), crimson-scarlet (passion, blood, sin), ivory-white (purity, mortality)
+      olfactory: rose, lilac, incense, opium-smoke
+      textile: Persian, Byzantine, Japanese — the exotic as aesthetic refuge
+    </palette>
+    <language>
+      syntax: extended periodic sentences with subordinate clauses; paratactic aphorisms for contrast; anaphora and parallelism in rhetorical crescendos
+      lexicon: Latinate polysyllables / art-historical terminology / botanical-gemological precision / archaic-exotic registers
+      rhetoric: EPIGRAM (compressed wit inverting received wisdom) / PARADOX (self-canceling propositions exposing doxa) / ANTITHESIS (binary juxtaposition) / HYPERBOLE (amplification toward the sublime-grotesque)
+    </language>
+    <telos>Intoxicating readerly experience: beauty as argument, style as ethics, prose as decorative surface concealing moral abyss</telos>
+  </aesthetics_system>
+
+</writing_style>
+
