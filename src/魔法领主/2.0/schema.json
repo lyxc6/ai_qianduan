@@ -1,0 +1,443 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "default": {},
+  "type": "object",
+  "properties": {
+    "世界": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "时间": {
+          "default": "永恒历1145年03月15日 07:30",
+          "type": "string"
+        },
+        "地点": {
+          "default": "城堡主卧",
+          "type": "string"
+        }
+      }
+    },
+    "主角": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "龙血": {
+          "default": {},
+          "type": "object",
+          "properties": {
+            "觉醒等级": {
+              "default": "龙息初萌",
+              "type": "string"
+            },
+            "魅惑强度": {
+              "$ref": "#/$defs/__schema0"
+            },
+            "龙血能量": {
+              "$ref": "#/$defs/__schema0"
+            },
+            "烙印数量": {
+              "$ref": "#/$defs/__schema1"
+            }
+          }
+        },
+        "修行路线": {
+          "default": "融合",
+          "type": "string"
+        },
+        "侧重": {
+          "default": "",
+          "type": "string"
+        },
+        "灵魂能量": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "姓名": {
+          "default": "{{user}}",
+          "type": "string"
+        },
+        "年龄": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "力量等级": {
+          "default": "大法师",
+          "type": "string"
+        },
+        "当前着装": {
+          "default": "",
+          "type": "string"
+        },
+        "当前姿势": {
+          "default": "",
+          "type": "string"
+        },
+        "当前位置": {
+          "default": "",
+          "type": "string"
+        },
+        "当前想法": {
+          "default": "",
+          "type": "string"
+        },
+        "最近性行为": {
+          "default": "",
+          "type": "string"
+        },
+        "阴茎状态": {
+          "default": "",
+          "type": "string"
+        },
+        "射精进度": {
+          "$ref": "#/$defs/__schema0"
+        }
+      }
+    },
+    "角色": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "description": "角色名"
+      },
+      "additionalProperties": {
+        "default": {},
+        "type": "object",
+        "properties": {
+          "背景": {
+            "default": "",
+            "type": "string"
+          },
+          "外貌": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "体型": {
+                "default": "",
+                "type": "string"
+              },
+              "面容": {
+                "default": "",
+                "type": "string"
+              },
+              "发色": {
+                "default": "",
+                "type": "string"
+              },
+              "眼睛": {
+                "default": "",
+                "type": "string"
+              },
+              "肤色": {
+                "default": "",
+                "type": "string"
+              },
+              "特征": {
+                "default": "",
+                "type": "string"
+              }
+            }
+          },
+          "性格": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "核心": {
+                "default": "",
+                "type": "string"
+              },
+              "优点": {
+                "default": "",
+                "type": "string"
+              },
+              "缺点": {
+                "default": "",
+                "type": "string"
+              },
+              "习惯": {
+                "default": "",
+                "type": "string"
+              }
+            }
+          },
+          "能力": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "擅长": {
+                "default": "",
+                "type": "string"
+              },
+              "盲区": {
+                "default": "",
+                "type": "string"
+              },
+              "特殊": {
+                "default": "",
+                "type": "string"
+              }
+            }
+          },
+          "NSFW": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "胸部": {
+                "default": "",
+                "type": "string"
+              },
+              "阴部": {
+                "default": "",
+                "type": "string"
+              },
+              "臀部": {
+                "default": "",
+                "type": "string"
+              },
+              "腰腹": {
+                "default": "",
+                "type": "string"
+              },
+              "腿部": {
+                "default": "",
+                "type": "string"
+              },
+              "敏感带": {
+                "default": "",
+                "type": "string"
+              },
+              "体质": {
+                "default": "",
+                "type": "string"
+              },
+              "性态度": {
+                "default": "",
+                "type": "string"
+              },
+              "特殊需求": {
+                "default": "",
+                "type": "string"
+              }
+            }
+          },
+          "年龄": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "处女": {
+            "default": true,
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "const": "是"
+              },
+              {
+                "type": "string",
+                "const": "否"
+              }
+            ]
+          },
+          "修行路线": {
+            "default": "",
+            "type": "string"
+          },
+          "灵魂倾向": {
+            "default": "",
+            "type": "string"
+          },
+          "擅长魔法": {
+            "default": "",
+            "type": "string"
+          },
+          "力量等级": {
+            "default": "见习法师",
+            "type": "string"
+          },
+          "种族": {
+            "default": "人类",
+            "type": "string"
+          },
+          "阶级": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "名称": {
+                "default": "平民",
+                "type": "string"
+              },
+              "等级": {
+                "default": "",
+                "type": "string"
+              }
+            }
+          },
+          "职业": {
+            "default": "",
+            "type": "string"
+          },
+          "好感度": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "后宫地位": {
+            "default": "",
+            "type": "string"
+          },
+          "当前着装": {
+            "default": "",
+            "type": "string"
+          },
+          "当前姿势": {
+            "default": "",
+            "type": "string"
+          },
+          "当前想法": {
+            "default": "",
+            "type": "string"
+          },
+          "最近性行为": {
+            "default": "无",
+            "type": "string"
+          },
+          "当前小穴状态": {
+            "default": "正常状态",
+            "type": "string"
+          },
+          "当前胸部状态": {
+            "default": "正常状态",
+            "type": "string"
+          },
+          "怀孕状态": {
+            "default": "未怀孕",
+            "type": "string"
+          },
+          "身体状态": {
+            "default": "正常状态",
+            "type": "string"
+          },
+          "高潮次数": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "内射次数": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "烙印状态": {
+            "default": "无烙印",
+            "type": "string"
+          },
+          "当前烙印反应": {
+            "default": "无",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "后宫": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "总数": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "平均好感度": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "满意度": {
+          "default": "良好",
+          "type": "string"
+        }
+      }
+    },
+    "行动选项": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "选项一": {
+          "default": "",
+          "type": "string"
+        },
+        "选项二": {
+          "default": "",
+          "type": "string"
+        },
+        "选项三": {
+          "default": "",
+          "type": "string"
+        },
+        "选项四": {
+          "default": "",
+          "type": "string"
+        }
+      }
+    },
+    "势力": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "description": "势力名"
+      },
+      "additionalProperties": {
+        "default": {},
+        "type": "object",
+        "properties": {
+          "关系": {
+            "default": "中立",
+            "type": "string"
+          },
+          "趋势": {
+            "default": "稳定",
+            "type": "string"
+          },
+          "上次互动": {
+            "default": "无",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "当前主线": {
+      "default": "",
+      "type": "string"
+    },
+    "任务列表": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "description": "任务名"
+      },
+      "additionalProperties": {
+        "default": {},
+        "type": "object",
+        "properties": {
+          "类型": {
+            "default": "支线",
+            "type": "string"
+          },
+          "说明": {
+            "default": "",
+            "type": "string"
+          },
+          "进度": {
+            "default": "未开始",
+            "type": "string"
+          },
+          "奖励": {
+            "default": "",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "__schema0": {
+      "default": 0,
+      "type": "number"
+    },
+    "__schema1": {
+      "default": 0,
+      "type": "number"
+    }
+  }
+}
