@@ -30,6 +30,8 @@ global.d.ts
 
 # AI Agent 工具目录
 .mimocode/
+.opencode/
+.agents/
 
 # 误创建的文件
 tore*
