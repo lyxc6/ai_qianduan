@@ -1,21 +1,30 @@
 <template>
-  <div class="bg-main rounded-lg p-2 flex flex-col relative animate-fadeIn max-h-[46rem]">
-    <div class="rounded-lg p-3 mb-2" style="background: linear-gradient(135deg, rgba(20, 12, 40, 0.85) 0%, rgba(30, 18, 60, 0.75) 100%); border-left: 3px solid var(--color-primary); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(167, 139, 250, 0.1);">
+  <div :class="'bg-main rounded-lg p-2 flex flex-col relative animate-fadeIn theme-' + currentTheme" style="height: var(--panel-max-height);">
+    <div class="rounded-lg p-3 mb-2 sig-header relative" style="background: var(--theme-header-bg); border-left: var(--theme-header-border); box-shadow: var(--theme-header-shadow);">
       <div class="flex flex-row justify-between items-center mb-1">
-        <div class="font-title text-[0.9rem] text-secondary tracking-wider" style="min-width: 4.5rem; color: var(--color-primary);">日期：</div>
+        <div class="font-title text-[0.9rem] text-secondary tracking-wider" style="min-width: 4.5rem; color: var(--theme-label-accent);">日期：</div>
         <div class="font-title text-[0.9rem] text-secondary tracking-wider font-serif font-medium flex-1 text-right pl-2 text-primary" id="current-time">{{ currentTime }}</div>
       </div>
       <div class="flex flex-row justify-between items-center">
-        <div class="font-title text-[0.9rem] text-secondary tracking-wider" style="min-width: 4.5rem; color: var(--color-primary);">地点：</div>
+        <div class="font-title text-[0.9rem] text-secondary tracking-wider" style="min-width: 4.5rem; color: var(--theme-label-accent);">地点：</div>
         <div class="font-title text-[0.9rem] text-secondary tracking-wider font-serif font-medium flex-1 text-right pl-2 text-primary" id="current-location">{{ currentLocation }}</div>
+      </div>
+      <div class="theme-switcher mt-2 pt-2" style="border-top: var(--theme-divider);">
+        <div
+          v-for="t in themes"
+          :key="t.id"
+          :class="['theme-dot', t.id, { active: currentTheme === t.id }]"
+          :title="t.label"
+          @click="切换主题(t.id)"
+        ></div>
       </div>
     </div>
 
-    <div v-if="!subPage" class="flex justify-between mt-1 rounded-t-lg p-1" style="background: linear-gradient(135deg, rgba(20, 12, 40, 0.6) 0%, rgba(30, 18, 60, 0.4) 100%);">
+    <div v-if="!subPage" class="flex justify-between mt-1 rounded-t-lg p-1 overflow-x-auto flex-shrink-0" style="background: var(--theme-tabbar-bg);">
       <div
         v-for="tab in tabs"
         :key="tab.id"
-        class="flex-1 font-title text-[0.9rem] text-secondary tracking-wider py-3 px-2 cursor-pointer bg-transparent rounded-t-md transition-all duration-300 text-center relative overflow-hidden hover:text-primary"
+        class="flex-1 font-title text-[0.8rem] sm:text-[0.9rem] text-secondary tracking-wider py-2.5 md:py-3 px-2 cursor-pointer bg-transparent rounded-t-md transition-all duration-300 text-center relative overflow-hidden hover:text-primary"
         style="border: 1px solid transparent;"
         :class="{ 'active-tab': currentPage === tab.id }"
         @click="currentPage = tab.id"
@@ -25,9 +34,9 @@
     </div>
 
     <div
-      class="bg-panel backdrop-blur-[10px] flex-1 min-h-0 overflow-y-auto scroll-contain"
+      class="bg-panel backdrop-blur-[10px] flex-1 min-h-0 overflow-y-auto scroll-contain sig-panel relative"
       :class="subPage ? 'rounded-lg p-2' : 'rounded-b-lg p-2'"
-      style="box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);"
+      style="box-shadow: var(--theme-panel-shadow);"
     >
       <template v-if="!subPage">
         <div v-for="tab in tabs" :key="'content-' + tab.id" class="hidden" :class="{ '!block': currentPage === tab.id }">
@@ -35,6 +44,7 @@
           <CharacterInfo v-if="tab.id === '2'" :statData="statData" />
           <Harem v-if="tab.id === '3'" :statData="statData" @showDetail="显示角色详情" />
           <FactionsInfo v-if="tab.id === '4'" :statData="statData" />
+          <TaskInfo v-if="tab.id === '5'" :statData="statData" />
         </div>
       </template>
       <CharacterDetailPage
@@ -54,6 +64,31 @@ import ActionOptions from './components/行动选项.vue';
 import CharacterInfo from './components/角色信息.vue';
 import CharacterDetailPage from './components/角色详情弹窗.vue';
 import FactionsInfo from './components/势力信息.vue';
+import TaskInfo from './components/任务信息.vue';
+
+const THEME_KEY = 'magic-lord-theme';
+
+const themes = [
+  { id: 'aristocratic', label: '贵族魔法' },
+  { id: 'gothic', label: '暗黑哥特' },
+  { id: 'arcane', label: '古奥术' },
+  { id: 'medieval', label: '经典中世纪' },
+];
+
+const currentTheme = ref(loadTheme());
+
+function loadTheme(): string {
+  try {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved && themes.some(t => t.id === saved)) return saved;
+  } catch (_) {}
+  return 'aristocratic';
+}
+
+function 切换主题(id: string) {
+  currentTheme.value = id;
+  try { localStorage.setItem(THEME_KEY, id); } catch (_) {}
+}
 
 defineOptions({
   unusedWarnings: false,
@@ -142,6 +177,7 @@ const tabs = [
   { id: '2', label: '主角' },
   { id: '3', label: '后宫' },
   { id: '4', label: '势力' },
+  { id: '5', label: '任务' },
 ];
 
 const currentPage = ref('1');
@@ -198,8 +234,8 @@ onMounted(() => {
 <style>
 .active-tab {
   color: var(--text-title) !important;
-  background-color: var(--bg-panel) !important;
-  border-bottom: 1px solid var(--bg-panel);
+  background-color: var(--theme-bg-panel) !important;
+  border-bottom: 1px solid var(--theme-bg-panel);
   transform: translateY(-1px);
 }
 
@@ -210,7 +246,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background: var(--theme-tab-active-bar);
   border-radius: 0.25rem 0.25rem 0 0;
 }
 </style>

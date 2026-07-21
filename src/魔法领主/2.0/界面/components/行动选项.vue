@@ -3,8 +3,8 @@
     <div
       v-for="(option, index) in options"
       :key="index"
-      class="flex-1 min-h-0 rounded-lg px-3.5 py-2.5 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-[0.85rem] text-primary relative overflow-y-auto"
-      style="background: linear-gradient(135deg, rgba(30, 18, 60, 0.8) 0%, rgba(20, 12, 40, 0.9) 100%); border: 1px solid var(--border-color); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(167, 139, 250, 0.1);"
+      class="flex-1 min-h-0 rounded-lg px-3 py-3 sm:px-3.5 sm:py-2.5 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm sm:text-[0.85rem] text-primary relative overflow-y-auto min-h-[44px]"
+      style="background: var(--theme-button-bg); border: var(--theme-button-border); box-shadow: var(--theme-button-shadow);"
       @click="handleClick(option)"
     >
       <span class="leading-relaxed break-all">{{ option || '' }}</span>

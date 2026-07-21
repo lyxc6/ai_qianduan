@@ -1,32 +1,32 @@
 <template>
   <div class="flex flex-col gap-2 p-1">
-    <div v-if="!factions || Object.keys(factions).length === 0" class="flex items-center justify-center h-full text-secondary font-title text-[0.9rem]">暂无势力信息</div>
+    <div v-if="!factions || Object.keys(factions).length === 0" class="flex items-center justify-center h-full text-secondary font-title text-sm sm:text-[0.9rem]">暂无势力信息</div>
     <div v-else class="flex flex-col gap-2">
       <div
         v-for="(info, factionName) in factions"
         :key="factionName"
         class="rounded-lg p-3 transition-all duration-300"
-        style="background: linear-gradient(135deg, rgba(30, 18, 60, 0.7) 0%, rgba(20, 12, 40, 0.8) 100%); border: 1px solid var(--border-color); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);"
+        style="background: var(--theme-card-bg); border: var(--theme-card-border); box-shadow: var(--theme-card-shadow);"
       >
         <div class="flex justify-between items-center mb-1">
-          <div class="font-title text-[0.95rem] text-title tracking-wider">{{ factionName }}</div>
+          <div class="font-title text-sm sm:text-[0.95rem] text-title tracking-wider">{{ factionName }}</div>
           <div class="flex items-center gap-2">
             <span
-              class="text-[0.75rem] px-2 py-0.5 rounded font-title"
+              class="text-[0.7rem] sm:text-[0.75rem] px-2 py-0.5 rounded font-title"
               :class="getRelationClass(getRelationText(info))"
             >
               {{ getRelationText(info) }}
             </span>
             <span
               v-if="getTrendText(info) && getTrendText(info) !== '稳定'"
-              class="text-[0.7rem] px-1.5 py-0.5 rounded font-title"
+              class="text-[0.65rem] sm:text-[0.7rem] px-1.5 py-0.5 rounded font-title"
               :class="getTrendClass(getTrendText(info))"
             >
               {{ getTrendText(info) === '改善' ? '↑' : '↓' }}
             </span>
           </div>
         </div>
-        <div v-if="getLastInteraction(info)" class="text-[0.7rem] text-secondary leading-relaxed truncate">{{ getLastInteraction(info) }}</div>
+        <div v-if="getLastInteraction(info)" class="text-[0.65rem] sm:text-[0.7rem] text-secondary leading-relaxed truncate">{{ getLastInteraction(info) }}</div>
       </div>
     </div>
   </div>
@@ -86,6 +86,4 @@ function getTrendClass(trend: string): string {
   if (trend === '恶化') return 'bg-red-500/20 text-red-400';
   return 'bg-gray-500/20 text-gray-400';
 }
-
-
 </script>
