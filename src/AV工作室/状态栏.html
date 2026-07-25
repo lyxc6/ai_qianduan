@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: rgba(20,20,35,0.95);
+    --purple: #bb86fc;
+    --teal: #03dac6;
+    --pink: #ff4081;
+    --gold: #ffd700;
+    --text: #d0d0e0;
+    --muted: #606080;
+    --border: rgba(187,134,252,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: transparent;
+    color: var(--text);
+    padding: 8px;
+  }
+  .card {
+    max-width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 4px 20px rgba(187,134,252,0.08);
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .phase {
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(187,134,252,0.15);
+    color: var(--purple);
+    letter-spacing: 0.05em;
+  }
+  .time {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    flex: 1;
+    min-width: 60px;
+    text-align: center;
+  }
+  .stat-val {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .actor-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+  .actor-name { color: var(--purple); font-weight: 600; }
+  .accept-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    min-width: 60px;
+  }
+  .accept-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s;
+  }
+  .shoot-info { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+  .empty-msg { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 12px 0; }
+  .flow-bar {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .flow-step {
+    flex: 1;
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--muted);
+    padding: 3px 2px;
+    border-radius: 4px;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .flow-step.active {
+    color: var(--purple);
+    background: rgba(187,134,252,0.12);
+    font-weight: 700;
+  }
+  .flow-step.done {
+    color: var(--teal);
+  }
+  .flow-arrow {
+    color: var(--muted);
+    font-size: 0.6rem;
+    align-self: center;
+    flex-shrink: 0;
+  }
+  .extra-model-badge {
+    font-size: 0.65rem;
+    color: #60efff;
+    text-align: center;
+    padding: 4px;
+    margin-top: 6px;
+    border-radius: 4px;
+    background: rgba(96,239,255,0.08);
+    display: none;
+  }
+  .extra-model-badge.visible { display: block; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <span class="phase" id="phase">加载中...</span>
+    <span class="time" id="time">---</span>
+  </div>
+
+  <div id="content"></div>
+
+  <div class="flow-bar">
+    <span class="flow-step" id="step1">招募</span><span class="flow-arrow">→</span>
+    <span class="flow-step" id="step2">交涉</span><span class="flow-arrow">→</span>
+    <span class="flow-step" id="step3">拍摄</span><span class="flow-arrow">→</span>
+    <span class="flow-step" id="step4">收尾</span>
+  </div>
+
+  <div class="extra-model-badge" id="extraBadge">◉ 额外模型解析中...</div>
+</div>
+
+<script>
+(async function() {
+  function updateFlow(phase) {
+    const steps = { '招募': 1, '交涉': 2, '拍摄': 3, '收尾': 4 };
+    const current = steps[phase] || 0;
+    for (let i = 1; i <= 4; i++) {
+      const el = document.getElementById('step' + i);
+      if (!el) continue;
+      el.classList.remove('active', 'done');
+      if (i < current) el.classList.add('done');
+      if (i === current) el.classList.add('active');
+    }
+  }
+
+  function checkExtraModel() {
+    const badge = document.getElementById('extraBadge');
+    if (!badge) return;
+    try {
+      const busy = window.Mvu?.isDuringExtraAnalysis?.() ?? false;
+      if (busy) {
+        badge.classList.add('visible');
+      } else {
+        badge.classList.remove('visible');
+      }
+    } catch {
+      badge.classList.remove('visible');
+    }
+  }
+
+  function render() {
+    try {
+      const d = getAllVariables().stat_data;
+      if (!d) { showEmpty(); updateFlow('招募'); return; }
+
+      const phase = d.当前阶段 || '招募';
+      document.getElementById('phase').textContent = phase;
+      document.getElementById('time').textContent = d.当前时间 || '---';
+      updateFlow(phase);
+      checkExtraModel();
+
+      const content = document.getElementById('content');
+      if (phase === '招募') {
+        const chars = d.可选角色列表 || [];
+        if (chars.length > 0) {
+          let html = '<div class="stats">';
+          html += '<div class="stat"><div class="stat-val" style="color:var(--purple)">' + chars.length + '</div><div class="stat-label">可选素人</div></div>';
+          html += '<div class="stat"><div class="stat-val" style="color:var(--teal)">' + (d.工作室?.知名度 || '---') + '</div><div class="stat-label">知名度</div></div>';
+          html += '</div>';
+          html += '<div style="margin-top:8px;font-size:0.75rem;color:var(--muted)">' + chars.map(c => c.姓名 + '(' + c.年龄 + ')').join(' / ') + '</div>';
+          content.innerHTML = html;
+        } else {
+          showEmpty();
+        }
+      } else if (phase === '交涉' || phase === '拍摄') {
+        const actor = d.当前演员 || {};
+        const name = actor.姓名 || '---';
+        const accept = actor.接受度 || 0;
+        let ac = accept >= 80 ? 'var(--teal)' : accept >= 40 ? 'var(--gold)' : 'var(--pink)';
+        let bc = accept >= 80 ? '#03dac6' : accept >= 40 ? '#ffd700' : '#ff4081';
+        let html = '<div class="actor-row"><span class="actor-name">' + name + '</span><span style="color:var(--muted)">' + (actor.年龄||'') + '</span>';
+        html += '<span style="color:' + ac + ';font-weight:700;margin-left:auto;">' + accept + '%</span></div>';
+        html += '<div class="accept-bar"><div class="accept-fill" style="width:' + accept + '%;background:' + bc + '"></div></div>';
+
+        const shoot = d.当前拍摄 || {};
+        if (shoot.拍摄流程?.length > 0) {
+          const done = shoot.拍摄流程.filter(i => i.状态 === '已完成').length;
+          const total = shoot.拍摄流程.length;
+          html += '<div class="shoot-info">拍摄进度: ' + done + '/' + total + ' | 题材: ' + (shoot.影片题材||'待定') + '</div>';
+        }
+        content.innerHTML = html;
+      } else if (phase === '收尾') {
+        const shoot = d.当前拍摄 || {};
+        const sales = shoot.影片销量 || 0;
+        const rating = shoot.影片评分 || 0;
+        let rc = rating >= 80 ? 'var(--teal)' : rating >= 60 ? 'var(--gold)' : 'var(--pink)';
+        let html = '<div class="stats">';
+        html += '<div class="stat"><div class="stat-val" style="color:var(--teal)">' + (sales ? sales.toLocaleString() : '---') + '</div><div class="stat-label">销量</div></div>';
+        html += '<div class="stat"><div class="stat-val" style="color:' + rc + '">' + rating + '</div><div class="stat-label">评分</div></div>';
+        html += '</div>';
+        content.innerHTML = html;
+      }
+    } catch(e) {
+      showEmpty();
+    }
+  }
+
+  function showEmpty() {
+    document.getElementById('content').innerHTML = '<div class="empty-msg">等待AI生成内容...</div>';
+  }
+
+  await waitGlobalInitialized('Mvu');
+  render();
+
+  // Poll for extra model status
+  setInterval(checkExtraModel, 1500);
+
+  // Listen for MVU variable updates
+  try {
+    if (window.Mvu?.events?.VARIABLE_UPDATE_ENDED) {
+      window.Mvu.events.VARIABLE_UPDATE_ENDED.subscribe(() => setTimeout(render, 300));
+    }
+  } catch {}
+})();
+</script>
+</body>
+</html>

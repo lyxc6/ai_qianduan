@@ -1,0 +1,204 @@
+/* AV工作室 - 暗色赛博朋克主题 */
+
+:root {
+  --bg-main: #0a0a0f;
+  --bg-panel: rgba(20, 20, 35, 0.85);
+  --bg-panel-solid: #141423;
+  --bg-card: rgba(30, 30, 50, 0.95);
+  --border-subtle: rgba(187, 134, 252, 0.15);
+  --border-accent: rgba(187, 134, 252, 0.4);
+  --text-primary: #e0e0f0;
+  --text-secondary: #9a9abf;
+  --text-muted: #606080;
+  --text-title: #ffffff;
+  --accent-purple: #bb86fc;
+  --accent-teal: #03dac6;
+  --accent-cyan: #60efff;
+  --accent-pink: #ff4081;
+  --accent-gold: #ffd700;
+  --gradient-header: linear-gradient(135deg, #bb86fc 0%, #60efff 100%);
+  --gradient-button: linear-gradient(135deg, rgba(187, 134, 252, 0.2) 0%, rgba(3, 218, 198, 0.1) 100%);
+  --shadow-card: 0 4px 24px rgba(187, 134, 252, 0.08);
+  --shadow-glow: 0 0 20px rgba(187, 134, 252, 0.15);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Status colors */
+  --stat-accept-low: #ff4081;
+  --stat-accept-mid: #ffd700;
+  --stat-accept-high: #03dac6;
+  --stat-fame: #60efff;
+  --stat-funds: #03dac6;
+
+  /* Tab colors */
+  --tabbar-bg: rgba(15, 15, 30, 0.9);
+  --tab-active-bg: rgba(30, 30, 50, 0.95);
+  --tab-active-border: #bb86fc;
+  --tab-active-glow: rgba(187, 134, 252, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans SC', sans-serif;
+  background: transparent;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-title {
+  font-family: 'Orbitron', 'Noto Sans SC', sans-serif;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: var(--shadow-card); }
+  50% { box-shadow: var(--shadow-glow); }
+}
+
+@keyframes scanLine {
+  0% { top: -2px; }
+  100% { top: calc(100% + 2px); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-pulseGlow {
+  animation: pulseGlow 2s infinite;
+}
+
+/* Tab styles */
+.tab-btn {
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-secondary);
+}
+
+.tab-btn.active {
+  color: var(--text-title) !important;
+  border-bottom-color: var(--tab-active-border);
+  text-shadow: 0 0 8px var(--tab-active-glow);
+}
+
+/* Card styles */
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+}
+
+.stat-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.progress-accept-low {
+  background: var(--stat-accept-low);
+}
+
+.progress-accept-mid {
+  background: var(--stat-accept-mid);
+}
+
+.progress-accept-high {
+  background: var(--stat-accept-high);
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--gradient-button);
+  border: 1px solid var(--border-accent);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-primary:hover {
+  border-color: var(--accent-purple);
+  box-shadow: var(--shadow-glow);
+  color: var(--text-title);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* Scrollbar */
+.scroll-contain::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scroll-contain::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-contain::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 2px;
+}
+
+.scroll-contain::-webkit-scrollbar-thumb:hover {
+  background: var(--border-accent);
+}
+
+/* Badge styles */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-accept { background: rgba(3, 218, 198, 0.15); color: var(--accent-teal); }
+.badge-warn { background: rgba(255, 215, 0, 0.15); color: var(--accent-gold); }
+.badge-danger { background: rgba(255, 64, 129, 0.15); color: var(--accent-pink); }
+.badge-purple { background: rgba(187, 134, 252, 0.15); color: var(--accent-purple); }
+.badge-cyan { background: rgba(96, 239, 255, 0.15); color: var(--accent-cyan); }
+
+/* Status dot */
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.status-dot.pending { background: var(--text-muted); }
+.status-dot.progress { background: var(--accent-cyan); animation: pulseGlow 1.5s infinite; }
+.status-dot.done { background: var(--accent-teal); }
