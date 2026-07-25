@@ -1,6 +1,7 @@
 <template>
   <div :class="'bg-main rounded-lg p-2 flex flex-col relative animate-fadeIn theme-' + currentTheme" style="height: var(--panel-max-height);">
     <div class="rounded-lg p-3 mb-2 sig-header relative" style="background: var(--theme-header-bg); border-left: var(--theme-header-border); box-shadow: var(--theme-header-shadow);">
+      <div class="header-title text-center mb-2">Lord's Grimoire</div>
       <div class="flex flex-row justify-between items-center mb-1">
         <div class="font-title text-[0.9rem] text-secondary tracking-wider" style="min-width: 4.5rem; color: var(--theme-label-accent);">日期：</div>
         <div class="font-title text-[0.9rem] text-secondary tracking-wider font-serif font-medium flex-1 text-right pl-2 text-primary" id="current-time">{{ currentTime }}</div>
@@ -69,6 +70,7 @@ import TaskInfo from './components/任务信息.vue';
 const THEME_KEY = 'magic-lord-theme';
 
 const themes = [
+  { id: 'parchment', label: '羊皮纸' },
   { id: 'aristocratic', label: '贵族魔法' },
   { id: 'gothic', label: '暗黑哥特' },
   { id: 'arcane', label: '古奥术' },
@@ -82,7 +84,7 @@ function loadTheme(): string {
     const saved = localStorage.getItem(THEME_KEY);
     if (saved && themes.some(t => t.id === saved)) return saved;
   } catch (_) {}
-  return 'aristocratic';
+  return 'parchment';
 }
 
 function 切换主题(id: string) {
@@ -232,6 +234,15 @@ onMounted(() => {
 </script>
 
 <style>
+.header-title {
+  font-family: var(--font-title);
+  font-size: 1.4em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: var(--theme-label-accent);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+
 .active-tab {
   color: var(--text-title) !important;
   background-color: var(--theme-bg-panel) !important;

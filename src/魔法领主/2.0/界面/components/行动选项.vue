@@ -3,8 +3,8 @@
     <div
       v-for="(option, index) in options"
       :key="index"
-      class="flex-1 min-h-0 rounded-lg px-3 py-3 sm:px-3.5 sm:py-2.5 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm sm:text-[0.85rem] text-primary relative overflow-y-auto min-h-[44px]"
-      style="background: var(--theme-button-bg); border: var(--theme-button-border); box-shadow: var(--theme-button-shadow);"
+      class="action-btn flex-1 min-h-0 rounded-lg px-3 py-3 sm:px-3.5 sm:py-2.5 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm sm:text-[0.85rem] text-primary relative overflow-y-auto min-h-[44px]"
+      style="background: var(--theme-button-bg); border: var(--theme-button-border); box-shadow: var(--theme-button-shadow); border-left: 3px solid transparent;"
       @click="handleClick(option)"
     >
       <span class="leading-relaxed break-all">{{ option || '' }}</span>
@@ -42,3 +42,10 @@ function handleClick(text?: string) {
   }
 }
 </script>
+
+<style scoped>
+.action-btn:hover {
+  border-left-color: var(--theme-label-accent) !important;
+  transform: translateX(2px);
+}
+</style>

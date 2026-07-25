@@ -21,7 +21,7 @@
       <div
         v-for="(charData, charName) in characters"
         :key="charName"
-        class="rounded-lg p-2.5 cursor-pointer transition-all duration-300"
+        class="harem-card rounded-lg p-2.5 cursor-pointer transition-all duration-300"
         style="background: var(--theme-card-bg); border: var(--theme-card-border); box-shadow: var(--theme-card-shadow);"
         @click="handleClick(String(charName))"
       >
@@ -74,3 +74,11 @@ function handleClick(characterName: string) {
   emit('showDetail', characterName);
 }
 </script>
+
+<style scoped>
+.harem-card:hover {
+  border-color: var(--theme-label-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+</style>

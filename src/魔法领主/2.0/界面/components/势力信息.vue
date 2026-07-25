@@ -13,14 +13,14 @@
           <div class="flex items-center gap-2">
             <span
               class="text-[0.7rem] sm:text-[0.75rem] px-2 py-0.5 rounded font-title"
-              :class="getRelationClass(getRelationText(info))"
+              :style="getRelationStyle(getRelationText(info))"
             >
               {{ getRelationText(info) }}
             </span>
             <span
               v-if="getTrendText(info) && getTrendText(info) !== '稳定'"
               class="text-[0.65rem] sm:text-[0.7rem] px-1.5 py-0.5 rounded font-title"
-              :class="getTrendClass(getTrendText(info))"
+              :style="getTrendStyle(getTrendText(info))"
             >
               {{ getTrendText(info) === '改善' ? '↑' : '↓' }}
             </span>
@@ -65,25 +65,25 @@ function getLastInteraction(info: FactionInfo | string): string {
   return info?.上次互动 || '';
 }
 
-function getRelationClass(relation: string): string {
+function getRelationStyle(relation: string): Record<string, string> {
   if (relation.includes('友好') || relation.includes('合作')) {
-    return 'bg-green-500/20 text-green-400';
+    return { background: 'rgba(46, 139, 87, 0.12)', color: '#2e8b57' };
   }
   if (relation.includes('贸易') || relation.includes('伙伴')) {
-    return 'bg-blue-500/20 text-blue-400';
+    return { background: 'rgba(58, 100, 140, 0.12)', color: '#3a5a7c' };
   }
   if (relation.includes('中立')) {
-    return 'bg-yellow-500/20 text-yellow-400';
+    return { background: 'rgba(180, 140, 60, 0.12)', color: '#8a6d30' };
   }
   if (relation.includes('敌对') || relation.includes('警惕')) {
-    return 'bg-red-500/20 text-red-400';
+    return { background: 'rgba(200, 50, 50, 0.12)', color: '#c83232' };
   }
-  return 'bg-gray-500/20 text-gray-400';
+  return { background: 'rgba(120, 120, 120, 0.1)', color: '#666' };
 }
 
-function getTrendClass(trend: string): string {
-  if (trend === '改善') return 'bg-green-500/20 text-green-400';
-  if (trend === '恶化') return 'bg-red-500/20 text-red-400';
-  return 'bg-gray-500/20 text-gray-400';
+function getTrendStyle(trend: string): Record<string, string> {
+  if (trend === '改善') return { background: 'rgba(46, 139, 87, 0.12)', color: '#2e8b57' };
+  if (trend === '恶化') return { background: 'rgba(200, 50, 50, 0.12)', color: '#c83232' };
+  return { background: 'rgba(120, 120, 120, 0.1)', color: '#666' };
 }
 </script>

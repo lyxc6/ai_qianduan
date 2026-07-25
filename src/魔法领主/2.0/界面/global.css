@@ -1,49 +1,53 @@
 :root {
   --font-serif: 'Noto Serif SC', serif;
   --font-title: 'ZCOOL XiaoWei', serif;
-  --border-color: rgba(138, 100, 200, 0.4);
-  --text-primary: #f5f3ff;
-  --text-secondary: #a5b4fc;
-  --text-title: #c4b5fd;
-  --accent-color: #f472b6;
   --panel-max-height: 34.5rem;
-}
 
-/* ============ 语义主题变量 - 默认 = 凡尔赛·魔法宫廷 ============ */
-:root {
-  --theme-bg-main: #0f0a1f;
-  --theme-bg-panel: rgba(20, 12, 40, 0.85);
-  --theme-header-bg: linear-gradient(135deg, #1a0f28 0%, #2a1f14 50%, #1a0f28 100%);
+  --text-primary: #4a3b2a;
+  --text-secondary: #6e5a44;
+  --text-title: #3b2340;
+  --accent-color: #c23d5a;
+  --border-color: rgba(139, 46, 46, 0.35);
+
+  --theme-bg-main: #f4ecd8;
+  --theme-bg-panel: rgba(244, 236, 216, 0.85);
+  --theme-header-bg: linear-gradient(135deg, #e8dcc8 0%, #d4c8a8 50%, #e8dcc8 100%);
   --theme-header-border: 3px solid #d4a853;
-  --theme-header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 168, 83, 0.1);
-  --theme-label-accent: #d4a853;
-  --theme-tabbar-bg: linear-gradient(135deg, rgba(26, 15, 40, 0.7) 0%, rgba(20, 12, 35, 0.5) 100%);
-  --theme-tab-active-bar: linear-gradient(90deg, #d4a853, #c23d5a);
-  --theme-panel-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
-  --theme-card-bg: linear-gradient(135deg, #1a0f28 0%, rgba(20, 12, 40, 0.75) 100%);
-  --theme-card-border: 1px solid rgba(212, 168, 83, 0.25);
-  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(212, 168, 83, 0.06);
-  --theme-stat-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.12) 0%, rgba(194, 61, 90, 0.08) 100%);
-  --theme-stat-border: 1px solid rgba(212, 168, 83, 0.25);
-  --theme-accent-bar: linear-gradient(90deg, #d4a853, #c23d5a);
-  --theme-highlight-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(212, 168, 83, 0.05) 100%);
-  --theme-highlight-border: 1px solid rgba(212, 168, 83, 0.3);
-  --theme-button-bg: linear-gradient(135deg, #1a0f28 0%, rgba(20, 12, 40, 0.9) 100%);
-  --theme-button-border: 1px solid rgba(212, 168, 83, 0.2);
-  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 168, 83, 0.06);
-  --theme-divider: 1px solid rgba(212, 168, 83, 0.2);
-  --theme-subtab-active-bg: rgba(212, 168, 83, 0.1);
-  --theme-subtab-active-indicator: #d4a853;
-  --theme-subtab-section-title-color: #d4a853;
-  --theme-subtab-section-divider: 1px solid rgba(212, 168, 83, 0.25);
-  --theme-scrollbar-thumb: rgba(212, 168, 83, 0.25);
-  --theme-scrollbar-thumb-hover: rgba(212, 168, 83, 0.45);
-  --theme-content-panel-border: 1px solid rgba(212, 168, 83, 0.12);
+  --theme-header-shadow: 0 2px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  --theme-label-accent: #8b2e2e;
+  --theme-tabbar-bg: linear-gradient(135deg, rgba(232, 220, 200, 0.7) 0%, rgba(200, 185, 160, 0.5) 100%);
+  --theme-tab-active-bar: linear-gradient(90deg, #d4a853, #8b2e2e);
+  --theme-panel-shadow: inset 0 0 40px rgba(139, 90, 43, 0.12);
+  --theme-card-bg: rgba(255, 255, 255, 0.6);
+  --theme-card-border: 1px dashed rgba(110, 90, 68, 0.3);
+  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 8px rgba(212, 168, 83, 0.04);
+  --theme-stat-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(244, 236, 216, 0.3) 100%);
+  --theme-stat-border: 1px solid rgba(212, 168, 83, 0.2);
+  --theme-accent-bar: linear-gradient(90deg, #d4a853, #8b2e2e);
+  --theme-highlight-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.15) 0%, rgba(244, 236, 216, 0.4) 100%);
+  --theme-highlight-border: 1px solid rgba(212, 168, 83, 0.35);
+  --theme-button-bg: rgba(255, 255, 255, 0.5);
+  --theme-button-border: 1px solid rgba(139, 46, 46, 0.2);
+  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  --theme-divider: 1px solid rgba(139, 46, 46, 0.2);
+  --theme-subtab-active-bg: rgba(139, 46, 46, 0.08);
+  --theme-subtab-active-indicator: #8b2e2e;
+  --theme-subtab-section-title-color: #8b2e2e;
+  --theme-subtab-section-divider: 1px solid rgba(139, 46, 46, 0.25);
+  --theme-scrollbar-thumb: rgba(139, 46, 46, 0.2);
+  --theme-scrollbar-thumb-hover: rgba(139, 46, 46, 0.4);
+  --theme-content-panel-border: 1px solid rgba(139, 46, 46, 0.12);
   --theme-switcher-dot: #d4a853;
 }
 
 /* ============ 凡尔赛·魔法宫廷 ============ */
 .theme-aristocratic {
+  --text-primary: #f5f3ff;
+  --text-secondary: #a5b4fc;
+  --text-title: #c4b5fd;
+  --accent-color: #f472b6;
+  --border-color: rgba(138, 100, 200, 0.4);
+
   --theme-bg-main: #0f0a1f;
   --theme-bg-panel: rgba(20, 12, 40, 0.85);
   --theme-header-bg: linear-gradient(135deg, #1a0f28 0%, #2a1f14 50%, #1a0f28 100%);
@@ -97,6 +101,12 @@
 
 /* ============ 血源大教堂 ============ */
 .theme-gothic {
+  --text-primary: #e8e0f0;
+  --text-secondary: #b8a8c8;
+  --text-title: #d4c0e8;
+  --accent-color: #e8486a;
+  --border-color: rgba(139, 26, 58, 0.4);
+
   --theme-bg-main: #050308;
   --theme-bg-panel: rgba(10, 5, 12, 0.9);
   --theme-header-bg: linear-gradient(135deg, #080010 0%, #150a1a 50%, #080010 100%);
@@ -130,6 +140,12 @@
 
 /* ============ 星图密仪室 ============ */
 .theme-arcane {
+  --text-primary: #e8f0f8;
+  --text-secondary: #a0c8e0;
+  --text-title: #c0e0f8;
+  --accent-color: #e8a060;
+  --border-color: rgba(74, 143, 168, 0.4);
+
   --theme-bg-main: #060b18;
   --theme-bg-panel: rgba(8, 14, 32, 0.85);
   --theme-header-bg: linear-gradient(135deg, #060d1a 0%, #0a1628 50%, #060d1a 100%);
@@ -175,6 +191,12 @@
 
 /* ============ 橡木旅店 ============ */
 .theme-medieval {
+  --text-primary: #f0e0c0;
+  --text-secondary: #c8b898;
+  --text-title: #e8d4a0;
+  --accent-color: #f0b060;
+  --border-color: rgba(212, 148, 58, 0.4);
+
   --theme-bg-main: #1a0f05;
   --theme-bg-panel: rgba(35, 22, 12, 0.85);
   --theme-header-bg: linear-gradient(135deg, #24180a 0%, #35220f 50%, #24180a 100%);
@@ -206,6 +228,80 @@
   --theme-switcher-dot: #d4943a;
 }
 
+/* ============ 中世纪羊皮纸（默认） ============ */
+.theme-parchment {
+  --text-primary: #4a3b2a;
+  --text-secondary: #6e5a44;
+  --text-title: #3b2340;
+  --accent-color: #c23d5a;
+  --border-color: rgba(139, 46, 46, 0.35);
+
+  --theme-bg-main: #f4ecd8;
+  --theme-bg-panel: rgba(244, 236, 216, 0.85);
+  --theme-header-bg: linear-gradient(135deg, #e8dcc8 0%, #d4c8a8 50%, #e8dcc8 100%);
+  --theme-header-border: 3px solid #d4a853;
+  --theme-header-shadow: 0 2px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  --theme-label-accent: #8b2e2e;
+  --theme-tabbar-bg: linear-gradient(135deg, rgba(232, 220, 200, 0.7) 0%, rgba(200, 185, 160, 0.5) 100%);
+  --theme-tab-active-bar: linear-gradient(90deg, #d4a853, #8b2e2e);
+  --theme-panel-shadow: inset 0 0 40px rgba(139, 90, 43, 0.12);
+  --theme-card-bg: rgba(255, 255, 255, 0.6);
+  --theme-card-border: 1px dashed rgba(110, 90, 68, 0.3);
+  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 8px rgba(212, 168, 83, 0.04);
+  --theme-stat-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(244, 236, 216, 0.3) 100%);
+  --theme-stat-border: 1px solid rgba(212, 168, 83, 0.2);
+  --theme-accent-bar: linear-gradient(90deg, #d4a853, #8b2e2e);
+  --theme-highlight-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.15) 0%, rgba(244, 236, 216, 0.4) 100%);
+  --theme-highlight-border: 1px solid rgba(212, 168, 83, 0.35);
+  --theme-button-bg: rgba(255, 255, 255, 0.5);
+  --theme-button-border: 1px solid rgba(139, 46, 46, 0.2);
+  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  --theme-divider: 1px solid rgba(139, 46, 46, 0.2);
+  --theme-subtab-active-bg: rgba(139, 46, 46, 0.08);
+  --theme-subtab-active-indicator: #8b2e2e;
+  --theme-subtab-section-title-color: #8b2e2e;
+  --theme-subtab-section-divider: 1px solid rgba(139, 46, 46, 0.25);
+  --theme-scrollbar-thumb: rgba(139, 46, 46, 0.2);
+  --theme-scrollbar-thumb-hover: rgba(139, 46, 46, 0.4);
+  --theme-content-panel-border: 1px solid rgba(139, 46, 46, 0.12);
+  --theme-switcher-dot: #d4a853;
+}
+
+/* 羊皮纸：噪点纹理 + 角标 */
+.theme-parchment .bg-main {
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  background-color: var(--theme-bg-main);
+}
+
+.theme-parchment .sig-header::before {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 14px; height: 14px;
+  border-left: 2px solid #d4a853;
+  border-top: 2px solid #d4a853;
+  opacity: 0.7;
+}
+.theme-parchment .sig-header::after {
+  content: '';
+  position: absolute;
+  bottom: 3px; right: 3px;
+  width: 14px; height: 14px;
+  border-right: 2px solid #d4a853;
+  border-bottom: 2px solid #d4a853;
+  opacity: 0.7;
+}
+
+/* 羊皮纸：底部进度条/面板内边衬 */
+.theme-parchment .sig-panel::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(139, 46, 46, 0.15) 20%, rgba(139, 46, 46, 0.15) 80%, transparent 100%);
+  opacity: 0.5;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -216,14 +312,14 @@
 body {
   background-color: transparent;
   font-family: var(--font-serif);
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
 }
 
 @media (min-width: 640px) {
   body {
-    font-size: 0.75rem;
+    font-size: 0.82rem;
   }
 }
 
@@ -275,10 +371,11 @@ body {
 .theme-dot.gothic { background: linear-gradient(135deg, #8b1a3a, #4a3a50); }
 .theme-dot.arcane { background: linear-gradient(135deg, #4a8fa8, #b8734a); }
 .theme-dot.medieval { background: linear-gradient(135deg, #d4943a, #6b5a3e); }
+.theme-dot.parchment { background: linear-gradient(135deg, #d4a853, #8b2e2e); }
 
 ::-webkit-scrollbar { width: 0.5rem; }
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.12);
   border-radius: 0.25rem;
 }
 ::-webkit-scrollbar-thumb {
