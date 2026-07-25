@@ -1,0 +1,483 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "default": {},
+  "type": "object",
+  "properties": {
+    "当前阶段": {
+      "default": "招募",
+      "type": "string"
+    },
+    "当前时间": {
+      "default": "2024年3月15日",
+      "type": "string"
+    },
+    "工作室": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "名称": {
+          "default": "梦幻映像",
+          "type": "string"
+        },
+        "知名度": {
+          "default": 1.5,
+          "type": "number"
+        },
+        "总资金": {
+          "default": 1000000,
+          "type": "number"
+        }
+      }
+    },
+    "可选角色列表": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "姓名": {
+            "$ref": "#/$defs/__schema0"
+          },
+          "年龄": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "性格": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "背景": {
+            "$ref": "#/$defs/__schema3"
+          },
+          "身高": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "体重": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "罩杯": {
+            "$ref": "#/$defs/__schema6"
+          },
+          "发色": {
+            "$ref": "#/$defs/__schema7"
+          },
+          "发型": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "衣着": {
+            "$ref": "#/$defs/__schema9"
+          },
+          "鞋袜": {
+            "$ref": "#/$defs/__schema10"
+          },
+          "配饰": {
+            "$ref": "#/$defs/__schema11"
+          },
+          "是否处女": {
+            "$ref": "#/$defs/__schema12"
+          },
+          "性爱经历": {
+            "$ref": "#/$defs/__schema13"
+          },
+          "性爱偏好": {
+            "$ref": "#/$defs/__schema14"
+          },
+          "小穴状态": {
+            "$ref": "#/$defs/__schema15"
+          },
+          "肛门状态": {
+            "$ref": "#/$defs/__schema16"
+          },
+          "口腔状态": {
+            "$ref": "#/$defs/__schema17"
+          },
+          "可接受内容": {
+            "$ref": "#/$defs/__schema18"
+          },
+          "不可接受内容": {
+            "$ref": "#/$defs/__schema19"
+          },
+          "底线": {
+            "$ref": "#/$defs/__schema20"
+          },
+          "弱点": {
+            "$ref": "#/$defs/__schema21"
+          },
+          "策略": {
+            "$ref": "#/$defs/__schema22"
+          }
+        }
+      }
+    },
+    "当前演员": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "姓名": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "年龄": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "性格": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "背景": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "身高": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "体重": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "罩杯": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "发色": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "发型": {
+          "$ref": "#/$defs/__schema8"
+        },
+        "衣着": {
+          "$ref": "#/$defs/__schema9"
+        },
+        "鞋袜": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "配饰": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "是否处女": {
+          "$ref": "#/$defs/__schema12"
+        },
+        "性爱经历": {
+          "$ref": "#/$defs/__schema13"
+        },
+        "性爱偏好": {
+          "$ref": "#/$defs/__schema14"
+        },
+        "小穴状态": {
+          "$ref": "#/$defs/__schema15"
+        },
+        "肛门状态": {
+          "$ref": "#/$defs/__schema16"
+        },
+        "口腔状态": {
+          "$ref": "#/$defs/__schema17"
+        },
+        "可接受内容": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "不可接受内容": {
+          "$ref": "#/$defs/__schema19"
+        },
+        "底线": {
+          "$ref": "#/$defs/__schema20"
+        },
+        "弱点": {
+          "$ref": "#/$defs/__schema21"
+        },
+        "策略": {
+          "$ref": "#/$defs/__schema22"
+        },
+        "接受度": {
+          "$ref": "#/$defs/__schema23"
+        },
+        "阶段状态": {
+          "default": "交涉中",
+          "type": "string"
+        },
+        "当前想法": {
+          "default": "",
+          "type": "string"
+        },
+        "身体状态": {
+          "default": "正常",
+          "type": "string"
+        }
+      }
+    },
+    "当前拍摄": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "影片题材": {
+          "default": "待定",
+          "type": "string"
+        },
+        "拍摄流程": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "项目": {
+                "default": "",
+                "type": "string"
+              },
+              "介绍": {
+                "default": "",
+                "type": "string"
+              },
+              "报酬": {
+                "default": 0,
+                "type": "number"
+              },
+              "状态": {
+                "default": "未开始",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "第三人称叙事": {
+          "default": "",
+          "type": "string"
+        },
+        "角色视角叙事": {
+          "default": "",
+          "type": "string"
+        },
+        "影片简介": {
+          "default": "",
+          "type": "string"
+        },
+        "影片销量": {
+          "$ref": "#/$defs/__schema24"
+        },
+        "影片评分": {
+          "$ref": "#/$defs/__schema23"
+        },
+        "观众评论": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "记者提问": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "角色回答": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "后日谈正文": {
+          "default": "",
+          "type": "string"
+        }
+      }
+    },
+    "演员库": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "姓名": {
+            "default": "",
+            "type": "string"
+          },
+          "年龄": {
+            "default": "",
+            "type": "string"
+          },
+          "性格": {
+            "default": "",
+            "type": "string"
+          },
+          "背景": {
+            "default": "",
+            "type": "string"
+          },
+          "拍摄次数": {
+            "$ref": "#/$defs/__schema24"
+          },
+          "最后合作": {
+            "default": "",
+            "type": "string"
+          },
+          "评价": {
+            "default": "",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "拍摄历史": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "演员": {
+            "default": "",
+            "type": "string"
+          },
+          "影片": {
+            "default": "",
+            "type": "string"
+          },
+          "销量": {
+            "$ref": "#/$defs/__schema24"
+          },
+          "评分": {
+            "$ref": "#/$defs/__schema23"
+          },
+          "时间": {
+            "default": "",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "行动选项": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "一": {
+          "default": "",
+          "type": "string"
+        },
+        "二": {
+          "default": "",
+          "type": "string"
+        },
+        "三": {
+          "default": "",
+          "type": "string"
+        },
+        "四": {
+          "default": "",
+          "type": "string"
+        }
+      }
+    },
+    "当前叙事视角": {
+      "default": "第三人称",
+      "type": "string"
+    },
+    "当前场景描述": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "__schema0": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema1": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema2": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema3": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema4": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema5": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema6": {
+      "default": "未明",
+      "type": "string"
+    },
+    "__schema7": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema8": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema9": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema10": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema11": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema12": {
+      "default": "是",
+      "type": "string"
+    },
+    "__schema13": {
+      "default": "无性爱经历",
+      "type": "string"
+    },
+    "__schema14": {
+      "default": "未知",
+      "type": "string"
+    },
+    "__schema15": {
+      "default": "未开发",
+      "type": "string"
+    },
+    "__schema16": {
+      "default": "未开发",
+      "type": "string"
+    },
+    "__schema17": {
+      "default": "未开发",
+      "type": "string"
+    },
+    "__schema18": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "__schema19": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "__schema20": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema21": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "__schema22": {
+      "default": "",
+      "type": "string"
+    },
+    "__schema23": {
+      "default": 0,
+      "type": "number"
+    },
+    "__schema24": {
+      "default": 0,
+      "type": "number"
+    }
+  }
+}
