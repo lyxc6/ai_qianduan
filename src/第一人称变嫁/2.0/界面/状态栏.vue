@@ -1,47 +1,38 @@
 <template>
-  <div class="main">
-    <div class="world-info">
-      <div class="world-info-box">
-        <div class="world-info-item-display">⏰日期：</div>
-        <div class="world-info-item-display" id="current-time">{{ currentTime }}</div>
+  <div class="bg-main rounded-lg p-2 flex flex-col relative animate-fadeIn" style="height: var(--panel-max-height);">
+    <div class="rounded-lg p-3 mb-2" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary); box-shadow: 0 2px 8px var(--warm-shadow), inset 0 1px 0 var(--warm-inner-light);">
+      <div class="flex flex-row justify-between items-center mb-1">
+        <div class="font-title text-[0.9rem] text-secondary tracking-wider" style="min-width: 4.5rem; color: var(--text-title);">⏰日期：</div>
+        <div class="font-title text-[0.9rem] text-secondary tracking-wider font-serif font-medium flex-1 text-right pl-2 text-primary" id="current-time">{{ currentTime }}</div>
       </div>
-      <div class="world-info-box">
-        <div class="world-info-item-display">🌤天气：</div>
-        <div class="world-info-item-display" id="current-weather">{{ currentWeather }}</div>
+      <div class="flex flex-row justify-between items-center">
+        <div class="font-title text-[0.9rem] text-secondary tracking-wider" style="min-width: 4.5rem; color: var(--text-title);">🌤天气：</div>
+        <div class="font-title text-[0.9rem] text-secondary tracking-wider font-serif font-medium flex-1 text-right pl-2 text-primary" id="current-weather">{{ currentWeather }}</div>
       </div>
     </div>
 
-    <div class="tab-bar">
-      <div class="tab-button" :class="{ active: currentPage === '1' }" @click="currentPage = '1'">行动</div>
-      <div class="tab-button" :class="{ active: currentPage === '2' }" @click="currentPage = '2'">苏晚棠</div>
-      <div class="tab-button" :class="{ active: currentPage === '3' }" @click="currentPage = '3'">沈含烟</div>
-      <div class="tab-button" :class="{ active: currentPage === '4' }" @click="currentPage = '4'">陆辞夜</div>
-      <div class="tab-button" :class="{ active: currentPage === '5' }" @click="currentPage = '5'">世界</div>
-      <div class="tab-button" :class="{ active: currentPage === '6' }" @click="currentPage = '6'">变量</div>
+    <div class="flex justify-between mt-1 rounded-t-lg p-1 overflow-x-auto flex-shrink-0" style="background: var(--warm-bg-medium);">
+      <div
+        v-for="tab in tabs"
+        :key="tab.id"
+        class="flex-1 font-title text-[0.8rem] sm:text-[0.9rem] text-secondary tracking-wider py-2.5 md:py-3 px-2 cursor-pointer bg-transparent rounded-t-md transition-all duration-300 text-center relative overflow-hidden hover:text-primary"
+        style="border: 1px solid transparent;"
+        :class="{ 'active-tab': currentPage === tab.id }"
+        @click="currentPage = tab.id"
+      >
+        {{ tab.label }}
+      </div>
     </div>
 
-    <div class="page-container" :class="{ active: currentPage === '1' }">
-      <ActionOptions :statData="statData" :currentMessage="currentMessage" @send="handleSend" />
-    </div>
-
-    <div class="page-container" :class="{ active: currentPage === '2' }">
-      <SuwanTang :statData="statData" />
-    </div>
-
-    <div class="page-container" :class="{ active: currentPage === '3' }">
-      <ShenHanYan :statData="statData" />
-    </div>
-
-    <div class="page-container" :class="{ active: currentPage === '4' }">
-      <LuCiYe :statData="statData" />
-    </div>
-
-    <div class="page-container" :class="{ active: currentPage === '5' }">
-      <World :statData="statData" />
-    </div>
-
-    <div class="page-container" :class="{ active: currentPage === '6' }">
-      <VariableDisplay :statData="statData" />
+    <div class="bg-panel backdrop-blur-[10px] flex-1 min-h-0 overflow-y-auto scroll-contain rounded-b-lg p-2 relative" style="box-shadow: inset 0 0 40px var(--warm-shadow);">
+      <div v-for="tab in tabs" :key="'content-' + tab.id" class="hidden" :class="{ '!block': currentPage === tab.id }">
+        <ActionOptions v-if="tab.id === '1'" :statData="statData" :currentMessage="currentMessage" @send="handleSend" />
+        <SuwanTang v-if="tab.id === '2'" :statData="statData" />
+        <ShenHanYan v-if="tab.id === '3'" :statData="statData" />
+        <LuCiYe v-if="tab.id === '4'" :statData="statData" />
+        <World v-if="tab.id === '5'" :statData="statData" />
+        <VariableDisplay v-if="tab.id === '6'" :statData="statData" />
+      </div>
     </div>
   </div>
 </template>
@@ -58,6 +49,15 @@ import VariableDisplay from './components/变量显示.vue';
 defineOptions({
   unusedWarnings: false,
 });
+
+const tabs = [
+  { id: '1', label: '行动' },
+  { id: '2', label: '苏晚棠' },
+  { id: '3', label: '沈含烟' },
+  { id: '4', label: '陆辞夜' },
+  { id: '5', label: '世界' },
+  { id: '6', label: '变量' },
+];
 
 interface StatData {
   苏晚棠?: {
@@ -156,7 +156,6 @@ interface StatData {
     选项三?: string;
     选项四?: string;
   };
-  事件?: string[];
 }
 
 const currentPage = ref('1');
@@ -178,10 +177,6 @@ async function loadData() {
     if (world.天气) {
       currentWeather.value = world.天气;
     }
-  }
-
-  if (data.事件 && Array.isArray(data.事件)) {
-    insertVariables({ 最近事件: [...data.事件] }, { type: 'chat' });
   }
 
   const messages = getChatMessages(-1);
@@ -221,3 +216,23 @@ onMounted(() => {
   loadData();
 });
 </script>
+
+<style>
+.active-tab {
+  color: var(--text-title) !important;
+  background-color: var(--warm-bg-light) !important;
+  border-bottom: 1px solid var(--warm-bg-light);
+  transform: translateY(-1px);
+}
+
+.active-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--user-color-primary), var(--user-color-secondary));
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+</style>

@@ -1,33 +1,46 @@
 <template>
-  <div class="action-options">
-    <div class="info-section">
-      <div class="section-title">当前视角</div>
-      <div class="info-value">{{ actionOptions.当前视角 || '苏晚棠' }}</div>
+  <div class="flex flex-col gap-2 p-1">
+    <div class="rounded-lg p-3" style="background: var(--warm-bg-medium); border-left: 3px solid var(--user-color-primary);">
+      <div class="font-title text-[0.85rem] text-title font-bold mb-2">当前视角</div>
+      <div class="text-[0.75rem] text-primary">{{ actionOptions.当前视角 || '苏晚棠' }}</div>
     </div>
 
-    <div class="info-section">
-      <div class="section-title">行动选项</div>
-      <div class="action-button" v-if="actionOptions.选项一" @click="sendAction(actionOptions.选项一)">
-        {{ actionOptions.选项一 }}
-      </div>
-      <div class="action-button" v-if="actionOptions.选项二" @click="sendAction(actionOptions.选项二)">
-        {{ actionOptions.选项二 }}
-      </div>
-      <div class="action-button" v-if="actionOptions.选项三" @click="sendAction(actionOptions.选项三)">
-        {{ actionOptions.选项三 }}
-      </div>
-      <div class="action-button" v-if="actionOptions.选项四" @click="sendAction(actionOptions.选项四)">
-        {{ actionOptions.选项四 }}
-      </div>
-      <div class="info-value" v-if="!hasOptions">暂无行动选项</div>
-    </div>
-
-    <div class="info-section" v-if="recentEvents && recentEvents.length > 0">
-      <div class="section-title">最近事件</div>
-      <div class="task-list">
-        <div class="task-item" v-for="(event, index) in recentEvents" :key="index">
-          <div class="task-description">{{ event }}</div>
+    <div class="rounded-lg p-3" style="background: var(--warm-bg-medium); border-left: 3px solid var(--user-color-primary);">
+      <div class="font-title text-[0.85rem] text-title font-bold mb-2">行动选项</div>
+      <div class="flex flex-col gap-2">
+        <div
+          v-if="actionOptions.选项一"
+          class="action-btn rounded-lg px-3 py-3 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm text-primary relative"
+          style="background: linear-gradient(135deg, var(--warm-gradient-start) 0%, var(--warm-gradient-end) 100%); border: 1px solid var(--border-color); border-left: 3px solid transparent;"
+          @click="sendAction(actionOptions.选项一)"
+        >
+          <span class="leading-relaxed break-all">{{ actionOptions.选项一 }}</span>
         </div>
+        <div
+          v-if="actionOptions.选项二"
+          class="action-btn rounded-lg px-3 py-3 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm text-primary relative"
+          style="background: linear-gradient(135deg, var(--warm-gradient-start) 0%, var(--warm-gradient-end) 100%); border: 1px solid var(--border-color); border-left: 3px solid transparent;"
+          @click="sendAction(actionOptions.选项二)"
+        >
+          <span class="leading-relaxed break-all">{{ actionOptions.选项二 }}</span>
+        </div>
+        <div
+          v-if="actionOptions.选项三"
+          class="action-btn rounded-lg px-3 py-3 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm text-primary relative"
+          style="background: linear-gradient(135deg, var(--warm-gradient-start) 0%, var(--warm-gradient-end) 100%); border: 1px solid var(--border-color); border-left: 3px solid transparent;"
+          @click="sendAction(actionOptions.选项三)"
+        >
+          <span class="leading-relaxed break-all">{{ actionOptions.选项三 }}</span>
+        </div>
+        <div
+          v-if="actionOptions.选项四"
+          class="action-btn rounded-lg px-3 py-3 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm text-primary relative"
+          style="background: linear-gradient(135deg, var(--warm-gradient-start) 0%, var(--warm-gradient-end) 100%); border: 1px solid var(--border-color); border-left: 3px solid transparent;"
+          @click="sendAction(actionOptions.选项四)"
+        >
+          <span class="leading-relaxed break-all">{{ actionOptions.选项四 }}</span>
+        </div>
+        <div class="text-[0.75rem] text-secondary" v-if="!hasOptions">暂无行动选项</div>
       </div>
     </div>
   </div>
@@ -45,7 +58,6 @@ interface Props {
       选项三?: string;
       选项四?: string;
     };
-    事件?: string[];
   };
   currentMessage?: any;
 }
@@ -56,7 +68,6 @@ const emit = defineEmits<{
 }>();
 
 const actionOptions = computed(() => props.statData?.行动选项 || {});
-const recentEvents = computed(() => props.statData?.事件 || []);
 const hasOptions = computed(() => {
   const options = actionOptions.value;
   return options.选项一 || options.选项二 || options.选项三 || options.选项四;
@@ -68,3 +79,12 @@ function sendAction(text: string) {
   }
 }
 </script>
+
+<style scoped>
+.action-btn:hover {
+  border-left-color: var(--user-color-primary) !important;
+  transform: translateX(2px);
+  background: linear-gradient(135deg, var(--warm-gradient-end) 0%, var(--warm-bg-light) 100%) !important;
+  box-shadow: 0 4px 12px var(--warm-shadow);
+}
+</style>

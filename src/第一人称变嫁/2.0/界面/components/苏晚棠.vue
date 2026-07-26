@@ -1,242 +1,242 @@
 <template>
-  <div class="character-detail-body">
-    <div class="character-info-section">
-      <div class="info-section">
-        <div class="section-title">基本信息</div>
-        <div class="info-group">
-          <div class="info-item">
-            <div class="info-label">姓名</div>
-            <div class="info-value">苏晚棠</div>
+  <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-3">
+      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);">
+        <div class="font-title text-[0.85rem] text-title font-bold mb-2">基本信息</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">姓名</div>
+            <div class="text-[0.75rem] text-primary">苏晚棠</div>
           </div>
-          <div class="info-item">
-            <div class="info-label">年龄</div>
-            <div class="info-value">16岁</div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">年龄</div>
+            <div class="text-[0.75rem] text-primary">16岁</div>
           </div>
-          <div class="info-item">
-            <div class="info-label">身份</div>
-            <div class="info-value">穿越者、TS病患者</div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">身份</div>
+            <div class="text-[0.75rem] text-primary">穿越者、TS病患者</div>
           </div>
-          <div class="info-item">
-            <div class="info-label">处女</div>
-            <div class="info-value">{{ character.处女 === true ? '是' : character.处女 === false ? '否' : '未知' }}</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="info-section">
-        <div class="section-title">好感度</div>
-        <div class="info-group">
-          <div class="info-item">
-            <div class="info-label">对陆辞夜</div>
-            <div class="info-value">{{ character.好感对陆辞夜 || 0 }}</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: ((character.好感对陆辞夜 || 0) / 10) + '%' }"></div>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">对沈含烟</div>
-            <div class="info-value">{{ character.好感对沈含烟 || 0 }}</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: ((character.好感对沈含烟 || 0) / 10) + '%' }"></div>
-            </div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">处女</div>
+            <div class="text-[0.75rem] text-primary">{{ character.处女 === true ? '是' : character.处女 === false ? '否' : '未知' }}</div>
           </div>
         </div>
       </div>
 
-      <div class="info-section">
-        <div class="section-title">沦陷度</div>
-        <div class="info-group">
-          <div class="info-item">
-            <div class="info-label">沦陷程度</div>
-            <div class="info-value">{{ character.沦陷 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.沦陷 || 0) + '%' }"></div>
+      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);">
+        <div class="font-title text-[0.85rem] text-title font-bold mb-2">好感度</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">对陆辞夜</div>
+            <div class="text-[0.75rem] text-primary">{{ character.好感对陆辞夜 || 0 }}</div>
+            <div class="h-2 rounded-full overflow-hidden mt-1" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: ((character.好感对陆辞夜 || 0) / 10) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">对沈含烟</div>
+            <div class="text-[0.75rem] text-primary">{{ character.好感对沈含烟 || 0 }}</div>
+            <div class="h-2 rounded-full overflow-hidden mt-1" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: ((character.好感对沈含烟 || 0) / 10) + '%' }"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="info-section">
-        <div class="section-title">生理状态</div>
-        <div class="info-group">
-          <div class="info-item">
-            <div class="info-label">生理阶段</div>
-            <div class="info-value">{{ character.生理阶段 || '安全期' }}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">生理天数</div>
-            <div class="info-value">{{ character.生理天数 || 1 }}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">上次经期</div>
-            <div class="info-value">{{ character.上次经期 || '无' }}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">经验等级</div>
-            <div class="info-value">{{ character.经验等级 || 0 }}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">亲密状态</div>
-            <div class="info-value">{{ character.亲密状态 || '正常' }}</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="info-section">
-        <div class="section-title">NSFW数据</div>
-        <div class="info-group">
-          <div class="info-item">
-            <div class="info-label">胸部开发</div>
-            <div class="info-value">{{ character.胸部开发 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.胸部开发 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">阴蒂开发</div>
-            <div class="info-value">{{ character.阴蒂开发 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.阴蒂开发 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">阴道开发</div>
-            <div class="info-value">{{ character.阴道开发 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.阴道开发 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">后庭开发</div>
-            <div class="info-value">{{ character.后庭开发 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.后庭开发 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">兴奋度</div>
-            <div class="info-value">{{ character.兴奋度 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.兴奋度 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">湿润度</div>
-            <div class="info-value">{{ character.湿润度 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.湿润度 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">高潮次数</div>
-            <div class="info-value">{{ character.高潮次数 || 0 }}</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="info-section">
-        <div class="section-title">敏感部位</div>
-        <div class="sensitive-bar">
-          <div class="sensitive-item">
-            <div class="sensitive-label">耳朵</div>
-            <div class="info-value">{{ character.耳朵敏感 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.耳朵敏感 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="sensitive-item">
-            <div class="sensitive-label">后颈</div>
-            <div class="info-value">{{ character.后颈敏感 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.后颈敏感 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="sensitive-item">
-            <div class="sensitive-label">腰部</div>
-            <div class="info-value">{{ character.腰部敏感 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.腰部敏感 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="sensitive-item">
-            <div class="sensitive-label">大腿内侧</div>
-            <div class="info-value">{{ character.大腿内侧敏感 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.大腿内侧敏感 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="sensitive-item">
-            <div class="sensitive-label">胸部</div>
-            <div class="info-value">{{ character.胸部敏感 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.胸部敏感 || 0) + '%' }"></div>
-            </div>
-          </div>
-          <div class="sensitive-item">
-            <div class="sensitive-label">阴蒂</div>
-            <div class="info-value">{{ character.阴蒂敏感 || 0 }}%</div>
-            <div class="bar">
-              <div class="bar-fill" :style="{ width: (character.阴蒂敏感 || 0) + '%' }"></div>
+      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);">
+        <div class="font-title text-[0.85rem] text-title font-bold mb-2">沦陷度</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">沦陷程度</div>
+            <div class="text-[0.75rem] text-primary">{{ character.沦陷 || 0 }}%</div>
+            <div class="h-2 rounded-full overflow-hidden mt-1" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.沦陷 || 0) + '%' }"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="info-section">
-        <div class="section-title">着装状态</div>
-        <div class="clothing-grid">
-          <div class="clothing-item">
-            <div class="clothing-label">头发</div>
-            <div class="clothing-value">{{ character.当前头发 || '无' }}</div>
+      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);">
+        <div class="font-title text-[0.85rem] text-title font-bold mb-2">生理状态</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">生理阶段</div>
+            <div class="text-[0.75rem] text-primary">{{ character.生理阶段 || '安全期' }}</div>
           </div>
-          <div class="clothing-item">
-            <div class="clothing-label">上装</div>
-            <div class="clothing-value">{{ character.当前上装 || '无' }}</div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">生理天数</div>
+            <div class="text-[0.75rem] text-primary">{{ character.生理天数 || 1 }}</div>
           </div>
-          <div class="clothing-item">
-            <div class="clothing-label">下装</div>
-            <div class="clothing-value">{{ character.当前下装 || '无' }}</div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">上次经期</div>
+            <div class="text-[0.75rem] text-primary">{{ character.上次经期 || '无' }}</div>
           </div>
-          <div class="clothing-item">
-            <div class="clothing-label">内衣</div>
-            <div class="clothing-value">{{ character.当前内衣 || '无' }}</div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">经验等级</div>
+            <div class="text-[0.75rem] text-primary">{{ character.经验等级 || 0 }}</div>
           </div>
-          <div class="clothing-item">
-            <div class="clothing-label">袜子</div>
-            <div class="clothing-value">{{ character.当前袜子 || '无' }}</div>
-          </div>
-          <div class="clothing-item">
-            <div class="clothing-label">鞋子</div>
-            <div class="clothing-value">{{ character.当前鞋子 || '无' }}</div>
-          </div>
-          <div class="clothing-item">
-            <div class="clothing-label">饰品</div>
-            <div class="clothing-value">{{ character.当前饰品 || '无' }}</div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">亲密状态</div>
+            <div class="text-[0.75rem] text-primary">{{ character.亲密状态 || '正常' }}</div>
           </div>
         </div>
       </div>
 
-      <div class="info-section">
-        <div class="section-title">身体描述</div>
-        <div class="info-group">
-          <div class="info-item">
-            <div class="info-label">胸部</div>
-            <div class="info-value">{{ character.当前胸部 || '无' }}</div>
+      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);">
+        <div class="font-title text-[0.85rem] text-title font-bold mb-2">NSFW数据</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">胸部开发</div>
+            <div class="text-[0.75rem] text-primary">{{ character.胸部开发 || 0 }}%</div>
+            <div class="h-2 rounded-full overflow-hidden mt-1" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.胸部开发 || 0) + '%' }"></div>
+            </div>
           </div>
-          <div class="info-item">
-            <div class="info-label">阴部</div>
-            <div class="info-value">{{ character.当前阴部 || '无' }}</div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">阴蒂开发</div>
+            <div class="text-[0.75rem] text-primary">{{ character.阴蒂开发 || 0 }}%</div>
+            <div class="h-2 rounded-full overflow-hidden mt-1" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.阴蒂开发 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">阴道开发</div>
+            <div class="text-[0.75rem] text-primary">{{ character.阴道开发 || 0 }}%</div>
+            <div class="h-2 rounded-full overflow-hidden mt-1" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.阴道开发 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">后庭开发</div>
+            <div class="text-[0.75rem] text-primary">{{ character.后庭开发 || 0 }}%</div>
+            <div class="h-2 rounded-full overflow-hidden mt-1" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.后庭开发 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">兴奋度</div>
+            <div class="text-[0.75rem] text-primary">{{ character.兴奋度 || 0 }}%</div>
+            <div class="h-2 rounded-full overflow-hidden mt-1" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.兴奋度 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">湿润度</div>
+            <div class="text-[0.75rem] text-primary">{{ character.湿润度 || 0 }}%</div>
+            <div class="h-2 rounded-full overflow-hidden mt-1" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.湿润度 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">高潮次数</div>
+            <div class="text-[0.75rem] text-primary">{{ character.高潮次数 || 0 }}</div>
           </div>
         </div>
       </div>
 
-      <div class="info-section" v-if="hasBodyMemory">
-        <div class="section-title">身体记忆</div>
-        <div class="task-list">
-          <div class="task-item" v-for="(memory, key) in character.身体记忆" :key="key">
-            <div class="task-title">{{ key }}</div>
-            <div class="task-description">{{ memory.描述 }}</div>
-            <div class="task-status">触发条件：{{ memory.触发条件 }} | 强度：{{ memory.强度 }}%</div>
+      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);">
+        <div class="font-title text-[0.85rem] text-title font-bold mb-2">敏感部位</div>
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <div class="text-[0.65rem] text-secondary min-w-[4rem]">耳朵</div>
+            <div class="text-[0.7rem] text-primary">{{ character.耳朵敏感 || 0 }}%</div>
+            <div class="flex-1 h-2 rounded-full overflow-hidden" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.耳朵敏感 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-row items-center gap-2">
+            <div class="text-[0.65rem] text-secondary min-w-[4rem]">后颈</div>
+            <div class="text-[0.7rem] text-primary">{{ character.后颈敏感 || 0 }}%</div>
+            <div class="flex-1 h-2 rounded-full overflow-hidden" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.后颈敏感 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-row items-center gap-2">
+            <div class="text-[0.65rem] text-secondary min-w-[4rem]">腰部</div>
+            <div class="text-[0.7rem] text-primary">{{ character.腰部敏感 || 0 }}%</div>
+            <div class="flex-1 h-2 rounded-full overflow-hidden" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.腰部敏感 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-row items-center gap-2">
+            <div class="text-[0.65rem] text-secondary min-w-[4rem]">大腿内侧</div>
+            <div class="text-[0.7rem] text-primary">{{ character.大腿内侧敏感 || 0 }}%</div>
+            <div class="flex-1 h-2 rounded-full overflow-hidden" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.大腿内侧敏感 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-row items-center gap-2">
+            <div class="text-[0.65rem] text-secondary min-w-[4rem]">胸部</div>
+            <div class="text-[0.7rem] text-primary">{{ character.胸部敏感 || 0 }}%</div>
+            <div class="flex-1 h-2 rounded-full overflow-hidden" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.胸部敏感 || 0) + '%' }"></div>
+            </div>
+          </div>
+          <div class="flex flex-row items-center gap-2">
+            <div class="text-[0.65rem] text-secondary min-w-[4rem]">阴蒂</div>
+            <div class="text-[0.7rem] text-primary">{{ character.阴蒂敏感 || 0 }}%</div>
+            <div class="flex-1 h-2 rounded-full overflow-hidden" style="background: var(--warm-bg-dark);">
+              <div class="h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, var(--user-color-primary) 0%, var(--user-color-secondary) 100%);" :style="{ width: (character.阴蒂敏感 || 0) + '%' }"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);">
+        <div class="font-title text-[0.85rem] text-title font-bold mb-2">着装状态</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div class="rounded-lg p-2 text-center" style="background: var(--warm-bg-medium);">
+            <div class="text-[0.65rem] text-secondary mb-1">头发</div>
+            <div class="text-[0.7rem] text-primary">{{ character.当前头发 || '无' }}</div>
+          </div>
+          <div class="rounded-lg p-2 text-center" style="background: var(--warm-bg-medium);">
+            <div class="text-[0.65rem] text-secondary mb-1">上装</div>
+            <div class="text-[0.7rem] text-primary">{{ character.当前上装 || '无' }}</div>
+          </div>
+          <div class="rounded-lg p-2 text-center" style="background: var(--warm-bg-medium);">
+            <div class="text-[0.65rem] text-secondary mb-1">下装</div>
+            <div class="text-[0.7rem] text-primary">{{ character.当前下装 || '无' }}</div>
+          </div>
+          <div class="rounded-lg p-2 text-center" style="background: var(--warm-bg-medium);">
+            <div class="text-[0.65rem] text-secondary mb-1">内衣</div>
+            <div class="text-[0.7rem] text-primary">{{ character.当前内衣 || '无' }}</div>
+          </div>
+          <div class="rounded-lg p-2 text-center" style="background: var(--warm-bg-medium);">
+            <div class="text-[0.65rem] text-secondary mb-1">袜子</div>
+            <div class="text-[0.7rem] text-primary">{{ character.当前袜子 || '无' }}</div>
+          </div>
+          <div class="rounded-lg p-2 text-center" style="background: var(--warm-bg-medium);">
+            <div class="text-[0.65rem] text-secondary mb-1">鞋子</div>
+            <div class="text-[0.7rem] text-primary">{{ character.当前鞋子 || '无' }}</div>
+          </div>
+          <div class="rounded-lg p-2 text-center" style="background: var(--warm-bg-medium);">
+            <div class="text-[0.65rem] text-secondary mb-1">饰品</div>
+            <div class="text-[0.7rem] text-primary">{{ character.当前饰品 || '无' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);">
+        <div class="font-title text-[0.85rem] text-title font-bold mb-2">身体描述</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">胸部</div>
+            <div class="text-[0.75rem] text-primary">{{ character.当前胸部 || '无' }}</div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[0.65rem] text-secondary font-bold">阴部</div>
+            <div class="text-[0.75rem] text-primary">{{ character.当前阴部 || '无' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);" v-if="hasBodyMemory">
+        <div class="font-title text-[0.85rem] text-title font-bold mb-2">身体记忆</div>
+        <div class="flex flex-col gap-2">
+          <div class="rounded-lg p-2" style="background: var(--warm-bg-medium);" v-for="(memory, key) in character.身体记忆" :key="key">
+            <div class="text-[0.75rem] font-bold text-title mb-1">{{ key }}</div>
+            <div class="text-[0.7rem] text-primary">{{ memory.描述 }}</div>
+            <div class="text-[0.65rem] text-secondary mt-1">触发条件：{{ memory.触发条件 }} | 强度：{{ memory.强度 }}%</div>
           </div>
         </div>
       </div>
