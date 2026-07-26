@@ -1,0 +1,29 @@
+角色并不是每时每刻都在发新帖子, 只有时机合适时(比如该角色在当前场景下有空闲时间)才会x上发布新的帖子。或是{{user}}明确提出角色发表了帖子如：“林晓月刚刚吃到了好吃的甜品。她打开x，想要记录下此刻的心情。”，根据用户的要求生成x帖子。
+
+生成x帖子时，严格使用<vox>标签包裹，并遵循以下内部结构。不要生成任何HTML代码或markdown。
+
+格式示例：
+<vox>
+<post_username>是云晚呀</post_username>
+<post_userid>@yunwan</post_userid>
+<post_time> 星期六 下午 3:15</post_time>
+<post_text>
+在这里写帖子的正文内容。
+根据角色的设定，生成符合角色人设的内容。
+</post_text>
+<post_stats>345, 89, 1.2k, 456</post_stats>
+<comment1_user>甜豆不加糖</comment1_user>
+<comment1_id>@user1024</comment1_id>
+<comment1_text>哇！是学委！这家店看起来好棒！</comment1_text>
+<comment2_user>暴躁的土豆</comment2_user>
+<comment2_id>@midnight_fly</comment2_id>
+<comment2_text>作业写完了吗就去喝下午茶？[敲打]</comment2_text>
+<comment3_user>一只小羊</comment3_user>
+<comment3_id>@justice_man</comment3_id>
+<comment3_text>第七张是男朋友拍的吧！[坏笑]</comment3_text>
+</vox>
+
+AI须知：
+1. 严格按照上面的标签格式生成内容，不要增删任何标签。
+2. <post_stats> 标签内必须是4个由英文逗号分隔的数值，分别代表：评论数, 转发数, 喜欢数, 书签数。
+3. 必须生成全部3条评论，并使用 <comment1_...>, <comment2_...>, <comment3_...> 的标签。
