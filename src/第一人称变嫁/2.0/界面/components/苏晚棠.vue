@@ -229,17 +229,6 @@
           </div>
         </div>
       </div>
-
-      <div class="rounded-lg p-3" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary);" v-if="hasBodyMemory">
-        <div class="font-title text-[0.85rem] text-title font-bold mb-2">身体记忆</div>
-        <div class="flex flex-col gap-2">
-          <div class="rounded-lg p-2" style="background: var(--warm-bg-medium);" v-for="(memory, key) in character.身体记忆" :key="key">
-            <div class="text-[0.75rem] font-bold text-title mb-1">{{ key }}</div>
-            <div class="text-[0.7rem] text-primary">{{ memory.描述 }}</div>
-            <div class="text-[0.65rem] text-secondary mt-1">触发条件：{{ memory.触发条件 }} | 强度：{{ memory.强度 }}%</div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -271,9 +260,8 @@ interface Props {
       腰部敏感?: number;
       大腿内侧敏感?: number;
       胸部敏感?: number;
-      阴蒂敏感?: number;
-      身体记忆?: Record<string, { 描述: string; 触发条件: string; 强度: number }>;
-      当前头发?: string;
+    阴蒂敏感?: number;
+    当前头发?: string;
       当前上装?: string;
       当前下装?: string;
       当前内衣?: string;
@@ -288,8 +276,4 @@ interface Props {
 
 const props = defineProps<Props>();
 const character = computed(() => props.statData?.苏晚棠 || {});
-const hasBodyMemory = computed(() => {
-  const memory = character.value.身体记忆;
-  return memory && typeof memory === 'object' && Object.keys(memory).length > 0;
-});
 </script>

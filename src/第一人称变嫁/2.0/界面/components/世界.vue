@@ -66,10 +66,6 @@
             <div class="text-[0.75rem] text-primary">{{ world.计数器?.特殊日期 || 0 }}</div>
           </div>
           <div class="flex flex-col gap-1">
-            <div class="text-[0.65rem] text-secondary font-bold">身体记忆</div>
-            <div class="text-[0.75rem] text-primary">{{ world.计数器?.身体记忆 || 0 }}</div>
-          </div>
-          <div class="flex flex-col gap-1">
             <div class="text-[0.65rem] text-secondary font-bold">主线任务</div>
             <div class="text-[0.75rem] text-primary">{{ world.计数器?.主线任务 || 0 }}</div>
           </div>
@@ -100,7 +96,6 @@ interface Props {
       支线任务?: Record<string, { 标题: string; 状态: string; 描述: string }>;
       计数器?: {
         特殊日期?: number;
-        身体记忆?: number;
         主线任务?: number;
         支线任务?: number;
       };

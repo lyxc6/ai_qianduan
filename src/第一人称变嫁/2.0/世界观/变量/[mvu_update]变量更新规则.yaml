@@ -35,22 +35,15 @@
     ${苏晚棠|沈含烟}:
       好感对陆辞夜:
         type: z.coerce.number().transform(v => _.clamp(v, 0, 1000))
-        check:
-          - 根据感知反应 ±(5~20)，关键事件 ±(50~150)
-          - 跨 250/500/750 时体现关系变化
+        check: delta方式更新；根据感知反应 ±(5~20)，关键事件 ±(50~150)；跨 250/500/750 时体现关系变化
       亲密状态:
         type: string
         check:
           - enum: 正常|前戏|进行中|事后
           - →前戏: 重置兴奋湿润高潮
           - →进行中: 每轮更新
-          - →事后: 更新开发敏感经验
-      身体记忆:
-        type: "{ [key: mem_NNN]: { 描述, 触发条件, 强度(0~100) } }"
-        check:
-          - 只存条件反射关键经历；最多 8 条，超限删最低
-          - mem_001 格式；新建读计数器+1
-      当前胸部:
+           - →事后: 更新开发敏感经验
+       当前胸部:
         type: string
         check:
           - 含杯型尺寸状态
@@ -61,34 +54,30 @@
           - 含外观紧致状态
           - 经验等级变化同步更新
 
-      好感对${沈含烟|苏晚棠}: z.coerce.number().transform(v => _.clamp(v, 0, 1000))  # 默认 500
+      好感对${沈含烟|苏晚棠}: z.coerce.number().transform(v => _.clamp(v, 0, 1000))  # delta方式更新
       攻略阶段: string  # 抗拒期|驯化期|沦陷期 由好感<250→抗拒 250~499→驯化 ≥500→沦陷 跨阈值同步更新，只能前进
-      沦陷: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # 0~100；上限=好感/10；被触碰 auto+3~5 即使理智抗拒
+      沦陷: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # delta方式更新；0~100；上限=好感/10；被触碰 auto+3~5 即使理智抗拒
       生理阶段: string  # 安全期|排卵期|经期前|经期中 每天+1 超 28 重置
       生理天数: z.coerce.number().transform(v => _.clamp(v, 1, 28))
       上次经期: string  # "2016-09-15"
       处女: z.boolean()  # 首次插入→false 不可逆
       经验等级: z.coerce.number().transform(v => _.clamp(v, 0, 10))  # 0→3→6→10；口交/本番/高潮/新玩法各+1
-      胸部开发: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # 揉捏/舔舐+2~15
-      阴蒂开发: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # 直接刺激+2~15
-      阴道开发: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # 进入+3~20，破处+30~50
-      后庭开发: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # 进入+3~20
+      高潮次数: z.coerce.number().transform(v => Math.max(v, 0))  # delta方式更新；触发+1；累计总次数
+      胸部开发|阴蒂开发|阴道开发|后庭开发: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # delta方式更新；揉捏/舔舐+2~15，进入+3~20，破处+30~50
+      耳朵敏感|后颈敏感|腰部敏感|大腿内侧敏感|胸部敏感|阴蒂敏感: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # delta方式更新；长期累积不重置，每次+1~5
+      当前头发|当前上装|当前下装|当前内衣|当前袜子|当前鞋子|当前饰品: string # 换装/损坏/褪去更新
       兴奋度: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # NSFW 实时调整；→前戏重置 0
       湿润度: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # 随兴奋联动；→前戏重置 0
-      高潮次数: z.coerce.number().transform(v => Math.max(v, 0))  # 触发+1；→前戏重置 0
-      耳朵敏感: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # 长期累积不重置，每次+1~5
-      后颈敏感: z.coerce.number().transform(v => _.clamp(v, 0, 100))  # 长期累积，每次+1~5
-      腰部敏感|大腿内侧敏感|胸部敏感|阴蒂敏感: z.coerce.number().transform(v => _.clamp(v, 0, 100))
-      当前头发: string  # 换发型/被弄乱更新
-      当前上装: string  # 换装/损坏/褪去更新
-      当前下装|当前内衣|当前袜子|当前鞋子|当前饰品: string
-
+      
     陆辞夜\好感对${苏晚棠|沈含烟}:
       type: z.coerce.number().transform(v => _.clamp(v, 0, 1000))
       check:
+        - delta方式更新
         - 苏晚棠: 主动进攻型，保护/干预时上升
         - 沈含烟: 起初策略性(通过她控苏晚棠)，后期独立情感
     陆辞夜\攻略阶段: string  # 狩猎期|确认期|深度绑定期 由 max 好感<250→狩猎 ≥500→绑定 跨阈值更新只能前进
+    陆辞夜\内射苏晚棠总次数: z.coerce.number().transform(v => Math.max(v, 0))  # 内射+1；累计总次数
+    陆辞夜\内射沈含烟总次数: z.coerce.number().transform(v => Math.max(v, 0))  # 内射+1；累计总次数
 
     ${世界\年\月\日\星期}:
       年: z.coerce.number().transform(v => Math.max(v, 2016))
@@ -112,7 +101,7 @@
       check:
         - sq_001 格式；新建读计数器+1
         - 活跃≤3
-    世界\计数器\特殊日期|世界\计数器\身体记忆|世界\计数器\主线任务|世界\计数器\支线任务: z.coerce.number().transform(v => Math.max(v, 0))  # 只读，新建实体+1
+    世界\计数器\特殊日期|世界\计数器\主线任务|世界\计数器\支线任务: z.coerce.number().transform(v => Math.max(v, 0))  # 只读，新建实体+1
 
   路径反例:
     - ❌ /好感/苏晚棠/好感对陆辞夜 → ✓ /苏晚棠/好感对陆辞夜
@@ -131,5 +120,5 @@
   联动规则:
     好感↔沦陷: 上限=好感/10；沦陷 100 需好感≥900
     时间推进: 时段跨日→更新日月年星期；每天各角色生理天数+1 超 28 重置并切阶段
-    NSFW: 前戏重置兴奋湿润高潮；事后更新开发敏感经验；首次插入处女→false；首次高潮经验+1
+    NSFW: 前戏重置兴奋湿润；事后更新开发敏感经验；首次插入处女→false；首次高潮经验+1；内射对应角色总次数+1
     UID: 读计数器→创建 key_NNN(N+1 补零)→计数器+1；先扫重名: 命中 replace→未命中 add

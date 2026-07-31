@@ -83,7 +83,6 @@ interface StatData {
     大腿内侧敏感?: number;
     胸部敏感?: number;
     阴蒂敏感?: number;
-    身体记忆?: Record<string, { 描述: string; 触发条件: string; 强度: number }>;
     当前头发?: string;
     当前上装?: string;
     当前下装?: string;
@@ -117,7 +116,6 @@ interface StatData {
     大腿内侧敏感?: number;
     胸部敏感?: number;
     阴蒂敏感?: number;
-    身体记忆?: Record<string, { 描述: string; 触发条件: string; 强度: number }>;
     当前头发?: string;
     当前上装?: string;
     当前下装?: string;
@@ -142,10 +140,9 @@ interface StatData {
     特殊日期?: Record<string, { 名称: string; 日期: string; 类型: string; 状态: string }>;
     主线任务?: Record<string, { 标题: string; 状态: string; 描述: string }>;
     支线任务?: Record<string, { 标题: string; 状态: string; 描述: string }>;
-    计数器?: {
-      特殊日期?: number;
-      身体记忆?: number;
-      主线任务?: number;
+     计数器?: {
+       特殊日期?: number;
+       主线任务?: number;
       支线任务?: number;
     };
   };
