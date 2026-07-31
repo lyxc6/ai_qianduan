@@ -1,48 +1,16 @@
 <template>
   <div class="flex flex-col gap-2 p-1">
-    <div class="rounded-lg p-3" style="background: var(--warm-bg-medium); border-left: 3px solid var(--user-color-primary);">
-      <div class="font-title text-[0.85rem] text-title font-bold mb-2">当前视角</div>
-      <div class="text-[0.75rem] text-primary">{{ actionOptions.当前视角 || '苏晚棠' }}</div>
-    </div>
-
-    <div class="rounded-lg p-3" style="background: var(--warm-bg-medium); border-left: 3px solid var(--user-color-primary);">
-      <div class="font-title text-[0.85rem] text-title font-bold mb-2">行动选项</div>
-      <div class="flex flex-col gap-2">
-        <div
-          v-if="actionOptions.选项一"
-          class="action-btn rounded-lg px-3 py-3 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm text-primary relative"
-          style="background: linear-gradient(135deg, var(--warm-gradient-start) 0%, var(--warm-gradient-end) 100%); border: 1px solid var(--border-color); border-left: 3px solid transparent;"
-          @click="sendAction(actionOptions.选项一)"
-        >
-          <span class="leading-relaxed break-all">{{ actionOptions.选项一 }}</span>
-        </div>
-        <div
-          v-if="actionOptions.选项二"
-          class="action-btn rounded-lg px-3 py-3 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm text-primary relative"
-          style="background: linear-gradient(135deg, var(--warm-gradient-start) 0%, var(--warm-gradient-end) 100%); border: 1px solid var(--border-color); border-left: 3px solid transparent;"
-          @click="sendAction(actionOptions.选项二)"
-        >
-          <span class="leading-relaxed break-all">{{ actionOptions.选项二 }}</span>
-        </div>
-        <div
-          v-if="actionOptions.选项三"
-          class="action-btn rounded-lg px-3 py-3 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm text-primary relative"
-          style="background: linear-gradient(135deg, var(--warm-gradient-start) 0%, var(--warm-gradient-end) 100%); border: 1px solid var(--border-color); border-left: 3px solid transparent;"
-          @click="sendAction(actionOptions.选项三)"
-        >
-          <span class="leading-relaxed break-all">{{ actionOptions.选项三 }}</span>
-        </div>
-        <div
-          v-if="actionOptions.选项四"
-          class="action-btn rounded-lg px-3 py-3 cursor-pointer transition-all duration-300 flex items-start justify-start font-serif text-sm text-primary relative"
-          style="background: linear-gradient(135deg, var(--warm-gradient-start) 0%, var(--warm-gradient-end) 100%); border: 1px solid var(--border-color); border-left: 3px solid transparent;"
-          @click="sendAction(actionOptions.选项四)"
-        >
-          <span class="leading-relaxed break-all">{{ actionOptions.选项四 }}</span>
-        </div>
-        <div class="text-[0.75rem] text-secondary" v-if="!hasOptions">暂无行动选项</div>
-      </div>
-    </div>
+    <div v-if="!hasOptions" class="empty-tip">暂无行动选项</div>
+    <button
+      v-for="(opt, i) in options"
+      :key="i"
+      type="button"
+      class="action-row"
+      @click="sendAction(opt)"
+    >
+      <span class="action-badge">{{ letters[i] }}</span>
+      <span class="action-text">{{ opt }}</span>
+    </button>
   </div>
 </template>
 
@@ -67,11 +35,16 @@ const emit = defineEmits<{
   send: [text: string];
 }>();
 
+const letters = ['A', 'B', 'C', 'D'];
+
 const actionOptions = computed(() => props.statData?.行动选项 || {});
-const hasOptions = computed(() => {
-  const options = actionOptions.value;
-  return options.选项一 || options.选项二 || options.选项三 || options.选项四;
+const options = computed(() => {
+  const opts = actionOptions.value;
+  return [opts.选项一, opts.选项二, opts.选项三, opts.选项四].filter(
+    (opt): opt is string => !!opt && String(opt).trim() !== '',
+  );
 });
+const hasOptions = computed(() => options.value.length > 0);
 
 function sendAction(text: string) {
   if (text) {
@@ -81,10 +54,65 @@ function sendAction(text: string) {
 </script>
 
 <style scoped>
-.action-btn:hover {
-  border-left-color: var(--user-color-primary) !important;
-  transform: translateX(2px);
-  background: linear-gradient(135deg, var(--warm-gradient-end) 0%, var(--warm-bg-light) 100%) !important;
-  box-shadow: 0 4px 12px var(--warm-shadow);
+.action-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid transparent;
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.7rem;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.action-row:hover {
+  transform: translateY(-1px);
+  border-left-color: var(--char-color);
+  border-color: var(--char-border);
+  background: var(--char-bg);
+  box-shadow: 0 4px 10px var(--shadow-soft);
+}
+
+.action-row:active {
+  transform: translateY(0);
+}
+
+.action-badge {
+  flex-shrink: 0;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 0.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.35rem;
+  background: linear-gradient(135deg, var(--char-grad-a), var(--char-grad-b));
+  color: #fff;
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: transform 0.2s ease;
+}
+
+.action-row:hover .action-badge {
+  transform: scale(1.08);
+}
+
+.action-text {
+  flex: 1;
+  word-break: break-all;
 }
 </style>

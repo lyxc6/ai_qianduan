@@ -1,66 +1,90 @@
 <template>
-  <div class="bg-main rounded-lg p-2 flex flex-col relative animate-fadeIn" style="height: var(--panel-max-height);">
-    <div class="rounded-lg p-3 mb-2" style="background: var(--warm-bg-light); border-left: 3px solid var(--user-color-primary); box-shadow: 0 2px 8px var(--warm-shadow), inset 0 1px 0 var(--warm-inner-light);">
-      <div class="flex flex-row justify-between items-center mb-1">
-        <div class="font-title text-[0.9rem] text-secondary tracking-wider" style="min-width: 4.5rem; color: var(--text-title);">⏰日期：</div>
-        <div class="font-title text-[0.9rem] text-secondary tracking-wider font-serif font-medium flex-1 text-right pl-2 text-primary" id="current-time">{{ currentTime }}</div>
+  <div
+    :data-theme="theme"
+    :data-scheme="scheme"
+    class="bg-main animate-fadeIn relative flex flex-col rounded-lg p-2"
+    style="height: var(--panel-max-height);"
+  >
+    <div class="head-bar">
+      <div class="min-w-0">
+        <div class="head-date font-title">{{ dateText }}</div>
+        <div class="head-sub">{{ weekText }}</div>
       </div>
-      <div class="flex flex-row justify-between items-center">
-        <div class="font-title text-[0.9rem] text-secondary tracking-wider" style="min-width: 4.5rem; color: var(--text-title);">🌤天气：</div>
-        <div class="font-title text-[0.9rem] text-secondary tracking-wider font-serif font-medium flex-1 text-right pl-2 text-primary" id="current-weather">{{ currentWeather }}</div>
+      <div class="head-chips">
+        <button
+          type="button"
+          class="scheme-btn"
+          :title="scheme === 'dark' ? '切换为浅色主题' : '切换为深色主题'"
+          @click="toggleScheme"
+        >
+          {{ scheme === 'dark' ? '☀️' : '🌙' }}
+        </button>
+        <span class="head-chip">🌤 {{ currentWeather || '—' }}</span>
+        <span class="head-chip">👤 {{ currentView || '—' }}</span>
+        <span v-if="stageLabel" class="stage-badge" :class="stageClass">{{ stageLabel }}</span>
       </div>
     </div>
 
-    <div class="flex justify-between mt-1 rounded-t-lg p-1 overflow-x-auto flex-shrink-0" style="background: var(--warm-bg-medium);">
+    <div class="tab-bar">
       <div
         v-for="tab in tabs"
         :key="tab.id"
-        class="flex-1 font-title text-[0.8rem] sm:text-[0.9rem] text-secondary tracking-wider py-2.5 md:py-3 px-2 cursor-pointer bg-transparent rounded-t-md transition-all duration-300 text-center relative overflow-hidden hover:text-primary"
-        style="border: 1px solid transparent;"
-        :class="{ 'active-tab': currentPage === tab.id }"
-        @click="currentPage = tab.id"
+        class="tab-item"
+        :class="{ active: currentPage === tab.id }"
+        @click="switchTab(tab.id)"
       >
-        {{ tab.label }}
+        <span class="tab-icon">{{ tab.icon }}</span>
+        <span class="tab-label">{{ tab.label }}</span>
       </div>
     </div>
 
-    <div class="bg-panel backdrop-blur-[10px] flex-1 min-h-0 overflow-y-auto scroll-contain rounded-b-lg p-2 relative" style="box-shadow: inset 0 0 40px var(--warm-shadow);">
+    <div class="bg-panel scroll-contain relative min-h-0 flex-1 overflow-y-auto rounded-b-lg p-2 backdrop-blur-[10px]" style="box-shadow: inset 0 0 40px var(--shadow-soft);">
       <div v-for="tab in tabs" :key="'content-' + tab.id" class="hidden" :class="{ '!block': currentPage === tab.id }">
         <ActionOptions v-if="tab.id === '1'" :statData="statData" :currentMessage="currentMessage" @send="handleSend" />
         <SuwanTang v-if="tab.id === '2'" :statData="statData" />
         <ShenHanYan v-if="tab.id === '3'" :statData="statData" />
         <LuCiYe v-if="tab.id === '4'" :statData="statData" />
         <World v-if="tab.id === '5'" :statData="statData" />
-        <VariableDisplay v-if="tab.id === '6'" :statData="statData" />
+        <UpdateDisplay v-if="tab.id === '6'" :statData="statData" :currentMessage="currentMessage" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import SuwanTang from './components/苏晚棠.vue';
 import ShenHanYan from './components/沈含烟.vue';
 import LuCiYe from './components/陆辞夜.vue';
 import World from './components/世界.vue';
 import ActionOptions from './components/行动选项.vue';
-import VariableDisplay from './components/变量显示.vue';
+import UpdateDisplay from './components/更新显示.vue';
 
 defineOptions({
   unusedWarnings: false,
 });
 
 const tabs = [
-  { id: '1', label: '行动' },
-  { id: '2', label: '苏晚棠' },
-  { id: '3', label: '沈含烟' },
-  { id: '4', label: '陆辞夜' },
-  { id: '5', label: '世界' },
-  { id: '6', label: '变量' },
+  { id: '1', label: '行动', icon: '⚡' },
+  { id: '2', label: '苏晚棠', icon: '🌸' },
+  { id: '3', label: '沈含烟', icon: '❄️' },
+  { id: '4', label: '陆辞夜', icon: '♟' },
+  { id: '5', label: '世界', icon: '🌿' },
+  { id: '6', label: '更新', icon: '📝' },
 ];
+
+const THEME_MAP: Record<string, string> = {
+  '1': 'action',
+  '2': 'swt',
+  '3': 'sht',
+  '4': 'lcy',
+  '5': 'world',
+  '6': 'updates',
+};
 
 interface StatData {
   苏晚棠?: {
+    攻略阶段?: string;
     好感对陆辞夜?: number;
     好感对沈含烟?: number;
     沦陷?: number;
@@ -94,6 +118,7 @@ interface StatData {
     当前阴部?: string;
   };
   沈含烟?: {
+    攻略阶段?: string;
     好感对陆辞夜?: number;
     好感对苏晚棠?: number;
     沦陷?: number;
@@ -127,6 +152,7 @@ interface StatData {
     当前阴部?: string;
   };
   陆辞夜?: {
+    攻略阶段?: string;
     好感对苏晚棠?: number;
     好感对沈含烟?: number;
   };
@@ -140,9 +166,9 @@ interface StatData {
     特殊日期?: Record<string, { 名称: string; 日期: string; 类型: string; 状态: string }>;
     主线任务?: Record<string, { 标题: string; 状态: string; 描述: string }>;
     支线任务?: Record<string, { 标题: string; 状态: string; 描述: string }>;
-     计数器?: {
-       特殊日期?: number;
-       主线任务?: number;
+    计数器?: {
+      特殊日期?: number;
+      主线任务?: number;
       支线任务?: number;
     };
   };
@@ -156,30 +182,91 @@ interface StatData {
 }
 
 const currentPage = ref('1');
-const currentTime = ref('加载中...');
-const currentWeather = ref('加载中...');
 const statData = ref<StatData>({});
 const currentMessage = ref<any>(null);
+
+const SCHEME_KEY = 'lj_theme_scheme';
+
+const scheme = ref<'light' | 'dark'>('light');
+
+function detectInitialScheme(): 'light' | 'dark' {
+  const saved = localStorage.getItem(SCHEME_KEY);
+  if (saved === 'dark' || saved === 'light') {
+    return saved;
+  }
+  try {
+    const body = parent.document.body;
+    if (body && typeof body.classList.contains === 'function' && body.classList.contains('darkTheme')) {
+      return 'dark';
+    }
+  } catch {
+    // ignore
+  }
+  return 'light';
+}
+
+function toggleScheme() {
+  scheme.value = scheme.value === 'dark' ? 'light' : 'dark';
+  try {
+    localStorage.setItem(SCHEME_KEY, scheme.value);
+  } catch {
+    // ignore
+  }
+}
+
+const theme = computed(() => THEME_MAP[currentPage.value] || 'action');
+
+const dateText = computed(() => {
+  const world = statData.value.世界;
+  if (world?.年 && world?.月 && world?.日) {
+    return `${world.年}年${world.月}月${world.日}日`;
+  }
+  return '——';
+});
+
+const weekText = computed(() => {
+  const world = statData.value.世界;
+  if (!world?.年) return '加载中...';
+  return [world.星期, world.时段].filter(Boolean).join(' · ');
+});
+
+const currentWeather = computed(() => statData.value.世界?.天气 || '');
+
+const currentView = computed(() => statData.value.行动选项?.当前视角 || '');
+
+const stageLabel = computed(() => {
+  const view = currentView.value;
+  if (!view) return '';
+  const char = (statData.value as Record<string, any>)[view];
+  return char?.攻略阶段 || '';
+});
+
+const stageClass = computed(() => {
+  const map: Record<string, string> = {
+    抗拒期: 'stage-resist',
+    驯化期: 'stage-tame',
+    沦陷期: 'stage-fall',
+    狩猎期: 'stage-hunt',
+    确认期: 'stage-confirm',
+    守护期: 'stage-guard',
+  };
+  return map[stageLabel.value] || '';
+});
 
 async function loadData() {
   await waitGlobalInitialized('Mvu');
   const data = getAllVariables().stat_data;
   statData.value = data || {};
 
-  if (data.世界) {
-    const world = data.世界;
-    if (world.年 && world.月 && world.日) {
-      currentTime.value = `${world.年}年${world.月}月${world.日}日 ${world.星期 || ''} ${world.时段 || ''}`;
-    }
-    if (world.天气) {
-      currentWeather.value = world.天气;
-    }
-  }
-
   const messages = getChatMessages(-1);
   if (messages && messages.length > 0) {
     currentMessage.value = messages[0];
   }
+}
+
+function switchTab(id: string) {
+  currentPage.value = id;
+  loadData();
 }
 
 function handleSend(text: string) {
@@ -210,26 +297,123 @@ function handleSend(text: string) {
 }
 
 onMounted(() => {
+  scheme.value = detectInitialScheme();
   loadData();
 });
 </script>
 
-<style>
-.active-tab {
-  color: var(--text-title) !important;
-  background-color: var(--warm-bg-light) !important;
-  border-bottom: 1px solid var(--warm-bg-light);
-  transform: translateY(-1px);
+<style scoped>
+.head-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.45rem 0.6rem 0.6rem;
 }
 
-.active-tab::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--user-color-primary), var(--user-color-secondary));
-  border-radius: 0.25rem 0.25rem 0 0;
+.head-date {
+  font-size: 1.1rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.head-sub {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  margin-top: 0.1rem;
+}
+
+.head-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.head-chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--char-bg);
+  color: var(--char-deep);
+  border: 1px solid var(--char-border);
+  border-radius: 999px;
+  padding: 0.12rem 0.6rem;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.scheme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  background: var(--char-bg);
+  border: 1px solid var(--char-border);
+  color: var(--char-deep);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.scheme-btn:hover {
+  transform: scale(1.1);
+  background: var(--char-bg-strong);
+  border-color: var(--char-color);
+}
+
+.tab-bar {
+  display: flex;
+  gap: 2px;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid var(--hairline);
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.45rem 0.65rem;
+  font-family: var(--font-title);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  border-radius: 0.45rem 0.45rem 0 0;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+  user-select: none;
+}
+
+.tab-item:hover {
+  color: var(--text-primary);
+  background: var(--char-bg);
+}
+
+.tab-item.active {
+  color: var(--char-deep);
+  border-bottom-color: var(--char-color);
+  background: var(--char-bg-strong);
+}
+
+.tab-icon {
+  font-size: 0.85rem;
+  line-height: 1;
 }
 </style>
