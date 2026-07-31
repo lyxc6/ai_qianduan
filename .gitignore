@@ -28,6 +28,9 @@ global.d.ts
 # 包管理器本地存储
 .pnpm-store/
 
+# 打包产物(已跟踪文件由 skip-worktree 忽略本地变更,CI 负责提交)
+dist/
+
 # AI Agent 工具目录
 .mimocode/
 .opencode/
