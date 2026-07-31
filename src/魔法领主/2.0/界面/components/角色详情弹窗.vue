@@ -1,18 +1,24 @@
 <template>
-  <div class="flex flex-col">
-    <div class="flex items-center gap-2 p-3 flex-shrink-0" style="border-bottom: var(--theme-content-panel-border);">
-      <button class="bg-transparent border-none text-secondary cursor-pointer px-1 py-0.5 leading-none transition-colors duration-300 hover:text-primary font-title text-[0.9rem] sm:text-[1rem] flex items-center gap-1" @click="$emit('back')">
-        <span class="text-[1rem] sm:text-[1.2rem]">←</span> 返回
+  <div class="flex h-full flex-col">
+    <div class="flex flex-shrink-0 items-center gap-2 px-1 pb-2" style="border-bottom: var(--theme-content-panel-border);">
+      <button
+        class="text-secondary font-title flex cursor-pointer items-center gap-1 rounded border-none bg-transparent px-1.5 py-0.5 text-[0.85rem] leading-none transition-colors duration-300 hover:text-primary hover:bg-black/5"
+        @click="$emit('back')"
+      >
+        <span class="text-[1rem] leading-none">←</span> 返回
       </button>
-      <div class="font-title text-[0.95rem] sm:text-[1.1rem] text-title tracking-wider ml-2">{{ characterName }}</div>
+      <div class="flex min-w-0 items-center gap-1.5">
+        <i class="fa-solid fa-user" style="color: var(--theme-gold); font-size: 0.7rem;"></i>
+        <span class="font-title text-title truncate text-[0.95rem] tracking-wider sm:text-[1.05rem]">{{ characterName }}</span>
+      </div>
     </div>
 
-    <div class="flex gap-1 px-3 pt-2 pb-0 overflow-x-auto flex-shrink-0" style="border-bottom: var(--theme-content-panel-border);">
+    <div class="flex flex-shrink-0 gap-0.5 overflow-x-auto pt-2 pb-1">
       <button
         v-for="(tab, index) in tabs"
         :key="index"
-        class="flex-shrink-0 px-3 py-2 sm:px-4 sm:py-2.5 font-title text-[0.75rem] sm:text-[0.8rem] transition-all duration-300 whitespace-nowrap"
-        :style="activeTab === index ? tabActiveStyle : tabInactiveStyle"
+        class="bookmark-tab font-title flex-shrink-0 px-3 pt-1.5 pb-2 text-[0.72rem] tracking-wider whitespace-nowrap sm:text-[0.78rem]"
+        :class="{ active: activeTab === index }"
         @click="activeTab = index"
       >
         {{ tab.label }}
@@ -20,167 +26,87 @@
     </div>
 
     <div
-      class="p-3 scroll-contain"
+      class="scroll-contain min-h-0 flex-1 overflow-y-auto pt-1"
       @touchstart.passive="onTouchStart"
       @touchend="onTouchEnd"
     >
-      <div class="flex flex-col gap-3">
+      <div class="flex flex-col gap-2.5 pb-1">
         <template v-if="activeTab === 0">
-          <div class="rounded-lg p-3" style="background: rgba(0, 0, 0, 0.2);">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">年龄</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed font-medium">{{ characterData.年龄 ?? 'N/A' }}</span>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">处女</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.处女 ? '是' : '否' }}</span>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">力量等级</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.力量等级 || '未知' }}</span>
-              </div>
-              <div class="flex flex-col" v-if="characterData.修行路线">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">修行路线</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.修行路线 }}</span>
-              </div>
-              <div class="flex flex-col" v-if="characterData.灵魂倾向">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">灵魂倾向</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.灵魂倾向 }}</span>
-              </div>
-              <div class="flex flex-col" v-if="characterData.擅长魔法">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">擅长魔法</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.擅长魔法 }}</span>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">好感度</span>
+          <div class="rounded-lg p-3" style="background: var(--theme-card-bg); border: var(--theme-card-border); box-shadow: var(--theme-card-shadow);">
+            <div class="grid grid-cols-2 gap-x-3 gap-y-2.5">
+              <InfoCell label="年龄" :value="characterData.年龄" fallback="N/A" />
+              <InfoCell label="处女" :value="characterData.处女 ? '是' : '否'" fallback="否" />
+              <InfoCell label="力量等级" :value="characterData.力量等级" fallback="未知" />
+              <InfoCell v-if="characterData.修行路线" label="修行路线" :value="characterData.修行路线" />
+              <InfoCell v-if="characterData.灵魂倾向" label="灵魂倾向" :value="characterData.灵魂倾向" />
+              <InfoCell v-if="characterData.擅长魔法" label="擅长魔法" :value="characterData.擅长魔法" />
+              <div class="col-span-2 flex flex-col">
+                <span class="text-secondary mb-1 text-[0.62rem]">好感度</span>
                 <div class="flex items-center gap-2">
-                  <div class="flex-1 h-2 rounded-sm overflow-hidden" style="background: rgba(0, 0, 0, 0.3);">
-                    <div class="h-full rounded-sm" style="background: var(--theme-accent-bar);" :style="{ width: Math.min(characterData.好感度 ?? 0, 100) + '%' }"></div>
+                  <div class="scale-track flex-1" style="background: rgba(0, 0, 0, 0.2);">
+                    <div class="scale-fill" style="background: var(--theme-accent-bar);" :style="{ width: Math.min(characterData.好感度 ?? 0, 100) + '%' }"></div>
+                    <div v-for="n in [1, 2, 3]" :key="n" class="scale-notch" :style="{ left: (n * 25) + '%' }"></div>
                   </div>
-                  <span class="text-[0.75rem] sm:text-[0.8rem] text-primary">{{ characterData.好感度 ?? 'N/A' }}</span>
+                  <span class="text-primary flex-shrink-0 text-[0.72rem]">{{ characterData.好感度 ?? 'N/A' }}</span>
                 </div>
               </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">种族</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.种族 || '未知' }}</span>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">职业</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.职业 || '未知' }}</span>
-              </div>
-              <div class="flex flex-col col-span-1 sm:col-span-2">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">后宫地位</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.后宫地位 || '未知' }}</span>
-              </div>
-              <div class="flex flex-col" v-if="characterData.阶级">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">阶级</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.阶级.名称 || '未知' }} {{ characterData.阶级.等级 }}</span>
-              </div>
+              <InfoCell label="种族" :value="characterData.种族" fallback="未知" />
+              <InfoCell label="职业" :value="characterData.职业" fallback="未知" />
+              <InfoCell v-if="characterData.阶级" label="阶级" :value="getClassText(characterData.阶级)" />
+              <InfoCell class="col-span-2" label="后宫地位" :value="characterData.后宫地位" fallback="未知" />
             </div>
           </div>
         </template>
 
         <template v-if="activeTab === 1">
-          <div class="rounded-lg p-3" style="background: rgba(0, 0, 0, 0.2);">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div class="flex flex-col col-span-1 sm:col-span-2">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">当前着装</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.当前着装 || '未知' }}</span>
+          <div class="rounded-lg p-3" style="background: var(--theme-card-bg); border: var(--theme-card-border); box-shadow: var(--theme-card-shadow);">
+            <div class="grid grid-cols-2 gap-x-3 gap-y-2.5">
+              <InfoCell class="col-span-2" label="当前着装" :value="characterData.当前着装" fallback="未知" />
+              <InfoCell class="col-span-2" label="当前姿势" :value="characterData.当前姿势" fallback="未知" />
+              <div class="col-span-2 flex flex-col">
+                <span class="text-secondary mb-1 text-[0.62rem]">当前想法</span>
+                <span class="text-primary font-serif text-[0.75rem] leading-relaxed italic" style="color: var(--theme-label-accent);">{{ characterData.当前想法 || '未知' }}</span>
               </div>
-              <div class="flex flex-col col-span-1 sm:col-span-2">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">当前姿势</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.当前姿势 || '未知' }}</span>
-              </div>
-              <div class="flex flex-col col-span-1 sm:col-span-2">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">当前想法</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed font-serif italic" style="color: var(--theme-label-accent);">{{ characterData.当前想法 || '未知' }}</span>
-              </div>
+              <InfoCell label="小穴状态" :value="characterData.当前小穴状态" fallback="未知" />
+              <InfoCell label="胸部状态" :value="characterData.当前胸部状态" fallback="未知" />
+              <InfoCell class="col-span-2" label="身体状态" :value="characterData.身体状态" fallback="未知" />
+              <InfoCell class="col-span-2" label="最近性行为" :value="characterData.最近性行为" fallback="暂无" />
               <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">小穴状态</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.当前小穴状态 || '未知' }}</span>
+                <span class="text-secondary mb-1 text-[0.62rem]">怀孕状态</span>
+                <span
+                  class="font-serif text-[0.75rem] leading-relaxed"
+                  :style="isPregnant ? `color: var(--accent-color); font-weight: 600; text-shadow: 0 0 8px ${isPregnant ? 'rgba(244,114,182,0.6)' : 'transparent'};` : ''"
+                >{{ characterData.怀孕状态 || '未知' }}</span>
               </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">胸部状态</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.当前胸部状态 || '未知' }}</span>
-              </div>
-              <div class="flex flex-col col-span-1 sm:col-span-2">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">身体状态</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.身体状态 || '未知' }}</span>
-              </div>
-              <div class="flex flex-col col-span-1 sm:col-span-2">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">最近性行为</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.最近性行为 || '暂无' }}</span>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">怀孕状态</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed" :style="isPregnant ? 'color: var(--accent-color); font-weight: 600;' : ''">{{ characterData.怀孕状态 || '未知' }}</span>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">高潮次数</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.高潮次数 ?? 0 }}</span>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">内射次数</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.内射次数 ?? 0 }}</span>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">烙印状态</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.烙印状态 || '无烙印' }}</span>
-              </div>
-              <div class="flex flex-col col-span-1 sm:col-span-2">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary mb-0.5">烙印反应</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed">{{ characterData.当前烙印反应 || '无' }}</span>
-              </div>
+              <InfoCell label="高潮次数" :value="characterData.高潮次数 ?? 0" />
+              <InfoCell label="内射次数" :value="characterData.内射次数 ?? 0" />
+              <InfoCell label="烙印状态" :value="characterData.烙印状态" fallback="无烙印" />
+              <InfoCell class="col-span-2" label="烙印反应" :value="characterData.当前烙印反应" fallback="无" />
             </div>
           </div>
         </template>
 
         <template v-if="activeTab === 2">
-          <div class="rounded-lg p-3" v-if="characterData.外貌" style="background: rgba(0, 0, 0, 0.2);">
-            <div class="font-title text-sm sm:text-[0.85rem] mb-2 tracking-wider pb-1" style="color: var(--theme-subtab-section-title-color); border-bottom: var(--theme-subtab-section-divider);">外貌</div>
-            <div class="flex flex-col gap-2">
-              <div class="flex justify-between items-center" v-for="(value, key) in characterData.外貌" :key="String(key)">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary flex-shrink-0 min-w-[3rem]">{{ key }}</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed text-right">{{ value || '未知' }}</span>
+          <template v-if="hasDetail">
+            <SectionCard v-for="(section, key) in detailSections" :key="String(key)" :title="section.title">
+              <div v-for="(value, k) in section.data" :key="String(k)" class="flex flex-col gap-1.5">
+                <div class="flex items-start justify-between gap-3">
+                  <span class="text-secondary min-w-[3rem] flex-shrink-0 pt-0.5 text-[0.62rem]">{{ k }}</span>
+                  <span class="text-primary text-right text-[0.74rem] leading-relaxed break-all">{{ value || '未知' }}</span>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="rounded-lg p-3" v-if="characterData.性格" style="background: rgba(0, 0, 0, 0.2);">
-            <div class="font-title text-sm sm:text-[0.85rem] mb-2 tracking-wider pb-1" style="color: var(--theme-subtab-section-title-color); border-bottom: var(--theme-subtab-section-divider);">性格</div>
-            <div class="flex flex-col gap-2">
-              <div class="flex justify-between items-center" v-for="(value, key) in characterData.性格" :key="String(key)">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary flex-shrink-0 min-w-[3rem]">{{ key }}</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed text-right">{{ value || '未知' }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="rounded-lg p-3" v-if="characterData.能力" style="background: rgba(0, 0, 0, 0.2);">
-            <div class="font-title text-sm sm:text-[0.85rem] mb-2 tracking-wider pb-1" style="color: var(--theme-subtab-section-title-color); border-bottom: var(--theme-subtab-section-divider);">能力</div>
-            <div class="flex flex-col gap-2">
-              <div class="flex justify-between items-center" v-for="(value, key) in characterData.能力" :key="String(key)">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary flex-shrink-0 min-w-[3rem]">{{ key }}</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed text-right">{{ value || '未知' }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="rounded-lg p-3" v-if="characterData.NSFW" style="background: rgba(0, 0, 0, 0.2);">
-            <div class="font-title text-sm sm:text-[0.85rem] mb-2 tracking-wider pb-1" style="color: var(--theme-subtab-section-title-color); border-bottom: var(--theme-subtab-section-divider);">NSFW</div>
-            <div class="flex flex-col gap-2">
-              <div class="flex justify-between items-center" v-for="(value, key) in characterData.NSFW" :key="String(key)">
-                <span class="text-[0.6rem] sm:text-[0.65rem] text-secondary flex-shrink-0 min-w-[3rem]">{{ key }}</span>
-                <span class="text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed text-right">{{ value || '未知' }}</span>
-              </div>
-            </div>
-          </div>
-          <div v-if="!characterData.外貌 && !characterData.性格 && !characterData.能力 && !characterData.NSFW" class="flex items-center justify-center h-20 text-secondary font-title text-sm sm:text-[0.9rem]">暂无详细信息</div>
+            </SectionCard>
+          </template>
+          <div v-else class="text-secondary font-title flex h-20 items-center justify-center text-[0.9rem]">暂无详细信息</div>
         </template>
 
         <template v-if="activeTab === 3">
-          <div class="rounded-lg p-3" v-if="characterData.背景" style="background: rgba(0, 0, 0, 0.2);">
-            <div class="font-serif text-[0.75rem] sm:text-[0.8rem] text-primary leading-relaxed whitespace-pre-wrap">{{ characterData.背景 }}</div>
+          <div v-if="characterData.背景" class="rounded-lg p-3" style="background: var(--theme-card-bg); border: var(--theme-card-border); box-shadow: var(--theme-card-shadow);">
+            <div class="quote-box">
+              <span class="text-primary font-serif text-[0.75rem] leading-relaxed whitespace-pre-wrap" style="font-style: normal;">{{ characterData.背景 }}</span>
+            </div>
           </div>
-          <div v-else class="flex items-center justify-center h-20 text-secondary font-title text-sm sm:text-[0.9rem]">暂无背景</div>
+          <div v-else class="text-secondary font-title flex h-20 items-center justify-center text-[0.9rem]">暂无背景</div>
         </template>
       </div>
     </div>
@@ -188,7 +114,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, h, ref } from 'vue';
 
 interface Props {
   characterName: string;
@@ -211,17 +137,6 @@ const tabs = [
 
 const activeTab = ref(0);
 
-const tabActiveStyle = {
-  background: 'var(--theme-subtab-active-bg)',
-  color: 'var(--text-title)',
-  boxShadow: 'inset 0 -2px 0 var(--theme-subtab-active-indicator)',
-};
-
-const tabInactiveStyle = {
-  background: 'transparent',
-  color: 'var(--text-secondary)',
-};
-
 const characterData = computed(() => {
   if (!props.characterName || !props.statData?.角色) return {};
   return props.statData.角色[props.characterName] || {};
@@ -231,6 +146,37 @@ const isPregnant = computed(() => {
   const state = characterData.value.怀孕状态;
   return state && state !== '未怀孕';
 });
+
+const detailSections = computed(() => {
+  const d = characterData.value;
+  const sections: { title: string; data: Record<string, any> }[] = [];
+  if (d.外貌) sections.push({ title: '外貌', data: d.外貌 });
+  if (d.性格) sections.push({ title: '性格', data: d.性格 });
+  if (d.能力) sections.push({ title: '能力', data: d.能力 });
+  if (d.NSFW) sections.push({ title: 'NSFW', data: d.NSFW });
+  return sections;
+});
+
+const hasDetail = computed(() => detailSections.value.length > 0);
+
+function getClassText(cls: Record<string, any>): string {
+  return [cls.名称, cls.等级].filter(Boolean).join(' ');
+}
+
+function InfoCell(props: any) {
+  const value = props.value ?? props.fallback ?? '—';
+  return h('div', { class: ['flex flex-col', props.class] }, [
+    h('span', { class: 'text-[0.62rem] text-secondary mb-1' }, props.label),
+    h('span', { class: 'text-[0.74rem] text-primary leading-relaxed font-medium' }, String(value)),
+  ]);
+}
+
+function SectionCard(props: any, ctx: any) {
+  return h('div', { class: 'rounded-lg p-3', style: 'background: var(--theme-card-bg); border: var(--theme-card-border); box-shadow: var(--theme-card-shadow);' }, [
+    h('div', { class: 'font-title text-[0.8rem] mb-2 tracking-widest gold-divider pb-1.5', style: 'color: var(--theme-subtab-section-title-color);' }, props.title),
+    h('div', { class: 'flex flex-col gap-2.5' }, ctx.slots.default?.()),
+  ]);
+}
 
 let touchStartX = 0;
 let touchStartY = 0;
@@ -254,6 +200,3 @@ function onTouchEnd(e: TouchEvent) {
   }
 }
 </script>
-
-<style>
-</style>

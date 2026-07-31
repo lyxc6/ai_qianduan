@@ -2,306 +2,111 @@
   --font-serif: 'Noto Serif SC', serif;
   --font-title: 'ZCOOL XiaoWei', serif;
   --panel-max-height: 34.5rem;
+}
 
-  --text-primary: #4a3b2a;
+/* ============ 羊皮纸魔法书（默认·浅色） ============ */
+.theme-parchment {
+  --text-primary: #3f3322;
   --text-secondary: #6e5a44;
-  --text-title: #3b2340;
+  --text-title: #2f2340;
   --accent-color: #c23d5a;
   --border-color: rgba(139, 46, 46, 0.35);
 
-  --theme-bg-main: #f4ecd8;
-  --theme-bg-panel: rgba(244, 236, 216, 0.85);
-  --theme-header-bg: linear-gradient(135deg, #e8dcc8 0%, #d4c8a8 50%, #e8dcc8 100%);
-  --theme-header-border: 3px solid #d4a853;
-  --theme-header-shadow: 0 2px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  --theme-bg-main: #efe6d0;
+  --theme-bg-panel: rgba(247, 240, 222, 0.92);
+  --theme-header-bg: linear-gradient(180deg, #8b5a2b 0%, #b07c38 12%, #efe0bd 55%, #f6eed6 100%);
+  --theme-header-border: 3px solid #8b5a2b;
+  --theme-header-shadow: 0 2px 12px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --theme-gold: #d4a853;
+  --theme-gold-deep: #8b5a2b;
   --theme-label-accent: #8b2e2e;
-  --theme-tabbar-bg: linear-gradient(135deg, rgba(232, 220, 200, 0.7) 0%, rgba(200, 185, 160, 0.5) 100%);
+  --theme-tabbar-bg: linear-gradient(180deg, #e2d3b0 0%, #eadcbc 100%);
+  --theme-tab-active-bg: linear-gradient(180deg, #f7f0de 0%, #efe3c6 100%);
   --theme-tab-active-bar: linear-gradient(90deg, #d4a853, #8b2e2e);
-  --theme-panel-shadow: inset 0 0 40px rgba(139, 90, 43, 0.12);
-  --theme-card-bg: rgba(255, 255, 255, 0.6);
-  --theme-card-border: 1px dashed rgba(110, 90, 68, 0.3);
-  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 8px rgba(212, 168, 83, 0.04);
-  --theme-stat-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(244, 236, 216, 0.3) 100%);
-  --theme-stat-border: 1px solid rgba(212, 168, 83, 0.2);
+  --theme-panel-shadow: inset 0 0 42px rgba(139, 90, 43, 0.14);
+  --theme-card-bg: rgba(255, 250, 238, 0.75);
+  --theme-card-border: 1px solid rgba(139, 90, 43, 0.28);
+  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.07), 0 0 10px rgba(212, 168, 83, 0.06);
+  --theme-stat-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.16) 0%, rgba(247, 240, 222, 0.4) 100%);
+  --theme-stat-border: 1px solid rgba(212, 168, 83, 0.35);
   --theme-accent-bar: linear-gradient(90deg, #d4a853, #8b2e2e);
-  --theme-highlight-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.15) 0%, rgba(244, 236, 216, 0.4) 100%);
-  --theme-highlight-border: 1px solid rgba(212, 168, 83, 0.35);
-  --theme-button-bg: rgba(255, 255, 255, 0.5);
-  --theme-button-border: 1px solid rgba(139, 46, 46, 0.2);
-  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  --theme-divider: 1px solid rgba(139, 46, 46, 0.2);
+  --theme-highlight-bg: linear-gradient(180deg, rgba(212, 168, 83, 0.2) 0%, rgba(247, 240, 222, 0.55) 100%);
+  --theme-highlight-border: 1px solid rgba(212, 168, 83, 0.45);
+  --theme-button-bg: rgba(255, 250, 238, 0.7);
+  --theme-button-border: 1px solid rgba(139, 90, 43, 0.35);
+  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --theme-rune-glow: rgba(212, 168, 83, 0.55);
+  --theme-rune-color: #8b5a2b;
+  --theme-divider: 1px solid rgba(139, 90, 43, 0.28);
   --theme-subtab-active-bg: rgba(139, 46, 46, 0.08);
   --theme-subtab-active-indicator: #8b2e2e;
   --theme-subtab-section-title-color: #8b2e2e;
   --theme-subtab-section-divider: 1px solid rgba(139, 46, 46, 0.25);
-  --theme-scrollbar-thumb: rgba(139, 46, 46, 0.2);
-  --theme-scrollbar-thumb-hover: rgba(139, 46, 46, 0.4);
-  --theme-content-panel-border: 1px solid rgba(139, 46, 46, 0.12);
+  --theme-quote-bg: rgba(139, 90, 43, 0.07);
+  --theme-quote-border: #d4a853;
+  --theme-scroll-wood: #8b5a2b;
+  --theme-scroll-shadow: rgba(139, 90, 43, 0.35);
+  --theme-scrollbar-thumb: rgba(139, 90, 43, 0.3);
+  --theme-scrollbar-thumb-hover: rgba(139, 90, 43, 0.5);
+  --theme-content-panel-border: 1px solid rgba(139, 90, 43, 0.18);
   --theme-switcher-dot: #d4a853;
+  --theme-badge-good: #2e8b57;
+  --theme-badge-bad: #c83232;
+  --theme-badge-neutral: #8a6d30;
 }
 
-/* ============ 凡尔赛·魔法宫廷 ============ */
-.theme-aristocratic {
-  --text-primary: #f5f3ff;
-  --text-secondary: #a5b4fc;
-  --text-title: #c4b5fd;
-  --accent-color: #f472b6;
-  --border-color: rgba(138, 100, 200, 0.4);
-
-  --theme-bg-main: #0f0a1f;
-  --theme-bg-panel: rgba(20, 12, 40, 0.85);
-  --theme-header-bg: linear-gradient(135deg, #1a0f28 0%, #2a1f14 50%, #1a0f28 100%);
-  --theme-header-border: 3px solid #d4a853;
-  --theme-header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 168, 83, 0.1);
-  --theme-label-accent: #d4a853;
-  --theme-tabbar-bg: linear-gradient(135deg, rgba(26, 15, 40, 0.7) 0%, rgba(20, 12, 35, 0.5) 100%);
-  --theme-tab-active-bar: linear-gradient(90deg, #d4a853, #c23d5a);
-  --theme-panel-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
-  --theme-card-bg: linear-gradient(135deg, #1a0f28 0%, rgba(20, 12, 40, 0.75) 100%);
-  --theme-card-border: 1px solid rgba(212, 168, 83, 0.25);
-  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(212, 168, 83, 0.06);
-  --theme-stat-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.12) 0%, rgba(194, 61, 90, 0.08) 100%);
-  --theme-stat-border: 1px solid rgba(212, 168, 83, 0.25);
-  --theme-accent-bar: linear-gradient(90deg, #d4a853, #c23d5a);
-  --theme-highlight-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(212, 168, 83, 0.05) 100%);
-  --theme-highlight-border: 1px solid rgba(212, 168, 83, 0.3);
-  --theme-button-bg: linear-gradient(135deg, #1a0f28 0%, rgba(20, 12, 40, 0.9) 100%);
-  --theme-button-border: 1px solid rgba(212, 168, 83, 0.2);
-  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 168, 83, 0.06);
-  --theme-divider: 1px solid rgba(212, 168, 83, 0.2);
-  --theme-subtab-active-bg: rgba(212, 168, 83, 0.1);
-  --theme-subtab-active-indicator: #d4a853;
-  --theme-subtab-section-title-color: #d4a853;
-  --theme-subtab-section-divider: 1px solid rgba(212, 168, 83, 0.25);
-  --theme-scrollbar-thumb: rgba(212, 168, 83, 0.25);
-  --theme-scrollbar-thumb-hover: rgba(212, 168, 83, 0.45);
-  --theme-content-panel-border: 1px solid rgba(212, 168, 83, 0.12);
-  --theme-switcher-dot: #d4a853;
-}
-
-/* 凡尔赛签名：金纹角标 */
-.theme-aristocratic .sig-header::before {
-  content: '';
-  position: absolute;
-  top: 3px; left: 3px;
-  width: 14px; height: 14px;
-  border-left: 2px solid var(--theme-label-accent);
-  border-top: 2px solid var(--theme-label-accent);
-  opacity: 0.7;
-}
-.theme-aristocratic .sig-header::after {
-  content: '';
-  position: absolute;
-  bottom: 3px; right: 3px;
-  width: 14px; height: 14px;
-  border-right: 2px solid var(--theme-label-accent);
-  border-bottom: 2px solid var(--theme-label-accent);
-  opacity: 0.7;
-}
-
-/* ============ 血源大教堂 ============ */
+/* ============ 暗黑哥特（深色） ============ */
 .theme-gothic {
   --text-primary: #e8e0f0;
-  --text-secondary: #b8a8c8;
+  --text-secondary: #a898b8;
   --text-title: #d4c0e8;
   --accent-color: #e8486a;
-  --border-color: rgba(139, 26, 58, 0.4);
+  --border-color: rgba(139, 26, 58, 0.45);
 
-  --theme-bg-main: #050308;
-  --theme-bg-panel: rgba(10, 5, 12, 0.9);
-  --theme-header-bg: linear-gradient(135deg, #080010 0%, #150a1a 50%, #080010 100%);
+  --theme-bg-main: #07030a;
+  --theme-bg-panel: rgba(12, 6, 15, 0.92);
+  --theme-header-bg: linear-gradient(180deg, #1a0a12 0%, #2a1020 30%, #0c0610 100%);
   --theme-header-border: 3px solid #8b1a3a;
-  --theme-header-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(139, 26, 58, 0.12);
+  --theme-header-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(139, 26, 58, 0.2);
+  --theme-gold: #a86a2a;
+  --theme-gold-deep: #5a3a1a;
   --theme-label-accent: #8b1a3a;
-  --theme-tabbar-bg: linear-gradient(135deg, rgba(8, 0, 16, 0.8) 0%, rgba(12, 5, 18, 0.5) 100%);
-  --theme-tab-active-bar: linear-gradient(90deg, #8b1a3a, #4a3a50);
+  --theme-tabbar-bg: linear-gradient(180deg, #12081a 0%, #1a0c22 100%);
+  --theme-tab-active-bg: linear-gradient(180deg, #1e1030 0%, #241238 100%);
+  --theme-tab-active-bar: linear-gradient(90deg, #a86a2a, #8b1a3a);
   --theme-panel-shadow: inset 0 0 50px rgba(0, 0, 0, 0.6);
-  --theme-card-bg: linear-gradient(135deg, #080010 0%, rgba(8, 3, 12, 0.85) 100%);
-  --theme-card-border: 2px solid rgba(139, 26, 58, 0.3);
-  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 6px rgba(139, 26, 58, 0.06);
-  --theme-stat-bg: linear-gradient(135deg, rgba(139, 26, 58, 0.15) 0%, rgba(74, 58, 80, 0.1) 100%);
-  --theme-stat-border: 1px solid rgba(139, 26, 58, 0.25);
-  --theme-accent-bar: linear-gradient(90deg, #8b1a3a, #4a3a50);
-  --theme-highlight-bg: linear-gradient(135deg, rgba(139, 26, 58, 0.12) 0%, rgba(139, 26, 58, 0.05) 100%);
-  --theme-highlight-border: 1px solid rgba(139, 26, 58, 0.3);
-  --theme-button-bg: linear-gradient(135deg, #080010 0%, rgba(10, 5, 15, 0.9) 100%);
-  --theme-button-border: 1px solid rgba(139, 26, 58, 0.2);
-  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(139, 26, 58, 0.05);
-  --theme-divider: 2px solid rgba(139, 26, 58, 0.25);
-  --theme-subtab-active-bg: rgba(139, 26, 58, 0.12);
+  --theme-card-bg: linear-gradient(135deg, rgba(26, 10, 30, 0.9) 0%, rgba(14, 7, 18, 0.85) 100%);
+  --theme-card-border: 1px solid rgba(139, 26, 58, 0.35);
+  --theme-card-shadow: 0 2px 10px rgba(0, 0, 0, 0.45), 0 0 8px rgba(139, 26, 58, 0.07);
+  --theme-stat-bg: linear-gradient(135deg, rgba(139, 26, 58, 0.18) 0%, rgba(74, 58, 80, 0.1) 100%);
+  --theme-stat-border: 1px solid rgba(139, 26, 58, 0.35);
+  --theme-accent-bar: linear-gradient(90deg, #8b1a3a, #a86a2a);
+  --theme-highlight-bg: linear-gradient(180deg, rgba(139, 26, 58, 0.16) 0%, rgba(30, 16, 48, 0.5) 100%);
+  --theme-highlight-border: 1px solid rgba(168, 106, 42, 0.4);
+  --theme-button-bg: linear-gradient(135deg, rgba(26, 10, 30, 0.9) 0%, rgba(14, 7, 20, 0.9) 100%);
+  --theme-button-border: 1px solid rgba(168, 106, 42, 0.3);
+  --theme-button-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(168, 106, 42, 0.08);
+  --theme-rune-glow: rgba(168, 106, 42, 0.5);
+  --theme-rune-color: #a86a2a;
+  --theme-divider: 1px solid rgba(139, 26, 58, 0.35);
+  --theme-subtab-active-bg: rgba(139, 26, 58, 0.15);
   --theme-subtab-active-indicator: #8b1a3a;
-  --theme-subtab-section-title-color: #8b1a3a;
-  --theme-subtab-section-divider: 2px solid rgba(139, 26, 58, 0.25);
-  --theme-scrollbar-thumb: rgba(139, 26, 58, 0.25);
-  --theme-scrollbar-thumb-hover: rgba(139, 26, 58, 0.45);
-  --theme-content-panel-border: 1px solid rgba(139, 26, 58, 0.15);
-  --theme-switcher-dot: #8b1a3a;
+  --theme-subtab-section-title-color: #a86a2a;
+  --theme-subtab-section-divider: 1px solid rgba(168, 106, 42, 0.3);
+  --theme-quote-bg: rgba(139, 26, 58, 0.1);
+  --theme-quote-border: #8b1a3a;
+  --theme-scroll-wood: #3a2210;
+  --theme-scroll-shadow: rgba(168, 106, 42, 0.4);
+  --theme-scrollbar-thumb: rgba(139, 26, 58, 0.35);
+  --theme-scrollbar-thumb-hover: rgba(139, 26, 58, 0.55);
+  --theme-content-panel-border: 1px solid rgba(168, 106, 42, 0.15);
+  --theme-switcher-dot: #a86a2a;
+  --theme-badge-good: #5aa97a;
+  --theme-badge-bad: #d85070;
+  --theme-badge-neutral: #c0a060;
 }
 
-/* ============ 星图密仪室 ============ */
-.theme-arcane {
-  --text-primary: #e8f0f8;
-  --text-secondary: #a0c8e0;
-  --text-title: #c0e0f8;
-  --accent-color: #e8a060;
-  --border-color: rgba(74, 143, 168, 0.4);
-
-  --theme-bg-main: #060b18;
-  --theme-bg-panel: rgba(8, 14, 32, 0.85);
-  --theme-header-bg: linear-gradient(135deg, #060d1a 0%, #0a1628 50%, #060d1a 100%);
-  --theme-header-border: 3px solid #4a8fa8;
-  --theme-header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(74, 143, 168, 0.1);
-  --theme-label-accent: #4a8fa8;
-  --theme-tabbar-bg: linear-gradient(135deg, rgba(6, 13, 26, 0.7) 0%, rgba(10, 18, 35, 0.5) 100%);
-  --theme-tab-active-bar: linear-gradient(90deg, #4a8fa8, #b8734a);
-  --theme-panel-shadow: inset 0 0 40px rgba(0, 8, 24, 0.5);
-  --theme-card-bg: linear-gradient(135deg, #060d1a 0%, rgba(8, 14, 30, 0.85) 100%);
-  --theme-card-border: 1px solid rgba(74, 143, 168, 0.2);
-  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 8px rgba(74, 143, 168, 0.05);
-  --theme-stat-bg: linear-gradient(135deg, rgba(74, 143, 168, 0.12) 0%, rgba(184, 115, 74, 0.08) 100%);
-  --theme-stat-border: 1px solid rgba(74, 143, 168, 0.25);
-  --theme-accent-bar: linear-gradient(90deg, #4a8fa8, #b8734a);
-  --theme-highlight-bg: linear-gradient(135deg, rgba(74, 143, 168, 0.1) 0%, rgba(74, 143, 168, 0.05) 100%);
-  --theme-highlight-border: 1px solid rgba(74, 143, 168, 0.3);
-  --theme-button-bg: linear-gradient(135deg, #060d1a 0%, rgba(8, 14, 35, 0.9) 100%);
-  --theme-button-border: 1px solid rgba(74, 143, 168, 0.2);
-  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(74, 143, 168, 0.05);
-  --theme-divider: 1px solid rgba(74, 143, 168, 0.2);
-  --theme-subtab-active-bg: rgba(74, 143, 168, 0.1);
-  --theme-subtab-active-indicator: #4a8fa8;
-  --theme-subtab-section-title-color: #4a8fa8;
-  --theme-subtab-section-divider: 1px solid rgba(74, 143, 168, 0.25);
-  --theme-scrollbar-thumb: rgba(74, 143, 168, 0.25);
-  --theme-scrollbar-thumb-hover: rgba(74, 143, 168, 0.45);
-  --theme-content-panel-border: 1px solid rgba(74, 143, 168, 0.12);
-  --theme-switcher-dot: #4a8fa8;
-}
-
-/* 奥术签名：面板角星芒 */
-.theme-arcane .sig-panel::before {
-  content: '';
-  position: absolute;
-  top: 3px; left: 3px;
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--theme-label-accent);
-  box-shadow: 0 0 8px 3px var(--theme-label-accent);
-  opacity: 0.4;
-}
-
-/* ============ 橡木旅店 ============ */
-.theme-medieval {
-  --text-primary: #f0e0c0;
-  --text-secondary: #c8b898;
-  --text-title: #e8d4a0;
-  --accent-color: #f0b060;
-  --border-color: rgba(212, 148, 58, 0.4);
-
-  --theme-bg-main: #1a0f05;
-  --theme-bg-panel: rgba(35, 22, 12, 0.85);
-  --theme-header-bg: linear-gradient(135deg, #24180a 0%, #35220f 50%, #24180a 100%);
-  --theme-header-border: 3px solid #d4943a;
-  --theme-header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 148, 58, 0.08);
-  --theme-label-accent: #d4943a;
-  --theme-tabbar-bg: linear-gradient(135deg, rgba(36, 24, 10, 0.7) 0%, rgba(25, 16, 8, 0.5) 100%);
-  --theme-tab-active-bar: linear-gradient(90deg, #d4943a, #6b5a3e);
-  --theme-panel-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
-  --theme-card-bg: linear-gradient(135deg, #24180a 0%, rgba(20, 14, 8, 0.85) 100%);
-  --theme-card-border: 1px solid rgba(212, 148, 58, 0.2);
-  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 6px rgba(212, 148, 58, 0.05);
-  --theme-stat-bg: linear-gradient(135deg, rgba(212, 148, 58, 0.12) 0%, rgba(107, 90, 62, 0.08) 100%);
-  --theme-stat-border: 1px solid rgba(212, 148, 58, 0.25);
-  --theme-accent-bar: linear-gradient(90deg, #d4943a, #6b5a3e);
-  --theme-highlight-bg: linear-gradient(135deg, rgba(212, 148, 58, 0.1) 0%, rgba(212, 148, 58, 0.05) 100%);
-  --theme-highlight-border: 1px solid rgba(212, 148, 58, 0.3);
-  --theme-button-bg: linear-gradient(135deg, #24180a 0%, rgba(20, 15, 10, 0.9) 100%);
-  --theme-button-border: 1px solid rgba(212, 148, 58, 0.2);
-  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(212, 148, 58, 0.05);
-  --theme-divider: 2px solid rgba(212, 148, 58, 0.25);
-  --theme-subtab-active-bg: rgba(212, 148, 58, 0.1);
-  --theme-subtab-active-indicator: #d4943a;
-  --theme-subtab-section-title-color: #d4943a;
-  --theme-subtab-section-divider: 2px solid rgba(212, 148, 58, 0.25);
-  --theme-scrollbar-thumb: rgba(212, 148, 58, 0.25);
-  --theme-scrollbar-thumb-hover: rgba(212, 148, 58, 0.45);
-  --theme-content-panel-border: 1px solid rgba(212, 148, 58, 0.12);
-  --theme-switcher-dot: #d4943a;
-}
-
-/* ============ 中世纪羊皮纸（默认） ============ */
-.theme-parchment {
-  --text-primary: #4a3b2a;
-  --text-secondary: #6e5a44;
-  --text-title: #3b2340;
-  --accent-color: #c23d5a;
-  --border-color: rgba(139, 46, 46, 0.35);
-
-  --theme-bg-main: #f4ecd8;
-  --theme-bg-panel: rgba(244, 236, 216, 0.85);
-  --theme-header-bg: linear-gradient(135deg, #e8dcc8 0%, #d4c8a8 50%, #e8dcc8 100%);
-  --theme-header-border: 3px solid #d4a853;
-  --theme-header-shadow: 0 2px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  --theme-label-accent: #8b2e2e;
-  --theme-tabbar-bg: linear-gradient(135deg, rgba(232, 220, 200, 0.7) 0%, rgba(200, 185, 160, 0.5) 100%);
-  --theme-tab-active-bar: linear-gradient(90deg, #d4a853, #8b2e2e);
-  --theme-panel-shadow: inset 0 0 40px rgba(139, 90, 43, 0.12);
-  --theme-card-bg: rgba(255, 255, 255, 0.6);
-  --theme-card-border: 1px dashed rgba(110, 90, 68, 0.3);
-  --theme-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 8px rgba(212, 168, 83, 0.04);
-  --theme-stat-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(244, 236, 216, 0.3) 100%);
-  --theme-stat-border: 1px solid rgba(212, 168, 83, 0.2);
-  --theme-accent-bar: linear-gradient(90deg, #d4a853, #8b2e2e);
-  --theme-highlight-bg: linear-gradient(135deg, rgba(212, 168, 83, 0.15) 0%, rgba(244, 236, 216, 0.4) 100%);
-  --theme-highlight-border: 1px solid rgba(212, 168, 83, 0.35);
-  --theme-button-bg: rgba(255, 255, 255, 0.5);
-  --theme-button-border: 1px solid rgba(139, 46, 46, 0.2);
-  --theme-button-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  --theme-divider: 1px solid rgba(139, 46, 46, 0.2);
-  --theme-subtab-active-bg: rgba(139, 46, 46, 0.08);
-  --theme-subtab-active-indicator: #8b2e2e;
-  --theme-subtab-section-title-color: #8b2e2e;
-  --theme-subtab-section-divider: 1px solid rgba(139, 46, 46, 0.25);
-  --theme-scrollbar-thumb: rgba(139, 46, 46, 0.2);
-  --theme-scrollbar-thumb-hover: rgba(139, 46, 46, 0.4);
-  --theme-content-panel-border: 1px solid rgba(139, 46, 46, 0.12);
-  --theme-switcher-dot: #d4a853;
-}
-
-/* 羊皮纸：噪点纹理 + 角标 */
-.theme-parchment .bg-main {
-  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
-  background-color: var(--theme-bg-main);
-}
-
-.theme-parchment .sig-header::before {
-  content: '';
-  position: absolute;
-  top: 3px; left: 3px;
-  width: 14px; height: 14px;
-  border-left: 2px solid #d4a853;
-  border-top: 2px solid #d4a853;
-  opacity: 0.7;
-}
-.theme-parchment .sig-header::after {
-  content: '';
-  position: absolute;
-  bottom: 3px; right: 3px;
-  width: 14px; height: 14px;
-  border-right: 2px solid #d4a853;
-  border-bottom: 2px solid #d4a853;
-  opacity: 0.7;
-}
-
-/* 羊皮纸：底部进度条/面板内边衬 */
-.theme-parchment .sig-panel::before {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(139, 46, 46, 0.15) 20%, rgba(139, 46, 46, 0.15) 80%, transparent 100%);
-  opacity: 0.5;
-}
-
+/* ============ 基础 ============ */
 * {
   margin: 0;
   padding: 0;
@@ -341,38 +146,200 @@ body {
 
 .animate-fadeIn { animation: fadeIn 1s ease-out; }
 
-.theme-switcher {
-  display: flex;
-  gap: 0.35rem;
-  align-items: center;
+/* ============ 纸张纹理（两主题共用，颜色随主题） ============ */
+.theme-parchment .bg-main,
+.theme-gothic .bg-main {
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.055'/%3E%3C/svg%3E");
+  background-color: var(--theme-bg-main);
 }
 
+/* ============ 书脊头部：四角金饰 ============ */
+.sig-header {
+  position: relative;
+}
+.sig-header::before,
+.sig-header::after {
+  content: '';
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  opacity: 0.8;
+}
+.sig-header::before {
+  top: 4px;
+  left: 4px;
+  border-left: 2px solid var(--theme-gold);
+  border-top: 2px solid var(--theme-gold);
+}
+.sig-header::after {
+  bottom: 4px;
+  right: 4px;
+  border-right: 2px solid var(--theme-gold);
+  border-bottom: 2px solid var(--theme-gold);
+}
+
+/* ============ 金线分隔 ============ */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--theme-gold) 25%, var(--theme-gold) 75%, transparent 100%);
+  opacity: 0.6;
+}
+
+/* ============ 书签式 Tab ============ */
+.bookmark-tab {
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 0.55rem), 50% 100%, 0 calc(100% - 0.55rem));
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.bookmark-tab:hover {
+  color: var(--text-title);
+  filter: brightness(1.08);
+}
+.bookmark-tab.active {
+  background: var(--theme-tab-active-bg);
+  color: var(--text-title);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 -3px 0 var(--theme-tab-active-bar);
+  z-index: 2;
+}
+
+/* ============ 符文按钮（行动选项） ============ */
+.rune-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.rune-btn:hover {
+  border-color: var(--theme-gold) !important;
+  box-shadow: 0 0 12px var(--theme-rune-glow), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+.rune-btn:active {
+  transform: scale(0.97);
+}
+.rune-btn.confirming {
+  animation: rune-confirm 0.5s ease-out;
+}
+@keyframes rune-confirm {
+  0% { box-shadow: 0 0 0 0 var(--theme-rune-glow); }
+  50% { box-shadow: 0 0 0 8px transparent; transform: scale(0.96); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.rune-btn .rune-num {
+  color: var(--theme-rune-color);
+  font-family: var(--font-title);
+  transition: color 0.3s;
+}
+.rune-btn:hover .rune-num {
+  color: var(--theme-gold-deep);
+  text-shadow: 0 0 8px var(--theme-rune-glow);
+}
+
+/* ============ 引述框 ============ */
+.quote-box {
+  background: var(--theme-quote-bg);
+  border-left: 3px solid var(--theme-quote-border);
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  font-style: italic;
+}
+
+/* ============ 卷轴卡（当前主线） ============ */
+.scroll-card {
+  position: relative;
+  background: var(--theme-highlight-bg);
+  border: var(--theme-highlight-border);
+  border-radius: 0.4rem;
+  box-shadow: var(--theme-card-shadow);
+}
+.scroll-card::before,
+.scroll-card::after {
+  content: '';
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 5px;
+  background: linear-gradient(180deg, var(--theme-scroll-wood), rgba(0, 0, 0, 0.35));
+  border-radius: 3px;
+  box-shadow: 0 1px 4px var(--theme-scroll-shadow);
+}
+.scroll-card::before { top: 5px; }
+.scroll-card::after { bottom: 5px; }
+.scroll-card .scroll-title-text {
+  font-family: var(--font-title);
+  letter-spacing: 0.15em;
+  color: var(--theme-label-accent);
+}
+
+/* ============ 分段刻度条 ============ */
+.scale-track {
+  position: relative;
+  height: 0.55rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+.scale-track .scale-fill {
+  height: 100%;
+  border-radius: 0.25rem;
+  transition: width 0.5s ease;
+}
+.scale-track .scale-notch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.28);
+  opacity: 0.7;
+}
+
+/* ============ 主题切换 ============ */
+.theme-switcher {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
 .theme-dot {
-  width: 0.75rem;
-  height: 0.75rem;
+  width: 0.85rem;
+  height: 0.85rem;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
-
 .theme-dot:hover {
-  transform: scale(1.3);
-  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.25);
+  border-color: #fff;
 }
-
 .theme-dot.active {
   border-color: #fff;
-  box-shadow: 0 0 6px var(--theme-switcher-dot);
+  box-shadow: 0 0 8px var(--theme-switcher-dot);
   transform: scale(1.15);
 }
+.theme-dot.parchment { background: linear-gradient(135deg, #efe6d0, #d4a853); }
+.theme-dot.gothic { background: linear-gradient(135deg, #8b1a3a, #a86a2a); }
 
-.theme-dot.aristocratic { background: linear-gradient(135deg, #d4a853, #c23d5a); }
-.theme-dot.gothic { background: linear-gradient(135deg, #8b1a3a, #4a3a50); }
-.theme-dot.arcane { background: linear-gradient(135deg, #4a8fa8, #b8734a); }
-.theme-dot.medieval { background: linear-gradient(135deg, #d4943a, #6b5a3e); }
-.theme-dot.parchment { background: linear-gradient(135deg, #d4a853, #8b2e2e); }
+/* ============ 抽屉动画（角色详情） ============ */
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+.drawer-enter-from {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.drawer-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
 
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-float-up { animation: floatUp 0.4s ease-out; }
+
+/* ============ 滚动条 ============ */
 ::-webkit-scrollbar { width: 0.5rem; }
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.12);
