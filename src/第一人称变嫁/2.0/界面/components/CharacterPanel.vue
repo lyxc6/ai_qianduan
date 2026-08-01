@@ -151,7 +151,7 @@ const coreStats = computed<RingStat[]>(() => {
       stats.push({
         label: key.slice(3),
         text: String(num),
-        pct: Math.min(100, Math.max(0, (num / 10) * 100)),
+        pct: Math.min(100, Math.max(0, num / 10)),
         kind: 'like',
       });
     }
