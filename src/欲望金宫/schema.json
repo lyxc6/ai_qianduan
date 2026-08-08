@@ -1,0 +1,271 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "default": {},
+  "type": "object",
+  "properties": {
+    "世界": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "当前日期": {
+          "default": "2026年8月8日",
+          "$ref": "#/$defs/__schema0"
+        },
+        "当前时间": {
+          "default": "21:00",
+          "$ref": "#/$defs/__schema0"
+        },
+        "当前地点": {
+          "default": "金宫俱乐部·顶层酒廊",
+          "$ref": "#/$defs/__schema0"
+        },
+        "营业状态": {
+          "default": "营业中",
+          "$ref": "#/$defs/__schema0"
+        },
+        "俱乐部名称": {
+          "default": "金宫俱乐部",
+          "$ref": "#/$defs/__schema0"
+        },
+        "知名度": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "本月流水": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "在册女孩数": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "育宫名额": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "本月事件": {
+          "default": "无",
+          "$ref": "#/$defs/__schema0"
+        }
+      }
+    },
+    "玩家": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "姓名": {
+          "default": "{{user}}",
+          "$ref": "#/$defs/__schema0"
+        },
+        "性别": {
+          "default": "男",
+          "$ref": "#/$defs/__schema0"
+        },
+        "会员等级": {
+          "default": "黑金卡",
+          "$ref": "#/$defs/__schema0"
+        },
+        "类别": {
+          "default": "新贵",
+          "$ref": "#/$defs/__schema0"
+        },
+        "年龄": {
+          "default": 28,
+          "type": "number"
+        },
+        "累计消费": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "金叶积分": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "当前需求": {
+          "default": "十周年夜第一次入会，想以诚意为后宫挑选第一位银铃以上的姐妹",
+          "$ref": "#/$defs/__schema0"
+        },
+        "专属服务员": {
+          "default": [],
+          "$ref": "#/$defs/__schema3"
+        },
+        "当前想法": {
+          "default": "",
+          "$ref": "#/$defs/__schema0"
+        }
+      }
+    },
+    "恩客": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "description": "恩客姓名"
+      },
+      "additionalProperties": {
+        "default": {},
+        "type": "object",
+        "properties": {
+          "会员等级": {
+            "default": "银卡",
+            "$ref": "#/$defs/__schema0"
+          },
+          "类别": {
+            "default": "财阀二代",
+            "$ref": "#/$defs/__schema0"
+          },
+          "累计消费": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "金叶积分": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "当前需求": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "专属服务员": {
+            "default": [],
+            "$ref": "#/$defs/__schema3"
+          }
+        }
+      }
+    },
+    "女孩": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "description": "女孩姓名"
+      },
+      "additionalProperties": {
+        "default": {},
+        "type": "object",
+        "properties": {
+          "姓名": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "年龄": {
+            "default": 20,
+            "type": "number"
+          },
+          "出身": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "职业": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "性格": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "性格标签": {
+            "default": [],
+            "$ref": "#/$defs/__schema3"
+          },
+          "外貌": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "等级": {
+            "default": "试用生",
+            "$ref": "#/$defs/__schema0"
+          },
+          "专属恩客": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "心动对象": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "恋情阶段": {
+            "default": "相识",
+            "$ref": "#/$defs/__schema0"
+          },
+          "好感度": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "欲望": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "孕愿": {
+            "default": "拒绝受孕",
+            "$ref": "#/$defs/__schema0"
+          },
+          "处女": {
+            "default": true,
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "性爱次数": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "无套次数": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "内射次数": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "怀孕状态": {
+            "default": "未孕",
+            "$ref": "#/$defs/__schema0"
+          },
+          "怀孕天数": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "生产次数": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "累计奖励": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "当前想法": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "身体状态": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema1": {
+      "default": 0,
+      "type": "number"
+    },
+    "__schema2": {
+      "default": 0,
+      "type": "number"
+    },
+    "__schema3": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

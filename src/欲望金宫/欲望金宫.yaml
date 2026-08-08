@@ -1,0 +1,104 @@
+# 基础信息
+name: 欲望金宫
+creator: ""
+character_version: ""
+
+# 主要字段映射
+fields:
+  description: 作品/欲望金宫/世界书/世界观/世界观核心.yaml
+  personality: ""
+  scenario: ""
+  first_mes: 作品/欲望金宫/开场白.md
+  mes_example: ""
+  creator_notes: ""
+  system_prompt: ""
+  post_history_instructions: ""
+
+# 扩展字段
+extensions:
+  talkativeness: "0.5"
+  fav: false
+  world: 欲望金宫
+
+# 脚本配置
+scripts:
+  - name: "变量结构设计"
+    content: 作品/欲望金宫/世界书/变量/变量结构.js
+    enabled: true
+
+# 角色书配置
+character_book:
+  name: 欲望金宫
+
+  entries:
+    - comment: "[initvar]变量初始化"
+      content: 作品/欲望金宫/世界书/变量/[initvar]变量初始化.yaml
+      enabled: false
+      position: before_char
+      insertion_order: 101
+      depth: 4
+      role: 0
+
+    - comment: "[mvu_update]变量更新规则"
+      content: 作品/欲望金宫/世界书/变量/[mvu_update]变量更新规则.yaml
+      enabled: true
+      position: at_depth
+      insertion_order: 1
+      depth: 1
+      role: 0
+
+    - comment: "[mvu_update]变量输出格式"
+      content: 作品/欲望金宫/世界书/变量/[mvu_update]变量输出格式.yaml
+      enabled: true
+      position: at_depth
+      insertion_order: 2
+      depth: 1
+      role: 0
+
+    - comment: "[mvu_update]给AI的变量信息"
+      content: 作品/欲望金宫/世界书/变量/给AI的变量信息.ejs
+      enabled: true
+      position: at_depth
+      insertion_order: 3
+      depth: 1
+      role: 0
+
+    - comment: "[mvu_plot]世界观核心"
+      content: 作品/欲望金宫/世界书/世界观/世界观核心.yaml
+      enabled: true
+      position: before_char
+      insertion_order: 1
+      depth: 4
+      role: 0
+
+    - comment: "[mvu_plot]俱乐部规则"
+      content: 作品/欲望金宫/世界书/世界观/俱乐部规则.yaml
+      enabled: true
+      position: before_char
+      insertion_order: 2
+      depth: 4
+      role: 0
+
+    - comment: "[mvu_plot]性爱与奖励规则"
+      content: 作品/欲望金宫/世界书/世界观/性爱与奖励规则.yaml
+      enabled: true
+      position: before_char
+      insertion_order: 3
+      depth: 4
+      role: 0
+
+    - comment: "[mvu_plot]阶级与身份"
+      content: 作品/欲望金宫/世界书/世界观/阶级与身份.yaml
+      enabled: true
+      position: before_char
+      insertion_order: 4
+      depth: 4
+      role: 0
+
+    - comment: "[mvu_plot]玩家设定"
+      content: 作品/欲望金宫/世界书/世界观/玩家设定.yaml
+      enabled: true
+      position: before_char
+      insertion_order: 5
+      depth: 4
+      role: 0
