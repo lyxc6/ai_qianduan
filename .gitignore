@@ -20,7 +20,7 @@ components.d.ts
 .roo/
 .trae/
 .vscode/
-
+.zcode/
 # 自动生成的类型文件
 auto-imports.zod.d.ts
 global.d.ts
@@ -35,6 +35,8 @@ dist/
 .mimocode/
 .opencode/
 .agents/
+.mimosa/
 
 # 误创建的文件
 tore*
+.preview/
