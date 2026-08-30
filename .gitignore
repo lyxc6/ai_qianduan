@@ -40,3 +40,7 @@ dist/
 # 误创建的文件
 tore*
 .preview/
+
+# 本地提取脚本与产物(含路径穿越风险的脚本，不纳入版本库)
+extract/
+extracted/
