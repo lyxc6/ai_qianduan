@@ -1,0 +1,96 @@
+# 基础信息
+name: 云梦仙宗
+creator: ""
+character_version: "1.0"
+
+# 主要字段映射
+fields:
+  description: 作品/云梦仙宗/世界书/世界观/世界观核心.yaml
+  personality: ""
+  scenario: ""
+  first_mes: 作品/云梦仙宗/开场白.md
+  mes_example: ""
+  creator_notes: ""
+  system_prompt: ""
+  post_history_instructions: ""
+
+# 扩展字段
+extensions:
+  talkativeness: "0.6"
+  fav: false
+  world: 云梦仙宗
+
+# 脚本配置
+scripts:
+  - name: "变量结构设计"
+    content: 作品/云梦仙宗/世界书/变量/变量结构.js
+    enabled: true
+
+# 角色书配置
+character_book:
+  name: 云梦仙宗
+
+  entries:
+    - comment: "[initvar]变量初始化"
+      content: 作品/云梦仙宗/世界书/变量/[initvar]变量初始化.yaml
+      enabled: false
+      position: before_char
+      insertion_order: 101
+      depth: 4
+      role: 0
+
+    - comment: "[mvu_update]变量更新规则"
+      content: 作品/云梦仙宗/世界书/变量/[mvu_update]变量更新规则.yaml
+      enabled: true
+      position: at_depth
+      insertion_order: 1
+      depth: 1
+      role: 0
+
+    - comment: "[mvu_update]变量输出格式"
+      content: 作品/云梦仙宗/世界书/变量/[mvu_update]变量输出格式.yaml
+      enabled: true
+      position: at_depth
+      insertion_order: 2
+      depth: 1
+      role: 0
+
+    - comment: "[mvu_update]给AI的变量信息"
+      content: 作品/云梦仙宗/世界书/变量/给AI的变量信息.ejs
+      enabled: true
+      position: at_depth
+      insertion_order: 3
+      depth: 1
+      role: 0
+
+    - comment: "[mvu_plot]世界观核心"
+      content: 作品/云梦仙宗/世界书/世界观/世界观核心.yaml
+      enabled: true
+      position: before_char
+      insertion_order: 1
+      depth: 4
+      role: 0
+
+    - comment: "[mvu_plot]宗门经营规则"
+      content: 作品/云梦仙宗/世界书/世界观/宗门经营规则.yaml
+      enabled: true
+      position: before_char
+      insertion_order: 2
+      depth: 4
+      role: 0
+
+    - comment: "[mvu_plot]修为体系"
+      content: 作品/云梦仙宗/世界书/世界观/修为体系.yaml
+      enabled: true
+      position: before_char
+      insertion_order: 3
+      depth: 4
+      role: 0
+
+    - comment: "[mvu_plot]人物与关系"
+      content: 作品/云梦仙宗/世界书/世界观/人物与关系.yaml
+      enabled: true
+      position: before_char
+      insertion_order: 4
+      depth: 4
+      role: 0

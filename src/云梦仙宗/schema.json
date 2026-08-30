@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "default": {},
+  "type": "object",
+  "properties": {
+    "世界": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "当前日期": {
+          "default": "云历148年·春三月·十五日",
+          "$ref": "#/$defs/__schema0"
+        },
+        "当前时间": {
+          "default": "辰时",
+          "$ref": "#/$defs/__schema0"
+        },
+        "当前地点": {
+          "default": "云梦山·主峰大殿",
+          "$ref": "#/$defs/__schema0"
+        },
+        "宗门名称": {
+          "default": "云梦仙宗",
+          "$ref": "#/$defs/__schema0"
+        },
+        "宗门等级": {
+          "default": "破落小派",
+          "$ref": "#/$defs/__schema0"
+        },
+        "灵石": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "声望": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "弟子人数": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "灵田等级": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "灵田数量": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "丹炉数量": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "藏经阁等级": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "弟子房舍等级": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "灵田地块": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "description": "地块名称"
+          },
+          "additionalProperties": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "作物": {
+                "default": "闲置",
+                "$ref": "#/$defs/__schema0"
+              },
+              "状态": {
+                "default": "空闲",
+                "$ref": "#/$defs/__schema0"
+              },
+              "种植日期": {
+                "default": "",
+                "$ref": "#/$defs/__schema0"
+              }
+            }
+          }
+        },
+        "悬赏列表": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "description": "悬赏名称"
+          },
+          "additionalProperties": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "发布方": {
+                "default": "",
+                "$ref": "#/$defs/__schema0"
+              },
+              "内容": {
+                "default": "",
+                "$ref": "#/$defs/__schema0"
+              },
+              "难度": {
+                "default": "寻物",
+                "$ref": "#/$defs/__schema0"
+              },
+              "报酬": {
+                "$ref": "#/$defs/__schema1"
+              },
+              "状态": {
+                "default": "可接取",
+                "$ref": "#/$defs/__schema0"
+              }
+            }
+          }
+        },
+        "本月事件": {
+          "default": "无",
+          "$ref": "#/$defs/__schema0"
+        }
+      }
+    },
+    "玩家": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "姓名": {
+          "default": "{{user}}",
+          "$ref": "#/$defs/__schema0"
+        },
+        "性别": {
+          "default": "男",
+          "$ref": "#/$defs/__schema0"
+        },
+        "年龄": {
+          "default": 18,
+          "type": "number"
+        },
+        "身份": {
+          "default": "掌门",
+          "$ref": "#/$defs/__schema0"
+        },
+        "修为境界": {
+          "default": "炼气",
+          "$ref": "#/$defs/__schema0"
+        },
+        "修为进度": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "功法": {
+          "default": "",
+          "$ref": "#/$defs/__schema0"
+        },
+        "灵石": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "贡献点": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "当前目标": {
+          "default": "重振云梦仙宗，让宗门重新有烟火气",
+          "$ref": "#/$defs/__schema0"
+        },
+        "当前想法": {
+          "default": "",
+          "$ref": "#/$defs/__schema0"
+        }
+      }
+    },
+    "女修": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "description": "女修姓名"
+      },
+      "additionalProperties": {
+        "default": {},
+        "type": "object",
+        "properties": {
+          "姓名": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "年龄": {
+            "default": 20,
+            "type": "number"
+          },
+          "身份": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "性格": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "性格标签": {
+            "default": [],
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "外貌": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "修为境界": {
+            "default": "炼气",
+            "$ref": "#/$defs/__schema0"
+          },
+          "修为进度": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "宗门职务": {
+            "default": "无",
+            "$ref": "#/$defs/__schema0"
+          },
+          "好感度": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "恋情阶段": {
+            "default": "相识",
+            "$ref": "#/$defs/__schema0"
+          },
+          "心情": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          },
+          "当前想法": {
+            "default": "",
+            "$ref": "#/$defs/__schema0"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema1": {
+      "default": 0,
+      "type": "number"
+    },
+    "__schema2": {
+      "default": 0,
+      "type": "number"
+    }
+  }
+}
