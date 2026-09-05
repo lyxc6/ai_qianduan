@@ -8,6 +8,7 @@
       - insert: insert new items into an object or array (using `-` as array index intends appending to the end)
       - remove
       - move
+    - when inserting new objects, include ALL required fields in one op, with field names exactly matching the variable schema (no invented or misspelled keys); never use null values
     - don't update field names starts with `_` as they are readonly, such as `_变量`
   format: |-
     <UpdateVariable>

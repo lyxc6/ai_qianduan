@@ -214,6 +214,7 @@
         "type": "object",
         "properties": {
           "年龄": {
+            "default": 18,
             "type": "number"
           },
           "种族身份": {
@@ -223,6 +224,7 @@
             "type": "string"
           },
           "好感度": {
+            "default": 20,
             "type": "number"
           },
           "当前着装": {
@@ -280,33 +282,31 @@
             "type": "object",
             "properties": {
               "脸型": {
+                "default": "鹅蛋脸",
                 "type": "string",
                 "description": "固定外貌：脸型，如 鹅蛋脸"
               },
               "发型": {
+                "default": "乌黑长发垂至腰际",
                 "type": "string",
                 "description": "固定外貌：发型与发色，如 银色长发垂至腰际"
               },
               "眼睛": {
+                "default": "茶色杏眼",
                 "type": "string",
                 "description": "固定外貌：眼睛形状与瞳色，如 琥珀色竖瞳"
               },
               "气质": {
+                "default": "温婉可人",
                 "type": "string",
                 "description": "固定外貌：整体气质，如 清冷如月"
               },
               "五官": {
+                "default": "鼻梁秀挺，菱唇粉嫩",
                 "type": "string",
                 "description": "固定外貌：鼻/唇/齿等五官细节"
               }
-            },
-            "required": [
-              "脸型",
-              "发型",
-              "眼睛",
-              "气质",
-              "五官"
-            ]
+            }
           },
           "身材信息": {
             "default": {
@@ -325,70 +325,66 @@
             "type": "object",
             "properties": {
               "身高": {
+                "default": "158cm",
                 "type": "string",
                 "description": "固定身材设定：身高，如 158cm"
               },
               "体重": {
+                "default": "46kg",
                 "type": "string",
                 "description": "固定身材设定：体重，如 46kg"
               },
               "体型": {
+                "default": "娇小玲珑",
                 "type": "string",
                 "description": "固定身材设定：体型，如 娇小玲珑/丰满婀娜/健美有力"
               },
               "三围": {
+                "default": "B82/W56/H84",
                 "type": "string",
                 "description": "固定身材设定：三围，如 B82/W56/H84"
               },
               "乳": {
+                "default": "B罩杯，匀称娇挺，乳晕淡粉",
                 "type": "string",
                 "description": "固定身材设定：乳房罩杯与外观"
               },
               "腰": {
+                "default": "纤细柔韧，不盈一握",
                 "type": "string",
                 "description": "固定身材设定：腰肢描述"
               },
               "臀": {
+                "default": "小巧圆润，线条柔和",
                 "type": "string",
                 "description": "固定身材设定：臀部描述"
               },
               "腿": {
+                "default": "笔直匀称，白皙细腻",
                 "type": "string",
                 "description": "固定身材设定：腿部描述"
               },
               "穴": {
+                "default": "一线天，粉嫩紧致",
                 "type": "string",
                 "description": "固定身材设定：阴部外观"
               },
               "皮肤": {
+                "default": "欺霜赛雪，温润细腻",
                 "type": "string",
                 "description": "固定身材设定：肤质描述"
               },
               "体味": {
+                "default": "淡淡皂香，清甜",
                 "type": "string",
                 "description": "固定身材设定：体味描述"
               }
-            },
-            "required": [
-              "身高",
-              "体重",
-              "体型",
-              "三围",
-              "乳",
-              "腰",
-              "臀",
-              "腿",
-              "穴",
-              "皮肤",
-              "体味"
-            ]
+            }
           }
         },
         "required": [
-          "年龄",
           "种族身份",
           "关系",
-          "好感度",
           "当前着装",
           "当前姿势",
           "当前位置",

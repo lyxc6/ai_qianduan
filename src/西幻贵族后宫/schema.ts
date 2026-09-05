@@ -54,10 +54,10 @@ export const Schema = z.object({
       z.string().describe('角色全名'),
       z
         .object({
-          年龄: z.coerce.number(),
+          年龄: z.coerce.number().prefault(18),
           种族身份: z.string(),
           关系: z.string(),
-          好感度: z.coerce.number().transform(v => _.clamp(v, 0, 100)),
+          好感度: z.coerce.number().transform(v => _.clamp(v, 0, 100)).prefault(20),
           当前着装: z.string(),
           当前姿势: z.string(),
           当前位置: z.string(),
@@ -71,13 +71,14 @@ export const Schema = z.object({
           高潮次数: z.coerce.number().prefault(0),
           被内射次数: z.coerce.number().prefault(0),
           // ===== 固定外貌设定（约束人物描写一致性，一般不更新） =====
+          // 每个字段都带 prefault 兜底：AI 新增成员时漏写个别字段不会导致整次变量更新失败
           外貌信息: z
             .object({
-              脸型: z.string().describe('固定外貌：脸型，如 鹅蛋脸'),
-              发型: z.string().describe('固定外貌：发型与发色，如 银色长发垂至腰际'),
-              眼睛: z.string().describe('固定外貌：眼睛形状与瞳色，如 琥珀色竖瞳'),
-              气质: z.string().describe('固定外貌：整体气质，如 清冷如月'),
-              五官: z.string().describe('固定外貌：鼻/唇/齿等五官细节'),
+              脸型: z.string().describe('固定外貌：脸型，如 鹅蛋脸').prefault('鹅蛋脸'),
+              发型: z.string().describe('固定外貌：发型与发色，如 银色长发垂至腰际').prefault('乌黑长发垂至腰际'),
+              眼睛: z.string().describe('固定外貌：眼睛形状与瞳色，如 琥珀色竖瞳').prefault('茶色杏眼'),
+              气质: z.string().describe('固定外貌：整体气质，如 清冷如月').prefault('温婉可人'),
+              五官: z.string().describe('固定外貌：鼻/唇/齿等五官细节').prefault('鼻梁秀挺，菱唇粉嫩'),
             })
             .prefault({
               脸型: '鹅蛋脸',
@@ -87,19 +88,20 @@ export const Schema = z.object({
               五官: '鼻梁秀挺，菱唇粉嫩',
             }),
           // ===== 固定身材设定（约束人物描写一致性，一般不更新） =====
+          // 每个字段都带 prefault 兜底：AI 新增成员时漏写个别字段不会导致整次变量更新失败
           身材信息: z
             .object({
-              身高: z.string().describe('固定身材设定：身高，如 158cm'),
-              体重: z.string().describe('固定身材设定：体重，如 46kg'),
-              体型: z.string().describe('固定身材设定：体型，如 娇小玲珑/丰满婀娜/健美有力'),
-              三围: z.string().describe('固定身材设定：三围，如 B82/W56/H84'),
-              乳: z.string().describe('固定身材设定：乳房罩杯与外观'),
-              腰: z.string().describe('固定身材设定：腰肢描述'),
-              臀: z.string().describe('固定身材设定：臀部描述'),
-              腿: z.string().describe('固定身材设定：腿部描述'),
-              穴: z.string().describe('固定身材设定：阴部外观'),
-              皮肤: z.string().describe('固定身材设定：肤质描述'),
-              体味: z.string().describe('固定身材设定：体味描述'),
+              身高: z.string().describe('固定身材设定：身高，如 158cm').prefault('158cm'),
+              体重: z.string().describe('固定身材设定：体重，如 46kg').prefault('46kg'),
+              体型: z.string().describe('固定身材设定：体型，如 娇小玲珑/丰满婀娜/健美有力').prefault('娇小玲珑'),
+              三围: z.string().describe('固定身材设定：三围，如 B82/W56/H84').prefault('B82/W56/H84'),
+              乳: z.string().describe('固定身材设定：乳房罩杯与外观').prefault('B罩杯，匀称娇挺，乳晕淡粉'),
+              腰: z.string().describe('固定身材设定：腰肢描述').prefault('纤细柔韧，不盈一握'),
+              臀: z.string().describe('固定身材设定：臀部描述').prefault('小巧圆润，线条柔和'),
+              腿: z.string().describe('固定身材设定：腿部描述').prefault('笔直匀称，白皙细腻'),
+              穴: z.string().describe('固定身材设定：阴部外观').prefault('一线天，粉嫩紧致'),
+              皮肤: z.string().describe('固定身材设定：肤质描述').prefault('欺霜赛雪，温润细腻'),
+              体味: z.string().describe('固定身材设定：体味描述').prefault('淡淡皂香，清甜'),
             })
             .prefault({
               身高: '158cm',
@@ -218,9 +220,7 @@ export const Schema = z.object({
   }),
 
   // ===== 事件（格式：日期|地点|事件描述） =====
-  事件: z.array(z.string()).prefault([
-    '西历1024年·霜月·初三|白蔷薇宫|主角决定启程环游大陆，广纳后宫',
-  ]),
+  事件: z.array(z.string()).prefault(['西历1024年·霜月·初三|白蔷薇宫|主角决定启程环游大陆，广纳后宫']),
 });
 
 export type Schema = z.output<typeof Schema>;
