@@ -15,7 +15,7 @@
       "world": "西幻贵族后宫",
       "regex_scripts": [
         {
-          "id": "1dcc4f51-d10a-4765-8f89-9a009c1c88a3",
+          "id": "2b6ad96d-92e2-4137-aa22-281d4a31986a",
           "scriptName": "[不发送]去除变量更新",
           "disabled": false,
           "runOnEdit": false,
@@ -33,7 +33,7 @@
           "promptOnly": true
         },
         {
-          "id": "7c3f2da4-062d-4008-96ac-408a6267eb3e",
+          "id": "aaec741b-08e1-483c-9fcb-d301ae2319bd",
           "scriptName": "[折叠]变量更新中",
           "disabled": false,
           "runOnEdit": false,
@@ -51,7 +51,7 @@
           "promptOnly": false
         },
         {
-          "id": "4940da8f-c847-4e70-b818-4f2de5ea55b1",
+          "id": "1fc5ca87-eb94-42ca-93e1-c4795d177767",
           "scriptName": "[折叠]完整变量更新",
           "disabled": false,
           "runOnEdit": false,
@@ -69,7 +69,7 @@
           "promptOnly": false
         },
         {
-          "id": "26c4e521-975f-485a-8d15-3aef70aa6a5a",
+          "id": "10988d96-545e-4ea4-9fcb-4a86425c4f43",
           "scriptName": "[界面]状态栏",
           "disabled": false,
           "runOnEdit": false,
@@ -90,7 +90,7 @@
         "scripts": [
           {
             "name": "mvu",
-            "id": "bdef1dc2-4a6a-4d7f-8f9b-70d45ca369b8",
+            "id": "6111e09f-9621-4723-bcee-e891df851237",
             "enabled": true,
             "type": "script",
             "content": "import 'https://testingcf.jsdelivr.net/gh/MagicalAstrogy/MagVarUpdate/artifact/bundle.js';",
@@ -107,7 +107,7 @@
           },
           {
             "name": "变量结构",
-            "id": "43c8064c-cb28-4f1c-8fec-33506350543f",
+            "id": "b22e6dce-813b-482c-a41b-ec605dbf7a35",
             "enabled": true,
             "type": "script",
             "content": "import 'dist/西幻贵族后宫/脚本/变量结构/index.js';",
