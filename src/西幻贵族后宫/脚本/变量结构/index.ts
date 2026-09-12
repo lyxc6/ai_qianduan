@@ -4,9 +4,11 @@ import { Schema } from '../../schema';
 $(async () => {
   registerMvuSchema(Schema);
 
-  // 固定锁定：外貌信息/身材信息仅创建时写入，之后 AI 的任何更新都还原为旧值
+  // 变量更新结束后的兜底处理。这些逻辑跨字段/面向整个容器，放进 schema 只会给动态容器套上包装而影响可扩展性，
+  // 因此按 MVU 文档「用 VARIABLE_UPDATE_ENDED 修正更新结果」的写法放在脚本里（状态栏没打开时同样生效）。
   await waitGlobalInitialized('Mvu');
   eventOn(Mvu.events.VARIABLE_UPDATE_ENDED, (new_variables, old_variables) => {
+    // ① 固定锁定：外貌信息/身材信息仅创建时写入，之后 AI 的任何更新都还原为旧值
     const new_harem = _.get(new_variables, 'stat_data.后宫', {});
     const old_harem = _.get(old_variables, 'stat_data.后宫', {});
     Object.keys(new_harem).forEach(name => {
@@ -17,6 +19,22 @@ $(async () => {
         _.set(new_harem[name], '身材信息', _.get(old_harem, [name, '身材信息']));
       }
     });
+
+    // ② 家族资源：数量归零的条目直接移除（对应《变量更新规则》的「数量归零后自动移除」）
+    const 家族资源 = _.get(new_variables, 'stat_data.世界.家族资源');
+    if (_.isPlainObject(家族资源)) {
+      _.set(
+        new_variables,
+        'stat_data.世界.家族资源',
+        _.pickBy(家族资源, 条目 => Number(_.get(条目, '数量', 1)) > 0),
+      );
+    }
+
+    // ③ 事件：只保留最近 60 条，避免 stat_data 随剧情无界膨胀、每轮提示词都吃掉大量上下文
+    const 事件 = _.get(new_variables, 'stat_data.事件');
+    if (_.isArray(事件) && 事件.length > 60) {
+      _.set(new_variables, 'stat_data.事件', 事件.slice(-60));
+    }
   });
 
   // 运行时兜底：变量 schema 在聊天初始化时一次性派生并固化，已初始化的旧聊天不会再重新推导，

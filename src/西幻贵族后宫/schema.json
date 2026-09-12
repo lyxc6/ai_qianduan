@@ -3,15 +3,18 @@
   "type": "object",
   "properties": {
     "世界": {
+      "default": {},
       "type": "object",
       "properties": {
         "当前时间": {
           "default": "西历1024年·霜月·初三|辰时",
-          "type": "string"
+          "description": "格式：西历YYYY年·月·日|时辰",
+          "$ref": "#/$defs/__schema0"
         },
         "当前地点": {
           "default": "圣罗兰帝国·王都|白蔷薇宫",
-          "type": "string"
+          "description": "格式：大地域|小地点",
+          "$ref": "#/$defs/__schema1"
         },
         "当前国家": {
           "default": "圣罗兰帝国",
@@ -27,8 +30,9 @@
             "description": "地域名"
           },
           "additionalProperties": {
-            "type": "string",
-            "description": "首次到达日期"
+            "default": "西历1024年·霜月·初三",
+            "description": "首次到达日期",
+            "$ref": "#/$defs/__schema2"
           }
         },
         "金币": {
@@ -64,24 +68,24 @@
             "description": "资源名"
           },
           "additionalProperties": {
+            "default": {},
             "type": "object",
             "properties": {
               "描述": {
+                "default": "家族珍藏",
                 "type": "string"
               },
               "数量": {
                 "default": 1,
                 "type": "number"
               }
-            },
-            "required": [
-              "描述"
-            ]
+            }
           }
         }
       }
     },
     "主角": {
+      "default": {},
       "type": "object",
       "properties": {
         "姓名": {
@@ -90,7 +94,12 @@
         },
         "性别": {
           "default": "男",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "男",
+            "女",
+            "其他"
+          ]
         },
         "年龄": {
           "default": 19,
@@ -127,90 +136,14 @@
       }
     },
     "后宫": {
-      "default": {
-        "莉雅": {
-          "年龄": 18,
-          "种族身份": "人类·贴身侍女",
-          "关系": "自幼陪伴主角的贴身侍女，忠心耿耿",
-          "好感度": 75,
-          "当前着装": "素白女仆裙外罩家徽围裙，颈间系着主角所赠的银链",
-          "当前姿势": "立于主角身侧，双手交叠",
-          "当前位置": "圣罗兰帝国·王都|白蔷薇宫",
-          "当前想法": "少爷要去环游大陆了，我一定要跟在身边照顾他。",
-          "处女": true,
-          "破处记录": "无",
-          "最近性行为": "无",
-          "胸部状态": "乳房处于自然状态，未充血",
-          "阴部状态": "干燥状态",
-          "身体状态": "健康状态良好，温婉可人",
-          "高潮次数": 0,
-          "被内射次数": 0,
-          "外貌信息": {
-            "脸型": "鹅蛋脸，线条柔和",
-            "发型": "乌黑长发绾成垂云髻，鬓边垂落碎发",
-            "眼睛": "茶色杏眼，眸光温润",
-            "气质": "温婉可人，柔静似水",
-            "五官": "鼻梁秀挺，菱唇粉嫩，齿若编贝"
-          },
-          "身材信息": {
-            "身高": "158cm",
-            "体重": "46kg",
-            "体型": "娇小玲珑",
-            "三围": "B82/W56/H84",
-            "乳": "B罩杯，匀称娇挺，乳晕淡粉",
-            "腰": "纤细柔韧，不盈一握",
-            "臀": "小巧圆润，线条柔和",
-            "腿": "笔直匀称，白皙细腻",
-            "穴": "一线天，粉嫩紧致",
-            "皮肤": "欺霜赛雪，温润细腻",
-            "体味": "淡淡皂香，清甜"
-          }
-        },
-        "希尔薇": {
-          "年龄": 19,
-          "种族身份": "人类·女骑士",
-          "关系": "家族私兵队长，誓死护卫主角的女骑士",
-          "好感度": 70,
-          "当前着装": "贴身锁子甲外罩白蔷薇纹章披风，足蹬长靴",
-          "当前姿势": "单膝跪地，手按剑柄请命同行",
-          "当前位置": "圣罗兰帝国·王都|白蔷薇宫",
-          "当前想法": "护少主周全乃我之荣誉，无论去往何方。",
-          "处女": true,
-          "破处记录": "无",
-          "最近性行为": "无",
-          "胸部状态": "乳房处于自然状态，未充血",
-          "阴部状态": "干燥状态",
-          "身体状态": "健康状态良好，英气飒爽",
-          "高潮次数": 0,
-          "被内射次数": 0,
-          "外貌信息": {
-            "脸型": "瓜子脸，轮廓利落",
-            "发型": "金棕短发利落束起，额前齐刘海",
-            "眼睛": "湛蓝瞳仁，目光坚毅",
-            "气质": "英气飒爽，如出鞘利剑",
-            "五官": "鼻梁高挺，唇线分明，棱角清晰"
-          },
-          "身材信息": {
-            "身高": "172cm",
-            "体重": "58kg",
-            "体型": "健美有力",
-            "三围": "C90/W62/H90",
-            "乳": "C罩杯，饱满挺拔，乳尖挺立",
-            "腰": "紧致有力，马甲线分明",
-            "臀": "挺翘紧实，富有弹性",
-            "腿": "修长有力，线条流畅",
-            "穴": "蝴蝶型，紧致粉嫩",
-            "皮肤": "蜜色健康，光滑紧致",
-            "体味": "汗水与皮革混合的英气"
-          }
-        }
-      },
+      "default": {},
       "type": "object",
       "propertyNames": {
         "type": "string",
         "description": "角色全名"
       },
       "additionalProperties": {
+        "default": {},
         "type": "object",
         "properties": {
           "年龄": {
@@ -218,9 +151,11 @@
             "type": "number"
           },
           "种族身份": {
+            "default": "未登记",
             "type": "string"
           },
           "关系": {
+            "default": "未登记",
             "type": "string"
           },
           "好感度": {
@@ -228,20 +163,37 @@
             "type": "number"
           },
           "当前着装": {
+            "default": "未描述",
             "type": "string"
           },
           "当前姿势": {
+            "default": "未描述",
             "type": "string"
           },
           "当前位置": {
+            "default": "未知",
             "type": "string"
           },
           "当前想法": {
+            "default": "她还没有说出此刻的想法",
             "type": "string"
           },
           "处女": {
             "default": true,
-            "type": "boolean"
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false",
+                  "是",
+                  "否"
+                ]
+              }
+            ]
           },
           "破处记录": {
             "default": "无",
@@ -272,127 +224,102 @@
             "type": "number"
           },
           "外貌信息": {
-            "default": {
-              "脸型": "鹅蛋脸",
-              "发型": "乌黑长发垂至腰际",
-              "眼睛": "茶色杏眼",
-              "气质": "温婉可人",
-              "五官": "鼻梁秀挺，菱唇粉嫩"
-            },
+            "default": {},
             "type": "object",
             "properties": {
               "脸型": {
                 "default": "鹅蛋脸",
-                "type": "string",
-                "description": "固定外貌：脸型，如 鹅蛋脸"
+                "description": "固定外貌：脸型，如 鹅蛋脸",
+                "$ref": "#/$defs/__schema3"
               },
               "发型": {
                 "default": "乌黑长发垂至腰际",
-                "type": "string",
-                "description": "固定外貌：发型与发色，如 银色长发垂至腰际"
+                "description": "固定外貌：发型与发色，如 银色长发垂至腰际",
+                "$ref": "#/$defs/__schema4"
               },
               "眼睛": {
                 "default": "茶色杏眼",
-                "type": "string",
-                "description": "固定外貌：眼睛形状与瞳色，如 琥珀色竖瞳"
+                "description": "固定外貌：眼睛形状与瞳色，如 琥珀色竖瞳",
+                "$ref": "#/$defs/__schema5"
               },
               "气质": {
                 "default": "温婉可人",
-                "type": "string",
-                "description": "固定外貌：整体气质，如 清冷如月"
+                "description": "固定外貌：整体气质，如 清冷如月",
+                "$ref": "#/$defs/__schema6"
               },
               "五官": {
                 "default": "鼻梁秀挺，菱唇粉嫩",
-                "type": "string",
-                "description": "固定外貌：鼻/唇/齿等五官细节"
+                "description": "固定外貌：鼻/唇/齿等五官细节",
+                "$ref": "#/$defs/__schema7"
               }
             }
           },
           "身材信息": {
-            "default": {
-              "身高": "158cm",
-              "体重": "46kg",
-              "体型": "娇小玲珑",
-              "三围": "B82/W56/H84",
-              "乳": "B罩杯，匀称娇挺，乳晕淡粉",
-              "腰": "纤细柔韧，不盈一握",
-              "臀": "小巧圆润，线条柔和",
-              "腿": "笔直匀称，白皙细腻",
-              "穴": "一线天，粉嫩紧致",
-              "皮肤": "欺霜赛雪，温润细腻",
-              "体味": "淡淡皂香，清甜"
-            },
+            "default": {},
             "type": "object",
             "properties": {
               "身高": {
                 "default": "158cm",
-                "type": "string",
-                "description": "固定身材设定：身高，如 158cm"
+                "description": "固定身材设定：身高，如 158cm",
+                "$ref": "#/$defs/__schema8"
               },
               "体重": {
                 "default": "46kg",
-                "type": "string",
-                "description": "固定身材设定：体重，如 46kg"
+                "description": "固定身材设定：体重，如 46kg",
+                "$ref": "#/$defs/__schema9"
               },
               "体型": {
                 "default": "娇小玲珑",
-                "type": "string",
-                "description": "固定身材设定：体型，如 娇小玲珑/丰满婀娜/健美有力"
+                "description": "固定身材设定：体型，如 娇小玲珑/丰满婀娜/健美有力",
+                "$ref": "#/$defs/__schema10"
               },
               "三围": {
                 "default": "B82/W56/H84",
-                "type": "string",
-                "description": "固定身材设定：三围，如 B82/W56/H84"
+                "description": "固定身材设定：三围，如 B82/W56/H84",
+                "$ref": "#/$defs/__schema11"
               },
               "乳": {
                 "default": "B罩杯，匀称娇挺，乳晕淡粉",
-                "type": "string",
-                "description": "固定身材设定：乳房罩杯与外观"
+                "description": "固定身材设定：乳房罩杯与外观",
+                "$ref": "#/$defs/__schema12"
               },
               "腰": {
                 "default": "纤细柔韧，不盈一握",
-                "type": "string",
-                "description": "固定身材设定：腰肢描述"
+                "description": "固定身材设定：腰肢描述",
+                "$ref": "#/$defs/__schema13"
               },
               "臀": {
                 "default": "小巧圆润，线条柔和",
-                "type": "string",
-                "description": "固定身材设定：臀部描述"
+                "description": "固定身材设定：臀部描述",
+                "$ref": "#/$defs/__schema14"
               },
               "腿": {
                 "default": "笔直匀称，白皙细腻",
-                "type": "string",
-                "description": "固定身材设定：腿部描述"
+                "description": "固定身材设定：腿部描述",
+                "$ref": "#/$defs/__schema15"
               },
               "穴": {
                 "default": "一线天，粉嫩紧致",
-                "type": "string",
-                "description": "固定身材设定：阴部外观"
+                "description": "固定身材设定：阴部外观",
+                "$ref": "#/$defs/__schema16"
               },
               "皮肤": {
                 "default": "欺霜赛雪，温润细腻",
-                "type": "string",
-                "description": "固定身材设定：肤质描述"
+                "description": "固定身材设定：肤质描述",
+                "$ref": "#/$defs/__schema17"
               },
               "体味": {
                 "default": "淡淡皂香，清甜",
-                "type": "string",
-                "description": "固定身材设定：体味描述"
+                "description": "固定身材设定：体味描述",
+                "$ref": "#/$defs/__schema18"
               }
             }
           }
-        },
-        "required": [
-          "种族身份",
-          "关系",
-          "当前着装",
-          "当前姿势",
-          "当前位置",
-          "当前想法"
-        ]
+        }
       }
     },
     "行动选项": {
+      "default": {},
       "type": "object",
       "properties": {
         "当前视角": {
@@ -423,13 +350,72 @@
       ],
       "type": "array",
       "items": {
-        "type": "string"
+        "default": "",
+        "description": "日期|地点|事件描述",
+        "$ref": "#/$defs/__schema19"
       }
     }
   },
-  "required": [
-    "世界",
-    "主角",
-    "行动选项"
-  ]
+  "$defs": {
+    "__schema0": {
+      "type": "string"
+    },
+    "__schema1": {
+      "type": "string"
+    },
+    "__schema2": {
+      "type": "string"
+    },
+    "__schema3": {
+      "type": "string"
+    },
+    "__schema4": {
+      "type": "string"
+    },
+    "__schema5": {
+      "type": "string"
+    },
+    "__schema6": {
+      "type": "string"
+    },
+    "__schema7": {
+      "type": "string"
+    },
+    "__schema8": {
+      "type": "string"
+    },
+    "__schema9": {
+      "type": "string"
+    },
+    "__schema10": {
+      "type": "string"
+    },
+    "__schema11": {
+      "type": "string"
+    },
+    "__schema12": {
+      "type": "string"
+    },
+    "__schema13": {
+      "type": "string"
+    },
+    "__schema14": {
+      "type": "string"
+    },
+    "__schema15": {
+      "type": "string"
+    },
+    "__schema16": {
+      "type": "string"
+    },
+    "__schema17": {
+      "type": "string"
+    },
+    "__schema18": {
+      "type": "string"
+    },
+    "__schema19": {
+      "type": "string"
+    }
+  }
 }

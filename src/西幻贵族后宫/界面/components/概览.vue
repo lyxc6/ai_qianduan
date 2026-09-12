@@ -54,7 +54,7 @@
             <div class="mini-name">{{ entry.name }}</div>
             <div class="mini-sub">{{ entry.m.种族身份 || '—' }} · 好感 {{ entry.m.好感度 ?? 0 }}</div>
           </div>
-          <span class="badge" :class="stageBadge(entry.m.好感度)">{{ entry.m.$好感阶段 || '—' }}</span>
+          <span class="badge" :class="阶段徽章(entry.m.好感度)">{{ 好感阶段(entry.m.好感度) }}</span>
         </div>
       </div>
       <div v-else class="empty-state">后宫尚无佳丽</div>
@@ -72,12 +72,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { 好感阶段, 阶段徽章 } from '../好感度';
 import { useDataStore } from '../store';
 
 interface Member {
   种族身份?: string;
   好感度?: number;
-  $好感阶段?: string;
 }
 
 const store = useDataStore();
@@ -100,15 +100,6 @@ const recentEvents = computed(() => {
   const list = store.data.事件 || [];
   return list.slice(-5).reverse();
 });
-
-function stageBadge(好感?: number): string {
-  if (!好感) return 'badge-trial';
-  if (好感 < 20) return 'badge-trial';
-  if (好感 < 40) return 'badge-bronze';
-  if (好感 < 60) return 'badge-silver';
-  if (好感 < 80) return 'badge-gold';
-  return 'badge-flower';
-}
 
 function formatMoney(value?: number): string {
   const amount = Number(value || 0);

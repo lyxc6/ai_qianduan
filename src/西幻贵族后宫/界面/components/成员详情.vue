@@ -4,7 +4,7 @@
       <button type="button" class="back-button" @click="$emit('back')">
         <i class="fa-solid fa-arrow-left"></i> 返回后宫
       </button>
-      <span class="badge" :class="stageBadge(member.好感度)">{{ member.$好感阶段 || '陌生戒备' }}</span>
+      <span class="badge" :class="阶段徽章(member.好感度)">{{ 好感阶段(member.好感度) }}</span>
     </div>
 
     <div class="detail-head">
@@ -178,6 +178,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { 好感阶段, 阶段徽章 } from '../好感度';
 import { useDataStore } from '../store';
 
 interface Props {
@@ -189,7 +190,6 @@ interface Member {
   种族身份?: string;
   关系?: string;
   好感度?: number;
-  $好感阶段?: string;
   当前着装?: string;
   当前姿势?: string;
   当前位置?: string;
@@ -231,15 +231,6 @@ const store = useDataStore();
 const member = computed<Member | null>(() => {
   return (store.data.后宫 && store.data.后宫[props.name]) || null;
 });
-
-function stageBadge(好感?: number): string {
-  if (!好感) return 'badge-trial';
-  if (好感 < 20) return 'badge-trial';
-  if (好感 < 40) return 'badge-bronze';
-  if (好感 < 60) return 'badge-silver';
-  if (好感 < 80) return 'badge-gold';
-  return 'badge-flower';
-}
 
 function clamp(value?: number): number {
   return Math.max(0, Math.min(100, value ?? 0));

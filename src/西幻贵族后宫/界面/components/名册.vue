@@ -16,7 +16,7 @@
             </div>
             <div class="girl-sub">{{ entry.m.种族身份 || '未登记' }} · {{ entry.m.关系 || '—' }}</div>
           </div>
-          <span class="badge" :class="stageBadge(entry.m.好感度)">{{ entry.m.$好感阶段 || '陌生戒备' }}</span>
+          <span class="badge" :class="阶段徽章(entry.m.好感度)">{{ 好感阶段(entry.m.好感度) }}</span>
         </div>
 
         <div class="mt-3 space-y-1.5">
@@ -43,13 +43,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { 好感阶段, 阶段徽章 } from '../好感度';
 import { useDataStore } from '../store';
 
 interface Member {
   种族身份?: string;
   关系?: string;
   好感度?: number;
-  $好感阶段?: string;
   当前想法?: string;
   当前位置?: string;
   处女?: boolean;
@@ -63,15 +63,6 @@ const members = computed(() =>
     .map(([name, m]) => ({ name, m: m as Member }))
     .sort((a, b) => (b.m.好感度 ?? 0) - (a.m.好感度 ?? 0)),
 );
-
-function stageBadge(好感?: number): string {
-  if (!好感) return 'badge-trial';
-  if (好感 < 20) return 'badge-trial';
-  if (好感 < 40) return 'badge-bronze';
-  if (好感 < 60) return 'badge-silver';
-  if (好感 < 80) return 'badge-gold';
-  return 'badge-flower';
-}
 
 function clamp(value?: number): number {
   return Math.max(0, Math.min(100, value ?? 0));
