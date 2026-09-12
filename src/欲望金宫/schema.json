@@ -192,13 +192,9 @@
           },
           "处女": {
             "default": true,
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
+            "type": [
+              "boolean",
+              "null"
             ]
           },
           "性爱次数": {
@@ -237,13 +233,9 @@
   },
   "$defs": {
     "__schema0": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
+      "type": [
+        "string",
+        "null"
       ]
     },
     "__schema1": {

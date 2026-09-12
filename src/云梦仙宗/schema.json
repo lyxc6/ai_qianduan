@@ -240,13 +240,9 @@
   },
   "$defs": {
     "__schema0": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
+      "type": [
+        "string",
+        "null"
       ]
     },
     "__schema1": {
