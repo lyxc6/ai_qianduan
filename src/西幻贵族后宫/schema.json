@@ -7,12 +7,10 @@
       "type": "object",
       "properties": {
         "当前时间": {
-          "default": "西历1024年·霜月·初三|辰时",
           "description": "格式：西历YYYY年·月·日|时辰",
           "$ref": "#/$defs/__schema0"
         },
         "当前地点": {
-          "default": "圣罗兰帝国·王都|白蔷薇宫",
           "description": "格式：大地域|小地点",
           "$ref": "#/$defs/__schema1"
         },
@@ -30,7 +28,6 @@
             "description": "地域名"
           },
           "additionalProperties": {
-            "default": "西历1024年·霜月·初三",
             "description": "首次到达日期",
             "$ref": "#/$defs/__schema2"
           }
@@ -40,6 +37,7 @@
           "type": "number"
         },
         "声望": {
+          "default": 20,
           "type": "number"
         },
         "家族资源": {
@@ -75,23 +73,13 @@
                 "type": "string"
               },
               "数量": {
+                "default": 1,
                 "type": "number"
               }
-            },
-            "required": [
-              "描述",
-              "数量"
-            ]
+            }
           }
         }
-      },
-      "required": [
-        "当前时间",
-        "当前地点",
-        "当前国家",
-        "金币",
-        "声望"
-      ]
+      }
     },
     "主角": {
       "default": {},
@@ -111,6 +99,7 @@
           ]
         },
         "年龄": {
+          "default": 19,
           "type": "number"
         },
         "头衔": {
@@ -138,21 +127,10 @@
           "type": "string"
         },
         "射精进度": {
+          "default": 0,
           "type": "number"
         }
-      },
-      "required": [
-        "姓名",
-        "性别",
-        "年龄",
-        "头衔",
-        "家族",
-        "财富等级",
-        "当前着装",
-        "当前姿势",
-        "当前想法",
-        "射精进度"
-      ]
+      }
     },
     "后宫": {
       "default": {},
@@ -166,6 +144,7 @@
         "type": "object",
         "properties": {
           "年龄": {
+            "default": 18,
             "type": "number"
           },
           "种族身份": {
@@ -177,6 +156,7 @@
             "type": "string"
           },
           "好感度": {
+            "default": 20,
             "type": "number"
           },
           "当前着装": {
@@ -196,6 +176,7 @@
             "type": "string"
           },
           "处女": {
+            "default": true,
             "anyOf": [
               {
                 "type": "boolean"
@@ -232,9 +213,11 @@
             "type": "string"
           },
           "高潮次数": {
+            "default": 0,
             "type": "number"
           },
           "被内射次数": {
+            "default": 0,
             "type": "number"
           },
           "外貌信息": {
@@ -242,132 +225,78 @@
             "type": "object",
             "properties": {
               "脸型": {
-                "default": "鹅蛋脸",
                 "description": "固定外貌：脸型，如 鹅蛋脸",
                 "$ref": "#/$defs/__schema3"
               },
               "发型": {
-                "default": "乌黑长发垂至腰际",
                 "description": "固定外貌：发型与发色，如 银色长发垂至腰际",
                 "$ref": "#/$defs/__schema4"
               },
               "眼睛": {
-                "default": "茶色杏眼",
                 "description": "固定外貌：眼睛形状与瞳色，如 琥珀色竖瞳",
                 "$ref": "#/$defs/__schema5"
               },
               "气质": {
-                "default": "温婉可人",
                 "description": "固定外貌：整体气质，如 清冷如月",
                 "$ref": "#/$defs/__schema6"
               },
               "五官": {
-                "default": "鼻梁秀挺，菱唇粉嫩",
                 "description": "固定外貌：鼻/唇/齿等五官细节",
                 "$ref": "#/$defs/__schema7"
               }
-            },
-            "required": [
-              "脸型",
-              "发型",
-              "眼睛",
-              "气质",
-              "五官"
-            ]
+            }
           },
           "身材信息": {
             "default": {},
             "type": "object",
             "properties": {
               "身高": {
-                "default": "158cm",
                 "description": "固定身材设定：身高，如 158cm",
                 "$ref": "#/$defs/__schema8"
               },
               "体重": {
-                "default": "46kg",
                 "description": "固定身材设定：体重，如 46kg",
                 "$ref": "#/$defs/__schema9"
               },
               "体型": {
-                "default": "娇小玲珑",
                 "description": "固定身材设定：体型，如 娇小玲珑/丰满婀娜/健美有力",
                 "$ref": "#/$defs/__schema10"
               },
               "三围": {
-                "default": "B82/W56/H84",
                 "description": "固定身材设定：三围，如 B82/W56/H84",
                 "$ref": "#/$defs/__schema11"
               },
               "乳": {
-                "default": "B罩杯，匀称娇挺，乳晕淡粉",
                 "description": "固定身材设定：乳房罩杯与外观",
                 "$ref": "#/$defs/__schema12"
               },
               "腰": {
-                "default": "纤细柔韧，不盈一握",
                 "description": "固定身材设定：腰肢描述",
                 "$ref": "#/$defs/__schema13"
               },
               "臀": {
-                "default": "小巧圆润，线条柔和",
                 "description": "固定身材设定：臀部描述",
                 "$ref": "#/$defs/__schema14"
               },
               "腿": {
-                "default": "笔直匀称，白皙细腻",
                 "description": "固定身材设定：腿部描述",
                 "$ref": "#/$defs/__schema15"
               },
               "穴": {
-                "default": "一线天，粉嫩紧致",
                 "description": "固定身材设定：阴部外观",
                 "$ref": "#/$defs/__schema16"
               },
               "皮肤": {
-                "default": "欺霜赛雪，温润细腻",
                 "description": "固定身材设定：肤质描述",
                 "$ref": "#/$defs/__schema17"
               },
               "体味": {
-                "default": "淡淡皂香，清甜",
                 "description": "固定身材设定：体味描述",
                 "$ref": "#/$defs/__schema18"
               }
-            },
-            "required": [
-              "身高",
-              "体重",
-              "体型",
-              "三围",
-              "乳",
-              "腰",
-              "臀",
-              "腿",
-              "穴",
-              "皮肤",
-              "体味"
-            ]
+            }
           }
-        },
-        "required": [
-          "年龄",
-          "种族身份",
-          "关系",
-          "好感度",
-          "当前着装",
-          "当前姿势",
-          "当前位置",
-          "当前想法",
-          "处女",
-          "破处记录",
-          "最近性行为",
-          "胸部状态",
-          "阴部状态",
-          "身体状态",
-          "高潮次数",
-          "被内射次数"
-        ]
+        }
       }
     },
     "行动选项": {
@@ -394,14 +323,7 @@
           "default": "夜探王都灯会，或许能撞见一段艳遇",
           "type": "string"
         }
-      },
-      "required": [
-        "当前视角",
-        "选项一",
-        "选项二",
-        "选项三",
-        "选项四"
-      ]
+      }
     },
     "事件": {
       "default": [
@@ -409,7 +331,6 @@
       ],
       "type": "array",
       "items": {
-        "default": "",
         "description": "日期|地点|事件描述",
         "$ref": "#/$defs/__schema19"
       }
@@ -417,63 +338,83 @@
   },
   "$defs": {
     "__schema0": {
+      "default": "西历1024年·霜月·初三|辰时",
       "type": "string"
     },
     "__schema1": {
+      "default": "圣罗兰帝国·王都|白蔷薇宫",
       "type": "string"
     },
     "__schema2": {
+      "default": "西历1024年·霜月·初三",
       "type": "string"
     },
     "__schema3": {
+      "default": "鹅蛋脸",
       "type": "string"
     },
     "__schema4": {
+      "default": "乌黑长发垂至腰际",
       "type": "string"
     },
     "__schema5": {
+      "default": "茶色杏眼",
       "type": "string"
     },
     "__schema6": {
+      "default": "温婉可人",
       "type": "string"
     },
     "__schema7": {
+      "default": "鼻梁秀挺，菱唇粉嫩",
       "type": "string"
     },
     "__schema8": {
+      "default": "158cm",
       "type": "string"
     },
     "__schema9": {
+      "default": "46kg",
       "type": "string"
     },
     "__schema10": {
+      "default": "娇小玲珑",
       "type": "string"
     },
     "__schema11": {
+      "default": "B82/W56/H84",
       "type": "string"
     },
     "__schema12": {
+      "default": "B罩杯，匀称娇挺，乳晕淡粉",
       "type": "string"
     },
     "__schema13": {
+      "default": "纤细柔韧，不盈一握",
       "type": "string"
     },
     "__schema14": {
+      "default": "小巧圆润，线条柔和",
       "type": "string"
     },
     "__schema15": {
+      "default": "笔直匀称，白皙细腻",
       "type": "string"
     },
     "__schema16": {
+      "default": "一线天，粉嫩紧致",
       "type": "string"
     },
     "__schema17": {
+      "default": "欺霜赛雪，温润细腻",
       "type": "string"
     },
     "__schema18": {
+      "default": "淡淡皂香，清甜",
       "type": "string"
     },
     "__schema19": {
+      "default": "",
       "type": "string"
     }
   }

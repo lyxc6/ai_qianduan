@@ -15,24 +15,44 @@
 // schema.json 由 pnpm dump / pnpm build 自动生成，供 世界书/变量/initvar.yaml 的编辑器校验使用。
 
 // ===== 通用构件 =====
+// 每个构件都是「prefault(缺失时给默认值) + catch(拿到离谱值时也回落到默认值)」两层：
+// prefault 让字段在 schema.json 里是可选且带 default（initvar 编辑器不会误报缺字段），
+// catch 保证 AI 写出 '很高'、104 这类值也不会让整条更新命令被丢弃。
 /** 0~100 的数值：-3 → 0、104 → 100、'很高'/缺失 → 预设值 */
-const 百分比 = (预设: number) => z.coerce.number().transform(v => _.clamp(v, 0, 100)).catch(预设);
+const 百分比 = (预设: number) =>
+  z
+    .coerce.number()
+    .transform(v => _.clamp(v, 0, 100))
+    .catch(预设)
+    .prefault(预设);
 /** 非负整数：3.7 → 4、-2 → 0（用四舍五入而不是 .int()，后者遇到小数会直接解析失败） */
-const 计数 = (预设: number) => z.coerce.number().transform(v => Math.max(0, Math.round(v))).catch(预设);
+const 计数 = (预设: number) =>
+  z
+    .coerce.number()
+    .transform(v => Math.max(0, Math.round(v)))
+    .catch(预设)
+    .prefault(预设);
 /** 任意数值：金币这类可增可减、不设上下限的量 */
-const 数值 = (预设: number) => z.coerce.number().catch(预设);
+const 数值 = (预设: number) => z.coerce.number().catch(预设).prefault(预设);
 /** 合理区间内的整数：年龄等（精灵、龙族长寿，上限放宽到 9999） */
-const 年龄 = (预设: number) => z.coerce.number().transform(v => _.clamp(Math.round(v), 1, 9999)).catch(预设);
+const 年龄 = (预设: number) =>
+  z
+    .coerce.number()
+    .transform(v => _.clamp(Math.round(v), 1, 9999))
+    .catch(预设)
+    .prefault(预设);
 /** 真假值：兼容 true / false / 'true' / 'false' / '是' / '否' */
 const 真假 = (预设: boolean) =>
   z
     .union([z.boolean(), z.enum(['true', 'false', '是', '否'])])
     .transform(v => v === true || v === 'true' || v === '是')
-    .catch(预设);
+    .catch(预设)
+    .prefault(预设);
 /** 语义固定的文本：AI 写错就回落到预设值（带 catch 的 enum 仍会在 schema.json 里列出候选值） */
-const 枚举 = <const T extends readonly [string, ...string[]]>(候选: T, 预设: T[number]) => z.enum(候选).catch(预设);
+const 枚举 = <const T extends readonly [string, ...string[]]>(候选: T, 预设: T[number]) =>
+  z.enum(候选).catch(预设).prefault(预设);
 /** 文本：非文本值回落到预设值 */
-const 文本 = (预设: string) => z.string().catch(预设);
+const 文本 = (预设: string) => z.string().catch(预设).prefault(预设);
 /** 结构容错：不是对象就当作默认对象；undefined 仍交给 prefault，让 schema.json 里保留 default */
 const 对象 = <S extends z.ZodType>(结构: S, 预设: Record<string, unknown> = {}) =>
   z.preprocess(
