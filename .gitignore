@@ -37,6 +37,9 @@ dist/
 .agents/
 .mimosa/
 
+# 历史计划归档(见 .archive/, 不纳入版本库)
+.archive/
+
 # 误创建的文件
 tore*
 .preview/
